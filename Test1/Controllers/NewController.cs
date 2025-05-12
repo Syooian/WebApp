@@ -59,9 +59,13 @@ namespace Test1.Controllers
         /// <returns></returns>
         public IActionResult ShowPhoto(int ID)
         {
+            //此種網頁Layout專有名字" master(ShowPhotos) - layout(ShowPhoto)"
+
             Debug.WriteLine("ShowPhoto " + ID);
 
-            ViewData["ShowPhoto"] = "<img src='/images/" + ID + ".jpg'>";
+            string[] name = { "櫻桃鴨", "鴨油高麗菜", "鴨油麻婆豆腐", "櫻桃鴨握壽司", "片皮鴨捲三星蔥", "三杯鴨", "櫻桃鴨片肉", "慢火白菜燉鴨湯" };
+
+            ViewData["ShowPhoto"] = $"<div style='text-align:center'><img src='/images/{ID}.jpg'><br><h3>{name[ID - 1]}</h3></div>";
 
             return View();
         }
