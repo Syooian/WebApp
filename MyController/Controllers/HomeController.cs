@@ -1,9 +1,8 @@
-using ConsoleApp1;
 using Microsoft.AspNetCore.Mvc;
+using MyController.Models;
 using System.Diagnostics;
-using Test1.Models;
 
-namespace Test1.Controllers
+namespace MyController.Controllers
 {
     public class HomeController : Controller
     {
@@ -25,14 +24,6 @@ namespace Test1.Controllers
 
         public IActionResult Privacy()
         {
-            return View();
-        }
-
-
-        public IActionResult CheckID(string ID)
-        {
-            ViewData["CheckIDResult"] = CheckIDCS.CheckID(ID);
-
             return View();
         }
 

@@ -6,4 +6,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\images\1.JPG" />
+    <None Include="wwwroot\images\2.JPG" />
+    <None Include="wwwroot\images\3.JPG" />
+    <None Include="wwwroot\images\4.JPG" />
+    <None Include="wwwroot\images\5.JPG" />
+    <None Include="wwwroot\images\6.JPG" />
+    <None Include="wwwroot\images\7.JPG" />
+    <None Include="wwwroot\images\8.JPG" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+  </ItemGroup>
+
 </Project>

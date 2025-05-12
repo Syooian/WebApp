@@ -52,6 +52,32 @@ namespace Test1.Controllers
             Response.WriteAsync($"Hello <span style='color:red'>{Name}</span>");
         }
 
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public IActionResult ShowPhoto(int ID)
+        {
+            ViewData["ShowPhoto"] = "<img src='/images/" + ID + ".jpg'>";
+
+            return View();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult ShowPhotos()
+        {
+            string str = "";
+            for (int a = 1; a <= 8; a++)
+            {
+                str += "<img src='/images/" + a + ".jpg' width='200'>";
+            }
+
+            ViewData["ShowPhotos"] = str;
+
+            return View();
+        }
     }
 }
