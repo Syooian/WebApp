@@ -59,6 +59,8 @@ namespace Test1.Controllers
         /// <returns></returns>
         public IActionResult ShowPhoto(int ID)
         {
+            Debug.WriteLine("ShowPhoto " + ID);
+
             ViewData["ShowPhoto"] = "<img src='/images/" + ID + ".jpg'>";
 
             return View();
@@ -72,7 +74,8 @@ namespace Test1.Controllers
             string str = "";
             for (int a = 1; a <= 8; a++)
             {
-                str += "<img src='/images/" + a + ".jpg' width='200'>";
+                //Debug.WriteLine($"<a href='ShowPhoto?ID={a}><img src='/images/" + a + ".jpg' width='200'></a>");
+                str += $"<a href='ShowPhoto?ID={a}'><img src='/images/" + a + ".jpg' width='200'></a>";
             }
 
             ViewData["ShowPhotos"] = str;
