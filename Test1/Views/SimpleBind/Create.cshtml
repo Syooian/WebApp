@@ -2,13 +2,13 @@
 	ViewData["Title"] = "商品新增";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 class="text-center shadow">@ViewData["Title"]</h1>
 <form method="post" action="/SimpleBind/Create">
 	<!--按下Submit按鈕後，送給哪個action做處理-->
-	<p>商品編號：<input type="text" id="ProductNo" name="ProductNo" /></p>
-	<p>商品名稱：<input type="text" id="ProductName" name="ProductName" /></p>
-	<p>商品價格：<input type="text" id="ProductPrice" name="ProductPrice" /></p>
-	<p><input type="submit" value="新增" /></p>
+	<p>商品編號：<input type="text" id="ProductNo" name="ProductNo" class="form-control" /></p>
+	<p>商品名稱：<input type="text" id="ProductName" name="ProductName" class="form-control" /></p>
+	<p>商品價格：<input type="text" id="ProductPrice" name="ProductPrice" class="form-control" /></p>
+	<p><input type="submit" value="新增" class="btn btn-warning" /></p>
 </form>
 
 <hr />
