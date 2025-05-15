@@ -34,10 +34,35 @@ namespace Test1.Controllers
         {
             Debug.WriteLine($"ID : {Member.ID}, Name : {Member.Name}, Address : {Member.Address}, Phone : {Member.Phone}");
 
-            ViewData["ID"]=Member.ID;
+            ViewData["ID"] = Member.ID;
             ViewData["Name"] = Member.Name;
             ViewData["Address"] = Member.Address;
             ViewData["Phone"] = Member.Phone;
+
+            return View();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult CreateProduct()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult CreateProduct(Product Product)
+        {
+            Debug.WriteLine($"商品編號 : {Product.ProductNo}, 商品名稱 : {Product.ProductName}, 商品價格 : {Product.ProductPrice}");
+
+            ViewData["ProductNo"] = Product.ProductNo;
+            ViewData["ProductName"] = Product.ProductName;
+            ViewData["ProductPrice"] = Product.ProductPrice;
 
             return View();
         }
