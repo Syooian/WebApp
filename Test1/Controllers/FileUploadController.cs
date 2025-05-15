@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCoreGeneratedDocument;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace Test1.Controllers
@@ -62,6 +63,23 @@ namespace Test1.Controllers
                 Photo.CopyTo(FS);
             }
 
+
+            return View();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult ShowPhotos()
+        {
+            var Files = Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Photos"));
+
+            foreach (var File in Files)
+            {
+                var FileName = Path.GetFileName(File);
+                ViewData["Photos"] += $"<img src='/Photos/{FileName}' style='width:200px;height:200px;'><br>";
+            }
 
             return View();
         }
