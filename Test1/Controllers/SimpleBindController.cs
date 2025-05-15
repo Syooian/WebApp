@@ -21,7 +21,7 @@ namespace Test1.Controllers
         [HttpPost]
         public IActionResult Create(string ProductNo, string ProductName, int ProductPrice)
         {
-            //變數名稱需與html內的name參數名稱相同才會自動對應接收值，否則須另外處理
+            //變數名稱需與html內的name參數名稱相同才會自動對應接收值，否則須另外處理 (簡單繫結法)
 
             Debug.WriteLine($"商品編號 : {ProductNo}, 商品名稱 : {ProductName}, 商品價格 : {ProductPrice}");
 
