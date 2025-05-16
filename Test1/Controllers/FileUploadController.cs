@@ -49,10 +49,12 @@ namespace Test1.Controllers
                 //取檔案名稱
                 var FileName = Path.GetFileName(Photo.FileName);
                 Debug.WriteLine("FileName : " + FileName);
+                //FileName : SaveClip.App_472954540_565605646298974_8964806260700130416_n.jpg
 
                 //檔案上傳後要儲存的完整路徑
                 var FilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Photos", FileName);
                 Debug.WriteLine("FilePath : " + FilePath);
+                //FilePath : H:\C#\WebApp\Test1\wwwroot\Photos\SaveClip.App_472954540_565605646298974_8964806260700130416_n.jpg
 
                 //檢查資料夾路徑
                 var DirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Photos");
@@ -87,9 +89,12 @@ namespace Test1.Controllers
             foreach (var File in Files)
             {
                 Debug.WriteLine("F1 : " + File);
+                //H:\C#\WebApp\Test1\wwwroot\Photos\SaveClip.App_472954540_565605646298974_8964806260700130416_n.jpg
 
                 var FileName = Path.GetFileName(File);
                 Debug.WriteLine("F2 : " + FileName);
+                //SaveClip.App_472954540_565605646298974_8964806260700130416_n.jpg
+
                 ViewData["Photos"] += $"<img src='/Photos/{FileName}' style='width:200px;height:200px;'><br>";
             }
 
