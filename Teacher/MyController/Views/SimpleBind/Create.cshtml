@@ -1,0 +1,16 @@
+﻿@{
+	ViewData["Title"] = "商品新增";
+}
+@* 
+ //假設我們有一個商品資料表,有 商品編號、商品名稱、商品價格 *@
+<h1 class="text-center shadow p-4 mb-5">@ViewData["Title"]</h1>
+
+
+<form method="post" action="/SimpleBind/Create">
+	<p>商品編號:<input type="text" id="ProductNo" name="ProductNo" class="form-control" /></p>
+	<p>商品名稱:<input type="text" id="ProductName" name="ProductName" class="form-control" /></p>
+	<p>商品價格:<input type="text" id="ProductPrice" name="ProductPrice" class="form-control" /></p>
+	<p><input type="submit" value="確定新增" class="btn btn-primary" /><input type="submit" value="清空表單" class="btn btn-warning" /></p>
+</form>
+<hr />
+商品編號:@ViewData["ProductNo"] 商品名稱:@ViewData["ProductName"] 商品價格:@ViewData["ProductPrice"]
