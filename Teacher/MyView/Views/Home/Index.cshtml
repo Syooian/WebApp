@@ -49,6 +49,9 @@
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
             <td>
+                    <a href="https://www.google.com.tw/maps/search/@(item.Address)" target="_blank" class="btn btn-danger">地圖</a>
+            </td>
+            <td>
                 @Html.ActionLink("編輯", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("詳細資料", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("刪除", "Delete", new { /* id=item.PrimaryKey */ })
