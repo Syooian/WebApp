@@ -55,7 +55,9 @@
 					<a href="https://www.google.com.tw/maps/search/@(item.Address)" target="_blank" class="btn btn-danger">地圖</a>
 				</td>
 				<td>
-					@Html.ActionLink("編輯", "Edit", new { /* id=item.PrimaryKey */ }) |
+					<!--編輯：顯示名字, Edit：Action的名字, new {xxxx}：傳入參數-->
+					<!--在New裡面寫class這種作法不常用-->
+					@Html.ActionLink("編輯", "Edit", new { @class = "btn btn-warning" }) |
 					@Html.ActionLink("詳細資料", "Details", new { /* id=item.PrimaryKey */ }) |
 					@Html.ActionLink("刪除", "Delete", new { /* id=item.PrimaryKey */ })
 				</td>
