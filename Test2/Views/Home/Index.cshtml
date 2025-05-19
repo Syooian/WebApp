@@ -15,6 +15,9 @@
 	<thead>
 		<tr>
 			<th>
+				圖片
+			</th>
+			<th>
 				@* @Html.DisplayNameFor(model => model.ID) *@
 				編號
 			</th>
@@ -33,6 +36,9 @@
 		@foreach (var item in Model)
 		{
 			<tr>
+				<td>
+					<img src="/images/@(item.ID).jpg" width="100px" />
+				</td>
 				<td>
 					@Html.DisplayFor(modelItem => item.ID)
 				</td>
