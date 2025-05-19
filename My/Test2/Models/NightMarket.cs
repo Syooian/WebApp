@@ -9,6 +9,7 @@ namespace Test2
         /// </summary>
         [Display(Name = "編號")]
         [Required(ErrorMessage = "請輸入夜市編號")]
+        [RegularExpression("A[0-9]{2}", ErrorMessage = "編號格式有誤")]
         public string ID { get; set; } = null!;
         /// <summary>
         /// 夜市名稱
