@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Test2.NightMarket>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<!--Html.Raw：Html Helper-->
+
+<p>
+	<a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>
+				@* @Html.DisplayNameFor(model => model.ID) *@
+				編號
+			</th>
+			<th>
+				@* @Html.DisplayNameFor(model => model.Name) *@
+				名稱
+			</th>
+			<th>
+				@* @Html.DisplayNameFor(model => model.Address) *@
+				夜市地址
+			</th>
+			<th>其他功能</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.ID)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Address)
+				</td>
+				<td>
+					@Html.ActionLink("編輯", "Edit", new { /* id=item.PrimaryKey */ }) |
+					@Html.ActionLink("詳細資料", "Details", new { /* id=item.PrimaryKey */ }) |
+					@Html.ActionLink("刪除", "Delete", new { /* id=item.PrimaryKey */ })
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
