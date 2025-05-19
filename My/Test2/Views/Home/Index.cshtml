@@ -9,7 +9,7 @@
 <!--Html.Raw：Html Helper-->
 
 <p>
-	<a asp-action="Create" class="btn btn-primary">Create New</a>
+	<a asp-action="Create" class="btn btn-primary">新增資料</a>
 </p>
 <table class="table table-hover">
 	<thead>
@@ -18,16 +18,15 @@
 				圖片
 			</th>
 			<th>
-				@* @Html.DisplayNameFor(model => model.ID) *@
-				編號
+				@Html.DisplayNameFor(model => model.ID)
+				@* 編號 *@
 			</th>
 			<th>
-				@* @Html.DisplayNameFor(model => model.Name) *@
-				名稱
+				@Html.DisplayNameFor(model => model.Name)
+				@* 名稱 *@
 			</th>
 			<th>
-				@* @Html.DisplayNameFor(model => model.Address) *@
-				地址
+				@Html.DisplayNameFor(model => model.Address)
 			</th>
 			<th>
 				前往地圖

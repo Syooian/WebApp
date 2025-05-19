@@ -56,7 +56,10 @@ namespace MyView.Controllers
 
             return View(list);
         }
-
+        public IActionResult Create()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

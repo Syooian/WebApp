@@ -31,6 +31,15 @@ namespace Test2.Controllers
             return View(Data);
         }
 
+        /// <summary>
+        /// 新增資料
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Create()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
