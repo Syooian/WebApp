@@ -26,6 +26,14 @@ namespace Test2.Controllers
             {
                 NightMarketData.Add(new NightMarket(id[a], name[a], address[a]));
             }
+
+            /*
+             * _Layout.cshtml
+             * 所有view共享同一Layout，且不可單獨存在，需依附別的script
+             * 
+             * _partialView.cshtml
+             * 部分View，需依附其他的View才能顯示
+             * */
         }
 
         /// <summary>
