@@ -1,0 +1,24 @@
+﻿@model IEnumerable<MyView.Models.NightMarket>
+@{
+	ViewData["Title"] = "IndexRWD";
+}
+
+<h1>IndexRWD</h1>
+
+<div class="row">
+	@foreach (var item in Model)
+	{
+		<div class="col-4">
+			<div class="card shadow mb-3">
+				<img src="/images/@(item.Id).jpg" class="img-thumbnail" />
+				<div class="card-body">
+					<h2 class="fw-bold">@item.Name</h2>
+					<p class="text-dark">@item.Address</p>
+					<a href="https://www.google.com.tw/maps/search/@(item.Address)" target="_blank" class="btn btn-danger">地圖</a>
+				</div>
+				
+			</div>
+
+		</div>
+	}
+</div>
