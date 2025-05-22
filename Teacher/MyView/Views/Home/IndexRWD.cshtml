@@ -1,20 +1,22 @@
 ﻿@model IEnumerable<MyView.Models.NightMarket>
 @{
-	ViewData["Title"] = "IndexRWD";
+	ViewData["Title"] = "來去逛夜市吧!";
 }
 
-<h1>IndexRWD</h1>
+<h1>@ViewData["Title"] </h1>
 
 <div class="row">
 	@foreach (var item in Model)
 	{
-		<div class="col-4">
+		<div class="col-xl-4 col-md-6">
 			<div class="card shadow mb-3">
 				<img src="/images/@(item.Id).jpg" class="img-thumbnail" />
 				<div class="card-body">
 					<h2 class="fw-bold">@item.Name</h2>
 					<p class="text-dark">@item.Address</p>
-					<a href="https://www.google.com.tw/maps/search/@(item.Address)" target="_blank" class="btn btn-danger">地圖</a>
+					<p class="text-end">
+						<a href="https://www.google.com.tw/maps/search/@(item.Address)" target="_blank" class="btn btn-danger">地圖</a>
+					</p>
 				</div>
 				
 			</div>

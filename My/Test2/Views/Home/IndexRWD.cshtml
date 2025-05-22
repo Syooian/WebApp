@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Test2.NightMarket>
 
 @{
-	ViewData["Title"] = "IndexRWD";
+	ViewData["Title"] = "各地夜市";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -9,13 +9,13 @@
 <div class="row">
 	@foreach (var Item in Model)
 	{
-		<div class="col-4">
+		<div class="col-xl-4 col-md-6">
 			<div class="card border-5 shadow mb-3">
 				<div class="card-header">
 					<h3>@Item.Name</h3>
+					<h5>@Item.Address</h5>
+					<a href="https://www.google.com.tw/maps/search/@(Item.Address)" target="_blank" class="btn btn-danger">地圖</a>
 				</div>
-
-				<a href="https://www.google.com.tw/maps/search/@(Item.Address)" target="_blank" class="btn btn-danger">地圖</a>
 
 				<img src="/images/@(Item.ID).jpg" class="img-fluid" />
 
