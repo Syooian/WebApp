@@ -1,0 +1,14 @@
+﻿@{
+	ViewData["Title"] = "Razor";
+}
+
+<h1>Razor</h1>
+
+@{
+	var Datetime = DateTime.Now;
+
+	@:Date : @Datetime.Date
+
+	<h5>Time : @Datetime.TimeOfDay</h5>
+	<h5>10+10=@(10 + 10)</h5>
+}

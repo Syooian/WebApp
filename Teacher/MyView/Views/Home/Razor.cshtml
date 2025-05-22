@@ -1,0 +1,55 @@
+﻿@{
+	ViewData["Title"] = "Razor語法";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@{
+
+	string name = "Jack";
+
+	var age = 30;
+
+	//age = "aaa";  //這樣會報錯
+
+	int Math = 85, Eng = 90, Chi = 100;
+
+	bool flag = true;
+
+	@:My name is Jack
+	@:My name is @name
+
+	<h3>My name is @name</h3>
+
+}
+
+<h3>My name is @name</h3>
+
+<h3>@Math+@Eng+@Chi</h3>
+
+<h3>@(Math + Eng + Chi)</h3>
+
+<h3>@Math+@Eng+@Chi=@(Math + Eng + Chi)</h3>
+
+@if (flag)
+{
+	<h2>歡迎登入本系統</h2>
+}
+else
+{
+	<h2>您的帳號密碼有誤</h2>
+}
+
+
+@{
+	string[] nm = { "瑞豐夜市", "新堀江商圈", "六合夜市", "青年夜市", "花園夜市", "大東夜市", "武聖夜市" };
+}
+
+<div class="col-3">
+	<ul class="list-group">
+		@foreach (var item in nm)
+		{
+			<li class="list-group-item">@item</li>
+		}
+	</ul>
+</div>
