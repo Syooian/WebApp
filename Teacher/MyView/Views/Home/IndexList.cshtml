@@ -1,0 +1,51 @@
+﻿@model MyView.Models.NightMarket
+
+@{
+	ViewData["Title"] = "IndexList";
+}
+
+<h1>IndexList</h1>
+<div class="row">
+	<div class="col-lg-3">
+		<div class="list-group d-lg-block d-none">
+			@foreach (var item in  ViewBag.nm)
+			{
+				<a class="list-group-item list-group-item-action" asp-action="IndexList" asp-route-id="@item.Id">@item.Name</a>
+			}
+
+		</div>
+
+		<nav class="nav nav-pills d-lg-none ">
+			@foreach (var item in ViewBag.nm)
+			{
+				<a class="nav-link" asp-action="IndexList" asp-route-id="@item.Id">@item.Name</a>
+			}
+		
+		</nav>
+	</div>
+
+	<div class="col-lg-9">
+		<h4>NightMarket</h4>
+		<hr />
+		<div class="row">
+			<div class="col-md-6">
+				<img src="/images/@(Model.Id).jpg" class="img-thumbnail" />
+			</div>
+
+
+			<div class="col-md-6">
+				<h1 class="fw-bold">@Model.Name</h1>
+				<h3 class="text-dark">@Model.Address</h3>
+				<p class="">
+					<a href="https://www.google.com.tw/maps/search/@(Model.Address)" target="_blank" class="btn btn-danger btn-lg">地圖</a>
+				</p>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+<div>
+	@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+	<a asp-action="Index">Back to List</a>
+</div>
