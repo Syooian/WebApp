@@ -96,10 +96,10 @@ namespace Test2.Controllers
 
             var List = NightMarketData();
 
-            //1
-            var Result = (from N in List where N.ID == ID select N).FirstOrDefault();
+            //Linq寫法
+            //var Result = (from N in List where N.ID == ID select N).FirstOrDefault();
 
-            //2
+            //一般For迴圈
             //NightMarket Result = null;
             //for (int a = 0; a < List.Count; a++)
             //{
@@ -110,8 +110,11 @@ namespace Test2.Controllers
             //    }
             //}
 
-            //3
-            //var Result = List.Find(N => N.ID == ID);
+            //Lambda寫法1
+            //var Result = List.Where(List => List.ID == ID).FirstOrDefault();
+
+            //Lambda寫法2 (List.Find)
+            var Result = List.Find(N => N.ID == ID);
 
             return View(Result);
         }

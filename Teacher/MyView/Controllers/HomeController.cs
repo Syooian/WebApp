@@ -60,10 +60,14 @@ namespace MyView.Controllers
             //from list
             //where id = 'A05'
 
-            var result = (from n in list
-                         where n.Id == id
-                         select n).FirstOrDefault();
+            //Linq¼gªk
+            //var result = (from n in list
+            //              where n.Id == id
+            //              select n).FirstOrDefault();
 
+          
+            //Lambda¼gªk
+            var result = list.Where(list => list.Id == id).FirstOrDefault();
 
 
             return View(result);
