@@ -57,7 +57,7 @@
 				<td>
 					@Html.ActionLink("編輯", "Edit", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-warning" })
 
-					<a class="btn btn-info" asp-action="Details">詳細資料</a>
+					<a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">詳細資料</a>
 					@*  @Html.ActionLink("詳細資料", "Details", new { /* id=item.PrimaryKey */ }) |
 						 @Html.ActionLink("刪除", "Delete", new { /* id=item.PrimaryKey */ }) *@
 					<a href="/Home/Delete" class="btn btn-danger">刪除</a>
