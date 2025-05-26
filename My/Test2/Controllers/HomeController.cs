@@ -93,6 +93,7 @@ namespace Test2.Controllers
         public IActionResult Details(string ID)
         {
             // Home/Details?ID=A01
+            // Home/Details/A01
 
             var List = NightMarketData();
 
@@ -126,20 +127,18 @@ namespace Test2.Controllers
         /// <returns></returns>
         public IActionResult IndexList(string ID)
         {
+            // Home/IndexList?ID=A01
+            // Home/IndexList/A01
+
             var List = NightMarketData();
 
-            //左側導覽列
-            //var Menu = new List<string>();
-            //for(int a = 0; a < List.Count; a++)
-            //{
-            //    Menu.Add(List[a].ID + " " + List[a].Name);
-            //}
-            ViewData["NM"] = List;
-            
-            //右側主畫面
-            var Result=List.Find(N => N.ID == ID);
+            VMNightMarket vmn = new VMNightMarket()
+            {
+                NightMarkets = List,
+                NightMarket = List.Find(N => N.ID == ID)
+            };
 
-            return View(Result);
+            return View(vmn);
         }
     }
 }
