@@ -11,10 +11,10 @@ public partial class dbStudentsContext : DbContext
     //{
     //}
 
-    public static readonly string DB_Server = "C501A117";
-    public static readonly string DB_Name = "tStudent";
-    public static readonly string DB_User = "Syooian";
-    public static readonly string DB_Password = "a123456";
+    public readonly string DB_Server = "C501A117";
+    public readonly string DB_Name = "dbStudents";
+    public readonly string DB_User = "Syooian";
+    public readonly string DB_Password = "a123456";
 
     /// <summary>
     /// 連線到資料庫
@@ -29,7 +29,7 @@ public partial class dbStudentsContext : DbContext
     /// </summary>
     public dbStudentsContext()
     {
-
+        //空建構子
     }
 
     public virtual DbSet<tStudent> tStudent { get; set; }

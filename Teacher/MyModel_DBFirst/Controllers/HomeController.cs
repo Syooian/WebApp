@@ -87,3 +87,22 @@ namespace MyModel_DBFirst.Controllers
 //      Edit.cshtml(Edit範本)
 //      Delete.cshtml(Delete範本)
 //      Details.cshtml(Details範本)
+
+
+//2.2   修改tStudentsController內容
+//2.2.1 撰寫建立DbContext物件的程式
+//      dbStudentsContext _context=new dbStudentsContext();
+//2.2.2 將原先既有的程式碼(如下)註解掉
+//      private readonly dbStudentsContext _context;
+//      public tStudentsController(dbStudentsContext context)
+//      {
+//          _context = context;
+//      }
+//※自動生成的Controller寫法為依賴注入(Dependency Injection, DI)，目前我們尚未學到，因此先用一般new物件的寫法※
+
+
+//2.3   執行Index View進行CRUD功能測試
+
+//※補充說明※
+//Visual Studio自動建立出的tStudentController，預設會使用「依賴注入(Dependency Injection)」的寫法
+//不過一開始我們先不使用依賴注入的寫法，因此我們需修改如 1.2.5 及 2.2 等步驟的程式碼後才能正常執行

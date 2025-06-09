@@ -11,6 +11,7 @@ namespace MyModel_DBFirst.Controllers
 {
     public class tStudentsController : Controller
     {
+        //2.2.2 將原先既有的程式碼(如下)註解掉
         //private readonly dbStudentsContext _context;
 
         //public tStudentsController(dbStudentsContext context)
@@ -18,6 +19,8 @@ namespace MyModel_DBFirst.Controllers
         //    _context = context;
         //}
 
+
+        //2.2.1 撰寫建立DbContext物件的程式
         dbStudentsContext _context = new dbStudentsContext(); //直接建立dbStudentsContext物件
 
         // GET: tStudents
