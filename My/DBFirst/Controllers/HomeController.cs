@@ -6,8 +6,8 @@ namespace DBFirst.Controllers
 {
     public class HomeController : Controller
     {
-        public static string DB_User = "Syooian";
-        public static string DB_Password = "a123456";
+        public static readonly string DB_User = "Syooian";
+        public static readonly string DB_Password = "a123456";
 
         private readonly ILogger<HomeController> _logger;
 
