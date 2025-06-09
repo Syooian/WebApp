@@ -1,7 +1,7 @@
-# ·s¼W¸ê®Æ®wµn¤J¨Ï¥ÎªÌ
-1. ¦øªA¾¹¡G¦w¥ş©Ê->µn¤J->·s¼Wµn¤J->¿ï¾ÜSQL ServerÅçÃÒ«á¿é¤J±b±K¡B¨ú®ø±j¨î°õ¦æ±K½X­ì«h
-2. ¦øªA¾¹¡GÄİ©Ê->¦w¥ş©Ê->¦øªA¾¹ÅçÃÒ¡GSQL Server¤ÎWindowsÅçÃÒ¼Ò¦¡
-3. ¶}±ÒSQL Server 2022 ¦w¥şºŞ²z­û¡G­«±ÒMSSQLSERVER
+# æ–°å¢è³‡æ–™åº«ç™»å…¥ä½¿ç”¨è€…
+1. ä¼ºæœå™¨ï¼šå®‰å…¨æ€§->ç™»å…¥->æ–°å¢ç™»å…¥->é¸æ“‡SQL Serveré©—è­‰å¾Œè¼¸å…¥å¸³å¯†ã€å–æ¶ˆå¼·åˆ¶åŸ·è¡Œå¯†ç¢¼åŸå‰‡
+2. ä¼ºæœå™¨ï¼šå±¬æ€§->å®‰å…¨æ€§->ä¼ºæœå™¨é©—è­‰ï¼šSQL ServeråŠWindowsé©—è­‰æ¨¡å¼
+3. é–‹å•ŸSQL Server 2022 å®‰å…¨ç®¡ç†å“¡ï¼šé‡å•ŸMSSQLSERVER
 
-* ¦Û°Ê«Ø¥ß¼Ò«¬
+è‡ªå‹•å»ºç«‹æ¨¡å‹ï¼š\
 Scaffold-DbContext "Data Source=C501A117;Database=dbStudents;TrustServerCertificate=True;User ID=Syooian;Password=a123456" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -NoOnConfiguring -UseDatabaseNames -NoPluralize -Force
