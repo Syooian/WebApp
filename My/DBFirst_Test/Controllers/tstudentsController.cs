@@ -11,12 +11,13 @@ namespace DBFirst_Test.Controllers
 {
     public class tstudentsController : Controller
     {
-        private readonly dbstudentsContext _context;
+        //private readonly dbstudentsContext _context;
 
-        public tstudentsController(dbstudentsContext context)
-        {
-            _context = context;
-        }
+        //public tstudentsController(dbstudentsContext context)
+        //{
+        //    _context = context;
+        //}
+        dbstudentsContext _context = new dbstudentsContext(); //建立DbContext物件
 
         // GET: tstudents
         public async Task<IActionResult> Index()
