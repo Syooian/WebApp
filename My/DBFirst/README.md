@@ -5,3 +5,9 @@
 
 自動建立模型：\
 Scaffold-DbContext "Data Source=C501A117;Database=dbStudents;TrustServerCertificate=True;User ID=Syooian;Password=a123456" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -NoOnConfiguring -UseDatabaseNames -NoPluralize -Force
+
+CRUD (增刪修查)：\
+利用模型自動產生
+1. 加入控制器->使用Entity Framework執行檢視的MVC控制器
+2. 模型類別：tStudent
+3. DbContext：dbStudentsContext

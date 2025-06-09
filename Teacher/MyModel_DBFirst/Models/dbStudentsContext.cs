@@ -2,35 +2,29 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace DBFirst.Models;
+namespace MyModel_DBFirst.Models;
 
 public partial class dbStudentsContext : DbContext
 {
+
+    //1.2.5 在dbStudentsContext.cs裡撰寫一個空的建構子
+    public dbStudentsContext()
+    {
+    }
+
     //public dbStudentsContext(DbContextOptions<dbStudentsContext> options)
     //    : base(options)
     //{
     //}
 
-    public static readonly string DB_Server = "C501A117";
-    public static readonly string DB_Name = "tStudent";
-    public static readonly string DB_User = "Syooian";
-    public static readonly string DB_Password = "a123456";
-
-    /// <summary>
-    /// 連線到資料庫
-    /// <para>講義：1.2.4</para>
-    /// </summary>
-    /// <param name="optionsBuilder"></param>
+    //1.2.4 在dbStudentsContext.cs裡撰寫連線到資料庫的程式
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseSqlServer($"Data Source={DB_Server};Database={DB_Name};TrustServerCertificate=True;User ID={DB_User};Password={DB_Password}");
+            => optionsBuilder.UseSqlServer("Data Source=TEACHER;Database=dbStudents;TrustServerCertificate=True;User ID=abc;Password=123");
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public dbStudentsContext()
-    {
 
-    }
+
+
+
 
     public virtual DbSet<tStudent> tStudent { get; set; }
 
@@ -38,7 +32,7 @@ public partial class dbStudentsContext : DbContext
     {
         modelBuilder.Entity<tStudent>(entity =>
         {
-            entity.HasKey(e => e.fStuId).HasName("PK__tStudent__08E5BA95D5F47CCA");
+            entity.HasKey(e => e.fStuId).HasName("PK__tStudent__08E5BA9512D28852");
 
             entity.Property(e => e.fStuId)
                 .HasMaxLength(6)

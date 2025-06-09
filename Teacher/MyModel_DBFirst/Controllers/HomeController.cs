@@ -1,11 +1,14 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 using MyModel_DBFirst.Models;
 
 namespace MyModel_DBFirst.Controllers
 {
     public class HomeController : Controller
     {
+       
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -58,3 +61,29 @@ namespace MyModel_DBFirst.Controllers
 //      {
 //      }
 ///////////////////////////////////////////////////////
+///
+
+//2.  製作自動生成的tStudent資料表的CRUD功能
+
+//2.1 使用Scaffold方法讓Visual Studio自動建立出tStudent資料表的的CRUD功能
+//    包含tStudentController及Index.cshtml、Create.cshtml、Edit.cshtml、Delete.cshtml、Details.cshtml等五個View的全部程式碼
+
+//2.1.1 在Controllers資料夾上按右鍵→加入→控制器
+//2.1.2 選擇「使用EntityFramework執行檢視的MVC控制器」→按下「加入」鈕
+//2.1.3 在對話方塊中設定如下
+//      模型類別: tStudent(MyModel_DBFirst.Models)
+//      資料內容類別: dbStudentsContext(MyModel_DBFirst.Models)
+//      勾選 產生檢視
+//      勾選 參考指令碼程式庫
+//      勾選 使用版面配置頁
+//      控制器名稱使用預設即可(tStudentsController)
+//      按下「新增」鈕
+//2.1.4 此時Visual Studio會進行Scaffolding動作，將產出一個tStudentsController
+//      (會包含所有相關的Action)及五個View(Index.cshtml、Create.cshtml、Edit.cshtml、Delete.cshtml、Details.cshtml)的全部程式碼
+
+//      ※備註說明※
+//      Index.cshtml(List範本)
+//      Create.cshtml(Create範本)
+//      Edit.cshtml(Edit範本)
+//      Delete.cshtml(Delete範本)
+//      Details.cshtml(Details範本)

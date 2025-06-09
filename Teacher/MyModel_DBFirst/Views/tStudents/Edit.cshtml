@@ -1,0 +1,44 @@
+﻿@model MyModel_DBFirst.Models.tStudent
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>tStudent</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="fStuId" />
+            <div class="form-group">
+                <label asp-for="fName" class="control-label"></label>
+                <input asp-for="fName" class="form-control" />
+                <span asp-validation-for="fName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fEmail" class="control-label"></label>
+                <input asp-for="fEmail" class="form-control" />
+                <span asp-validation-for="fEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fScore" class="control-label"></label>
+                <input asp-for="fScore" class="form-control" />
+                <span asp-validation-for="fScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
