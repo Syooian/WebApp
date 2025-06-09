@@ -13,5 +13,5 @@
 2. 加入控制器->使用Entity Framework執行檢視的MVC控制器
 3. 模型類別：tStudent
 4. DbContext：dbStudentsContext
-5. 在dbStudentsContext.cs終將預設的dbStudentsContext註解後直接創建一個空建構子，再新增OnConfiguring方法
+5. 在dbStudentsContext.cs終將預設的dbStudentsContext註解後直接創建一個空建構子(1.2.5)，再新增OnConfiguring方法(1.2.4)
 6. 執行tStudents/Index.cshtml(使用瀏覽器檢視)
