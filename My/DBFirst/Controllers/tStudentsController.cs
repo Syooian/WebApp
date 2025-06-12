@@ -68,8 +68,18 @@ namespace DBFirst.Controllers
 
             if (ModelState.IsValid)//模型驗證是否完全符合規則
             {
-                _context.Add(tStudent);//將資料加入到資料庫表單中
-                await _context.SaveChangesAsync();//寫入資料庫
+                try
+                {
+                    _context.Add(tStudent);//將資料加入到資料庫表單中
+                    await _context.SaveChangesAsync();//寫入資料庫
+                }
+                catch(Exception ex)
+                {
+                    ViewData["ErrorMessage"] = "資料庫操作錯誤。";//將錯誤訊息返回給View
+
+                    return View(tStudent);
+                }
+
                 return RedirectToAction(nameof(Index));//回到Index頁面
             }
             return View(tStudent);
