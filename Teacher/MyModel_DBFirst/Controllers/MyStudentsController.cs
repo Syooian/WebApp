@@ -22,7 +22,7 @@ namespace MyModel_DBFirst.Controllers
 
             var result = db.tStudent.ToList();  //select * from tStudents
 
-            //4.2.2 將查詢結果傳給View
+            //將查詢結果傳給View
             return View(result);
         }
     }

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<MyModel_DBFirst.Models.tStudent>
+
+@{
+	ViewData["Title"] = "學生資料列表";
+}
+@* //4.2.6 修改介面上的文字，拿掉Details的超鏈結 *@
+<h1>@ViewData["Title"]</h1>
+
+<p>
+	<a asp-action="Create">新增學生資料</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.fStuId)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.fName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.fEmail)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.fScore)
+			</th>
+			<th>
+				學生資料管理
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.fStuId)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.fName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.fEmail)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.fScore)
+				</td>
+				<td>
+					<a asp-action="Edit" asp-route-id="@item.fStuId" class="btn btn-warning btn-sm">編輯</a>
+					<a asp-action="Delete" asp-route-id="@item.fStuId" class="btn btn-danger btn-sm">刪除</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
