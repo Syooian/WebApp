@@ -106,3 +106,18 @@ namespace MyModel_DBFirst.Controllers
 //※補充說明※
 //Visual Studio自動建立出的tStudentController，預設會使用「依賴注入(Dependency Injection)」的寫法
 //不過一開始我們先不使用依賴注入的寫法，因此我們需修改如 1.2.5 及 2.2 等步驟的程式碼後才能正常執行
+
+
+///////////////////////////////////////////////////////
+//3. 撰寫模型內容
+
+//3.1 打開tStudent.cs檔案
+//3.2 撰寫在View上顯示的欄位內容(Display)
+//3.3 撰寫在表單上的欄位驗證規則(需using System.ComponentModel.DataAnnotations)
+//    常用的驗證器 Required、StringLength、RegularExpression、Compare、EmailAddress、Range、DataType
+//    Required:必填欄位
+//    StringLength:資料字數
+//    RegularExpression:資料格式
+//    Compare:與其它欄位比較是否相等
+//    EmailAddress:是否是E - mail格式
+//    Range: 限制所填的範圍
