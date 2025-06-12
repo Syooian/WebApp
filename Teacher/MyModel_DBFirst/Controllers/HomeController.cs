@@ -112,12 +112,12 @@ namespace MyModel_DBFirst.Controllers
 //3. 撰寫模型內容
 
 //3.1 打開tStudent.cs檔案
-//3.2 撰寫在View上顯示的欄位內容(Display)
-//3.3 撰寫在表單上的欄位驗證規則(需using System.ComponentModel.DataAnnotations)
+//3.2 撰寫在View上顯示的欄位內容(需using System.ComponentModel.DataAnnotations)
+//3.3 撰寫在表單上的欄位驗證規則
 //    常用的驗證器 Required、StringLength、RegularExpression、Compare、EmailAddress、Range、DataType
 //    Required:必填欄位
 //    StringLength:資料字數
-//    RegularExpression:資料格式
+//    RegularExpression:資料格式(正則)
 //    Compare:與其它欄位比較是否相等
-//    EmailAddress:是否是E - mail格式
+//    EmailAddress:是否是E-mail格式
 //    Range: 限制所填的範圍

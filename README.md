@@ -5,3 +5,7 @@
 	先寫模型類別，再依類別建立資料庫
 
 # 資料存取層 (Data Access Layer DAL)
+
+## nvarchar vs. varchar
+n : Unicode格式
+varchar 內中文字通常會佔 2 個位元組（byte）
