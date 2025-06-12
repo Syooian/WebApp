@@ -60,18 +60,21 @@ namespace MyModel_DBFirst.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("fStuId,fName,fEmail,fScore")] tStudent tStudent)
         {
+
+
+            //3.4 在tStudentsController檔案的Post Create Action中撰寫檢查學號是否重複的程式碼
             //select * from tStudent
             //where fStuId = '127377'
 
             //Linq 
-            var result = await _context.tStudent.FindAsync(tStudent.fStuId);  
+            var result = await _context.tStudent.FindAsync(tStudent.fStuId);  //將表單資料的學號傳入資料庫查詢
 
-            if(result!=null)  //表示已經有此學號存在資料庫
+            if (result!=null)  //表示已經有此學號存在資料庫
             {
                 ViewData["ErrorMessage"] = "學號已存在，請重新輸入！";  //將錯誤訊息傳遞到View
                 return View(tStudent);
             }
-
+            ////////////////////////////////////////////////////////////////////////////////////////
           
 
             if (ModelState.IsValid)  //模型驗證是否完全符合規則

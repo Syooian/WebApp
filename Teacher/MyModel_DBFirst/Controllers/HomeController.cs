@@ -121,3 +121,32 @@ namespace MyModel_DBFirst.Controllers
 //    Compare:與其它欄位比較是否相等
 //    EmailAddress:是否是E-mail格式
 //    Range: 限制所填的範圍
+//3.4 在tStudentsController檔案的Post Create Action中撰寫檢查學號是否重複的程式碼
+//3.5 在Create View檔案中補上呈現學號重複的錯誤訊息
+
+
+
+///////////////////////////////////////////////////////
+//4.製作手工打造的tStudent資料表的CRUD功能
+
+//4.1   建立MyStudentsController
+//4.1.1 在Controllers資料夾上按右鍵→加入→控制器
+//4.1.2 選擇「MVC控制器 - 空白」
+//4.1.3 輸入檔名MyStudentsController.cs
+//4.1.4 撰寫建立DbContext物件的程式
+
+//4.2   建立同步執行的Index Action
+//4.2.1 撰寫Index Action程式碼
+//4.2.2 建立Index View
+//4.2.3 在Index Action內按右鍵→新增檢視→選擇「Razor檢視」→按下「加入」鈕
+//4.2.4 在對話方塊中設定如下
+//      檢視名稱: Index
+//      範本:List
+//      模型類別: tStudent(MyModel_DBFirst.Models)
+//      資料內容類別: dbStudentsContext(MyModel_DBFirst.Models)
+//      不勾選 建立成局部檢視
+//      不勾選 參考指令碼程式庫
+//      勾選 使用版面配置頁
+//4.2.5 執行Index View測試
+//4.2.6 修改介面上的文字，拿掉Details的超鏈結
+//      ※可依自己的喜好修改View的顯示※
