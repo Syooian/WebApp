@@ -30,7 +30,7 @@ namespace MyModel_DBFirst.Controllers
         //4.3.2 建立Create View
         public IActionResult Create()
         {
-         
+
             return View();
         }
 
@@ -46,7 +46,7 @@ namespace MyModel_DBFirst.Controllers
             if (result != null)
             {
                 ViewData["ErrorMessage"] = "學號已存在，請重新輸入！"; //將錯誤訊息傳遞到View
-                return View(student); 
+                return View(student);
             }
 
 
@@ -71,11 +71,13 @@ namespace MyModel_DBFirst.Controllers
 
 
         //4.4.1 撰寫Edit Action程式碼(需有兩個Edit Action)
-        public ActionResult Edit(string id) 
+        public ActionResult Edit(string id)
         {
+            ViewData["Now"] = DateTime.Now;
+
             var result = db.tStudent.Find(id); //使用Find方法查詢學號是否存在
 
-            if(result == null)
+            if (result == null)
             {
                 return NotFound(); //如果找不到資料，回傳404 Not Found
             }
@@ -85,7 +87,25 @@ namespace MyModel_DBFirst.Controllers
 
         }
 
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Edit(string id, tStudent student)
+        {
+            if (id != student.fStuId) //檢查傳入的學號是否與表單資料的學號一致
+            {
+                return View(student); //如果不一致，則回到Edit View
+            }
+
+            if (ModelState.IsValid)
+            {
+                db.tStudent.Update(student);
+                db.SaveChanges();
+                return RedirectToAction("Index"); //編輯完成後，導向到Index Action
+
+            }
 
 
+            return View(student);
+
+        }
     }
 }

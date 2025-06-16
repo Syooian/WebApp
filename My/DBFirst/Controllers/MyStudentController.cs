@@ -80,5 +80,33 @@ namespace DBFirst.Controllers
 
             return View(Student);
         }
+        /// <summary>
+        /// 回傳資料庫
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Student"></param>
+        /// <returns></returns>
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Edit(string id, tStudent Student)
+        {
+            if (id != Student.fStuId)//檢查學號是否一致
+            {
+                return NotFound();//回傳404 Not Found結果
+            }
+
+            if (ModelState.IsValid)//模型驗證
+            {
+                //更新資料
+                Context.tStudent.Update(Student);
+
+                //傳回資料庫
+                Context.SaveChanges();
+
+                //回首頁
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(Student); //如果模型驗證失敗，回傳原本的View
+        }
     }
 }
