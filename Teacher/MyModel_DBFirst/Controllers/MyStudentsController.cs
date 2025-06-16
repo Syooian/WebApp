@@ -68,5 +68,24 @@ namespace MyModel_DBFirst.Controllers
         }
 
 
+
+
+        //4.4.1 撰寫Edit Action程式碼(需有兩個Edit Action)
+        public ActionResult Edit(string id) 
+        {
+            var result = db.tStudent.Find(id); //使用Find方法查詢學號是否存在
+
+            if(result == null)
+            {
+                return NotFound(); //如果找不到資料，回傳404 Not Found
+            }
+
+
+            return View(result);
+
+        }
+
+
+
     }
 }

@@ -59,5 +59,23 @@ namespace DBFirst.Controllers
             //回首頁
             return RedirectToAction(nameof(Index));
         }
+
+        /// <summary>
+        /// 編輯學生資料
+        /// </summary>
+        /// <param name="fStuId">學號</param>
+        /// <returns></returns>
+        public ActionResult Edit(string fStuId)
+        {
+            var Student = Context.tStudent.Find(fStuId);
+
+            if (Student == null)
+            {
+                //找不到學生資料，回傳404 Not Found結果
+                return NotFound();
+            }
+
+            return View(Student);
+        }
     }
 }
