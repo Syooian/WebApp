@@ -25,5 +25,16 @@ namespace MyModel_DBFirst.Controllers
             //將查詢結果傳給View
             return View(result);
         }
+
+        //4.3.1 撰寫Create Action程式碼(需有兩個Create Action)
+        //4.3.2 建立Create View
+
+        public IActionResult Create()
+        {
+         
+            return View();
+        }
+
+
     }
 }

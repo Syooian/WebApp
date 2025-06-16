@@ -23,5 +23,14 @@ namespace DBFirst.Controllers
             //將結果傳給View 4.2.2
             return View(Result);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }

@@ -150,3 +150,21 @@ namespace MyModel_DBFirst.Controllers
 //4.2.5 執行Index View測試
 //4.2.6 修改介面上的文字，拿掉Details的超鏈結
 //      ※可依自己的喜好修改View的顯示※
+
+
+//4.3   建立同步執行的Create Action
+//4.3.1 撰寫Create Action程式碼(需有兩個Create Action)
+//4.3.2 建立Create View
+//4.3.3 在Create Action內按右鍵→新增檢視→選擇「Razor檢視」→按下「加入」鈕
+//4.3.4 在對話方塊中設定如下
+//      檢視名稱: Index
+//      範本:Create
+//      模型類別: tStudent(MyModel_DBFirst.Models)
+//      資料內容類別: dbStudentsContext(MyModel_DBFirst.Models)
+//      不勾選 建立成局部檢視
+//      勾選 參考指令碼程式庫
+//      勾選 使用版面配置頁
+//4.3.5 執行Create功能測試
+//      ※可依自己的喜好修改View的顯示※
+//4.3.6 加入Token驗證標籤
+//4.3.7 加入檢查主鍵是否重覆的程式
