@@ -166,5 +166,32 @@ namespace MyModel_DBFirst.Controllers
 //      勾選 使用版面配置頁
 //4.3.5 執行Create功能測試
 //      ※可依自己的喜好修改View的顯示※
-//4.3.6 加入Token驗證標籤
-//4.3.7 加入檢查主鍵是否重覆的程式
+
+//4.3.6 加入檢查主鍵是否重覆的程式
+//4.3.7 加入Token驗證標籤
+//  ※Token驗證的功用是防止CSRF攻擊，讓表單提交時能夠驗證請求的合法性※
+
+
+//4.4   建立同步執行的Edit Action
+//4.4.1 撰寫Edit Action程式碼(需有兩個Edit Action)
+//4.4.2 建立Edit View
+//4.4.3 在Edit Action內按右鍵→新增檢視→選擇「Razor檢視」→按下「加入」鈕
+//4.4.4 在對話方塊中設定如下
+//      檢視名稱: Edit
+//      範本:Edit
+//      模型類別: tStudent(MyModel_DBFirst.Models)
+//      資料內容類別: dbStudentsContext(MyModel_DBFirst.Models)
+//      不勾選 建立成局部檢視
+//      勾選 參考指令碼程式庫
+//      勾選 使用版面配置頁
+//4.4.5 執行Edit功能測試
+//      ※可依自己的喜好修改View的顯示※
+
+
+//4.5   建立同步執行的Delete Action
+//4.5.1 撰寫Delete Action程式碼
+//4.5.2 將Index的Delete改為Form，以Post方式送出
+//4.5.3 執行Delete功能測試
+//※補充說明※
+//這種寫法用不到Delete View，因此可以把Delete.cshtml刪除
+//Delete的按鈕若使用超鏈結，使用者將可直接在url給參數就能刪除資料

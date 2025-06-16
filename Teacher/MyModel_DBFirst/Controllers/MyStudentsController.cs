@@ -35,10 +35,12 @@ namespace MyModel_DBFirst.Controllers
         }
 
 
+        //4.3.7 加入Token驗證標籤
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(tStudent student)
         {
-            //檢查學號是否重複
+            //4.3.6 加入檢查主鍵是否重覆的程式
             var result = db.tStudent.Find(student.fStuId); //使用Find方法查詢學號是否存在
 
             if (result != null)

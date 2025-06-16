@@ -38,6 +38,7 @@ namespace DBFirst.Controllers
         /// <param name="Student"></param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(tStudent Student)
         {
             //檢查學號重複值
