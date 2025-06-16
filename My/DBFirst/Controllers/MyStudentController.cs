@@ -1,5 +1,6 @@
 ﻿using DBFirst.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace DBFirst.Controllers
 {
@@ -63,11 +64,13 @@ namespace DBFirst.Controllers
         /// <summary>
         /// 編輯學生資料
         /// </summary>
-        /// <param name="fStuId">學號</param>
+        /// <param name="id">學號</param>
         /// <returns></returns>
-        public ActionResult Edit(string fStuId)
+        public ActionResult Edit(string id)
         {
-            var Student = Context.tStudent.Find(fStuId);
+            Debug.WriteLine("fStuId : " + id);//需配合指定的參數名稱，在Program.cs內 (app.MapControllerRoute)
+
+            var Student = Context.tStudent.Find(id);
 
             if (Student == null)
             {

@@ -14,6 +14,8 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="fStuId" />
             <div class="form-group">
+                <div>學號：@Model.fStuId</div>
+                <input asp-for="fStuId" class="form-control" readonly />
                 <label asp-for="fName" class="control-label"></label>
                 <input asp-for="fName" class="form-control" />
                 <span asp-validation-for="fName" class="text-danger"></span>
@@ -40,5 +42,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
