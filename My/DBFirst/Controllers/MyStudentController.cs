@@ -32,5 +32,22 @@ namespace DBFirst.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 將表單的資料傳回資料庫
+        /// </summary>
+        /// <param name="Student"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult Create(tStudent Student)
+        {
+            //在模型新增資料
+            Context.tStudent.Add(Student);
+
+            //傳回資料庫
+            Context.SaveChanges();
+
+            //回首頁
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

@@ -36,5 +36,19 @@ namespace MyModel_DBFirst.Controllers
         }
 
 
+        [HttpPost]
+        public IActionResult Create(tStudent student)
+        {
+            //把表單送來的資料存入資料庫
+
+            //1.在模型新增一筆資料
+            db.tStudent.Add(student);
+            //2.回寫資料庫
+            db.SaveChanges(); //轉譯SQL 執行 INSERT INTO tStudent(fStuId, fName, fEmail, fScore) VALUES(...)
+
+            return RedirectToAction("Index"); //新增完成後，導向到Index Action
+        }
+
+
     }
 }

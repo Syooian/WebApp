@@ -32,16 +32,17 @@
                 <span asp-validation-for="fScore" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="確定新增" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
-
+<hr />
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">回學生資料列表</a>
 </div>
 
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}  @* //把驗證的JS放入 *@
 }
