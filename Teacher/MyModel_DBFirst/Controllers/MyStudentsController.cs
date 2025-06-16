@@ -28,7 +28,6 @@ namespace MyModel_DBFirst.Controllers
 
         //4.3.1 撰寫Create Action程式碼(需有兩個Create Action)
         //4.3.2 建立Create View
-
         public IActionResult Create()
         {
          
@@ -39,14 +38,31 @@ namespace MyModel_DBFirst.Controllers
         [HttpPost]
         public IActionResult Create(tStudent student)
         {
+            //檢查學號是否重複
+            var result = db.tStudent.Find(student.fStuId); //使用Find方法查詢學號是否存在
+
+            if (result != null)
+            {
+                ViewData["ErrorMessage"] = "學號已存在，請重新輸入！"; //將錯誤訊息傳遞到View
+                return View(student); 
+            }
+
+
             //把表單送來的資料存入資料庫
+            if (ModelState.IsValid)
+            {
+                //1.在模型新增一筆資料
+                db.tStudent.Add(student);
+                //2.回寫資料庫
+                db.SaveChanges(); //轉譯SQL 執行 INSERT INTO tStudent(fStuId, fName, fEmail, fScore) VALUES(...)
 
-            //1.在模型新增一筆資料
-            db.tStudent.Add(student);
-            //2.回寫資料庫
-            db.SaveChanges(); //轉譯SQL 執行 INSERT INTO tStudent(fStuId, fName, fEmail, fScore) VALUES(...)
+                return RedirectToAction("Index"); //新增完成後，導向到Index Action
+            }
 
-            return RedirectToAction("Index"); //新增完成後，導向到Index Action
+
+            //如果模型驗證失敗，則回到Create View
+            return View(student); //將表單資料傳回Create View，讓使用者可以修正錯誤
+
         }
 
 

@@ -157,7 +157,7 @@ namespace MyModel_DBFirst.Controllers
 //4.3.2 建立Create View
 //4.3.3 在Create Action內按右鍵→新增檢視→選擇「Razor檢視」→按下「加入」鈕
 //4.3.4 在對話方塊中設定如下
-//      檢視名稱: Index
+//      檢視名稱: Create
 //      範本:Create
 //      模型類別: tStudent(MyModel_DBFirst.Models)
 //      資料內容類別: dbStudentsContext(MyModel_DBFirst.Models)

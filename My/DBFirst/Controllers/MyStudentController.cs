@@ -40,6 +40,15 @@ namespace DBFirst.Controllers
         [HttpPost]
         public IActionResult Create(tStudent Student)
         {
+            //檢查學號重複值
+            var Result = Context.tStudent.Find(Student.fStuId);
+            if (Result != null)
+            {
+                //學號重複，回傳錯誤訊息
+                ViewData["ErrorMessage"] = "學號已存在，請重新輸入。";
+                return View(Student);
+            }
+
             //在模型新增資料
             Context.tStudent.Add(Student);
 
