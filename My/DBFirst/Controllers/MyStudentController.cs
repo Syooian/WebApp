@@ -6,7 +6,7 @@ namespace DBFirst.Controllers
     public class MyStudentController : Controller
     {
         //建立DB物件 (4.1.4)
-        dbStudentsContext Context;
+        dbStudentsContext Context = new dbStudentsContext();
 
         /// <summary>
         /// 
