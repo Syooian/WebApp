@@ -68,10 +68,14 @@ public partial class dbstudentsContext : DbContext
 
         modelBuilder.Entity<tstudent2>(entity =>
         {
-            entity.HasNoKey();
+            entity.HasKey(e => e.fStuId).HasName("PRIMARY");
 
             entity.HasIndex(e => e.DeptID, "FK_tstudent2_department");
 
+            entity.Property(e => e.fStuId)
+                .HasMaxLength(6)
+                .IsFixedLength()
+                .HasComment("學號");
             entity.Property(e => e.DeptID)
                 .HasMaxLength(2)
                 .HasComment("科系ID");
@@ -85,16 +89,8 @@ public partial class dbstudentsContext : DbContext
                 .HasDefaultValueSql("'0'")
                 .HasComment("分數")
                 .HasColumnType("int(11)");
-            entity.Property(e => e.fStuId)
-                .HasMaxLength(6)
-                .IsFixedLength()
-                .HasComment("學號");
-            entity.Property(e => e.欄位_6222)
-                .HasComment("666")
-                .HasColumnType("int(11)")
-                .HasColumnName("欄位 6222");
 
-            entity.HasOne(d => d.Dept).WithMany()
+            entity.HasOne(d => d.Dept).WithMany(p => p.tstudent2)
                 .HasForeignKey(d => d.DeptID)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_tstudent2_department");

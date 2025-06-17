@@ -17,4 +17,6 @@ public partial class department
     /// 科系名稱
     /// </summary>
     public string DeptName { get; set; } = null!;
+
+    public virtual ICollection<tstudent2> tstudent2 { get; set; } = new List<tstudent2>();
 }
