@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace DBFirst_Test.Models;
 
@@ -9,16 +10,6 @@ public partial class tstudent2
     /// 學號
     /// </summary>
     public string fStuId { get; set; } = null!;
-
-    /// <summary>
-    /// 姓名
-    /// </summary>
-    public string fName { get; set; } = null!;
-
-    /// <summary>
-    /// 電子郵件
-    /// </summary>
-    public string fEmail { get; set; } = null!;
 
     /// <summary>
     /// 分數
