@@ -25,6 +25,9 @@
 				@Html.DisplayNameFor(model => model.fScore)
 			</th>
 			<th>
+				@Html.DisplayNameFor(model => model.DeptID)
+			</th>
+			<th>
 				學生資料管理
 			</th>
 		</tr>
@@ -44,6 +47,9 @@
 				</td>
 				<td>
 					@Html.DisplayFor(modelItem => item.fScore)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.DeptID)
 				</td>
 				<td class="d-flex">
 					<a asp-action="Edit" asp-route-id="@item.fStuId" class="btn btn-warning btn-sm">編輯</a>

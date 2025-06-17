@@ -21,6 +21,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.fScore)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeptID)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -36,6 +39,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.fScore)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeptID)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.fStuId">Edit</a> |
