@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DBFirst.Models.tStudent>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.fName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fScore)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fScore)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.fStuId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.fStuId">Details</a> |
+                    <form asp-action="Delete">
+                        <input type="hidden" value="@item.fStuId" name="id" />
+                        <input type="submit" value="刪除" class="btn btn-danger btn-sm" onclick="return confirm('刪除資料？')" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

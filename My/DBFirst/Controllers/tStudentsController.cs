@@ -58,11 +58,29 @@ namespace DBFirst.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("fStuId,fName,fEmail,fScore")] tStudent tStudent)
         {
-            if (ModelState.IsValid)
+            //Linq
+            var Result = await _context.tStudent.FindAsync(tStudent.fStuId);
+            if (Result != null)
             {
-                _context.Add(tStudent);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ViewData["ErrorMessage"] = "學號已存在，請重新輸入。";//將錯誤訊息返回給View
+                return View(tStudent);
+            }
+
+            if (ModelState.IsValid)//模型驗證是否完全符合規則
+            {
+                try
+                {
+                    _context.Add(tStudent);//將資料加入到資料庫表單中
+                    await _context.SaveChangesAsync();//寫入資料庫
+                }
+                catch(Exception ex)
+                {
+                    ViewData["ErrorMessage"] = "資料庫操作錯誤。";//將錯誤訊息返回給View
+
+                    return View(tStudent);
+                }
+
+                return RedirectToAction(nameof(Index));//回到Index頁面
             }
             return View(tStudent);
         }
