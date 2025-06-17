@@ -244,3 +244,26 @@ namespace MyModel_DBFirst.Controllers
 //public virtual Department? Department { get; set; }
 
 //5.2.4 在dbStudentsContext中加入Department的DbSet
+
+//※補充說明※
+//※若資料庫的變動幅度較大，則建議重新執行Scaffold - DbContext指令重建整個模型※
+//※不過若以Scaffold - DbContext重新建立模型，會將的DbContext及各個Class皆變回初始的程式碼，之前自己撰寫的部份會全部消失※
+//※對於Controller及View來說，若不想重新Scaffold CRUD亦必須一個一個手動修改※
+
+
+//5.3   重新製作自動生成的tStudent資料表CRUD功能
+//5.3.1 將sControler的名稱改為tStudents2Controler
+//5.3.2 在Controllers資料夾上按右鍵→加入→控制器
+//5.3.3 選擇「使用EntityFramework執行檢視的MVC控制器」→按下「加入」鈕
+//5.3.4 在對話方塊中設定如下
+//      模型類別: tStudent(MyModel_DBFirst.Models)
+//      資料內容類別: dbStudentsContext(MyModel_DBFirst.Models)
+//      勾選 產生檢視
+//      勾選 參考指令碼程式庫
+//      勾選 使用版面配置頁
+//      控制器名稱使tStudents2Controller
+//      按下「新增」鈕
+//5.3.5 參考2.2.1修改建立DbContext物件的程式
+//5.3.6 測試
+
+
