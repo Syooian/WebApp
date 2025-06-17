@@ -107,5 +107,27 @@ namespace MyModel_DBFirst.Controllers
             return View(student);
 
         }
+
+
+        //4.5.1 撰寫Delete Action程式碼
+
+
+        public IActionResult Delete(string id)
+        {
+            //delete from tStudents where fStuId = id;
+
+            var result = db.tStudent.Find(id);
+
+            if (result == null)
+            {
+                return NotFound(); //如果找不到資料，回傳404 Not Found
+            }
+
+            db.tStudent.Remove(result); //將找到的資料從模型資料裡移除
+            db.SaveChanges(); //回寫資料庫，執行 DELETE FROM tStudents WHERE fStuId = id;
+
+            return RedirectToAction("Index"); //刪除完成後，導向到Index Action
+        }
+
     }
 }

@@ -39,7 +39,7 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.fStuId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.fStuId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.fStuId">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.fStuId" onclick="return confirm('刪除資料？')">Delete</a>
             </td>
         </tr>
 }

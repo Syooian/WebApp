@@ -47,7 +47,7 @@
 				</td>
 				<td>
 					<a asp-action="Edit" asp-route-id="@item.fStuId" class="btn btn-warning btn-sm">編輯</a>
-					<a asp-action="Delete" asp-route-id="@item.fStuId" class="btn btn-danger btn-sm">刪除</a>
+					<a asp-action="Delete" asp-route-id="@item.fStuId" class="btn btn-danger btn-sm" onclick="return confirm('您確定要刪除此筆資料嗎?')">刪除</a>
 				</td>
 			</tr>
 		}

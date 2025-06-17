@@ -108,5 +108,28 @@ namespace DBFirst.Controllers
 
             return View(Student); //如果模型驗證失敗，回傳原本的View
         }
+
+        /// <summary>
+        /// 刪除資料
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IActionResult Delete(string id)
+        {
+            var Student = Context.tStudent.Find(id);
+
+            if (Student == null)
+            {
+                //找不到學生資料，回傳404 Not Found結果
+                return NotFound();
+            }
+
+            //從資料庫中刪除學生資料
+            Context.tStudent.Remove(Student);
+
+            Context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
