@@ -211,3 +211,21 @@ namespace MyModel_DBFirst.Controllers
 //5.1.2 在tStudent Class中增加一個屬性 public string DeptID { get; set; }
 //5.1.3 視情況修改View
 //5.1.4 執行測試
+
+
+//5.2   在dbStudents資料庫中增加資料表
+//5.2.1 在SSMS中執行下列DDL指令碼以建立Department資料表及與tStudnet的關聯
+//////////////////////////////////////////////////////////
+//create table Department(
+//    DeptID varchar(2) primary key,
+//    DeptName nvarchar(30) not null
+//)
+//go
+
+//insert into Department values('01','資工系'),('02', '資管系'),('03', '工管系')
+//go
+
+//alter table tStudent
+//	add foreign key(DeptID) references Department(DeptID)
+//go
+//////////////////////////////////////////////////////////
