@@ -196,3 +196,18 @@ namespace MyModel_DBFirst.Controllers
 //※補充說明※
 //這種寫法用不到Delete View，因此可以把Delete.cshtml刪除
 //Delete的按鈕若使用超鏈結，使用者將可直接在url給參數就能刪除資料
+
+
+
+//範例情境：學生要多出科系資料，所以資料庫需要修改，建立一個科系資料表並與tStudent資料表關聯
+//5. 資料庫修改
+//※由於DB First是以反向工程利用資料庫寫成的程式碼，因此在資料庫有小幅變動時，則必須手動撰寫模型內容※
+
+//5.1   在tStudent資料表中增加一個欄位
+//5.1.1 在SSMS中執行下列DDL指令碼以修改tStudent資料表及，增加一個DeptID欄位
+//alter table tStudent
+//	    add DeptID varchar(2) not null default '01'
+//  go
+//5.1.2 在tStudent Class中增加一個屬性 public string DeptID { get; set; }
+//5.1.3 視情況修改View
+//5.1.4 執行測試

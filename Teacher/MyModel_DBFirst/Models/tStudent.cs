@@ -30,4 +30,10 @@ public partial class tStudent
     [Display(Name = "成績")]
     [Range(0, 100, ErrorMessage = "成績必須介於0到100之間")]
     public int? fScore { get; set; }
+
+
+    //5.1.2 在tStudent Class中增加一個屬性
+    [Display(Name = "科系")]
+
+    public string DeptID { get; set; } = null!;
 }

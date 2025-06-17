@@ -31,4 +31,9 @@ public partial class tStudent
     [Display(Name = "成績")]
     [Range(0, 100, ErrorMessage = "成績必須介於0到100之間。")]
     public int? fScore { get; set; }
+    /// <summary>
+    /// 科系ID
+    /// </summary>
+    [Display(Name = "科系ID")]
+    public string DeptID { get; set; } = null!;
 }
