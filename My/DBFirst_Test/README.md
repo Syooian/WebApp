@@ -38,7 +38,12 @@ EF Core ¥Í¦¨ªº¼Ò«¬³q±`¬O partial Ãþ§O¡A³o¤¹³\±z¦b¥t¤@­ÓÀÉ®×¤¤ÂX®i¸ÓÃþ§O¡A¦Ó¤£·|³
 	<li>©R¦WªÅ¶¡¤@­P¡G ½T«O¤¸¼Æ¾ÚÃþ§O»P¼Ò«¬Ãþ§O¦b¬Û¦Pªº©R¦WªÅ¶¡¤¤¡A§_«h [MetadataType] ÄÝ©ÊµLªk¥¿½TÀ³¥Î¡C</li>
 	<li>EF Core ¤£¤ä«ùª½±µ¥Í¦¨¤¸¼Æ¾ÚÃþ§O¡G ±z»Ý­n¤â°Ê³Ð«Ø¤¸¼Æ¾ÚÃþ§O¡A³o¬OÁ×§KÂÐ»\ªº¥N»ù¡C</li>
 	<li>ÅçÃÒ³W«hªºÀ³¥Î¡G ½T«O Razor Pages ©Î±±¨î¾¹¤¤ªº¼Ò«¬¸j©w©MÅçÃÒÅÞ¿è¥¿½TÀ³¥Î³o¨Ç³W«h¡C</li>
+	<li>[MetadataType]ªº¤£¤ä´©¡G</li>
+	<ol>
+		<li>[MetadataType] ÄÝ©Ê¨Ã¤£¬O EF Core ­ì¥Í¤ä«ùªº¥\¯à¡C³o¬O¦]¬° [MetadataType] ¬O ASP.NET ªº¥\¯à¡A¥D­n¥Î©óÂÂª©ªº ASP.NET MVC ©M Web Forms¡A¦Ó¤£¬O EF Core¡C</li>
+		<li>±q ASP.NET Core ¶}©l¡]¥]¬A Razor Pages ©M ASP.NET Core MVC¡^¡A[MetadataType] ÄÝ©Ê¤w¤£¦A¬O®Ø¬[ªº­ì¥Í¥\¯à¡C³o¬O¦]¬° ASP.NET Core ªº³]­p¥Ø¼Ð¬O»´¶q¤Æ©M¼Ò²Õ¤Æ¡A¨Ã¥B»PÂÂª©ªº ASP.NET Framework¡]¦p ASP.NET MVC 5 ©M Web Forms¡^¦³ÅãµÛªº¬[ºc®t²§¡C¦]¦¹¥Ø«eASP.NET MVC¤w¤£¤ä´©¨Ï¥ÎMetadataÂX®i</li>
+	</ol>	
 </ol>
 
-<h3>Á`µ²</h3>
+<p><h3>Á`µ²</h3></p>
 ³q¹L¨Ï¥Î ³¡¤ÀÃþ§O ©M ¤¸¼Æ¾ÚÃþ§O¡A±z¥i¥H±NÅã¥Ü¦WºÙ©MÅçÃÒ³W«h±q¼Ò«¬¤¤¤ÀÂ÷¡AÁ×§K¦b­«·s¥Í¦¨¼Ò«¬®É³QÂÐ»\¡C³o¬O¤@ºØ¼Ð·Ç¥B±ÀÂËªº°µªk¡A¯S§O¬O¦b¨Ï¥Î EF Core ªº DB First ¶}µo¼Ò¦¡®É¡CBy GitHub Copilot
