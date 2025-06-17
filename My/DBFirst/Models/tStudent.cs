@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DBFirst.Models;
 
@@ -35,5 +36,11 @@ public partial class tStudent
     /// 科系ID
     /// </summary>
     [Display(Name = "科系ID")]
+    [ForeignKey("Department")]//用標籤方式來表示關聯
     public string DeptID { get; set; } = null!;
+    /// <summary>
+    /// 
+    /// <para>描述此與tStudent是一對多的關聯</para>
+    /// </summary>
+    public virtual Department? Department { get; set; }//virtual表示描述與Department的關聯(不重要)
 }

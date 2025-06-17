@@ -32,7 +32,14 @@ public partial class dbStudentsContext : DbContext
         //空建構子
     }
 
+    /// <summary>
+    /// 學生資料表
+    /// </summary>
     public virtual DbSet<tStudent> tStudent { get; set; }
+    /// <summary>
+    /// 科系資料表
+    /// </summary>
+    public virtual DbSet<Department> Department { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

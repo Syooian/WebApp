@@ -229,3 +229,18 @@ namespace MyModel_DBFirst.Controllers
 //	add foreign key(DeptID) references Department(DeptID)
 //go
 //////////////////////////////////////////////////////////
+
+//5.2.2 在Models資料夾中新增Department Class(Models資料夾上按右鍵→加入→類別)，內容如下
+//public class Department
+//{
+//    [Key]
+//    public string DeptID { get; set; }
+//    public string DeptName { get; set; } = null!
+//    public List<tStudent>? tStudents { get; set; }
+//}
+//5.2.3 修改tStudent Class以建立與Department的關聯，內容如下
+//[ForeignKey("Department")]
+//public string DeptID { get; set; } = null!
+//public virtual Department? Department { get; set; }
+
+//5.2.4 在dbStudentsContext中加入Department的DbSet
