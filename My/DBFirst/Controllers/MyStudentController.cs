@@ -114,6 +114,7 @@ namespace DBFirst.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Delete(string id)
         {
             var Student = Context.tStudent.Find(id);

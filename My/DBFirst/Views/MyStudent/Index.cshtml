@@ -25,23 +25,27 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.fName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fScore)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.fStuId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.fStuId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.fStuId" onclick="return confirm('刪除資料？')">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fScore)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.fStuId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.fStuId">Details</a> |
+                    <form asp-action="Delete">
+                        <input type="hidden" value="@item.fStuId" name="id" />
+                        <input type="submit" value="刪除" class="btn btn-danger btn-sm" onclick="return confirm('刪除資料？')" />
+                    </form>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

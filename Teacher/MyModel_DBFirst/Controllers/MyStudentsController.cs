@@ -110,8 +110,8 @@ namespace MyModel_DBFirst.Controllers
 
 
         //4.5.1 撰寫Delete Action程式碼
-
-
+        //4.5.4 執行Delete功能測試
+        [HttpPost,ValidateAntiForgeryToken]
         public IActionResult Delete(string id)
         {
             //delete from tStudents where fStuId = id;

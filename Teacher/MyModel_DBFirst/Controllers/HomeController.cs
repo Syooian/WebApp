@@ -190,8 +190,9 @@ namespace MyModel_DBFirst.Controllers
 
 //4.5   建立同步執行的Delete Action
 //4.5.1 撰寫Delete Action程式碼
-//4.5.2 將Index的Delete改為Form，以Post方式送出
-//4.5.3 執行Delete功能測試
+//4.5.2 將Index View的Delete改為Form，以Post方式送出
+//4.5.3 將Delete Action改為Post方式
+//4.5.4 執行Delete功能測試
 //※補充說明※
 //這種寫法用不到Delete View，因此可以把Delete.cshtml刪除
 //Delete的按鈕若使用超鏈結，使用者將可直接在url給參數就能刪除資料
