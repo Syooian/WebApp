@@ -1,5 +1,6 @@
 ﻿using DBFirst.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
@@ -32,6 +33,7 @@ namespace DBFirst.Controllers
         /// <returns></returns>
         public IActionResult Create()
         {
+            ViewData["DeptData"] = new SelectList(Context.Department, "DeptID", "DeptName");//建立給下拉式選單的資料來源
             return View();
         }
         /// <summary>

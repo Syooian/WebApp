@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyModel_DBFirst.Models;
 
@@ -34,7 +35,9 @@ namespace MyModel_DBFirst.Controllers
         //4.3.2 建立Create View
         public IActionResult Create()
         {
-
+            //5.5.3 修改 Create Action
+            ViewData["Dept"] = new SelectList(db.Department, "DeptID", "DeptName"); //建立給下拉選單的資料來源
+            
             return View();
         }
 

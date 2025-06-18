@@ -1,54 +1,58 @@
 ﻿@model MyModel_DBFirst.Models.tStudent
 
 @{
-    ViewData["Title"] = "學生資料新增";
+	ViewData["Title"] = "學生資料新增";
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <hr />
 <div class="row">
-    <div class="col-xl-4 col-md-6">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="fStuId" class="control-label"></label>
-                <input asp-for="fStuId" class="form-control" />
-                <span asp-validation-for="fStuId" class="text-danger"></span>
-                <span class="text-danger">@ViewData["ErrorMessage"]</span>
-            </div>
-            <div class="form-group">
-                <label asp-for="fName" class="control-label"></label>
-                <input asp-for="fName" class="form-control" />
-                <span asp-validation-for="fName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="fEmail" class="control-label"></label>
-                <input asp-for="fEmail" class="form-control" />
-                <span asp-validation-for="fEmail" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="fScore" class="control-label"></label>
-                <input asp-for="fScore" class="form-control" />
-                <span asp-validation-for="fScore" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DeptID" class="control-label"></label>
-                <input asp-for="DeptID" class="form-control" />
-                <span asp-validation-for="DeptID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="確定新增" class="btn btn-success" />
-            </div>
-        </form>
-    </div>
+	<div class="col-xl-4 col-md-6">
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="fStuId" class="control-label"></label>
+				<input asp-for="fStuId" class="form-control" />
+				<span asp-validation-for="fStuId" class="text-danger"></span>
+				<span class="text-danger">@ViewData["ErrorMessage"]</span>
+			</div>
+			<div class="form-group">
+				<label asp-for="fName" class="control-label"></label>
+				<input asp-for="fName" class="form-control" />
+				<span asp-validation-for="fName" class="text-danger"></span>
+			</div>
+			@*   //5.5.4 修改 Create View *@
+			<div class="form-group">
+				<label asp-for="DeptID" class="control-label"></label>
+				<select asp-for="DeptID" asp-items="@ViewBag.Dept" class="form-control"></select>
+				<span asp-validation-for="DeptID" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="fEmail" class="control-label"></label>
+				<input asp-for="fEmail" class="form-control" />
+				<span asp-validation-for="fEmail" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="fScore" class="control-label"></label>
+				<input asp-for="fScore" class="form-control" />
+				<span asp-validation-for="fScore" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<input type="submit" value="確定新增" class="btn btn-success" />
+			</div>
+		</form>
+	</div>
 </div>
 <hr />
 <div>
-    <a asp-action="Index">回學生資料列表</a>
+	<a asp-action="Index">回學生資料列表</a>
 </div>
 
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}  @* //把驗證的JS放入 *@
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}  @* //把驗證的JS放入 *@
 }
