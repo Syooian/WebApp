@@ -22,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.fScore)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DeptID)
+                @Html.DisplayNameFor(model => model.Department.DeptName)
             </th>
             <th></th>
         </tr>
@@ -41,7 +41,7 @@
                     @Html.DisplayFor(modelItem => item.fScore)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DeptID)
+                    @Html.DisplayFor(modelItem => item.Department.DeptName)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.fStuId">Edit</a> |

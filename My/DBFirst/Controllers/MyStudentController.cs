@@ -1,5 +1,6 @@
 ﻿using DBFirst.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace DBFirst.Controllers
@@ -19,7 +20,7 @@ namespace DBFirst.Controllers
             //Index Action 4.2.1
             //Linq寫法
             //var Result = from Student in Context.tStudent select Student;
-            var Result = Context.tStudent.ToList();
+            var Result = Context.tStudent.Include(t => t.Department).ToList();
 
             //將結果傳給View 4.2.2
             return View(Result);

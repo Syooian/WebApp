@@ -49,7 +49,8 @@
 					@Html.DisplayFor(modelItem => item.fScore)
 				</td>
 				<td>
-					@Html.DisplayFor(modelItem => item.DeptID)
+					@* //5.5.2 修改 Index View *@
+					@Html.DisplayFor(modelItem => item.Department.DeptName) (@Html.DisplayFor(modelItem => item.DeptID))
 				</td>
 				<td class="d-flex">
 					<a asp-action="Edit" asp-route-id="@item.fStuId" class="btn btn-warning btn-sm">編輯</a>

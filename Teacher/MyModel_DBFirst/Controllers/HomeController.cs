@@ -267,3 +267,15 @@ namespace MyModel_DBFirst.Controllers
 //5.3.6 測試
 
 
+
+//5.4   修改Index View有關Department的顯示
+
+//5.5   手動修改MyStudentsController及相關的View
+//5.5.1 修改 Index Action
+//5.5.2 修改 Index View
+//5.5.3 修改 Create Action
+//5.5.4 修改 Create View
+//5.5.5 修改 Edit Action
+//5.5.6 修改 Edit View
+
+

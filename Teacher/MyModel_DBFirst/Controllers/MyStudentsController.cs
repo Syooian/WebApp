@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyModel_DBFirst.Models;
 
 namespace MyModel_DBFirst.Controllers
@@ -19,8 +20,11 @@ namespace MyModel_DBFirst.Controllers
             //Linq
             //var result = from s in db.tStudent
             //             select s;
+            //var result = db.tStudent.ToList();  //select * from tStudents
 
-            var result = db.tStudent.ToList();  //select * from tStudents
+            //5.5.1 修改 Index Action
+            var result = db.tStudent.Include(t => t.Department).ToList();
+
 
             //將查詢結果傳給View
             return View(result);
