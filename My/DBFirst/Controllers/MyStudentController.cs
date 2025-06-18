@@ -33,7 +33,7 @@ namespace DBFirst.Controllers
         /// <returns></returns>
         public IActionResult Create()
         {
-            ViewData["DeptData"] = new SelectList(Context.Department, "DeptID", "DeptName");//建立給下拉式選單的資料來源
+            SetDeptData();
             return View();
         }
         /// <summary>
@@ -81,6 +81,8 @@ namespace DBFirst.Controllers
                 return NotFound();
             }
 
+            SetDeptData();
+
             return View(Student);
         }
         /// <summary>
@@ -110,6 +112,14 @@ namespace DBFirst.Controllers
             }
 
             return View(Student); //如果模型驗證失敗，回傳原本的View
+        }
+
+        /// <summary>
+        /// 建立給科系的下拉式選單的資料來源
+        /// </summary>
+        void SetDeptData()
+        {
+            ViewData["DeptData"] = new SelectList(Context.Department, "DeptID", "DeptName");
         }
 
         /// <summary>

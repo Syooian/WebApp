@@ -89,6 +89,8 @@ namespace MyModel_DBFirst.Controllers
                 return NotFound(); //如果找不到資料，回傳404 Not Found
             }
 
+            //5.5.5 修改 Edit Action
+            ViewData["Dept"] = new SelectList(db.Department, "DeptID", "DeptName"); //建立給下拉選單的資料來源
 
             return View(result);
 
