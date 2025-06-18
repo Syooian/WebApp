@@ -42,6 +42,18 @@ namespace MyModel_DBFirst.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("DeptID,DeptName")] Department department)
         {
+            //5.6.8 在DepartmentsController Create Action中加入檢查科系代碼是否重覆的程式
+            var result = _context.Department.Find(department.DeptID);
+
+            if(result != null)
+            {
+                ViewData["ErrorMessage"] = "科系代碼已存在，請重新輸入！"; //將錯誤訊息傳遞到View
+                return View(department);
+            }
+
+
+
+
             if (ModelState.IsValid)
             {
                 _context.Add(department);

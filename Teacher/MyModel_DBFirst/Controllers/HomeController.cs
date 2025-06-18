@@ -294,3 +294,4 @@ namespace MyModel_DBFirst.Controllers
 //5.6.5 測試
 //5.6.6 編輯Department 模型
 //5.6.7 編輯Department View
+//5.6.8 在DepartmentsController Create Action中加入檢查科系代碼是否重覆的程式

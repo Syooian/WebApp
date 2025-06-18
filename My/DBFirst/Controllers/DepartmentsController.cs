@@ -50,6 +50,13 @@ namespace DBFirst.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("DeptID,DeptName")] Department department)
         {
+            var result = _context.Department.Find(department.DeptID);
+            if (result != null)
+            {
+                ViewData["ErrorMessage"] = "科系代碼已存在，請重新輸入！"; //將錯誤訊息傳遞到View
+                return View(department);
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(department);
