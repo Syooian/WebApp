@@ -293,5 +293,8 @@ namespace MyModel_DBFirst.Controllers
 //5.6.4 參考2 .2.1修改建立DbContext物件的程式
 //5.6.5 測試
 //5.6.6 編輯Department 模型
-//5.6.7 編輯Department View
+//5.6.7 依需求修改或移除Department View及DepartmentsController Action
 //5.6.8 在DepartmentsController Create Action中加入檢查科系代碼是否重覆的程式
+
+
+//5.7   編輯Layout選單，加入「科系管理」及「學生資料管理」
