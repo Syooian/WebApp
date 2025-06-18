@@ -279,3 +279,18 @@ namespace MyModel_DBFirst.Controllers
 //5.5.6 修改 Edit View
 
 
+//5.6 製作自動生成的Department資料表的CRUD功能
+//5.6.1 在Controllers資料夾上按右鍵→加入→控制器
+//5.6.2 選擇「使用EntityFramework執行檢視的MVC控制器」→按下「加入」鈕
+//5.6.3 在對話方塊中設定如下
+//      模型類別: Department(MyModel_DBFirst.Models)
+//      資料內容類別: dbStudentsContext(MyModel_DBFirst.Models)
+//      勾選 產生檢視
+//      勾選 參考指令碼程式庫
+//      勾選 使用版面配置頁
+//      控制器名稱使用預設即可(DepartmentsController)
+//      按下「新增」鈕
+//5.6.4 參考2 .2.1修改建立DbContext物件的程式
+//5.6.5 測試
+//5.6.6 編輯Department 模型
+//5.6.7 編輯Department View
