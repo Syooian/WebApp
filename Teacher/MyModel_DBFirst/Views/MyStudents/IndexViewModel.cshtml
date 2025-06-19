@@ -1,7 +1,6 @@
-﻿<!--接Action return回來的類別-->
-<!--不須再使用IEnumerable，因為裡面已經都是List-->
-@model DBFirst.ViewModels.VM_tStudent
-@*@model IEnumerable<DBFirst.Models.tStudent>-->*@
+﻿@* @model IEnumerable<MyModel_DBFirst.Models.tStudent> *@
+@model MyModel_DBFirst.ViewModels.VMtStudent
+
 
 @{
     ViewData["Title"] = "IndexViewModel";
@@ -13,25 +12,24 @@
     <a asp-action="Create">Create New</a>
 </p>
 
+
 <div class="row">
     <div class="col-3">
         科系
-        <table class="table">
-            <tbody>
-                @foreach (var item in Model.Departments)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DeptName)
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+        <ul>
+        @foreach(var item in Model.Departments)
+        {
+           
+				<li>
+					@item.DeptID - @item.DeptName
+				</li>
+          
+        }
+        </ul>
 
+    </div>
     <div class="col-9">
-        學生
+        學生資料
         <table class="table">
             <thead>
                 <tr>
@@ -47,6 +45,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fScore)
                     </th>
+
                     <th></th>
                 </tr>
             </thead>
@@ -66,6 +65,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.fScore)
                         </td>
+                        
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.fStuId">Edit</a> |
                             <a asp-action="Details" asp-route-id="@item.fStuId">Details</a> |
@@ -75,5 +75,14 @@
                 }
             </tbody>
         </table>
+
+
     </div>
 </div>
+
+
+
+
+
+
+

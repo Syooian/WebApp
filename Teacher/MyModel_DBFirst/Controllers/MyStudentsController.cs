@@ -18,7 +18,7 @@ namespace MyModel_DBFirst.Controllers
 
             VMtStudent students = new VMtStudent()
             {
-                Students = db.tStudent.Where(s=>s.DeptID=="02").ToList(),
+                Students = db.tStudent.Where(s=>s.DeptID=="03").ToList(),
                 Departments = db.Department.ToList()
             };
            

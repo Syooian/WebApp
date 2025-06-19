@@ -19,6 +19,8 @@ namespace DBFirst.Controllers
         {
             var VM = new ViewModels.VM_tStudent
             {
+                //Where : 帶入條件
+
                 Departments = Context.Department.ToList(),
                 Students = Context.tStudent.ToList()
             };
