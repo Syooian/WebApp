@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyModel_DBFirst.Models;
+using MyModel_DBFirst.ViewModels;
 
 namespace MyModel_DBFirst.Controllers
 {
@@ -9,6 +10,23 @@ namespace MyModel_DBFirst.Controllers
     {
         //4.1.4 撰寫建立DbContext物件的程式
         dbStudentsContext db = new dbStudentsContext();
+
+
+        //5.8.4 撰寫MyStudnetsController裡新的IndexViewModel Action
+        public IActionResult IndexViewModel()
+        {
+
+            VMtStudent students = new VMtStudent()
+            {
+                Students = db.tStudent.Where(s=>s.DeptID=="02").ToList(),
+                Departments = db.Department.ToList()
+            };
+           
+
+
+
+            return View(students);
+        }
 
 
         //讀出tStudents資料表的資料
@@ -37,7 +55,7 @@ namespace MyModel_DBFirst.Controllers
         {
             //5.5.3 修改 Create Action
             ViewData["Dept"] = new SelectList(db.Department, "DeptID", "DeptName"); //建立給下拉選單的資料來源
-            
+
             return View();
         }
 
@@ -120,7 +138,7 @@ namespace MyModel_DBFirst.Controllers
 
         //4.5.1 撰寫Delete Action程式碼
         //4.5.4 執行Delete功能測試
-        [HttpPost,ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Delete(string id)
         {
             //delete from tStudents where fStuId = id;

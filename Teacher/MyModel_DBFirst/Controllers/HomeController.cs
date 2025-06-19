@@ -305,7 +305,7 @@ namespace MyModel_DBFirst.Controllers
 //5.8.1 建立ViewModels資料夾(專案上按右鍵→加入→新增資料夾)
 //5.8.2 在ViewModels資料夾新增VMtStudent類別(右鍵→加入→類別→輸入VMtStudent.cs→按下「新增」鈕)做為Model(這個Model只給View排版用因此稱作ViewModel)
 //5.8.3 撰寫VMtStudent類別
-//5.8.4 修改MyStudnetsController裡的Index Action
+//5.8.4 撰寫MyStudnetsController裡新的IndexViewModel Action
 //5.8.5 修改Index View的排版方式
 //5.8.6 測試
 //※補充說明※

@@ -13,6 +13,21 @@ namespace DBFirst.Controllers
 
         /// <summary>
         /// 
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult IndexViewModel()
+        {
+            var VM = new ViewModels.VM_tStudent
+            {
+                Departments = Context.Department.ToList(),
+                Students = Context.tStudent.ToList()
+            };
+
+            return View(VM);
+        }
+
+        /// <summary>
+        /// 
         /// <para>讀取tStudnets資料表資料</para>
         /// </summary>
         /// <returns></returns>
