@@ -1,4 +1,7 @@
-﻿@model IEnumerable<DBFirst.Models.tStudent>
+﻿<!--接Action return回來的類別-->
+<!--不須再使用IEnumerable，因為裡面已經都是List-->
+@model DBFirst.ViewModels.VM_tStudent
+@*@model IEnumerable<DBFirst.Models.tStudent>-->*@
 
 @{
     ViewData["Title"] = "IndexViewModel";
