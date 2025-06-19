@@ -3,14 +3,8 @@
 
 
 @{
-	ViewData["Title"] = "IndexViewModel";
+	ViewData["Title"] = "學生資料管理";
 }
-
-
-
-<p>
-	<a asp-action="Create">Create New</a>
-</p>
 
 
 <div class="row">
@@ -28,7 +22,9 @@
 	</div>
 	<div class="col-9">
 		<h2 class="text-center">學生資料</h2>
-		
+		<p class="text-end">
+			<a asp-action="Create" class="btn btn-primary">新增學生資料</a>
+		</p>
 		<table class="table">
 			<thead>
 				<tr>

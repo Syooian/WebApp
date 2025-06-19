@@ -83,7 +83,7 @@ namespace MyModel_DBFirst.Controllers
                 //2.回寫資料庫
                 db.SaveChanges(); //轉譯SQL 執行 INSERT INTO tStudent(fStuId, fName, fEmail, fScore) VALUES(...)
 
-                return RedirectToAction("Index"); //新增完成後，導向到Index Action
+                return RedirectToAction("IndexViewModel"); //新增完成後，導向到Index Action
             }
 
 
@@ -126,7 +126,7 @@ namespace MyModel_DBFirst.Controllers
             {
                 db.tStudent.Update(student);
                 db.SaveChanges();
-                return RedirectToAction("Index"); //編輯完成後，導向到Index Action
+                return RedirectToAction("IndexViewModel"); //編輯完成後，導向到Index Action
 
             }
 
@@ -153,7 +153,7 @@ namespace MyModel_DBFirst.Controllers
             db.tStudent.Remove(result); //將找到的資料從模型資料裡移除
             db.SaveChanges(); //回寫資料庫，執行 DELETE FROM tStudents WHERE fStuId = id;
 
-            return RedirectToAction("Index"); //刪除完成後，導向到Index Action
+            return RedirectToAction("IndexViewModel"); //刪除完成後，導向到Index Action
         }
 
     }
