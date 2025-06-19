@@ -14,15 +14,16 @@ namespace DBFirst.Controllers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="id">科系ID<para>不帶入值時表示全部科系</para></param>
         /// <returns></returns>
-        public IActionResult IndexViewModel()
+        public IActionResult IndexViewModel(string id = "")
         {
             var VM = new ViewModels.VM_tStudent
             {
                 //Where : 帶入條件
 
                 Departments = Context.Department.ToList(),
-                Students = Context.tStudent.ToList()
+                Students = string.IsNullOrEmpty(id) ? Context.tStudent.ToList() : Context.tStudent.Where(S => S.DeptID == id).ToList()
             };
 
             return View(VM);

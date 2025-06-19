@@ -3,81 +3,85 @@
 
 
 @{
-    ViewData["Title"] = "IndexViewModel";
+	ViewData["Title"] = "IndexViewModel";
 }
 
-<h1>IndexViewModel</h1>
+
 
 <p>
-    <a asp-action="Create">Create New</a>
+	<a asp-action="Create">Create New</a>
 </p>
 
 
 <div class="row">
-    <div class="col-3">
-        科系
-        <ul>
-        @foreach(var item in Model.Departments)
-        {
-           
-				<li>
-					@item.DeptID - @item.DeptName
-				</li>
-          
-        }
-        </ul>
+	<div class="col-3">
+		<h4 class="text-center">科系</h4>
+		<div class="list-group">
+			@foreach (var item in Model.Departments)
+			{
 
-    </div>
-    <div class="col-9">
-        學生資料
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fStuId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fEmail)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fScore)
-                    </th>
+				<a asp-action="IndexViewModel" asp-route-id="@item.DeptID" class="list-group-item list-group-item-action">@item.DeptName</a>
 
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Students)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.fStuId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.fName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.fEmail)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.fScore)
-                        </td>
-                        
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.fStuId">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.fStuId">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.fStuId">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+			}
+		</div>
+
+	</div>
+	<div class="col-9">
+		<h2 class="text-center">學生資料</h2>
+		
+		<table class="table">
+			<thead>
+				<tr>
+					<th>
+						@Html.DisplayNameFor(model => model.Students.FirstOrDefault().fStuId)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Students.FirstOrDefault().fName)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Students.FirstOrDefault().fEmail)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Students.FirstOrDefault().fScore)
+					</th>
+
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model.Students)
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.fStuId)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.fName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.fEmail)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.fScore)
+						</td>
+
+						<td class="d-flex">
+							<a asp-action="Edit" asp-route-id="@item.fStuId" class="btn btn-warning btn-sm">編輯</a>
+
+						
+							<form asp-action="Delete">
+								<input type="hidden" value="@item.fStuId" name="id" />
+								<input type="submit" value="刪除" class="btn btn-danger btn-sm" onclick="return confirm('您確定要刪除此筆資料嗎?')" />
+							</form>
+						
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
 
 
-    </div>
+	</div>
 </div>
 
 

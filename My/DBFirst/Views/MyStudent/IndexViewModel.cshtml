@@ -17,16 +17,15 @@
     <div class="col-3">
         科系
         <table class="table">
-            <tbody>
+            <ul>
+                <li><a asp-action="IndexViewModel" asp-route-id="">全部科系</a></li>
                 @foreach (var item in Model.Departments)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DeptName)
-                        </td>
-                    </tr>
+                    <li>
+                        <a asp-action="IndexViewModel" asp-route-id="@item.DeptID">@item.DeptName</a>
+                    </li>
                 }
-            </tbody>
+            </ul>
         </table>
     </div>
 
