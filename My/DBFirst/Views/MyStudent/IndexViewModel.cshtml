@@ -37,6 +37,9 @@
                         @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fStuId)
                     </th>
                     <th>
+                        @Html.DisplayNameFor(model => model.Students.FirstOrDefault().Department.DeptName)
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fName)
                     </th>
                     <th>
@@ -54,6 +57,9 @@
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.fStuId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Department.DeptName)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.fName)
