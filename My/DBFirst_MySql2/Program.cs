@@ -1,7 +1,15 @@
+using DBFirst_MySql2.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//設定連線
+builder.Services.AddDbContext<dbstudentsContext>(Options =>
+    Options.UseMySql(builder.Configuration.GetConnectionString("DBConnectionStrings"),
+    new MySqlServerVersion(new Version(8, 0, 33)))); // MySQL 版本號可根據實際情況調整
 
 var app = builder.Build();
 
