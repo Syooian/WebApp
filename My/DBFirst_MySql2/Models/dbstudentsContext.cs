@@ -13,8 +13,6 @@ public partial class dbstudentsContext : DbContext
 
     public virtual DbSet<department> department { get; set; }
 
-    public virtual DbSet<tstudent> tstudent { get; set; }
-
     public virtual DbSet<tstudent2> tstudent2 { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -35,20 +33,6 @@ public partial class dbstudentsContext : DbContext
             entity.Property(e => e.DeptName)
                 .HasMaxLength(50)
                 .HasComment("科系名稱");
-        });
-
-        modelBuilder.Entity<tstudent>(entity =>
-        {
-            entity.HasKey(e => e.fStuId).HasName("PRIMARY");
-
-            entity.Property(e => e.fStuId)
-                .HasMaxLength(6)
-                .IsFixedLength();
-            entity.Property(e => e.fEmail).HasMaxLength(40);
-            entity.Property(e => e.fName).HasMaxLength(30);
-            entity.Property(e => e.fScore)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("int(11)");
         });
 
         modelBuilder.Entity<tstudent2>(entity =>
