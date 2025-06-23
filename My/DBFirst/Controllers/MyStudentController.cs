@@ -8,8 +8,12 @@ namespace DBFirst.Controllers
 {
     public class MyStudentController : Controller
     {
-        //建立DB物件 (4.1.4)
-        dbStudentsContext Context = new dbStudentsContext();
+        readonly dbStudentsContext Context;
+
+        public MyStudentController(dbStudentsContext Context)
+        {
+            this.Context = Context;
+        }
 
         /// <summary>
         /// 

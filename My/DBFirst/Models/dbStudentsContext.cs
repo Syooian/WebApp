@@ -6,23 +6,23 @@ namespace DBFirst.Models;
 
 public partial class dbStudentsContext : DbContext
 {
-    //public dbStudentsContext(DbContextOptions<dbStudentsContext> options)
-    //    : base(options)
-    //{
-    //}
+    public dbStudentsContext(DbContextOptions<dbStudentsContext> options)
+        : base(options)
+    {
+    }
 
-    public readonly string DB_Server = "C501A117";
-    public readonly string DB_Name = "dbStudents";
-    public readonly string DB_User = "Syooian";
-    public readonly string DB_Password = "a123456";
+    //public readonly string DB_Server = "C501A117";
+    //public readonly string DB_Name = "dbStudents";
+    //public readonly string DB_User = "Syooian";
+    //public readonly string DB_Password = "a123456";
 
     /// <summary>
     /// 連線到資料庫
     /// <para>講義：1.2.4</para>
     /// </summary>
     /// <param name="optionsBuilder"></param>
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseSqlServer($"Data Source={DB_Server};Database={DB_Name};TrustServerCertificate=True;User ID={DB_User};Password={DB_Password}");
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //        => optionsBuilder.UseSqlServer($"Data Source={DB_Server};Database={DB_Name};TrustServerCertificate=True;User ID={DB_User};Password={DB_Password}");
 
     /// <summary>
     /// 

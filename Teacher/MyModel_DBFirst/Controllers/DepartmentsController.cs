@@ -11,16 +11,16 @@ namespace MyModel_DBFirst.Controllers
 {
     public class DepartmentsController : Controller
     {
-        //private readonly dbStudentsContext _context;
+        private readonly dbStudentsContext _context;
 
-        //public DepartmentsController(dbStudentsContext context)
-        //{
-        //    _context = context;
-        //}
+        public DepartmentsController(dbStudentsContext context)
+        {
+            _context = context;
+        }
 
 
         //5.6.4 參考2 .2.1修改建立DbContext物件的程式
-        dbStudentsContext _context = new dbStudentsContext(); //直接new物件的寫法
+        //dbStudentsContext _context = new dbStudentsContext(); //直接new物件的寫法
 
         // GET: Departments
         public async Task<IActionResult> Index()

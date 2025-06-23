@@ -11,15 +11,17 @@ namespace MyModel_DBFirst.Controllers
 {
     public class tStudents2Controller : Controller
     {
-        //private readonly dbStudentsContext _context;
+        //6.2.2 將步驟tStudents2Controller所註解掉的程式取消註解(這裡的寫法是scaffold預設的依賴注入寫法)
+        private readonly dbStudentsContext _context;
 
-        //public tStudents2Controller(dbStudentsContext context)
-        //{
-        //    _context = context;
-        //}
+        public tStudents2Controller(dbStudentsContext context)
+        {
+            _context = context;
+        }
 
 
-        dbStudentsContext _context = new dbStudentsContext(); 
+        //6.2.1 將tStudents2Controller建立DbContext物件的程式註解
+        //dbStudentsContext _context = new dbStudentsContext(); 
 
         // GET: tStudents2
         public async Task<IActionResult> Index()

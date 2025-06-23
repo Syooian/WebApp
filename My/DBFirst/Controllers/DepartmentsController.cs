@@ -11,7 +11,12 @@ namespace DBFirst.Controllers
 {
     public class DepartmentsController : Controller
     {
-        private readonly dbStudentsContext _context = new dbStudentsContext();
+        private readonly dbStudentsContext _context;
+
+        public DepartmentsController(dbStudentsContext context)
+        {
+            _context = context;
+        }
 
         // GET: Departments
         public async Task<IActionResult> Index()
