@@ -54,15 +54,15 @@ namespace DBFirst.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IActionResult Create(string id)
+        public IActionResult Create(string DeptID)
         {
-            //5.5.3 修改 Create Action
-            ViewData["Dept"] = new SelectList(Context.Department, "DeptID", "DeptName"); //建立給下拉選單的資料來源
-
             //5.9.2 修改Get Create Action進行參數傳遞
-            ViewData["DeptID"] = id;
+            ViewData["DeptID"] = DeptID;
 
             SetDeptData();
+
+            Console.WriteLine("DeptID : " + DeptID);
+
             return View();
         }
         /// <summary>
@@ -90,7 +90,7 @@ namespace DBFirst.Controllers
             Context.SaveChanges();
 
             //回首頁
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("IndexViewModel", new { id = Student.DeptID });
         }
 
         /// <summary>

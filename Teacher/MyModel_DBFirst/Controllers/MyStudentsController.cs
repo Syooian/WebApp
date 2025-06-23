@@ -87,6 +87,7 @@ namespace MyModel_DBFirst.Controllers
                 //2.回寫資料庫
                 db.SaveChanges(); //轉譯SQL 執行 INSERT INTO tStudent(fStuId, fName, fEmail, fScore) VALUES(...)
 
+                                                            //5.9.3 修改Post Create Action進行參數傳遞
                 return RedirectToAction("IndexViewModel", new { id= student.DeptID }); //新增完成後，導向到Index Action
             }
 
