@@ -117,6 +117,7 @@ namespace MyModel_DBFirst.Controllers
             //5.5.5 修改 Edit Action
             ViewData["Dept"] = new SelectList(db.Department, "DeptID", "DeptName"); //建立給下拉選單的資料來源
 
+            //5.9.4 修改Get Edit Action進行參數傳遞
             ViewData["DeptID"] = deptid;
 
             return View(result);
@@ -136,6 +137,7 @@ namespace MyModel_DBFirst.Controllers
             {
                 db.tStudent.Update(student);
                 db.SaveChanges();
+                                                        //5.9.5 修改Post Edit Action進行參數傳遞
                 return RedirectToAction("IndexViewModel", new { id= student.DeptID }); //編輯完成後，導向到Index Action
 
             }
@@ -164,6 +166,7 @@ namespace MyModel_DBFirst.Controllers
             db.tStudent.Remove(result); //將找到的資料從模型資料裡移除
             db.SaveChanges(); //回寫資料庫，執行 DELETE FROM tStudents WHERE fStuId = id;
 
+                                                       //5.9.6 修改Post Delete Action進行參數傳遞      
             return RedirectToAction("IndexViewModel", new { id = result.DeptID }); //刪除完成後，導向到Index Action
         }
 

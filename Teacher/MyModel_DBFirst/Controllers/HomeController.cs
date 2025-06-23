@@ -332,4 +332,27 @@ namespace MyModel_DBFirst.Controllers
 
 
 
+//6. 將取得資料改為依賴注入(Dependency Injection)的寫法
+
+//6.1   資料庫連線字串的改寫
+//      ※目前我們將資料庫的連線字串寫在DbContext的類別檔(dbStudentsContext.cs)中，這是一種較不好的寫法※
+//6.1.1 將連線字串寫在appsettings.json檔中
+//6.1.2 將dbStudentsContext中所寫的連線字串註解掉
+//6.1.3 將dbStudentsContext中所寫的空建構子註解掉(也可留著只是用不到)
+//6.1.4 在Program.cs加入使用appsettings.json中的連線字串程式碼(這段必須寫法var builder這行後面)
+
+
+//6.2   修正tStudents2Controller建立DbContext物件的寫法
+//6.2.1 將tStudents2Controller建立DbContext物件的程式註解
+//6.2.2 將步驟tStudents2Controller所註解掉的程式取消註解(這裡的寫法是scaffold預設的依賴注入寫法)
+//6.2.3 參照tStudents2Controller，修改MyStudentsController及DepartmentController中建立DbContext物件的程式為依賴注入寫法
+
+//※補充說明※
+//依賴注入(Dependency Injection)是物件導向程式設計撰寫時的一種技巧
+//其利用控制反轉(IoC)的概念，將new主動建立物建的寫法反轉為被動地接受物件
+//物件的生命週期控制權則在DI Container手上而不是使用物件的程式
+//這個寫法的優點是解除物件之間的耦合，有利於程式維護、單元測試等
+
+
+
 

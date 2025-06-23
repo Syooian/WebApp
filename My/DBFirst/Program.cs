@@ -1,7 +1,16 @@
+﻿using DBFirst.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+#region 設定區域
+//讀取appsettings.json
+builder.Services.AddDbContext<dbStudentsContext>(Options=>
+    Options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnectionStrings")));
+#endregion
 
 var app = builder.Build();
 

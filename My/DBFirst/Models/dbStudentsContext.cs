@@ -27,10 +27,10 @@ public partial class dbStudentsContext : DbContext
     /// <summary>
     /// 
     /// </summary>
-    public dbStudentsContext()
-    {
-        //空建構子
-    }
+    //public dbStudentsContext()
+    //{
+    //    //空建構子
+    //}
 
     /// <summary>
     /// 學生資料表
