@@ -24,6 +24,7 @@ namespace MyModel_DBFirst.Controllers
 
             ViewData["DeptName"] = db.Department.Find(id).DeptName;
 
+            ViewData["DeptID"] = id;
 
             return View(students);
         }
@@ -51,10 +52,13 @@ namespace MyModel_DBFirst.Controllers
 
         //4.3.1 撰寫Create Action程式碼(需有兩個Create Action)
         //4.3.2 建立Create View
-        public IActionResult Create()
+        public IActionResult Create(string aaa)
         {
             //5.5.3 修改 Create Action
             ViewData["Dept"] = new SelectList(db.Department, "DeptID", "DeptName"); //建立給下拉選單的資料來源
+            
+            //5.9.2 修改Get Create Action進行參數傳遞
+            ViewData["DeptID"] = aaa;
 
             return View();
         }

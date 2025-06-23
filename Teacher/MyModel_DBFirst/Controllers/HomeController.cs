@@ -320,7 +320,7 @@ namespace MyModel_DBFirst.Controllers
 //※說明:目前執行完新增或修改功能，導回Index Action時皆會呈現「資工系」的學生資料※
 //※這是因為Index Action若沒給參數則會預設使用deptid="01"的資料，造成流程上的小問題※
 //※因此需要修改Create、Edit與Delete的Action及View進行參數傳遞，以保留住網頁原本的狀態※
-//5.9.1 修改Index View上Create的超鏈結進行參數傳遞
+//5.9.1 修改IndexViewModel View上Create的超鏈結進行參數傳遞
 //5.9.2 修改Get Create Action進行參數傳遞
 //5.9.3 修改Post Create Action進行參數傳遞
 //5.9.4 修改Get Edit Action進行參數傳遞

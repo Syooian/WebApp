@@ -28,7 +28,7 @@
     <div class="col-9">
         學生
         <p class="text-end">
-            <a asp-action="Create">新增學生資料</a>
+            <a asp-action="Create" asp-route-id="@ViewBag.DeptID">新增學生資料</a>
         </p>
         @if (Model.Students.Count == 0)
         {

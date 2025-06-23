@@ -26,6 +26,10 @@ namespace DBFirst.Controllers
                 Students = string.IsNullOrEmpty(id) ? Context.tStudent.ToList() : Context.tStudent.Where(S => S.DeptID == id).ToList()
             };
 
+            if (!string.IsNullOrEmpty(id))
+                ViewData["DeptName"] = Context.Department.Find(id).DeptName;
+            ViewData["DeptID"] = id;
+
             return View(VM);
         }
 
@@ -48,9 +52,16 @@ namespace DBFirst.Controllers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public IActionResult Create()
+        public IActionResult Create(string id)
         {
+            //5.5.3 修改 Create Action
+            ViewData["Dept"] = new SelectList(Context.Department, "DeptID", "DeptName"); //建立給下拉選單的資料來源
+
+            //5.9.2 修改Get Create Action進行參數傳遞
+            ViewData["DeptID"] = id;
+
             SetDeptData();
             return View();
         }
