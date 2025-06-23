@@ -1,0 +1,90 @@
+﻿<!--接Action return回來的類別-->
+<!--不須再使用IEnumerable，因為裡面已經都是List-->
+@model DBFirst.ViewModels.VM_tStudent
+@*@model IEnumerable<DBFirst.Models.tStudent>-->*@
+
+@{
+    ViewData["Title"] = "學生資料管理";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-3">
+        科系
+        <table class="table">
+            <ul>
+                <li><a asp-action="IndexViewModel" asp-route-id="">全部科系</a></li>
+                @foreach (var item in Model.Departments)
+                {
+                    <li>
+                        <a asp-action="IndexViewModel" asp-route-id="@item.DeptID">@item.DeptName</a>
+                    </li>
+                }
+            </ul>
+        </table>
+    </div>
+
+    <div class="col-9">
+        學生
+        <p class="text-end">
+            <a asp-action="Create" asp-route-DeptID="@ViewBag.DeptID">新增學生資料</a>
+        </p>
+        @if (Model.Students.Count == 0)
+        {
+            <h3 class="text-center text-danger">無學生資料</h3>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fStuId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Students.FirstOrDefault().Department.DeptName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fEmail)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fScore)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Students)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fStuId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Department.DeptName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fEmail)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fScore)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.fStuId">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.fStuId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.fStuId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

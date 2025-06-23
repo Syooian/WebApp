@@ -9,25 +9,22 @@ using DBFirst.Models;
 
 namespace DBFirst.Controllers
 {
-    public class tStudents2Controller : Controller
+    public class DepartmentsController : Controller
     {
         private readonly dbStudentsContext _context;
 
-        public tStudents2Controller(dbStudentsContext context)
+        public DepartmentsController(dbStudentsContext context)
         {
             _context = context;
         }
 
-        //dbStudentsContext _context = new dbStudentsContext();
-
-        // GET: tStudents2
+        // GET: Departments
         public async Task<IActionResult> Index()
         {
-            var dbStudentsContext = _context.tStudent.Include(t => t.Department);
-            return View(await dbStudentsContext.ToListAsync());
+            return View(await _context.Department.ToListAsync());
         }
 
-        // GET: tStudents2/Details/5
+        // GET: Departments/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -35,42 +32,46 @@ namespace DBFirst.Controllers
                 return NotFound();
             }
 
-            var tStudent = await _context.tStudent
-                .Include(t => t.Department)
-                .FirstOrDefaultAsync(m => m.fStuId == id);
-            if (tStudent == null)
+            var department = await _context.Department
+                .FirstOrDefaultAsync(m => m.DeptID == id);
+            if (department == null)
             {
                 return NotFound();
             }
 
-            return View(tStudent);
+            return View(department);
         }
 
-        // GET: tStudents2/Create
+        // GET: Departments/Create
         public IActionResult Create()
         {
-            ViewData["DeptID"] = new SelectList(_context.Department, "DeptID", "DeptID");
             return View();
         }
 
-        // POST: tStudents2/Create
+        // POST: Departments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("fStuId,fName,fEmail,fScore,DeptID")] tStudent tStudent)
+        public async Task<IActionResult> Create([Bind("DeptID,DeptName")] Department department)
         {
+            var result = _context.Department.Find(department.DeptID);
+            if (result != null)
+            {
+                ViewData["ErrorMessage"] = "科系代碼已存在，請重新輸入！"; //將錯誤訊息傳遞到View
+                return View(department);
+            }
+
             if (ModelState.IsValid)
             {
-                _context.Add(tStudent);
+                _context.Add(department);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DeptID"] = new SelectList(_context.Department, "DeptID", "DeptID", tStudent.DeptID);
-            return View(tStudent);
+            return View(department);
         }
 
-        // GET: tStudents2/Edit/5
+        // GET: Departments/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -78,23 +79,22 @@ namespace DBFirst.Controllers
                 return NotFound();
             }
 
-            var tStudent = await _context.tStudent.FindAsync(id);
-            if (tStudent == null)
+            var department = await _context.Department.FindAsync(id);
+            if (department == null)
             {
                 return NotFound();
             }
-            ViewData["DeptID"] = new SelectList(_context.Department, "DeptID", "DeptID", tStudent.DeptID);
-            return View(tStudent);
+            return View(department);
         }
 
-        // POST: tStudents2/Edit/5
+        // POST: Departments/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("fStuId,fName,fEmail,fScore,DeptID")] tStudent tStudent)
+        public async Task<IActionResult> Edit(string id, [Bind("DeptID,DeptName")] Department department)
         {
-            if (id != tStudent.fStuId)
+            if (id != department.DeptID)
             {
                 return NotFound();
             }
@@ -103,12 +103,12 @@ namespace DBFirst.Controllers
             {
                 try
                 {
-                    _context.Update(tStudent);
+                    _context.Update(department);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!tStudentExists(tStudent.fStuId))
+                    if (!DepartmentExists(department.DeptID))
                     {
                         return NotFound();
                     }
@@ -119,11 +119,10 @@ namespace DBFirst.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DeptID"] = new SelectList(_context.Department, "DeptID", "DeptID", tStudent.DeptID);
-            return View(tStudent);
+            return View(department);
         }
 
-        // GET: tStudents2/Delete/5
+        // GET: Departments/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -131,35 +130,34 @@ namespace DBFirst.Controllers
                 return NotFound();
             }
 
-            var tStudent = await _context.tStudent
-                .Include(t => t.Department)
-                .FirstOrDefaultAsync(m => m.fStuId == id);
-            if (tStudent == null)
+            var department = await _context.Department
+                .FirstOrDefaultAsync(m => m.DeptID == id);
+            if (department == null)
             {
                 return NotFound();
             }
 
-            return View(tStudent);
+            return View(department);
         }
 
-        // POST: tStudents2/Delete/5
+        // POST: Departments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var tStudent = await _context.tStudent.FindAsync(id);
-            if (tStudent != null)
+            var department = await _context.Department.FindAsync(id);
+            if (department != null)
             {
-                _context.tStudent.Remove(tStudent);
+                _context.Department.Remove(department);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool tStudentExists(string id)
+        private bool DepartmentExists(string id)
         {
-            return _context.tStudent.Any(e => e.fStuId == id);
+            return _context.Department.Any(e => e.DeptID == id);
         }
     }
 }

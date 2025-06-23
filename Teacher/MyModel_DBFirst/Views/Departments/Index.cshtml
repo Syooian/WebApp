@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MyModel_DBFirst.Models.Department>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.DeptID)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.DeptName)
+			</th>
+		
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.DeptID)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.DeptName)
+				</td>
+			
+			</tr>
+		}
+	</tbody>
+</table>

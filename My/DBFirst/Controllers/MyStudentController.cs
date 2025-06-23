@@ -1,13 +1,41 @@
 ﻿using DBFirst.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace DBFirst.Controllers
 {
     public class MyStudentController : Controller
     {
-        //建立DB物件 (4.1.4)
-        dbStudentsContext Context = new dbStudentsContext();
+        readonly dbStudentsContext Context;
+
+        public MyStudentController(dbStudentsContext Context)
+        {
+            this.Context = Context;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id">科系ID<para>不帶入值時表示全部科系</para></param>
+        /// <returns></returns>
+        public IActionResult IndexViewModel(string id = "")
+        {
+            var VM = new ViewModels.VM_tStudent
+            {
+                //Where : 帶入條件
+
+                Departments = Context.Department.ToList(),
+                Students = string.IsNullOrEmpty(id) ? Context.tStudent.ToList() : Context.tStudent.Where(S => S.DeptID == id).ToList()
+            };
+
+            if (!string.IsNullOrEmpty(id))
+                ViewData["DeptName"] = Context.Department.Find(id).DeptName;
+            ViewData["DeptID"] = id;
+
+            return View(VM);
+        }
 
         /// <summary>
         /// 
@@ -19,7 +47,7 @@ namespace DBFirst.Controllers
             //Index Action 4.2.1
             //Linq寫法
             //var Result = from Student in Context.tStudent select Student;
-            var Result = Context.tStudent.ToList();
+            var Result = Context.tStudent.Include(t => t.Department).ToList();
 
             //將結果傳給View 4.2.2
             return View(Result);
@@ -28,9 +56,14 @@ namespace DBFirst.Controllers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public IActionResult Create()
+        public IActionResult Create(string DeptID)
         {
+            SetDeptData(DeptID);
+
+            Console.WriteLine("DeptID : " + DeptID);
+
             return View();
         }
         /// <summary>
@@ -58,7 +91,7 @@ namespace DBFirst.Controllers
             Context.SaveChanges();
 
             //回首頁
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("IndexViewModel", new { id = Student.DeptID });
         }
 
         /// <summary>
@@ -77,6 +110,8 @@ namespace DBFirst.Controllers
                 //找不到學生資料，回傳404 Not Found結果
                 return NotFound();
             }
+
+            SetDeptData(Student.DeptID);
 
             return View(Student);
         }
@@ -103,10 +138,22 @@ namespace DBFirst.Controllers
                 Context.SaveChanges();
 
                 //回首頁
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("IndexViewModel", new { id = Student.DeptID });
             }
 
             return View(Student); //如果模型驗證失敗，回傳原本的View
+        }
+
+        /// <summary>
+        /// 建立給科系的下拉式選單的資料來源
+        /// </summary>
+        /// <param name="DeptID">科系ID</param>
+        void SetDeptData(string DeptID)
+        {
+            //5.9.2 修改Get Create Action進行參數傳遞
+            ViewData["DeptID"] = DeptID;
+
+            ViewData["DeptData"] = new SelectList(Context.Department, "DeptID", "DeptName");
         }
 
         /// <summary>
@@ -130,7 +177,7 @@ namespace DBFirst.Controllers
 
             Context.SaveChanges();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("IndexViewModel", new { id = Student.DeptID });
         }
     }
 }

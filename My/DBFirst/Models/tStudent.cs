@@ -35,7 +35,7 @@ public partial class tStudent
     /// <summary>
     /// 科系ID
     /// </summary>
-    [Display(Name = "科系ID")]
+    [Display(Name = "科系")]
     [ForeignKey("Department")]//用標籤方式來表示關聯
     public string DeptID { get; set; } = null!;
     /// <summary>
