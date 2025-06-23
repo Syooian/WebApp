@@ -56,10 +56,7 @@ namespace DBFirst.Controllers
         /// <returns></returns>
         public IActionResult Create(string DeptID)
         {
-            //5.9.2 修改Get Create Action進行參數傳遞
-            ViewData["DeptID"] = DeptID;
-
-            SetDeptData();
+            SetDeptData(DeptID);
 
             Console.WriteLine("DeptID : " + DeptID);
 
@@ -110,7 +107,7 @@ namespace DBFirst.Controllers
                 return NotFound();
             }
 
-            SetDeptData();
+            SetDeptData(Student.DeptID);
 
             return View(Student);
         }
@@ -137,7 +134,7 @@ namespace DBFirst.Controllers
                 Context.SaveChanges();
 
                 //回首頁
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("IndexViewModel", new { id = Student.DeptID });
             }
 
             return View(Student); //如果模型驗證失敗，回傳原本的View
@@ -146,8 +143,12 @@ namespace DBFirst.Controllers
         /// <summary>
         /// 建立給科系的下拉式選單的資料來源
         /// </summary>
-        void SetDeptData()
+        /// <param name="DeptID">科系ID</param>
+        void SetDeptData(string DeptID)
         {
+            //5.9.2 修改Get Create Action進行參數傳遞
+            ViewData["DeptID"] = DeptID;
+
             ViewData["DeptData"] = new SelectList(Context.Department, "DeptID", "DeptName");
         }
 
@@ -172,7 +173,7 @@ namespace DBFirst.Controllers
 
             Context.SaveChanges();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("IndexViewModel", new { id = Student.DeptID });
         }
     }
 }
