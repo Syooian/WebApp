@@ -13,16 +13,16 @@ namespace MyModel_DBFirst.Controllers
 
 
         //5.8.4 撰寫MyStudnetsController裡新的IndexViewModel Action
-        public IActionResult IndexViewModel(string id="01")
+        public IActionResult IndexViewModel(string id = "01")
         {
 
             VMtStudent students = new VMtStudent()
             {
-                Students = db.tStudent.Where(s=>s.DeptID==id).ToList(),
+                Students = db.tStudent.Where(s => s.DeptID == id).ToList(),
                 Departments = db.Department.ToList()
             };
-           
 
+            ViewData["DeptName"] = db.Department.Find(id).DeptName;
 
 
             return View(students);

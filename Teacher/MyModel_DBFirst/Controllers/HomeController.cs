@@ -312,3 +312,24 @@ namespace MyModel_DBFirst.Controllers
 //5.8.7 修改IndexViewModel Action，將科系代碼由參數傳入，做為篩選條件
 //※補充說明※
 //View Model指的是專為View設計的Model，主要用於View的呈現或驗證規則(商業邏輯)
+
+
+
+
+//5.9   網頁的狀態保留
+//※說明:目前執行完新增或修改功能，導回Index Action時皆會呈現「資工系」的學生資料※
+//※這是因為Index Action若沒給參數則會預設使用deptid="01"的資料，造成流程上的小問題※
+//※因此需要修改Create、Edit與Delete的Action及View進行參數傳遞，以保留住網頁原本的狀態※
+//5.9.1 修改Index View上Create的超鏈結進行參數傳遞
+//5.9.2 修改Get Create Action進行參數傳遞
+//5.9.3 修改Post Create Action進行參數傳遞
+//5.9.4 修改Get Edit Action進行參數傳遞
+//5.9.5 修改Post Edit Action進行參數傳遞
+//5.9.6 修改Post Delete Action進行參數傳遞
+//5.9.7 測試
+//※補充說明※
+//只要能正確的傳遞參數來保留狀態，SelectList物件會自動 Mapping正確的option
+
+
+
+
