@@ -24,7 +24,7 @@
 		<h2 class="text-center">@ViewData["DeptName"] 學生資料</h2>
 		<p class="text-end">
 			@* //5.9.1 修改IndexViewModel View上Create的超鏈結進行參數傳遞 *@
-			<a asp-action="Create" asp-route-aaa="@ViewBag.DeptID" class="btn btn-primary">新增學生資料</a>
+			<a asp-action="Create" asp-route-deptid="@ViewBag.DeptID" class="btn btn-primary">新增學生資料</a>
 		</p>
 
 		@if (Model.Students.Count() == 0)

@@ -52,13 +52,13 @@ namespace MyModel_DBFirst.Controllers
 
         //4.3.1 撰寫Create Action程式碼(需有兩個Create Action)
         //4.3.2 建立Create View
-        public IActionResult Create(string aaa)
+        public IActionResult Create(string deptid)
         {
             //5.5.3 修改 Create Action
             ViewData["Dept"] = new SelectList(db.Department, "DeptID", "DeptName"); //建立給下拉選單的資料來源
             
             //5.9.2 修改Get Create Action進行參數傳遞
-            ViewData["DeptID"] = aaa;
+            ViewData["DeptID"] = deptid;
 
             return View();
         }
@@ -87,7 +87,7 @@ namespace MyModel_DBFirst.Controllers
                 //2.回寫資料庫
                 db.SaveChanges(); //轉譯SQL 執行 INSERT INTO tStudent(fStuId, fName, fEmail, fScore) VALUES(...)
 
-                return RedirectToAction("IndexViewModel"); //新增完成後，導向到Index Action
+                return RedirectToAction("IndexViewModel", new { id= student.DeptID }); //新增完成後，導向到Index Action
             }
 
 
