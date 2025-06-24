@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,10 +19,9 @@ namespace DBFirst_MySql2.Controllers
         }
 
         // GET: Home
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var dbstudentsContext = _context.tstudent2.Include(t => t.Dept);
-            return View(await dbstudentsContext.ToListAsync());
+            return View();
         }
 
         // GET: Home/Details/5
@@ -158,6 +157,15 @@ namespace DBFirst_MySql2.Controllers
         private bool tstudent2Exists(string id)
         {
             return _context.tstudent2.Any(e => e.fStuId == id);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Privacy()
+        {
+            return View();
         }
     }
 }

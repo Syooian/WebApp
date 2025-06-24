@@ -1,53 +1,9 @@
-﻿@model IEnumerable<DBFirst_MySql2.Models.tstudent2>
-
-@{
-    ViewData["Title"] = "Index";
+﻿@{
+    ViewData["Title"] = "Home Page";
 }
+<h1>@ViewData["Title"]</h1>
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.fName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.fEmail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.fScore)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Dept)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.fName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fScore)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dept.DeptID)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.fStuId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.fStuId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.fStuId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
