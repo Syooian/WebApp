@@ -11,12 +11,12 @@
     <div class="col-3">
         <table class="table">
             <tr>
-                <th>全部科系</th>
+                <th><a asp-action="Students" asp-route-DeptID="">全部科系</a></th>
             </tr>
             @foreach (var Item in Model.Departments)
             {
                 <tr>
-                    <th>@Item.DeptName</th>
+                    <th><a asp-action="Students" asp-route-DeptID="@Item.DeptID">@Item.DeptName</a></th>
                 </tr>
             }
         </table>

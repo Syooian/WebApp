@@ -28,13 +28,14 @@ namespace DBFirst_MySql2.Controllers
         /// <summary>
         /// 學生資料管理
         /// </summary>
+        /// <param name="DeptID">科系ID<para>未帶入值時顯示全部科系</para></param>
         /// <returns></returns>
-        public IActionResult Students()
+        public IActionResult Students(string DeptID = "")
         {
             var VM = new VM_tStudent2_Department()
             {
                 Departments = _context.department.ToList(),
-                Students = _context.tstudent2.ToList()
+                Students = string.IsNullOrEmpty(DeptID) ? _context.tstudent2.ToList() : _context.tstudent2.Where(S => S.DeptID == DeptID).ToList()
             };
 
             return View(VM);
