@@ -1,8 +1,8 @@
-using DBFirst_Test.Models;
+﻿using DBFirst_MySql1.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace DBFirst_Test.Controllers
+namespace DBFirst_MySql1.Controllers
 {
     public class HomeController : Controller
     {

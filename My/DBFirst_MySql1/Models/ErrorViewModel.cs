@@ -1,4 +1,4 @@
-namespace DBFirst_Test.Models
+﻿namespace DBFirst_MySql1.Models
 {
     public class ErrorViewModel
     {

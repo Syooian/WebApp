@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DBFirst_Test.Models;
+namespace DBFirst_MySql1.Models;
 
 /// <summary>
 /// 科系

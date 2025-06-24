@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace DBFirst_Test.Models;
+namespace DBFirst_MySql1.Models;
 
 public partial class dbstudentsContext : DbContext
 {
