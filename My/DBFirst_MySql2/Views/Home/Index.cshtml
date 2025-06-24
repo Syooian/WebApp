@@ -3,7 +3,13 @@
 }
 <h1>@ViewData["Title"]</h1>
 
+<script src="/js/UpdateTime.js"></script>
+<script>
+    setInterval(()=>UpdateTime("CurrentTime"),500);
+</script>
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
+    <h5><span id="CurrentTime"></span></h5>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
