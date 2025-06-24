@@ -6,49 +6,58 @@
 
 <h1>Students</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fEmail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fScore)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Students.FirstOrDefault().Dept)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Students)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fEmail)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fScore)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Dept.DeptID)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.fStuId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.fStuId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.fStuId">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row">
+    <!--科系列表-->
+    <div class="col-3">
+
+    </div>
+    <!--學生列表-->
+    <div class="col-9">
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fEmail)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fScore)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Students.FirstOrDefault().Dept)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Students)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fEmail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fScore)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dept.DeptID)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.fStuId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.fStuId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.fStuId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
