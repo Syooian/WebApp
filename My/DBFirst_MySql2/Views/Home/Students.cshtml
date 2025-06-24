@@ -30,6 +30,9 @@
             <thead>
                 <tr>
                     <th>
+                        @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fStuId)
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.Students.FirstOrDefault().fName)
                     </th>
                     <th>
@@ -49,6 +52,9 @@
                 {
                     <tr>
                         <td>
+                            @Html.DisplayFor(modelitem => item.fStuId)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.fName)
                         </td>
                         <td>
@@ -58,7 +64,7 @@
                             @Html.DisplayFor(modelItem => item.fScore)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Dept.DeptID)
+                            @Html.DisplayFor(modelItem => item.Dept.DeptName)
                         </td>
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.fStuId">Edit</a> |
