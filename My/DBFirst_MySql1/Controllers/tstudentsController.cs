@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DBFirst_Test.Models;
+using DBFirst_MySql1.Models;
 
-namespace DBFirst_Test.Controllers
+namespace DBFirst_MySql1.Controllers
 {
     public class tstudentsController : Controller
     {

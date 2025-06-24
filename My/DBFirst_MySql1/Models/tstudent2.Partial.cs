@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DBFirst_Test.Models
+namespace DBFirst_MySql1.Models
 {
     public partial class tstudent2
     {
