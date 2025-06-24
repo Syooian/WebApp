@@ -18,6 +18,15 @@ namespace DBFirst_MySql1.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 學生管理
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Students()
+        {
+
+        }
+
         public IActionResult Privacy()
         {
             return View();

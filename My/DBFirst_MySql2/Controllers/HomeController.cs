@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DBFirst_MySql2.Models;
+using DBFirst_MySql2.ViewModels;
 
 namespace DBFirst_MySql2.Controllers
 {
@@ -22,6 +23,21 @@ namespace DBFirst_MySql2.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        /// <summary>
+        /// 學生資料管理
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Students()
+        {
+            var VM = new VM_tStudent2_Department()
+            {
+                Departments = _context.department.ToList(),
+                Students = _context.tstudent2.ToList()
+            };
+
+            return View(VM);
         }
 
         // GET: Home/Details/5
