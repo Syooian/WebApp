@@ -1,4 +1,4 @@
-using DBFirst_MySql2.Models;
+ï»¿using DBFirst_MySql2.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,10 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//³]©w³s½u
+//è¨­å®šé€£ç·š
 builder.Services.AddDbContext<dbstudentsContext>(Options =>
     Options.UseMySql(builder.Configuration.GetConnectionString("DBConnectionStrings"),
-    new MySqlServerVersion(new Version(8, 0, 33)))); // MySQL ª©¥»¸¹¥i®Ú¾Ú¹ê»Ú±¡ªp½Õ¾ã
+    new MySqlServerVersion(new Version(8, 0, 33)))); // MySQL ç‰ˆæœ¬è™Ÿå¯æ ¹æ“šå¯¦éš›æƒ…æ³èª¿æ•´
 
 var app = builder.Build();
 
@@ -24,6 +24,11 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.MapControllerRoute(
+    name: "StudentsDept",
+    //pattern: "{controller=Home}/{action=Students}/{DeptID?}");
+    pattern: "Home/Students/{DeptID?}",
+    defaults: new { controller = "Home", action = "Students" });
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
