@@ -1,7 +1,10 @@
-﻿選擇DBFirst_MySql1為啟動專案
-套件管理主控台的預設專案選擇DBFirst_MySql1
-Scaffold-DbContext生成Model操作：\
-Scaffold-DbContext "Server='127.0.0.1';Database='dbstudents';User='root';Password='autc007'" Pomelo.EntityFrameworkCore.MySql -OutputDir Models -NoOnConfiguring -UseDatabaseNames -NoPluralize -Force
+﻿## Scaffold-DbContext生成Model操作
+<ol>
+	<li>選擇DBFirst_MySql1為啟動專案</li>
+	<li>檢視->其他視窗->開啟套件管理器主控台</li>
+	<li>套件管理器主控台的預設專案選擇DBFirst_MySql1</li>
+	<li>執行以下指令：Scaffold-DbContext "Server='127.0.0.1';Database='dbstudents';User='root';Password='autc007'" Pomelo.EntityFrameworkCore.MySql -OutputDir Models -NoOnConfiguring -UseDatabaseNames -NoPluralize -Force</li>
+</ol>
 
 ## 生成Model時自動加入註解
 資料庫上如果有填入註解，生成Model時會自動加入註解
