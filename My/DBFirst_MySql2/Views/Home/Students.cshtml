@@ -9,7 +9,17 @@
 <div class="row">
     <!--科系列表-->
     <div class="col-3">
-
+        <table class="table">
+            <tr>
+                <th>全部科系</th>
+            </tr>
+            @foreach (var Item in Model.Departments)
+            {
+                <tr>
+                    <th>@Item.DeptName</th>
+                </tr>
+            }
+        </table>
     </div>
     <!--學生列表-->
     <div class="col-9">
