@@ -25,6 +25,23 @@ namespace NorthwindStore.Controllers
             return View(await northwindContext.ToListAsync());
         }
 
+
+        public async Task<IActionResult> GetPhoto(int id)
+        {
+            //取得某個商品分類的圖片
+            var emp = await _context.Employees.FindAsync(id);
+
+            if (emp == null)
+            {
+                return NotFound(); //如果找不到分類或圖片長度小於78，則回傳NotFound
+            }
+
+
+            var photoBytes = emp.Photo.Skip(78).ToArray();//跳過前78個byte，取得圖片的實際內容後，轉成byte[]陣列  
+
+            return File(photoBytes, "image/bmp");
+        }
+
         // GET: Employees/Details/5
         public async Task<IActionResult> Details(int? id)
         {
