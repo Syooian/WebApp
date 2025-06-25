@@ -97,39 +97,6 @@ namespace NorthwindStore.Controllers
             return View(categories);
         }
 
-        // GET: Categories/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var categories = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryID == id);
-            if (categories == null)
-            {
-                return NotFound();
-            }
-
-            return View(categories);
-        }
-
-        // POST: Categories/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var categories = await _context.Categories.FindAsync(id);
-            if (categories != null)
-            {
-                _context.Categories.Remove(categories);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
         private bool CategoriesExists(int id)
         {
             return _context.Categories.Any(e => e.CategoryID == id);

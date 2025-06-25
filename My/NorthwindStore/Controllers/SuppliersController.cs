@@ -115,39 +115,6 @@ namespace NorthwindStore.Controllers
             return View(suppliers);
         }
 
-        // GET: Suppliers/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var suppliers = await _context.Suppliers
-                .FirstOrDefaultAsync(m => m.SupplierID == id);
-            if (suppliers == null)
-            {
-                return NotFound();
-            }
-
-            return View(suppliers);
-        }
-
-        // POST: Suppliers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var suppliers = await _context.Suppliers.FindAsync(id);
-            if (suppliers != null)
-            {
-                _context.Suppliers.Remove(suppliers);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
         private bool SuppliersExists(int id)
         {
             return _context.Suppliers.Any(e => e.SupplierID == id);
