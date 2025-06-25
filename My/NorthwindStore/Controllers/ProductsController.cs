@@ -19,10 +19,22 @@ namespace NorthwindStore.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? CategoryID)
         {
-            var northwindContext = _context.Products.Include(p => p.Category).Include(p => p.Supplier);
-            return View(await northwindContext.ToListAsync());
+            ViewModels.VM_Category_Product VM = null;
+
+            await Task.Run(() =>
+            {
+                VM = new ViewModels.VM_Category_Product()
+                {
+                    Categories = _context.Categories.ToList(),
+                    Products = CategoryID == null ?
+                        _context.Products.ToList() :
+                        _context.Products.Where(P => P.CategoryID == CategoryID).ToList()
+                };
+            });
+
+            return View(VM);
         }
 
         // GET: Products/Details/5

@@ -38,7 +38,7 @@
 		</ul>
 		<li>員工資料管理(Employees)：</li>
 		<ul>
-			<li>顯示EmployeeID、FirstName、LastName、Title、TitleOfCourtesy、HireDate。</li>
+			<li>顯示EmployeeID、LastName、FirstName、Title、TitleOfCourtesy、HireDate。</li>
 		</ul>
 		<li>供應商資料管理(Suppliers)：</li>
 		<ul>
