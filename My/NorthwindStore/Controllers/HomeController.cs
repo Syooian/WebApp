@@ -1,6 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using NorthwindStore.Models;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace NorthwindStore.Controllers
 {
@@ -28,5 +30,24 @@ namespace NorthwindStore.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        #region 取圖片
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="OlePicture"></param>
+        /// <returns></returns>
+        public static byte[] RemoveOleHeader(byte[] OlePicture)
+        {
+            const int OleHeaderLength = 78;//OLE header 通常長度為 78 bytes
+
+            if (OlePicture == null || OlePicture.Length <= OleHeaderLength)
+            {
+                return OlePicture;
+            }
+
+            return OlePicture.Skip(OleHeaderLength).ToArray();
+        }
+        #endregion
     }
 }

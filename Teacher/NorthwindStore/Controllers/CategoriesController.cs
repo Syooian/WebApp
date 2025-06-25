@@ -24,7 +24,22 @@ namespace NorthwindStore.Controllers
             return View(await _context.Categories.ToListAsync());
         }
 
-       
+        public async Task<IActionResult> GetPicture(int id)
+        {
+            //取得某個商品分類的圖片
+            var cate = await _context.Categories.FindAsync(id);
+
+            if(cate == null )
+            {
+                return NotFound(); //如果找不到分類或圖片長度小於78，則回傳NotFound
+            }
+
+
+            var picBytes= cate.Picture.Skip(78).ToArray();//跳過前78個byte，取得圖片的實際內容後，轉成byte[]陣列  
+
+            return File(picBytes, "image/bmp" );
+        }
+
 
         // GET: Categories/Create
         public IActionResult Create()

@@ -42,6 +42,16 @@
                 </td>
                 <td>
                     @*@Html.DisplayFor(modelItem => item.Picture)*@
+                    @if (item.Picture != null && item.Picture.Length > 0)
+                    {
+                        var ImgBytes = NorthwindStore.Controllers.HomeController.RemoveOleHeader(item.Picture);
+
+                        <img src="data:image/jpg;base64,@Convert.ToBase64String(ImgBytes)" alt="@item.CategoryName" style="max-width:100px; max-height:100px;" />
+                    }
+                    else
+                    {
+                        <span>No Image</span>
+                    }
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.CategoryID">Edit</a>
