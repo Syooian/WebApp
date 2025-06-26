@@ -1,0 +1,100 @@
+﻿@model NorthwindStore.Models.Employees
+
+@{
+	ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+
+	<h4>Employees</h4>
+	<hr />
+	<div class="row">
+		<div class="col-8">
+			<div class="row">
+				<div class="col-sm-2">
+					@Html.DisplayNameFor(model => model.LastName)
+				</div>
+				<div class="col-sm-10">
+					@Html.DisplayFor(model => model.LastName)
+				</div>
+				<div class="col-sm-2">
+					@Html.DisplayNameFor(model => model.FirstName)
+				</div>
+				<div class="col-sm-10">
+					@Html.DisplayFor(model => model.FirstName)
+				</div>
+				<div class="col-sm-2">
+					@Html.DisplayNameFor(model => model.Title)
+				</div>
+				<div class="col-sm-10">
+					@Html.DisplayFor(model => model.Title)
+				</div>
+				<div class="col-sm-2">
+					@Html.DisplayNameFor(model => model.TitleOfCourtesy)
+				</div>
+				<div class="col-sm-10">
+					@Html.DisplayFor(model => model.TitleOfCourtesy)
+				</div>
+				<div class="col-sm-2">
+					@Html.DisplayNameFor(model => model.BirthDate)
+				</div>
+				<div class="col-sm-10">
+					@Html.DisplayFor(model => model.BirthDate)
+				</div>
+				<div class="col-sm-2">
+					@Html.DisplayNameFor(model => model.HireDate)
+				</div>
+				<div class="col-sm-10">
+					@Html.DisplayFor(model => model.HireDate)
+				</div>
+				<div class="col-sm-2">
+					@Html.DisplayNameFor(model => model.Address)
+				</div>
+				<div class="col-sm-10">
+					@Html.DisplayFor(model => model.Address)
+				</div>
+				<div class="col-sm-2">
+					@Html.DisplayNameFor(model => model.PostalCode)
+				</div>
+				<div class="col-sm-10">
+					@Html.DisplayFor(model => model.PostalCode)
+				</div>
+				<div class="col-sm-2">
+					@Html.DisplayNameFor(model => model.HomePhone)
+				</div>
+				<div class="col-sm-10">
+					@Html.DisplayFor(model => model.HomePhone)
+				</div>
+				<div class="col-sm-2">
+					@Html.DisplayNameFor(model => model.Extension)
+				</div>
+				<div class="col-sm-10">
+					@Html.DisplayFor(model => model.Extension)
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col-4">
+			<img src="/Employees/GetPhoto/@Model.EmployeeID" />
+
+		</div>
+	</div>
+
+
+
+	<div class="row">
+		<div class="col-sm-">
+			@Html.DisplayNameFor(model => model.Notes)
+		</div>
+		<div class="col-sm-10">
+			@Html.DisplayFor(model => model.Notes)
+		</div>
+
+	</div>
+
+<div>
+	<a asp-action="Edit" asp-route-id="@Model?.EmployeeID">Edit</a> |
+	<a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<NorthwindStore.Models.Customers>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.CustomerID)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.CompanyName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ContactName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ContactTitle)
+			</th>
+
+			<th>
+				@Html.DisplayNameFor(model => model.Phone)
+			</th>
+
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.CustomerID)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.CompanyName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ContactName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ContactTitle)
+				</td>
+
+				<td>
+					@Html.DisplayFor(modelItem => item.Phone)
+				</td>
+
+				<td>
+
+					<a asp-action="Details" asp-route-id="@item.CustomerID">Details</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

@@ -1,0 +1,111 @@
+﻿@model NorthwindStore.ViewModels.VM_Category_Product
+
+@{
+    ViewData["Title"] = "商品資料管理";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<div class="row">
+    <div class="col-3">
+        <h3>商品分類</h3>
+        <table class="table">
+            <tr>
+                <th><a asp-action="Index" asp-route-CategoryID="">全部分類</a></th>
+            </tr>
+            @foreach (var Item in Model.Categories)
+            {
+                <tr>
+                    <th><a asp-action="Index" asp-route-CategoryID="@Item.CategoryID">@Item.CategoryName</a></th>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="col-9">
+        <h3>商品</h3>
+        <p>
+            <a asp-action="Create" class="btn btn-primary">建立新商品</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Products.FirstOrDefault().ProductID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Products.FirstOrDefault().ProductName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Products.FirstOrDefault().QuantityPerUnit)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Products.FirstOrDefault().UnitPrice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Products.FirstOrDefault().UnitsInStock)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Products.FirstOrDefault().UnitsOnOrder)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Products.FirstOrDefault().ReorderLevel)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Discontinued)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Category)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Supplier)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Products)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.QuantityPerUnit)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnitPrice)
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.UnitsInStock)*@
+                            @item.UnitsInStock @*顯示資料庫的原始資料：e.g. 純文字*@
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnitsOnOrder)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReorderLevel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Discontinued)@*用適合的型態來顯示資料庫的資料：e.g. 勾勾*@
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category.CategoryID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Supplier.SupplierID)
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.ProductID" class="btn btn-primary">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

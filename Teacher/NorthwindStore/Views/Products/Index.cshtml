@@ -1,0 +1,106 @@
+﻿@* @model IEnumerable<NorthwindStore.Models.Products> *@
+@model NorthwindStore.ViewModels.VMProduct
+
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<div class="row">
+	<div class="col-3">
+		<h4 class="text-center">商品分類</h4>
+		<div class="list-group">
+			@foreach (var item in Model.Category)
+			{
+
+				<a asp-action="Index" asp-route-cateID="@item.CategoryID" class="list-group-item list-group-item-action">@item.CategoryName</a>
+
+			}
+		</div>
+	</div>
+	<div class="col-9">
+
+
+		<h3 class="text-center">@ViewData["CateName"]類的商品列表</h3>
+
+
+		<p>
+			<a asp-action="Create">Create New</a>
+		</p>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>
+						@Html.DisplayNameFor(model => model.Product.FirstOrDefault().ProductID)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Product.FirstOrDefault().ProductName)
+					</th>
+
+					<th>
+						@Html.DisplayNameFor(model => model.Product.FirstOrDefault().UnitPrice)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Product.FirstOrDefault().UnitsInStock)
+					</th>
+
+					<th>
+						@Html.DisplayNameFor(model => model.Product.FirstOrDefault().Discontinued)
+					</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model.Product)
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.ProductID)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.ProductName)
+						</td>
+
+						<td>
+							@Html.DisplayFor(modelItem => item.UnitPrice)
+						</td>
+						<td>
+							@* @Html.DisplayFor(modelItem => item.UnitsInStock) *@ @* 用適合的型態呈現資料庫的資料 *@
+
+							@item.UnitsInStock  @* 顯示資料庫的原始資料 *@
+						</td>
+
+
+						<td>
+
+							@if(item.Discontinued){
+								<span class="text-danger">已下架</span>
+							}
+							else{
+								
+								<span>上架中</span>
+							}
+
+							@* 	@Html.DisplayFor(modelItem => item.Discontinued) *@ @* 用適合的型態呈現資料庫的資料 *@
+						</td>
+
+						<td>
+
+							<a asp-action="Details" asp-route-id="@item.ProductID">Details</a>
+
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+
+</div>
+
+
+
+

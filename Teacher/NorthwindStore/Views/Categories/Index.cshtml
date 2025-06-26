@@ -1,0 +1,56 @@
+﻿@model IEnumerable<NorthwindStore.Models.Categories>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.CategoryID)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.CategoryName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Description)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Picture)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.CategoryID)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.CategoryName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Description)
+				</td>
+				<td>
+				@* 	@Html.DisplayFor(modelItem => item.Picture) *@
+					<img src="GetPicture/@item.CategoryID" />
+				
+
+				</td>
+				<td>
+					<a asp-action="Edit" asp-route-id="@item.CategoryID">Edit</a>
+
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
