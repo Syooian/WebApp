@@ -7,7 +7,7 @@
 # 資料存取層 (Data Access Layer DAL)
 
 ## nvarchar vs. varchar
-n : Unicode格式
+n : Unicode格式  
 varchar 內中文字通常會佔 2 個位元組（byte）
 
 ## 必要的例外處理，需自行加入
