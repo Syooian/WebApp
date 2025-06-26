@@ -80,7 +80,8 @@
                             @Html.DisplayFor(modelItem => item.UnitPrice)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.UnitsInStock)
+                            @*@Html.DisplayFor(modelItem => item.UnitsInStock)*@
+                            @item.UnitsInStock @*顯示資料庫的原始資料：e.g. 純文字*@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.UnitsOnOrder)
@@ -89,7 +90,7 @@
                             @Html.DisplayFor(modelItem => item.ReorderLevel)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Discontinued)
+                            @Html.DisplayFor(modelItem => item.Discontinued)@*用適合的型態來顯示資料庫的資料：e.g. 勾勾*@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Category.CategoryID)

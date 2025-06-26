@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NorthwindStore.Models;
+using NorthwindStore.ViewModels;
 
 namespace NorthwindStore.Controllers
 {
@@ -19,10 +20,27 @@ namespace NorthwindStore.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+    //public async Task<IActionResult> Index()
+    //{
+    //    var northwindContext = _context.Products.Include(p => p.Category).Include(p => p.Supplier);
+    //    return View(await northwindContext.ToListAsync());
+    //}
+
+
+        public async Task<IActionResult> Index(int cateID=1)
         {
-            var northwindContext = _context.Products.Include(p => p.Category).Include(p => p.Supplier);
-            return View(await northwindContext.ToListAsync());
+
+            VMProduct products = new VMProduct()
+            {
+                Product = _context.Products.Where(p => p.CategoryID == cateID).ToList(),
+                Category = _context.Categories.ToList()
+            };
+
+            ViewData["CateName"] = _context.Categories.Find(cateID).CategoryName;
+
+            //ViewData["DeptID"] = id;
+
+            return View(products);
         }
 
         // GET: Products/Details/5
