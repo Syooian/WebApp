@@ -24,7 +24,7 @@ namespace DBFirst_MySql1.Controllers
         /// <returns></returns>
         public IActionResult Students()
         {
-
+            return View();
         }
 
         public IActionResult Privacy()
