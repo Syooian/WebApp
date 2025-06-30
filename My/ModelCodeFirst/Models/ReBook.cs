@@ -11,6 +11,12 @@ namespace ModelCodeFirst.Models
     {
         public string ReID { get; set; } = null!;
 
+        public string Description { get; set; } = null!;
+
+        public string Author { get; set; } = null!;
+
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+
         public string ID { get; set; } = null!;
 
         /// <summary>
