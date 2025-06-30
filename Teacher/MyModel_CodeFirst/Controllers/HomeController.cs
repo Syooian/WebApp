@@ -61,7 +61,7 @@ namespace MyModel_CodeFirst.Controllers
 //      (3)描述資料庫裡面的資料表
 //1.2.3 在appsettings.json中撰寫資料庫連線字串
 //1.2.4 在Program.cs內以依賴注入的寫法註冊讀取連線字串的服務(food panda、Uber Eats)
-//      ※注意程式的位置必須要在var builder = WebApplication.CreateBuilder(args);這句之後
+//      ※注意程式的位置必須要在var builder = WebApplication.CreateBuilder(args);這句之後且在var app = builder.Build();之前
 //1.2.5 在套件管理器主控台(檢視 > 其他視窗 > 套件管理器主控台)下指令
 //      ※※※注意注意※※※ 在執行指令前請先確定專案是否正確選擇
 //      ※※※注意注意※※※ 在執行指令前請先確定專案是否正確選擇
