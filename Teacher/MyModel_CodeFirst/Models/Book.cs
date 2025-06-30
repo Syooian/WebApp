@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MyModel_CodeFirst.Models
 {
     //1.1.2 設計Book類別的各屬性，包括名稱、資料類型及其相關的驗證規則及顯示名稱(Display)
-    public class Book
+    public partial class Book
     {
         //屬性封裝
 

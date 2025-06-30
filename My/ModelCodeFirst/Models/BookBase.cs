@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ModelCodeFirst.Models
 {
-    public abstract partial class BookBase
+    public abstract class BookBase
     {
         /// <summary>
         /// 內文
