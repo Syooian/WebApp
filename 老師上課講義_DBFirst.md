@@ -1,6 +1,6 @@
 # MyModel_DBFirst專案進行步驟
 
-**MyModel_DBFirst專案位置：**[\Teacher\MyModel_DBFirst](/Teacher/MyModel_DBFirst)  
+**專案位置：**[\Teacher\MyModel_DBFirst](/Teacher/MyModel_DBFirst)  
 **講義原始檔案：**[HomeController.cs](/Teacher/MyModel_DBFirst/Controllers/HomeController.cs)
 
 ## 1. 使用DB First建立 Model
