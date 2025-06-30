@@ -7,11 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\BookBase.Partial.cs" />
+    <Compile Remove="Models\MetaData.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Models\BookBase.Partial.cs" />
+    <None Include="Models\MetaData.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

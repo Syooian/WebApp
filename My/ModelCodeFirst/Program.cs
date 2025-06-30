@@ -1,7 +1,13 @@
+﻿using Microsoft.EntityFrameworkCore;
+using ModelCodeFirst.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<GuestBookContext>(Options =>
+    Options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnectionStrings")));
 
 var app = builder.Build();
 
