@@ -6,4 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Models\BookBase.Partial.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Models\BookBase.Partial.cs" />
+  </ItemGroup>
+
 </Project>
