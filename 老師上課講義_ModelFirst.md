@@ -1,6 +1,7 @@
 # MyModel_CodeFirst專案進行步驟
 
-**原始檔案：**[HomeController.cs](/Teacher/MyModel_CodeFirst/Controllers/HomeController.cs)
+**專案位置：**[\Teacher\MyModel_CodeFirst](/Teacher/MyModel_CodeFirst/)  
+**講義原始檔案：**[HomeController.cs](/Teacher/MyModel_CodeFirst/Controllers/HomeController.cs)
 
 ## 1. 使用Code First建立Model及資料庫
 <p>1.1 在Models資料夾裡建立Book及ReBook兩個類別做為模型</p>
