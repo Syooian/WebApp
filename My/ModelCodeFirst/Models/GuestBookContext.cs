@@ -1,20 +1,25 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace MyModel_CodeFirst.Models
+namespace ModelCodeFirst.Models
 {
-    //1.2.2 撰寫GuestBookContext類別的內容
-    //(1)須繼承DbContext類別
-    public class GuestBookContext:DbContext
+    /// <summary>
+    /// 
+    /// </summary>
+    public class GuestBookContext : DbContext
     {
-        //(2)撰寫依賴注入用的建構子
+        /// <summary>
+        /// 依賴注入用的建構子
+        /// </summary>
+        /// <param name="options"></param>
         public GuestBookContext(DbContextOptions<GuestBookContext> options)
             : base(options)
         {
+
         }
 
-        //(3)描述資料庫裡面的資料表
+        #region 描述資料庫裡面的資料表
         public virtual DbSet<Book> Book { get; set; } //Book資料表
         public virtual DbSet<ReBook> ReBook { get; set; } //ReBook資料表
-
+        #endregion
     }
 }
