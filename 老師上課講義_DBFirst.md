@@ -1,6 +1,6 @@
-<strong>原始檔案：</strong>\Teacher\MyModel_DBFirst\Controllers\HomeController.cs
-
 # MyModel_DBFirst專案進行步驟
+
+**原始檔案：**[HomeController.cs](/Teacher/MyModel_DBFirst/Controllers/HomeController.cs)
 
 ## 1. 使用DB First建立 Model
 <p>1.1 在SSMS中執行dbStudents.sql程式碼，建立範例資料庫dbStudents，內含一個tStudent資料表</P>
