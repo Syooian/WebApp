@@ -26,5 +26,11 @@ namespace ModelCodeFirst.Models
         [Display(Name = "照片")]
         [StringLength(40)]//GUID+.jpg
         public string? Photo { get; set; } = null!;
+
+        /// <summary>
+        /// 每個回覆
+        /// </summary>
+        //public virtual ICollection<ReBook> ReBooks { get; set; } = new List<ReBook>();
+        public virtual List<ReBook>? ReBooks { get; set; }//一個留言可以有多個回覆
     }
 }

@@ -43,6 +43,7 @@ namespace MyModel_CodeFirst.Models
 
 
         //1.1.5 撰寫兩個類別間的關聯屬性做為未來資料表之間的關聯
+        public virtual List<ReBook>? ReBooks { get; set; }
 
     }
 }
