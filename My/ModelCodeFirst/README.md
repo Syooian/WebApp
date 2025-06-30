@@ -1,3 +1,3 @@
 ﻿- 指令  
-Add-Migration InitialCreate
+Add-Migration InitialCreate  
 Remove-Migration

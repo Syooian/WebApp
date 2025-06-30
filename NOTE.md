@@ -8,7 +8,7 @@
 	1. 資料
 		* UseCase
 
-		ER圖->DB
+		ER圖->DB  
 		Class圖->Class Code
 
 	2. 流程（系統分析）
@@ -40,7 +40,7 @@ asp-route-自訂參數名稱：未在路由中定義參數名稱，使用該方�
 1. 使用套件管理器主控台(檢視 > 其他視窗 > 套件管理器主控台)
 2. 輸入以下內容：Scaffold-DbContext "Data Source=伺服器位址;Database=資料庫名稱;TrustServerCertificate=True;User ID=帳號;Password=密碼" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -NoOnConfiguring -UseDatabaseNames -NoPluralize -
 
-## 參數說明
+### 參數說明
 TrustServerCertificate=True：信任伺服器憑證\
 -NoOnConfiguring：不要在DBContext內生成OnConfiguring方法
 
