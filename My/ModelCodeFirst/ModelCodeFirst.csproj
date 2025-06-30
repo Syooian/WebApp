@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\BookBase.Partial.cs" />
+    <Compile Remove="Models\MetaData.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Models\BookBase.Partial.cs" />
+    <None Include="Models\MetaData.cs" />
   </ItemGroup>
 
 </Project>

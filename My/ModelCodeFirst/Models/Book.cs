@@ -5,7 +5,7 @@ namespace ModelCodeFirst.Models
     /// <summary>
     /// 留言
     /// </summary>
-    public class Book
+    public class Book : BookBase
     {
         /// <summary>
         /// 留言編號
