@@ -11,6 +11,14 @@ builder.Services.AddDbContext<GuestBookContext>(Options =>
 
 var app = builder.Build();
 
+//建立SeedData初始化
+using (var Scope = app.Services.CreateScope())
+{
+    var Service = Scope.ServiceProvider;
+
+    SeedData.Initialize(Service);
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
