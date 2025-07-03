@@ -21,6 +21,8 @@ public class BookData
     /// 標題
     /// </summary>
     [Display(Name = "標題")]
+    [Required(ErrorMessage = "請輸入標題")]
+    [StringLength(50, ErrorMessage = "不能超過50個字")]
     public string Title { get; set; } = null!;
     /// <summary>
     /// 照片
@@ -42,6 +44,7 @@ public class BookData
     /// 作者
     /// </summary>
     [Display(Name = "作者")]
+    [Required(ErrorMessage = "請輸入作者")]
     [StringLength(20, ErrorMessage = "不能超過20個字")]
     public string Author { get; set; } = null!;
     /// <summary>

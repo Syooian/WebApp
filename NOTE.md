@@ -52,3 +52,12 @@ TrustServerCertificate=True：信任伺服器憑證\
 4. DbContext：dbStudentsContext
 5. 在dbStudentsContext.cs終將預設的dbStudentsContext註解後直接創建一個空建構子(1.2.5)，再新增OnConfiguring方法(1.2.4)
 6. 執行tStudents/Index.cshtml(使用瀏覽器檢視)
+
+### CodeFirst
+* 拋出來的資料庫只看原始類別，不看Metadata
+* 原始類別就算沒有標註主Key，在拋到資料庫時會自動指定(第一個屬性的名字如果有包含ID)
+
+### 資料表的Datetime資料類型
+* datetime：
+* datetime2：比datetime有更高的精度(可到秒的小數第7位)
+* datetimeoffset：
