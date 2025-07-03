@@ -15,16 +15,16 @@ namespace ModelCodeFirst.Migrations
                 name: "Book",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ID = table.Column<string>(type: "varchar(36)", unicode: false, maxLength: 36, nullable: false, defaultValue: "False"),
+                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Photo = table.Column<string>(type: "varchar(40)", unicode: false, maxLength: 40, nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Author = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Book", x => x.ID);
+                    table.PrimaryKey("PK_BookID", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -36,7 +36,7 @@ namespace ModelCodeFirst.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BookID = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    BookID = table.Column<string>(type: "varchar(36)", nullable: true)
                 },
                 constraints: table =>
                 {

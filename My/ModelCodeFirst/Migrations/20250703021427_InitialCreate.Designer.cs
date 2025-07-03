@@ -12,7 +12,7 @@ using ModelCodeFirst.Models;
 namespace ModelCodeFirst.Migrations
 {
     [DbContext(typeof(GuestBookContext))]
-    [Migration("20250630035802_InitialCreate")]
+    [Migration("20250703021427_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -28,27 +28,39 @@ namespace ModelCodeFirst.Migrations
             modelBuilder.Entity("ModelCodeFirst.Models.Book", b =>
                 {
                     b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(36)")
+                        .HasDefaultValue("False");
 
                     b.Property<string>("Author")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Photo")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(40)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("ID");
+                    b.HasKey("ID")
+                        .HasName("PK_BookID");
 
                     b.ToTable("Book");
                 });
@@ -63,7 +75,7 @@ namespace ModelCodeFirst.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BookID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(36)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");

@@ -66,7 +66,9 @@ namespace ModelCodeFirst.Models
                 Entity.Property(E => E.Author)
                     .IsRequired(true)
                     .HasMaxLength(20)
-                    .IsUnicode(true)
+                    .IsUnicode(true);
+
+                Entity.Property(E => E.CreatedDate)
                     .HasColumnType("datetime");
             });
         }
