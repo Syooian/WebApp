@@ -15,6 +15,15 @@ builder.Services.AddDbContext<GuestBookContext>(options =>
 /////////////////////////////////////////////////////////////////////
 var app = builder.Build();
 
+//1.3.4 在Program.cs撰寫啟用Initializer的程式
+using (var scope = app.Services.CreateScope())
+{
+    var service = scope.ServiceProvider;
+
+    SeedData.Initialize(service);
+}
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
