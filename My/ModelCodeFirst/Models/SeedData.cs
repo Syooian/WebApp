@@ -53,6 +53,12 @@ namespace ModelCodeFirst.Models
 
                     context.Book.Add(BookData);
 
+                    #region 上傳圖片
+                    File.Copy(
+                        Path.Combine(Directory.GetCurrentDirectory(), "SeedPhotos", $"{a + 1}.jpg"), //From
+                        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", BookData.Photo)); //To
+                    #endregion
+
                     #region 留言回覆
                     for (int b = 0; b < 3; b++)
                     {
