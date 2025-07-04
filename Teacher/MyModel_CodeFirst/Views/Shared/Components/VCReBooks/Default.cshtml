@@ -2,17 +2,20 @@
 
 @model IEnumerable<MyModel_CodeFirst.Models.ReBook>
 @{
-    Layout = null;
+	Layout = null;
 }
 
-<h4 class="text-center">所有回覆</h4>
-<div class="border border-1 rounded p-3 bg-light">
-
-@foreach(var item in Model)
+@* //2.4.12 在VCReBook View Component的Default View中加入沒有回覆留言即不顯示的判斷 *@
+@if (Model.Count() != 0)
 {
-    <p>@Html.DisplayFor(modelItem => item.Description)</p>
-    <p class="text-end">@Html.DisplayFor(modelItem => item.Author) 於 @Html.DisplayFor(modelItem => item.CreatedDate) 回覆</p>
-	<hr />
-}
+	<h4 class="text-center">所有回覆</h4>
+	<div class="border border-1 rounded p-3 bg-light">
 
-</div>
+		@foreach (var item in Model)
+		{
+			<p>@Html.DisplayFor(modelItem => item.Description)</p>
+			<p class="text-end">@Html.DisplayFor(modelItem => item.Author) 於 @Html.DisplayFor(modelItem => item.CreatedDate) 回覆</p>
+			<hr />
+		}
+	</div>
+}
