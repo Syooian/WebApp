@@ -1,0 +1,26 @@
+﻿@model ModelCodeFirst.Models.Book
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h2>@Html.DisplayFor(modelItem => Model.Title)</h2>
+    <div class="card mb-4">
+        <img src="~/BookPhotos/@Model.Photo" class="card-img-top img-thumbnail" />
+
+        <div class="card-body">
+
+            <p>	@Html.DisplayFor(modelItem => Model.Description)</p>
+        </div>
+        <div class="card-footer">
+            <p class="text-end">
+                @Html.DisplayFor(modelItem => Model.Author) 於 	@Html.DisplayFor(modelItem => Model.CreatedDate)
+            </p>
+        </div>
+
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -33,7 +33,7 @@ namespace ModelCodeFirst.Controllers
         }
 
         // GET: PostBooks/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Display(string id)
         {
             if (id == null)
             {

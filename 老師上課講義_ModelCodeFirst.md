@@ -103,3 +103,11 @@
 * 2.1.4 修改PostBooksController，移除Edit、Delete Action
 * 2.1.5 刪除Edit、Delete View檔案
 * 2.1.6 修改Index Action的寫法
+
+<p>2.2   顯示功能</p>
+
+* 2.2.1 修改適合前台呈現的Index View
+* 2.2.2 將PostBooksController中Details Action改名為Display(View也要改名字)
+* 2.2.3 在Index View中加入Display Action的超鏈結
+* 2.2.4 修改Display View 排版樣式，排版可以個人喜好呈現  
+※排版可以個人喜好呈現※

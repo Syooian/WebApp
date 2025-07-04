@@ -27,8 +27,9 @@ namespace MyModel_CodeFirst.Controllers
             return View(result);
         }
 
-        // GET: Books/Details/5
-        public async Task<IActionResult> Details(string id)
+
+        //2.2.2 將PostBooksController中Details Action改名為Display(View也要改名字)
+        public async Task<IActionResult> Display(string id)
         {
             if (id == null)
             {
