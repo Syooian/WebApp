@@ -15,7 +15,7 @@
 
         <div class="card-body">
 
-            <p>	@Html.DisplayFor(modelItem => Model.Description)</p>
+            <p>@Html.Raw(Model.Description.Replace("\r\n", "<br>"))</p>
         </div>
         <div class="card-footer">
             <p class="text-end">
