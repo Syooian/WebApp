@@ -163,8 +163,8 @@ namespace MyModel_CodeFirst.Controllers
 //2.4.1 修改Create View，修改Photo為上傳檔案的元件(type="file")
 //2.4.2 修改Create View，將<form>增加 enctype="multipart/form-data" 屬性
 //2.4.3 加入前端效果，使照片可先預覽
-//2.4.4 刪除ImageType欄位
-//2.4.5 刪除TimeStamp欄位
+
+//2.4.5 刪除CreatedDate欄位
 //2.4.6 修改Post Create Action，加上處理上傳照片的功能
 //2.4.7 測試留言功能
 //2.4.8 在Index View中加入未上傳照片的留言之顯示方式
