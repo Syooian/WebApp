@@ -102,6 +102,12 @@ public class ReBookData
     //[DisplayFormat(DataFormatString = "{0})]//按照原始格式
     [HiddenInput]//隱藏在View中
     public DateTime CreatedDate { get; set; } = DateTime.Now;
+
+    /// <summary>
+    /// 
+    /// <para>指向<see cref="Book.ID"/></para>
+    /// </summary>
+    public string ID { get; set; } = null!;
     #endregion
 }
 /// <summary>

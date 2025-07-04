@@ -61,14 +61,49 @@ namespace ModelCodeFirst.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Title,Photo,Description,Author,CreatedDate")] Book book)
+        public async Task<IActionResult> Create([Bind("ID,Title,Photo,Description,Author,CreatedDate")] Book book, IFormFile? NewPhoto)
         {
+            var CreatedDatetime = DateTime.Now;
+
+            #region 上傳照片
+            if (NewPhoto != null && NewPhoto.Length != 0)
+            {
+                switch (NewPhoto.ContentType)
+                {
+                    case "image/jpeg":
+                    case "image/png":
+                        {
+                            //要複製過去的圖片，取新檔名(Book的ID+原檔附檔名)
+                            var FileName = book.ID + Path.GetExtension(NewPhoto.FileName);
+                            //要複製過去的路徑
+                            var UploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "BookPhotos", FileName);
+
+                            using (FileStream FS = new FileStream(UploadPath, FileMode.Create))
+                            {
+                                NewPhoto.CopyTo(FS);
+                            }
+
+                            book.Photo = FileName;//儲存新檔名到資料庫
+
+                            break;
+                        }
+                    default:
+                        {
+                            ViewData["ErrorMessage"] = "僅限上傳JPG或PNG格式圖片。";
+                            return View();
+                        }
+                }
+            }
+            #endregion
+
+            //Model驗證
             if (ModelState.IsValid)
             {
                 _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(book);
         }
 

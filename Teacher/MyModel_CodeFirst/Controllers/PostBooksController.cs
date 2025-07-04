@@ -58,10 +58,39 @@ namespace MyModel_CodeFirst.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookID,Title,Description,Author,Photo,CreatedDate")] Book book, IFormFile newPhoto)
+        public async Task<IActionResult> Create([Bind("BookID,Title,Description,Author,Photo,CreatedDate")] Book book, IFormFile? newPhoto)
         {
  
             book.CreatedDate = DateTime.Now; //設定建立時間為目前時間
+
+            //2.4.6 修改Post Create Action，加上處理上傳照片的功能
+            if (newPhoto != null && newPhoto.Length != 0)
+            {
+                //只允許上傳圖片
+                if (newPhoto.ContentType != "image/jpeg" && newPhoto.ContentType != "image/png")
+                {
+                    ViewData["ErrMessage"] = "只允許上傳.jpg或.png的圖片檔案!!";
+                    return View();
+                }
+
+
+                //取得檔案名稱
+                string fileName = book.BookID + Path.GetExtension(newPhoto.FileName);
+
+                //取得檔案的完整路徑
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "BookPhotos", fileName);
+                // /wwwroot/Photos/xxx.jpg
+
+                //將檔案上傳並儲存於指定的路徑
+
+                using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                {
+                    newPhoto.CopyTo(fs);
+                }
+
+                book.Photo = fileName;
+
+            }
 
             if (ModelState.IsValid)
             {
