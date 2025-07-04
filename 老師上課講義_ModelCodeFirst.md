@@ -111,3 +111,29 @@
 * 2.2.3 在Index View中加入Display Action的超鏈結
 * 2.2.4 修改Display View 排版樣式，排版可以個人喜好呈現  
 ※排版可以個人喜好呈現※
+
+<p>2.3   使用「ViewComponent」技巧實作「將回覆留言內容顯示於Display View」</p>
+※此單元將要介紹ViewComponent的使用方式※
+
+* 2.3.1 在專案中新增ViewComponents資料夾(專案上按右鍵→加入→新增資料夾)以放置所有的ViewComponent元件檔
+* 2.3.2 在ViewComponents資料夾中建立VCReBooks ViewComponent(右鍵→加入→類別→輸入檔名→新增)
+* 2.3.3 VCReBooks class繼承ViewComponent(注意using Microsoft.AspNetCore.Mvc;)
+* 2.3.4 撰寫InvokeAsync()方法取得回覆留言資料
+* 2.3.5 在/Views/Shared裡建立Components資料夾，並在Components資料夾中建立VCReBooks資料夾
+* 2.3.6 在/Views/Shared/Components/VCReBooks裡建立檢視(右鍵→加入→檢視→選擇「Razor檢視」→按下「加入」鈕)
+* 2.3.7 在對話方塊中設定如下
+    * 檢視名稱: Default
+    * 範本:Empty(沒有模型)
+    * 不勾選「**建立成局部檢視**」
+    * 不勾選「**使用版面配置頁**」  
+※注意：資料夾及View的名稱不是自訂的，而是有預設的名稱，規定如下：※
+    > /Views/Shared/Components/{ComponentName}/Default.cshtml
+    > /Views/{ControllerName}/Components/{ComponentName}/Default.cshtml
+
+* 2.3.8 在Default View上方加入@model  
+```csharp
+IEnumerable<MyModel_CodeFirst.Models.ReBook>
+```
+* 2.3.9 依喜好編輯Default View排版方式
+* 2.3.10 編寫Display View，加入VCReBooks ViewComponent
+* 2.3.11 測試
