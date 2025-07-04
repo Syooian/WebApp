@@ -49,6 +49,7 @@ namespace MyModel_CodeFirst.Controllers
         // GET: Books/Create
         public IActionResult Create()
         {
+           
             return View();
         }
 
@@ -57,8 +58,11 @@ namespace MyModel_CodeFirst.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookID,Title,Description,Author,Photo,CreatedDate")] Book book)
+        public async Task<IActionResult> Create([Bind("BookID,Title,Description,Author,Photo,CreatedDate")] Book book, IFormFile newPhoto)
         {
+ 
+            book.CreatedDate = DateTime.Now; //設定建立時間為目前時間
+
             if (ModelState.IsValid)
             {
                 _context.Add(book);

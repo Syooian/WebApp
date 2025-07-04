@@ -157,3 +157,18 @@ namespace MyModel_CodeFirst.Controllers
 //2.3.9 依喜好編輯Default View排版方式
 //2.3.10 編寫Display View，加入VCReBooks ViewComponent
 //2.3.11 測試
+
+
+//2.4   留言功能
+//2.4.1 修改Create View，修改Photo為上傳檔案的元件(type="file")
+//2.4.2 修改Create View，將<form>增加 enctype="multipart/form-data" 屬性
+//2.4.3 加入前端效果，使照片可先預覽
+//2.4.4 刪除ImageType欄位
+//2.4.5 刪除TimeStamp欄位
+//2.4.6 修改Post Create Action，加上處理上傳照片的功能
+//2.4.7 測試留言功能
+//2.4.8 在Index View中加入未上傳照片的留言之顯示方式
+//2.4.9 在Display View中加入未上傳照片的留言之顯示方式
+//2.4.10 在Index View中加入處理「有換行的留言」顯示方式
+//2.4.11 在Display View中加入處理「有換行的留言」顯示方式
+//2.4.12 在VCReBook View Component的Default View中加入沒有回覆留言即不顯示的判斷
