@@ -64,3 +64,7 @@ TrustServerCertificate=True：信任伺服器憑證\
 
 # 非同步傳輸
 先到先處理，但途中有人先做完了就先Response，接著馬上找下一個人處理
+
+# ViewModel與ViewComponents的差別
+ViewModel：  
+ViewComponents：將View的取得當成一個小組件
