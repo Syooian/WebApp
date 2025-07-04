@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ModelCodeFirst.Models;
+using MyModel_CodeFirst.Models;
 
-namespace ModelCodeFirst.Controllers
+namespace MyModel_CodeFirst.Controllers
 {
     public class PostBooksController : Controller
     {
@@ -18,21 +18,16 @@ namespace ModelCodeFirst.Controllers
             _context = context;
         }
 
-        // GET: PostBooks
+        // GET: Books
         public async Task<IActionResult> Index()
         {
-            #region 在資料庫執行排序
-            //var Result = await _context.Book.OrderByDescending(R => R.CreatedDate).ToListAsync();
-            #endregion
-            #region 在本機記憶體執行排序
-            //var Result = await _context.Book.ToListAsync();
-            //Result.OrderByDescending(R => R.CreatedDate);
-            #endregion
+            //2.1.6 修改Index Action的寫法
+            var result = await _context.Book.OrderByDescending(s=>s.CreatedDate).ToListAsync();
 
-            return View(await _context.Book.ToListAsync());
+            return View(result);
         }
 
-        // GET: PostBooks/Details/5
+        // GET: Books/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -41,7 +36,7 @@ namespace ModelCodeFirst.Controllers
             }
 
             var book = await _context.Book
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.BookID == id);
             if (book == null)
             {
                 return NotFound();
@@ -50,18 +45,18 @@ namespace ModelCodeFirst.Controllers
             return View(book);
         }
 
-        // GET: PostBooks/Create
+        // GET: Books/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: PostBooks/Create
+        // POST: Books/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Title,Photo,Description,Author,CreatedDate")] Book book)
+        public async Task<IActionResult> Create([Bind("BookID,Title,Description,Author,Photo,CreatedDate")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -72,9 +67,11 @@ namespace ModelCodeFirst.Controllers
             return View(book);
         }
 
+     
+
         private bool BookExists(string id)
         {
-            return _context.Book.Any(e => e.ID == id);
+            return _context.Book.Any(e => e.BookID == id);
         }
     }
 }

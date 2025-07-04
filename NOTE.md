@@ -61,3 +61,6 @@ TrustServerCertificate=True：信任伺服器憑證\
 * datetime：
 * datetime2：比datetime有更高的精度(可到秒的小數第7位)
 * datetimeoffset：
+
+# 非同步傳輸
+先到先處理，但途中有人先做完了就先Response，接著馬上找下一個人處理
