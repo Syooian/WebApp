@@ -9,8 +9,11 @@
 <div>
 	<h2>@Html.DisplayFor(modelItem => Model.Title)</h2>
 	<div class="card mb-4">
-		<img src="~/BookPhotos/@Model.Photo" class="card-img-top img-thumbnail" />
-
+		@* //2.4.9 在Display View中加入未上傳照片的留言之顯示方式 *@
+		@if (Model.Photo != null)
+		{
+			<img src="~/BookPhotos/@Model.Photo" class="card-img-top img-thumbnail" />
+		}
 		<div class="card-body">
 
 

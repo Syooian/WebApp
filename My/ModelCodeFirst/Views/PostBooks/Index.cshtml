@@ -38,7 +38,10 @@
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Photo)
+                    @if (item.Photo != null)
+                    {
+                        <img src="~/BookPhotos/@item.Photo" class="card-img-top img-thumbnail" />
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)

@@ -13,16 +13,22 @@
 @foreach (var item in Model)
 {
 	<div class="card mb-4">
-		<img src="~/BookPhotos/@item.Photo" class="card-img-top img-thumbnail" />
+		@* //2.4.8 在Index View中加入未上傳照片的留言之顯示方式 *@
+		@if (item.Photo != null)
+		{
 
+
+			<img src="~/BookPhotos/@item.Photo" class="card-img-top img-thumbnail" />
+		}
 		<div class="card-body">
 			<h3>@Html.DisplayFor(modelItem => item.Title)</h3>
-		
+
 
 			<p>	@Html.DisplayFor(modelItem => item.Description)</p>
 		</div>
 		<div class="card-footer">
-			<p class="text-end">@Html.DisplayFor(modelItem => item.Author) 於 	@Html.DisplayFor(modelItem => item.CreatedDate)
+			<p class="text-end">
+				@Html.DisplayFor(modelItem => item.Author) 於 	@Html.DisplayFor(modelItem => item.CreatedDate)
 				<a asp-action="Display" asp-route-id="@item.BookID">看更多...</a>
 			</p>
 		</div>
