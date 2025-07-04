@@ -1,0 +1,18 @@
+﻿@model IEnumerable<ModelCodeFirst.Models.ReBook>
+@{
+    Layout = null;
+}
+
+@if (Model.Count() > 0)
+{
+    <h4 class="text-center">所有回覆</h4>
+
+    <div class="border border-1 rounded p-3 bg-light">
+        @foreach (var Item in Model)
+        {
+            <p>@Html.DisplayFor(ModelItem => Item.Description)</p>
+            <p>@Html.DisplayFor(ModelItem => Item.Author)</p>
+            <p>@Html.DisplayFor(ModelItem => Item.CreatedDate)</p>
+        }
+    </div>
+}

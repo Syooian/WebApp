@@ -12,6 +12,7 @@ public class BookData
     [Display(Name = "編號")]
     [StringLength(36, MinimumLength = 36)]
     [Key]
+    [HiddenInput]
     public string BookID { get; set; } = null!; //留言編號, 採用GUID
 
 

@@ -1,0 +1,39 @@
+﻿@model MyModel_CodeFirst.Models.Book
+
+@{
+	ViewData["Title"] = "Details";
+}
+
+@* //2.2.4 修改Display View 排版樣式，排版可以個人喜好呈現 *@
+
+<div>
+	<h2>@Html.DisplayFor(modelItem => Model.Title)</h2>
+	<div class="card mb-4">
+		@* //2.4.9 在Display View中加入未上傳照片的留言之顯示方式 *@
+		@if (Model.Photo != null)
+		{
+			<img src="~/BookPhotos/@Model.Photo" class="card-img-top img-thumbnail" />
+		}
+		<div class="card-body">
+
+
+			@* //2.4.11 在Display View中加入處理「有換行的留言」顯示方式 *@
+			<p>	@Html.Raw(Model.Description.Replace("\r\n", "<br>"))</p>
+		</div>
+		<div class="card-footer">
+			<p class="text-end">
+				@Html.DisplayFor(modelItem => Model.Author) 於 	@Html.DisplayFor(modelItem => Model.CreatedDate)
+			</p>
+		</div>
+
+	</div>
+</div>
+<hr />
+@* //2.3.10 編寫Display View，加入VCReBooks ViewComponent *@
+<div>
+	@await Component.InvokeAsync("VCReBooks", new { bookID = Model.BookID })
+</div>
+
+<div>
+	<a asp-action="Index">回留言列表</a>
+</div>

@@ -1,0 +1,78 @@
+﻿@model MyModel_CodeFirst.Models.Book
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Book</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+             <input asp-for="BookID" class="form-control" value="@Guid.NewGuid()" />
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="8"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Author" class="control-label"></label>
+                <input asp-for="Author" class="form-control" />
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Photo" class="control-label"></label>
+                <input type="file" name="newPhoto" id="newPhoto" class="form-control" />
+                <span asp-validation-for="Photo" class="text-danger"></span>
+                <span class="text-danger">@ViewData["ErrMessage"]</span>
+            </div>
+         
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+	<div class="col-md-8">
+	
+		<img id="photoPreview" class="img-thumbnail" />
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    @* //2.4.3 加入前端效果，使照片可先預覽 *@
+    <script>
+        $('#newPhoto').on( 'change' , function(){
+            let file= this.files[0];
+
+			if (file) {
+				let reader = new FileReader();
+
+				reader.onload = function (e) {
+					$('#photoPreview').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(file);
+
+			} else {
+				$('#photoPreview').attr('src', '');
+			}
+        
+        } );
+    </script>
+
+
+
+}

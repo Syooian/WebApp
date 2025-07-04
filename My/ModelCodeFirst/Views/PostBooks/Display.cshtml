@@ -1,0 +1,35 @@
+﻿@model ModelCodeFirst.Models.Book
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h2>@Html.DisplayFor(modelItem => Model.Title)</h2>
+    <div class="card mb-4">
+
+        @if (Model.Photo != null)
+        {
+            <img src="~/BookPhotos/@Model.Photo" class="card-img-top img-thumbnail" />
+        }
+
+        <div class="card-body">
+
+            <p>@Html.Raw(Model.Description.Replace("\r\n", "<br>"))</p>
+        </div>
+        <div class="card-footer">
+            <p class="text-end">
+                @Html.DisplayFor(modelItem => Model.Author) 於 	@Html.DisplayFor(modelItem => Model.CreatedDate)
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<div>
+    @await Component.InvokeAsync("VC_ReBooks", new { ID = Model.ID })
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

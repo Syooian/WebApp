@@ -1,0 +1,90 @@
+﻿@model IEnumerable<MyModel_CodeFirst.Models.Book>
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
+
+@foreach (var item in Model)
+{
+	<div class="card mb-4">
+		@* //2.4.8 在Index View中加入未上傳照片的留言之顯示方式 *@
+		@if (item.Photo != null)
+		{
+
+
+			<img src="~/BookPhotos/@item.Photo" class="card-img-top img-thumbnail" />
+		}
+		<div class="card-body">
+			<h3>@Html.DisplayFor(modelItem => item.Title)</h3>
+
+		@* 	//2.4.10 在Index View中加入處理「有換行的留言」顯示方式  \r\n → <br> *@
+			<p>	@Html.Raw(item.Description.Replace("\r\n","<br>"))</p>
+		</div>
+		<div class="card-footer">
+			<p class="text-end">
+				@Html.DisplayFor(modelItem => item.Author) 於 	@Html.DisplayFor(modelItem => item.CreatedDate)
+				<a asp-action="Display" asp-route-id="@item.BookID">看更多...</a>
+			</p>
+		</div>
+
+	</div>
+}
+
+
+
+
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Title)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Description)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Author)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Photo)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.CreatedDate)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Title)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Description)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Author)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Photo)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.CreatedDate)
+				</td>
+				<td>
+					<a asp-action="Edit" asp-route-id="@item.BookID">Edit</a> |
+					<a asp-action="Details" asp-route-id="@item.BookID">Details</a> |
+					<a asp-action="Delete" asp-route-id="@item.BookID">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
