@@ -1,21 +1,27 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyModel_CodeFirst.Models;
 
 namespace MyModel_CodeFirst.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly GuestBookContext _context;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, GuestBookContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var result = await _context.Book.Where(b=>b.Photo!=null).OrderByDescending(s => s.CreatedDate).Take(5).ToListAsync();
+
+
+            return View(result);
         }
 
         public IActionResult Privacy()
