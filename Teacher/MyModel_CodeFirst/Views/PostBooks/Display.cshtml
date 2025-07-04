@@ -1,7 +1,7 @@
 ﻿@model MyModel_CodeFirst.Models.Book
 
 @{
-    ViewData["Title"] = "Details";
+	ViewData["Title"] = "Details";
 }
 
 @* //2.2.4 修改Display View 排版樣式，排版可以個人喜好呈現 *@
@@ -12,7 +12,7 @@
 		<img src="~/BookPhotos/@Model.Photo" class="card-img-top img-thumbnail" />
 
 		<div class="card-body">
-		
+
 
 
 			<p>	@Html.DisplayFor(modelItem => Model.Description)</p>
@@ -25,6 +25,12 @@
 
 	</div>
 </div>
+<hr />
+@* //2.3.10 編寫Display View，加入VCReBooks ViewComponent *@
 <div>
-    <a asp-action="Index">回留言列表</a>
+	@await Component.InvokeAsync("VCReBooks", new { bookID = Model.BookID })
+</div>
+
+<div>
+	<a asp-action="Index">回留言列表</a>
 </div>

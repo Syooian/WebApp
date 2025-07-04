@@ -12,9 +12,11 @@ namespace ModelCodeFirst.ViewComponent
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string BookID)
+        public async Task<IViewComponentResult> InvokeAsync(string ID)
         {
-            var Result = await _context.ReBook.Where(R => R.ID == BookID).OrderByDescending(R=>R.CreatedDate).ToListAsync();
+            Console.WriteLine($"ID：{ID}");
+
+            var Result = await _context.ReBook.Where(R => R.ReID == ID).OrderByDescending(R => R.CreatedDate).ToListAsync();
             return View(Result);
             //return View(await Task.FromResult(new List<ReBook>()));
         }

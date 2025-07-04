@@ -1,0 +1,18 @@
+﻿@* //2.3.8 在Default View上方加入@model IEnumerable<MyModel_CodeFirst.Models.ReBook> *@
+
+@model IEnumerable<MyModel_CodeFirst.Models.ReBook>
+@{
+    Layout = null;
+}
+
+<h4 class="text-center">所有回覆</h4>
+<div class="border border-1 rounded p-3 bg-light">
+
+@foreach(var item in Model)
+{
+    <p>@Html.DisplayFor(modelItem => item.Description)</p>
+    <p class="text-end">@Html.DisplayFor(modelItem => item.Author) 於 @Html.DisplayFor(modelItem => item.CreatedDate) 回覆</p>
+	<hr />
+}
+
+</div>

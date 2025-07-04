@@ -1,15 +1,11 @@
-﻿
+﻿@model IEnumerable<ModelCodeFirst.Models.ReBook>
 @{
     Layout = null;
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Default</title>
-</head>
-<body>
-</body>
-</html>
+@foreach (var Item in Model)
+{
+    <p>@Html.DisplayFor(ModelItem => Item.Description)</p>
+    <p>@Html.DisplayFor(ModelItem => Item.Author)</p>
+    <p>@Html.DisplayFor(ModelItem => Item.CreatedDate)</p>
+}

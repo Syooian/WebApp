@@ -21,6 +21,11 @@
 
     </div>
 </div>
+
+<div>
+    @await Component.InvokeAsync("VC_ReBooks", new { ID = Model.ID })
+</div>
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
