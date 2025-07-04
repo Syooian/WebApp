@@ -52,7 +52,7 @@ public class BookData
     /// </summary>
     [Display(Name = "發表日期")]
     [DataType(DataType.Date)]//給View看的
-    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss")]//讀出來時的格式化日期
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}")]//讀出來時的格式化日期
     //[DisplayFormat(DataFormatString = "{0})]//按照原始格式
     [HiddenInput]//隱藏在View中
     public DateTime CreatedDate { get; set; } = DateTime.Now;
@@ -98,7 +98,7 @@ public class ReBookData
     /// </summary>
     [Display(Name = "發表日期")]
     [DataType(DataType.Date)]//給View看的
-    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss")]//讀出來時的格式化日期
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}")]//讀出來時的格式化日期
     //[DisplayFormat(DataFormatString = "{0})]//按照原始格式
     [HiddenInput]//隱藏在View中
     public DateTime CreatedDate { get; set; } = DateTime.Now;
