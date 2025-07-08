@@ -37,7 +37,12 @@ namespace ModelCodeFirst.Controllers
             {
                 _context.Add(reBook);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                //2.5.14 修改ReBooksController中的Create Action，使其Return JSON資料
+                //使用局部更新，局部更新只能使用Ajax
+                return Json(reBook);
+
+                //return RedirectToAction("Display", "PostBooks", new { ID = reBook.ID });//("View, "Controller", 參數)，此動作就是重新Request，造成畫面重新刷新，因此是不合理的作法
             }
 
             // 將原本的 return View("Create","ReBooks", reBook); 修正為只傳回 view 名稱與 model

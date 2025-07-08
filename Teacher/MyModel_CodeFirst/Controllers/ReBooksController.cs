@@ -38,11 +38,14 @@ namespace MyModel_CodeFirst.Controllers
             {
                 _context.Add(reBook);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //2.5.14 修改ReBooksController中的Create Action，使其Return JSON資料
+                return Json(reBook);
+
+                //return RedirectToAction("Display", "PostBooks", new { id = reBook.BookID });
             }
-            ViewData["BookID"] = new SelectList(_context.Book, "BookID", "BookID", reBook.BookID);
+            //ViewData["BookID"] = new SelectList(_context.Book, "BookID", "BookID", reBook.BookID);
             // 將原本的 return View("Create","ReBooks", reBook); 修正為只傳回 view 名稱與 model
-            return View(reBook);
+            return Json(reBook);
         }
 
        
