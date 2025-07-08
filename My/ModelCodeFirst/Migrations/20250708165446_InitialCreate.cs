@@ -31,27 +31,26 @@ namespace ModelCodeFirst.Migrations
                 name: "ReBook",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ReID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BookID = table.Column<string>(type: "varchar(36)", nullable: true)
+                    ID = table.Column<string>(type: "varchar(36)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ReBook", x => x.ID);
+                    table.PrimaryKey("PK_ReBookID", x => x.ReID);
                     table.ForeignKey(
-                        name: "FK_ReBook_Book_BookID",
-                        column: x => x.BookID,
+                        name: "FK_ReBook_Book_ID",
+                        column: x => x.ID,
                         principalTable: "Book",
                         principalColumn: "ID");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ReBook_BookID",
+                name: "IX_ReBook_ID",
                 table: "ReBook",
-                column: "BookID");
+                column: "ID");
         }
 
         /// <inheritdoc />

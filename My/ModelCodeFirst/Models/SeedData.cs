@@ -70,8 +70,8 @@ namespace ModelCodeFirst.Models
                     {
                         var ReBookData = new ReBook
                         {
-                            ID = Guid.NewGuid().ToString(),
-                            ReID = BookData.ID, //關聯到留言的ID
+                            ID = BookData.ID, //關聯到留言的ID
+                            ReID = Guid.NewGuid().ToString(),
                             Author = $"ReAuthor {a + 1}-{b + 1}",
                             CreatedDate = DateTime.Now.AddMinutes(10),
                             Description = $"This is reply number {b + 1} for book {a + 1}."
