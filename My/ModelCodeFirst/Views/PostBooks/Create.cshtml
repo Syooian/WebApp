@@ -49,5 +49,8 @@
 </div>
 
 @section Scripts {
+    @*RenderPartial：*@
+    @*Partial沒有Controller，只會有ViewComponent，也無法做Controller要做的事情*@
+    @*無法單獨存在*@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

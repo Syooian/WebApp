@@ -62,8 +62,20 @@
 <!--Scripts可自己取-->
 <!--避免<script src="~/lib/jquery/dist/jquery.min.js"></script>重複載入-->
 @section Scripts {
+    @*2.5.12 載入前端驗證套件(如jQuery Validation)以驗證Create View的表單*@
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
     <script>
         //2.5.7 在PostBooks\Display View中將RePostBooks\Create View以Ajax方式讀入
-        $('#ReBookForm').load('/ReBooks/Create?ID=@Model.ID');
+        //$('#ReBookForm').load('/ReBooks/Create?ID=@Model.ID');
+
+        //2.5.13 使用Callback function重新綁定 unobtrusive validation
+        $('#ReBookForm').load('/ReBooks/Create?ID=@Model.ID',function(){
+            //Load結束之後才會呼叫此function
+            //unobtrusive：<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js">其中的==>unobtrusive<==
+            $.validator.unobtrusive.parse($('#ReBookForm'));
+        });
     </script>
 }
