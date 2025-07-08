@@ -29,6 +29,18 @@
 	</div>
 </div>
 <hr />
+@* //嵌入回覆留言表單 *@
+<div id="ReBookForm" class="bg-light p-5 rounded">
+
+</div>
+
+
+
+
+
+
+
+<hr />
 @* //2.3.10 編寫Display View，加入VCReBooks ViewComponent *@
 <div>
 	@await Component.InvokeAsync("VCReBooks", new { bookID = Model.BookID })
@@ -37,3 +49,16 @@
 <div>
 	<a asp-action="Index">回留言列表</a>
 </div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+	<script>
+		//2.5.7 在PostBooks\Display View中將RePostBooks\Create View以Ajax方式讀入
+		$('#ReBookForm').load('/ReBooks/Create', function () {
+			// 重新綁定 unobtrusive validation
+			$.validator.unobtrusive.parse($('#ReBookForm'));
+		});
+	</script>
+}

@@ -21,6 +21,7 @@ namespace ModelCodeFirst.Controllers
         // GET: ReBooks/Create
         public IActionResult Create()
         {
+            ViewData["ID"] = new SelectList(_context.Book, "ID", "ID");
             return View();
         }
 
@@ -38,11 +39,6 @@ namespace ModelCodeFirst.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(reBook);
-        }
-
-        private bool ReBookExists(string id)
-        {
-            return _context.ReBook.Any(e => e.ID == id);
         }
     }
 }

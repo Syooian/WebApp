@@ -41,6 +41,7 @@ namespace MyModel_CodeFirst.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["BookID"] = new SelectList(_context.Book, "BookID", "BookID", reBook.BookID);
+            // 將原本的 return View("Create","ReBooks", reBook); 修正為只傳回 view 名稱與 model
             return View(reBook);
         }
 

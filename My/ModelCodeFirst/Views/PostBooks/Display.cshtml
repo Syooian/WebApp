@@ -26,6 +26,12 @@
     </div>
 </div>
 
+<hr />
+@*嵌入回覆留言表單*@
+<div id="ReBookForm" class="bg-light p-5 rounded">
+</div>
+<hr />
+
 <div>
     @await Component.InvokeAsync("VC_ReBooks", new { ID = Model.ID })
 </div>
@@ -33,3 +39,13 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+<!--對應到_Layout.cshtml的"await RenderSectionAsync("Scripts", required: false)"-->
+<!--Scripts可自己取-->
+<!--避免<script src="~/lib/jquery/dist/jquery.min.js"></script>重複載入-->
+@section Scripts {
+    <script>
+        //2.5.7 在PostBooks\Display View中將RePostBooks\Create View以Ajax方式讀入
+        $('#ReBookForm').load('/ReBooks/Create')
+    </script>
+}
