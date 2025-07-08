@@ -77,6 +77,7 @@ public class ReBookData
     /// </summary>
     [Display(Name = "回覆留言編號")]
     [Key]
+    [HiddenInput]
     public string ReID { get; set; } = null!;
 
     #region 共用項目

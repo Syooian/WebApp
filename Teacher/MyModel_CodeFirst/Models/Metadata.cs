@@ -54,6 +54,7 @@ public class ReBookData
     [Display(Name = "編號")]
     [StringLength(36, MinimumLength = 36)]
     [Key]
+    [HiddenInput]
     public string ReBookID { get; set; } = null!; //留言編號, 採用GUID
 
     [Display(Name = "回覆內容")]
