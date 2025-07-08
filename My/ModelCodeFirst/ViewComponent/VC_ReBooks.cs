@@ -16,7 +16,7 @@ namespace ModelCodeFirst.ViewComponent
         {
             Console.WriteLine($"ID：{ID}");
 
-            var Result = await _context.ReBook.Where(R => R.ReID == ID).OrderByDescending(R => R.CreatedDate).ToListAsync();
+            var Result = await _context.ReBook.Where(R => R.ID == ID).OrderByDescending(R => R.CreatedDate).ToListAsync();
             return View(Result);
             //return View(await Task.FromResult(new List<ReBook>()));
         }
