@@ -53,7 +53,7 @@ namespace ModelCodeFirst.Models
                         Title = $"Book {a + 1}",
                         Description = $"This is book number {a + 1}.",
                         Author = $"Author {a + 1}",
-                        CreatedDate = DateTime.Now.AddMinutes(10),
+                        CreatedDate = DateTime.Now.AddSeconds((a + 1) * 10),
                         Photo = $"{NewGUID}.jpg"
                     };
 
@@ -73,7 +73,7 @@ namespace ModelCodeFirst.Models
                             ID = BookData.ID, //關聯到留言的ID
                             ReID = Guid.NewGuid().ToString(),
                             Author = $"ReAuthor {a + 1}-{b + 1}",
-                            CreatedDate = DateTime.Now.AddMinutes(10),
+                            CreatedDate = DateTime.Now.AddSeconds((b + 1) * 5),
                             Description = $"This is reply number {b + 1} for book {a + 1}."
                         };
 
