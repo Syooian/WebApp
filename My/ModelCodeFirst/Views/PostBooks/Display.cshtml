@@ -26,11 +26,29 @@
     </div>
 </div>
 
-<hr />
-@*嵌入回覆留言表單*@
-<div id="ReBookForm" class="bg-light p-5 rounded">
+<hr /><!--------------------------------------------------回覆留言框-------------------------------------------------->
+<!--彈出回覆留言框的按鈕 -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ReBookModal">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="ReBookModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">我要回覆</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @* //嵌入回覆留言表單 *@
+                <div id="ReBookForm" class="bg-light p-2 rounded">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<hr />
+<hr /><!--------------------------------------------------回覆留言框-------------------------------------------------->
 
 <div>
     @await Component.InvokeAsync("VC_ReBooks", new { ID = Model.ID })

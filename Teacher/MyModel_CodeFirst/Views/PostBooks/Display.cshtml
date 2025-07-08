@@ -29,13 +29,31 @@
 	</div>
 </div>
 <hr />
-@* //嵌入回覆留言表單 *@
-<div id="ReBookForm" class="bg-light p-5 rounded">
 
+
+
+
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ReBookFormModal">
+	我要回覆
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="ReBookFormModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-3">我要回覆</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				@* //嵌入回覆留言表單 *@
+				<div id="ReBookForm" class="bg-light p-2 rounded">
+				</div>
+			</div>
+			
+		</div>
+	</div>
 </div>
-
-
-
 
 
 
