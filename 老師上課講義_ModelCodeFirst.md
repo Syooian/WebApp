@@ -152,3 +152,31 @@
 * 2.4.10 在Index View中加入處理「有換行的留言」顯示方式
 * 2.4.11 在Display View中加入處理「有換行的留言」顯示方式
 * 2.4.12 在VCReBook View Component的Default View中加入沒有回覆留言即不顯示的判斷
+
+<p>2.5   回覆留言功能</p>
+
+* 2.5.1 在Controllers資料夾上按右鍵→加入→控制器
+* 2.5.2 選擇「使用EntityFramework執行檢視的MVC控制器」→按下「加入」鈕
+* 2.5.3 在對話方塊中設定如下
+    * 模型類別：ReBook(MyModel_CodeFirst.Models)
+    * 資料內容類別：GuestBookContext(MyModel_CodeFirst.Models)
+    * 勾選「產生檢視」
+    * 勾選「參考指令碼程式庫」
+    * 不勾選「使用版面配置頁」
+    * 控制器名稱改為「RePostBooksController」
+    * 按下「新增」鈕
+* 2.5.4 修改RePostBooksController，僅保留Create Action，其它全部刪除
+* 2.5.5 僅保留Create View檔案，其它全部刪除
+* 2.5.6 修改 Create View  
+※製作前後端分離的回覆留言功能※
+
+* 2.5.7 在PostBooks\Display View中將RePostBooks\Create View以Ajax方式讀入
+* 2.5.8 配合Boostrap Modal Component顯示出Create畫面
+* 2.5.9 傳遞BookID參數
+* 2.5.10 將ReBooks\Create View中\<form>加上BookID的隱藏欄位
+* 2.5.11 測試效果
+* 2.5.12 修改ReBooksController中的Create Action，使其Return JSON資料
+* 2.5.13 在PostBooks\Display View中撰寫相關的JavaScript程式，以Ajax方式執行新增回覆留言
+* 2.5.14 將ReBooks\Create View的Form建立ID
+* 2.5.15 在ReBooksController中撰寫自VCRebook ViewComponent取得回覆留言資料的Action
+* 2.5.16 測試效果
