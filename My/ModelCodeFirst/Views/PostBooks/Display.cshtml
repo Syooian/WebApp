@@ -26,10 +26,74 @@
     </div>
 </div>
 
-<div>
+<hr /><!--------------------------------------------------回覆留言框-------------------------------------------------->
+<!--彈出回覆留言框的按鈕 -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ReBookModal">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="ReBookModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">我要回覆</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @* //嵌入回覆留言表單 *@
+                <div id="ReBookForm" class="bg-light p-2 rounded">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr /><!--------------------------------------------------回覆留言框-------------------------------------------------->
+
+<div id="ReBookList">
     @await Component.InvokeAsync("VC_ReBooks", new { ID = Model.ID })
 </div>
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+<!--對應到_Layout.cshtml的"await RenderSectionAsync("Scripts", required: false)"-->
+<!--Scripts可自己取-->
+<!--避免<script src="~/lib/jquery/dist/jquery.min.js"></script>重複載入-->
+@section Scripts {
+    @*2.5.12 載入前端驗證套件(如jQuery Validation)以驗證Create View的表單*@
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        //2.5.7 在PostBooks\Display View中將RePostBooks\Create View以Ajax方式讀入
+        //$('#ReBookForm').load('/ReBooks/Create?ID=@Model.ID');
+
+        //2.5.13 使用Callback function重新綁定 unobtrusive validation
+        $('#ReBookForm').load('/ReBooks/Create?ID=@Model.ID',function(){
+            //Load結束之後才會呼叫此function
+            //unobtrusive：<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js">其中的==>unobtrusive<==
+            $.validator.unobtrusive.parse($('#ReBookForm'));
+        });
+
+        //2.5.15 在PostBooks\Display View中撰寫相關的JavaScript程式，以Ajax方式執行新增回覆留言
+        //此動作只能使用Ajax達成
+        function AddReBook(){
+            $.ajax({
+                type:"POST",
+                url:"/ReBooks/Create",//Controller/Action
+                data:$('#ReBookForm form').serialize(),
+                success:function(){
+                    //更新底下回覆留言區
+                    console.log('/ReBooks/GetReBookByViewComponent?ID=@(Model.ID)');
+                    $('#ReBookList').load('/ReBooks/GetReBookByViewComponent?ID=@(Model.ID)');
+                },
+                error:function(){
+                    console.log("AddReBook Ajax Error");
+                }
+            });
+        }
+    </script>
+}
