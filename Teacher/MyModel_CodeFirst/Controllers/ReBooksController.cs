@@ -18,12 +18,12 @@ namespace MyModel_CodeFirst.Controllers
             _context = context;
         }
 
-       
 
-        // GET: ReBooks/Create
-        public IActionResult Create()
+
+        //2.5.8 傳遞BookID參數
+        public IActionResult Create(string BookID)
         {
-            ViewData["BookID"] = new SelectList(_context.Book, "BookID", "BookID");
+            ViewData["BookID"] = BookID; //2.5.8 傳遞BookID參數
             return View();
         }
 

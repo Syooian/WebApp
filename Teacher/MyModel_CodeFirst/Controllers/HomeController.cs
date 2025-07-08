@@ -197,12 +197,14 @@ namespace MyModel_CodeFirst.Controllers
 //      ※製作前後端分離的回覆留言功能※
 
 //2.5.7 在PostBooks\Display View中將RePostBooks\Create View以Ajax方式讀入
-//2.5.8 配合Boostrap Modal Component顯示出Create畫面
-//2.5.9 傳遞BookID參數
-//2.5.10 將ReBooks\Create View中<form>加上BookID的隱藏欄位
+//2.5.8 傳遞BookID參數
+//2.5.9 將ReBooks\Create View設定BookID為隱藏欄位(可在Model加也可以View改動)
+//2.5.10 配合Boostrap Modal Component顯示出Create畫面
 //2.5.11 測試效果
-//2.5.12 修改ReBooksController中的Create Action，使其Return JSON資料
-//2.5.13 在PostBooks\Display View中撰寫相關的JavaScript程式，以Ajax方式執行新增回覆留言
-//2.5.14 將ReBooks\Create View的Form建立ID
-//2.5.15 在ReBooksController中撰寫自VCRebook ViewComponent取得回覆留言資料的Action
-//2.5.16 測試效果
+//2.5.12 載入前端驗證套件(如jQuery Validation)以驗證Create View的表單
+//2.5.13 使用Callback function重新綁定 unobtrusive validation
+//2.5.14 修改ReBooksController中的Create Action，使其Return JSON資料
+//2.5.15 在PostBooks\Display View中撰寫相關的JavaScript程式，以Ajax方式執行新增回覆留言
+//2.5.16 將ReBooks\Create View的Form建立ID
+//2.5.17 在ReBooksController中撰寫自VCRebook ViewComponent取得回覆留言資料的Action
+//2.5.18 測試效果

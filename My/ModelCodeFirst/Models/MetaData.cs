@@ -108,6 +108,7 @@ public class ReBookData
     /// 
     /// <para>指向<see cref="Book.ID"/></para>
     /// </summary>
+    [HiddenInput]
     public string ID { get; set; } = null!;
     #endregion
 }

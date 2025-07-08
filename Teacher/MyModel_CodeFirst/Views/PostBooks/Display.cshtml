@@ -51,14 +51,8 @@
 </div>
 
 @section Scripts {
-	@{
-		await Html.RenderPartialAsync("_ValidationScriptsPartial");
-	}
 	<script>
 		//2.5.7 在PostBooks\Display View中將RePostBooks\Create View以Ajax方式讀入
-		$('#ReBookForm').load('/ReBooks/Create', function () {
-			// 重新綁定 unobtrusive validation
-			$.validator.unobtrusive.parse($('#ReBookForm'));
-		});
+		$('#ReBookForm').load('/ReBooks/Create?BookID=@(Model.BookID)'); //2.5.8 傳遞BookID參數
 	</script>
 }

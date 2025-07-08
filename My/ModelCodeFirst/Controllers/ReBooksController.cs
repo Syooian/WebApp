@@ -19,9 +19,10 @@ namespace ModelCodeFirst.Controllers
         }
 
         // GET: ReBooks/Create
-        public IActionResult Create()
+        public IActionResult Create(string ID)
         {
-            ViewData["ID"] = new SelectList(_context.Book, "ID", "ID");
+            //給下拉式選單的值
+            ViewData["ID"] = ID;
             return View();
         }
 
@@ -38,6 +39,10 @@ namespace ModelCodeFirst.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            // 將原本的 return View("Create","ReBooks", reBook); 修正為只傳回 view 名稱與 model
+            ViewData["ID"] = new SelectList(_context.Book, "ID", "ID", reBook.ID);
+
             return View(reBook);
         }
     }

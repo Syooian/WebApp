@@ -46,6 +46,6 @@
 @section Scripts {
     <script>
         //2.5.7 在PostBooks\Display View中將RePostBooks\Create View以Ajax方式讀入
-        $('#ReBookForm').load('/ReBooks/Create')
+        $('#ReBookForm').load('/ReBooks/Create?ID=@Model.ID');
     </script>
 }

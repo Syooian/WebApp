@@ -78,6 +78,7 @@ public class ReBookData
 
     //外來鍵屬性
     [ForeignKey("Book")]
+    [HiddenInput] //2.5.9 將ReBooks\Create View設定BookID為隱藏欄位(可在Model加也可以View改動)
     public string BookID { get; set; } = null!;
 
 }
