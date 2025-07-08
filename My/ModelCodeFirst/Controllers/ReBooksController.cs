@@ -50,5 +50,15 @@ namespace ModelCodeFirst.Controllers
 
             return View(reBook);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public IActionResult GetReBookByViewComponent(string ID)
+        {
+            return ViewComponent("VC_ReBooks", new { ID = ID });
+        }
     }
 }

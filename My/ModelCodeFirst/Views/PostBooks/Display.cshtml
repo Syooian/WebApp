@@ -50,7 +50,7 @@
 </div>
 <hr /><!--------------------------------------------------回覆留言框-------------------------------------------------->
 
-<div>
+<div id="ReBookList">
     @await Component.InvokeAsync("VC_ReBooks", new { ID = Model.ID })
 </div>
 
@@ -77,5 +77,23 @@
             //unobtrusive：<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js">其中的==>unobtrusive<==
             $.validator.unobtrusive.parse($('#ReBookForm'));
         });
+
+        //2.5.15 在PostBooks\Display View中撰寫相關的JavaScript程式，以Ajax方式執行新增回覆留言
+        //此動作只能使用Ajax達成
+        function AddReBook(){
+            $.ajax({
+                type:"POST",
+                url:"/ReBooks/Create",//Controller/Action
+                data:$('#ReBookForm form').serialize(),
+                success:function(){
+                    //更新底下回覆留言區
+                    console.log('/ReBooks/GetReBookByViewComponent?ID=@(Model.ID)');
+                    $('#ReBookList').load('/ReBooks/GetReBookByViewComponent?ID=@(Model.ID)');
+                },
+                error:function(){
+                    console.log("AddReBook Ajax Error");
+                }
+            });
+        }
     </script>
 }

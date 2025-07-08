@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -48,6 +49,14 @@ namespace MyModel_CodeFirst.Controllers
             return Json(reBook);
         }
 
-       
+        //2.5.16 在ReBooksController中撰寫自VCRebook ViewComponent取得回覆留言資料的Action
+        public IActionResult GetReBookByViewComponent(string BookID)
+        {
+
+            return ViewComponent("VCReBooks", new { bookID = BookID });
+          
+        }
+
+
     }
 }

@@ -205,6 +205,5 @@ namespace MyModel_CodeFirst.Controllers
 //2.5.13 使用Callback function重新綁定 unobtrusive validation
 //2.5.14 修改ReBooksController中的Create Action，使其Return JSON資料
 //2.5.15 在PostBooks\Display View中撰寫相關的JavaScript程式，以Ajax方式執行新增回覆留言
-//2.5.16 將ReBooks\Create View的Form建立ID
-//2.5.17 在ReBooksController中撰寫自VCRebook ViewComponent取得回覆留言資料的Action
+//2.5.16 在ReBooksController中撰寫自VCRebook ViewComponent取得回覆留言資料的Action
 //2.5.18 測試效果

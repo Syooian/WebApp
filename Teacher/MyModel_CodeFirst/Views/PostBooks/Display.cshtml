@@ -60,7 +60,7 @@
 
 <hr />
 @* //2.3.10 編寫Display View，加入VCReBooks ViewComponent *@
-<div>
+<div id="ReBookList">
 	@await Component.InvokeAsync("VCReBooks", new { bookID = Model.BookID })
 </div>
 
@@ -70,7 +70,7 @@
 
 @section Scripts {
 	@* //2.5.12 載入前端驗證套件(如jQuery Validation)以驗證Create View的表單 *@
-	
+
 	@{
 		await Html.RenderPartialAsync("_ValidationScriptsPartial");
 	}
@@ -80,5 +80,36 @@
 		$('#ReBookForm').load('/ReBooks/Create?BookID=@(Model.BookID)',function(){
 			$.validator.unobtrusive.parse($('#ReBookForm'));
 		}); //2.5.8 傳遞BookID參數
+
+
+		//2.5.15 在PostBooks\Display View中撰寫相關的JavaScript程式，以Ajax方式執行新增回覆留言
+		function addReBook(){
+
+			//console.log($('#ReBookForm form').serialize());
+
+			$.ajax({
+				type:"Post",
+				url:"/ReBooks/Create",
+				data: $('#ReBookForm form').serialize(),
+				success:function(){
+					//更新底下的回覆留言區
+					console.log('/ReBooks/GetReBookByViewComponent?BookID=@(Model.BookID)');
+					$('#ReBookList').load('/ReBooks/GetReBookByViewComponent?BookID=@(Model.BookID)');
+
+
+
+				},
+				error:function(){
+
+				}
+			});
+
+		}
+
+
+
+
+
+
 	</script>
 }
