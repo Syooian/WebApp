@@ -68,3 +68,17 @@ TrustServerCertificate=True：信任伺服器憑證\
 # ViewModel與ViewComponents的差別
 ViewModel：  
 ViewComponents：將View的取得當成一個小組件
+
+# Migration 指令
+* Add-Migration InitialCreate  
+* Update-database  
+* Update-Database -Migration \<MigrationName>  
+將資料庫還原到指定 migration 狀態。
+* Remove-Migration
+* Get-Migration  
+顯示目前所有的 migration。
+* Script-Migration  
+產生 SQL 腳本；將資料庫從某個 migration 狀態更新到另一個狀態。  
+範例：Script-Migration -From InitialCreate -To Latest
+* Drop-Database  
+刪除目前的資料庫（可能需安裝 EF Core Power Tools 或使用 CLI）。
