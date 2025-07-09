@@ -16,6 +16,7 @@ public class BookData
     [Display(Name = "留言編號")]
     [StringLength(36, MinimumLength = 36)]
     [Key]
+    [HiddenInput]
     public string ID { get; set; } = null!;
     /// <summary>
     /// 標題
@@ -76,6 +77,7 @@ public class ReBookData
     /// 回覆留言編號
     /// </summary>
     [Display(Name = "回覆留言編號")]
+    [StringLength(36, MinimumLength = 36)]
     [Key]
     [HiddenInput]
     public string ReID { get; set; } = null!;
@@ -109,6 +111,7 @@ public class ReBookData
     /// <para>指向<see cref="Book.ID"/></para>
     /// </summary>
     [HiddenInput]
+    [ForeignKey("Book")]
     public string ID { get; set; } = null!;
     #endregion
 }

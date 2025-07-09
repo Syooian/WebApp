@@ -12,7 +12,7 @@ using ModelCodeFirst.Models;
 namespace ModelCodeFirst.Migrations
 {
     [DbContext(typeof(GuestBookContext))]
-    [Migration("20250703021427_InitialCreate")]
+    [Migration("20250708165446_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -67,15 +67,12 @@ namespace ModelCodeFirst.Migrations
 
             modelBuilder.Entity("ModelCodeFirst.Models.ReBook", b =>
                 {
-                    b.Property<string>("ID")
+                    b.Property<string>("ReID")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Author")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BookID")
-                        .HasColumnType("varchar(36)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -84,13 +81,13 @@ namespace ModelCodeFirst.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ReID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("ID")
+                        .HasColumnType("varchar(36)");
 
-                    b.HasKey("ID");
+                    b.HasKey("ReID")
+                        .HasName("PK_ReBookID");
 
-                    b.HasIndex("BookID");
+                    b.HasIndex("ID");
 
                     b.ToTable("ReBook");
                 });
@@ -99,7 +96,7 @@ namespace ModelCodeFirst.Migrations
                 {
                     b.HasOne("ModelCodeFirst.Models.Book", "Book")
                         .WithMany("ReBooks")
-                        .HasForeignKey("BookID");
+                        .HasForeignKey("ID");
 
                     b.Navigation("Book");
                 });

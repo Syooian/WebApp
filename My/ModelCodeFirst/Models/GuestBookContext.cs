@@ -71,6 +71,42 @@ namespace ModelCodeFirst.Models
                 Entity.Property(E => E.CreatedDate)
                     .HasColumnType("datetime");
             });
+
+            ModelBuilder.Entity<ReBook>(Entity =>
+            {
+                Entity.HasKey(E => E.ReID).HasName("PK_ReBookID");//設定主鍵
+
+                Entity.HasOne(E => E.Book)
+                    .WithMany(E => E.ReBooks)
+                    .HasForeignKey(E => E.ID);
+                /**
+             * 不加上面那段，生成的InitialCreate會長這樣
+             * 
+             * migrationBuilder.CreateTable(
+                name: "ReBook",
+                columns: table => new
+                {
+                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ReID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BookID = table.Column<string>(type: "varchar(36)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReBook", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_ReBook_Book_BookID",
+                        column: x => x.BookID,
+                        principalTable: "Book",
+                        principalColumn: "ID");
+                });
+             * */
+
+
+            });
+            
         }
     }
 }
