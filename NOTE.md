@@ -82,3 +82,8 @@ ViewComponents：將View的取得當成一個小組件
 範例：Script-Migration -From InitialCreate -To Latest
 * Drop-Database  
 刪除目前的資料庫（可能需安裝 EF Core Power Tools 或使用 CLI）。
+
+# 更換Bootstrap
+使用NuGet安裝Bootstrap後，需手動至NuGet的Package下將Bootstrap和jQuery的檔案複製到專案內（因為.NET Core的問題）
+
+site.css, site.js檔：寫自定義內容，不要去改原始的css和js檔

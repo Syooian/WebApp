@@ -224,7 +224,7 @@ namespace MyModel_CodeFirst.Controllers
 
 //3.2   Ы砞璸
 //3.2.1 Shared戈Жいミ_UserLayout.cshtmlЫ郎
-//3.2.2 盢_UserLayout.cshtmlBootstrap竚传程穝セ
+//3.2.2 盢_UserLayout.cshtmlBootstrapのjQuery竚传程穝セ
 //3.2.3 砞﹚Home/Index ViewLayout_UserLayout
 //3.2.4 ミVCBooksTopThree.cs  ViewComponent
 //3.2.5 级糶VCBooksTopThree Classㄏㄤ弄程穝掸痙ē
