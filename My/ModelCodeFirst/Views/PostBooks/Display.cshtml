@@ -80,17 +80,34 @@
             $.validator.unobtrusive.parse($('#ReBookForm'));
         });
 
+        //抓彈出框
+        const Modal=new bootstrap.Modal(document.getElementById('ReBookModal'));
+
         //2.5.15 在PostBooks\Display View中撰寫相關的JavaScript程式，以Ajax方式執行新增回覆留言
         //此動作只能使用Ajax達成
         function AddReBook(){
+            //2.5.17判斷表單是否驗證通過
+            if(!$('#ReBookForm form').valid()){
+                //驗證失敗，不送出表單
+                return;
+            }
+
             $.ajax({
                 type:"POST",
                 url:"/ReBooks/Create",//Controller/Action
                 data:$('#ReBookForm form').serialize(),
                 success:function(){
                     //更新底下回覆留言區
-                    console.log('/ReBooks/GetReBookByViewComponent?ID=@(Model.ID)');
+                    //console.log('/ReBooks/GetReBookByViewComponent?ID=@(Model.ID)');
                     $('#ReBookList').load('/ReBooks/GetReBookByViewComponent?ID=@(Model.ID)');
+
+                    //將表單重新載入（也可在送出表單後重新產生GUID）
+                    $('#ReBookForm').load('/ReBooks/Create?ID=@(Model.ID)',function(){
+                        $.validator.unobtrusive.parse($('#ReBookForm'));
+                    });
+
+                    //關閉彈出框
+                    Modal.hide();
                 },
                 error:function(){
                     console.log("AddReBook Ajax Error");

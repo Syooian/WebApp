@@ -82,20 +82,35 @@
 		}); //2.5.8 傳遞BookID參數
 
 
+
+		const ReBookFormModal = new bootstrap.Modal(document.getElementById('ReBookFormModal'));
+											
+
 		//2.5.15 在PostBooks\Display View中撰寫相關的JavaScript程式，以Ajax方式執行新增回覆留言
 		function addReBook(){
-
-			//console.log($('#ReBookForm form').serialize());
+			//2.5.17 在addReBook()函數中加入判斷是否驗證通過的程式
+			if(!$('#ReBookForm form').valid()){  //驗證沒有成功,表單不送出
+				return;
+			}
+			
 
 			$.ajax({
 				type:"Post",
 				url:"/ReBooks/Create",
 				data: $('#ReBookForm form').serialize(),
 				success:function(){
-					//更新底下的回覆留言區
-					console.log('/ReBooks/GetReBookByViewComponent?BookID=@(Model.BookID)');
+
+					//1.更新底下的回覆留言區
 					$('#ReBookList').load('/ReBooks/GetReBookByViewComponent?BookID=@(Model.BookID)');
 
+
+					//2.將表單重新載入
+					$('#ReBookForm').load('/ReBooks/Create?BookID=@(Model.BookID)',function(){
+						$.validator.unobtrusive.parse($('#ReBookForm'));
+					});
+
+					//3.將modal隱藏
+					ReBookFormModal.hide();
 
 
 				},
@@ -103,8 +118,11 @@
 
 				}
 			});
-
 		}
+
+
+
+
 
 
 

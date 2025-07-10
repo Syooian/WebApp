@@ -16,6 +16,7 @@ namespace MyModel_CodeFirst.Controllers
             _context = context;
         }
 
+        //3.1.2 在HomeController中加入讀取Book資料表的程式
         public async Task<IActionResult> Index()
         {
             var result = await _context.Book.Where(b=>b.Photo!=null).OrderByDescending(s => s.CreatedDate).Take(5).ToListAsync();
@@ -206,4 +207,27 @@ namespace MyModel_CodeFirst.Controllers
 //2.5.14 修改ReBooksController中的Create Action，使其Return JSON資料
 //2.5.15 在PostBooks\Display View中撰寫相關的JavaScript程式，以Ajax方式執行新增回覆留言
 //2.5.16 在ReBooksController中撰寫自VCRebook ViewComponent取得回覆留言資料的Action
+//       ※將表單的送出按鈕的type由submit改為button後，表單將不會自動觸發前端驗證器※
+//2.5.17 在addReBook()函數中加入判斷是否驗證通過的程式
 //2.5.18 測試效果
+
+
+//---------------這條線以上是第一次作業的評量範圍----------------------------
+
+
+//3     介面設及與佈局
+//3.1   Bootstrap應用-利用Bootstrap裡的功能作首頁照片輪播
+//3.1.1 在Home/Index View中使用Bootstrap的Carousel元件
+//3.1.2 在HomeController中加入讀取Book資料表的程式
+//3.1.3 編輯Home/Index View實現照片輪播效果 
+
+
+//3.2   佈局設計
+//3.2.1 在Shared資料夾中建立_UserLayout.cshtml佈局檔
+//3.2.2 將_UserLayout.cshtml的Bootstrap及jQuery置換為最新版本
+//3.2.3 設定Home/Index View的Layout為_UserLayout
+//3.2.4 建立VCBooksTopThree.cs 的 ViewComponent
+//3.2.5 撰寫VCBooksTopThree Class使其能讀出最新三筆留言
+//3.2.6 在Shared/Components資料夾中建立VCBooksTopThree資料夾，並在其中建立Default.cshtml檔
+//3.2.7 撰寫VCBooksTopThree的Default View，使其能顯示最新三筆留言
+//3.2.8 在Home/Index View中加入VCBooksTopThree ViewComponent

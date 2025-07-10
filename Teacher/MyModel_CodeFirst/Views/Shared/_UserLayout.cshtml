@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - MyModel_CodeFirst</title>
+
+	@* 	//3.2.2 將_UserLayout.cshtml的Bootstrap及jQuery置換為最新版本 *@
+	<link rel="stylesheet" href="~/css/bootstrap.min.css" />
+
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/MyModel_CodeFirst.styles.css" asp-append-version="true" />
+</head>
+<body>
+
+	<div class="container mt-4">
+		<div class="row">
+			<nav class="col-3">
+				<div class="btn-group-vertical">
+						<a asp-action="Index" asp-controller="Home" class="btn btn-primary">首頁</a>
+						<a asp-action="Index" asp-controller="PostBooks" class="btn btn-primary">留言板</a>
+						<button type="button" class="btn btn-primary">.....</button>
+						<button type="button" class="btn btn-primary">Button</button>
+					
+				</div>
+			</nav>
+			<section class="col-9">
+				<main role="main" class="pb-3">
+					@RenderBody()
+				</main>
+			</section>
+
+		</div>
+	</div>
+
+	<footer class="border-top footer text-muted">
+		<div class="container">
+			&copy; 2025 - MyModel_CodeFirst - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+		</div>
+	</footer>
+	<script src="~/js/jquery.min.js"></script>
+	<script src="~/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
