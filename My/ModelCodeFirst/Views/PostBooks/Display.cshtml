@@ -86,6 +86,12 @@
         //2.5.15 在PostBooks\Display View中撰寫相關的JavaScript程式，以Ajax方式執行新增回覆留言
         //此動作只能使用Ajax達成
         function AddReBook(){
+            //2.5.17判斷表單是否驗證通過
+            if(!$('#ReBookForm form').valid()){
+                //驗證失敗，不送出表單
+                return;
+            }
+
             $.ajax({
                 type:"POST",
                 url:"/ReBooks/Create",//Controller/Action

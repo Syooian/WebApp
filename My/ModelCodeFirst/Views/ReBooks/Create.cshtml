@@ -27,7 +27,11 @@
                 <input asp-for="ID" class="form-control" value="@ViewBag.ID" />
             </div>
             <div class="form-group mt-4">
+                <!--用我們自己寫的ajax來做全部的事，所以改用button-->
                 <input type="button" onclick="AddReBook()" value="確定回覆" class="btn btn-primary" />
+
+                <!--會先執行onclick，再執行submit-->
+                <!--<input type="submit" onclick="AddReBook()" value="確定回覆" class="btn btn-primary" />-->
             </div>
         </form>
     </div>

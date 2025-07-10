@@ -88,10 +88,11 @@
 
 		//2.5.15 在PostBooks\Display View中撰寫相關的JavaScript程式，以Ajax方式執行新增回覆留言
 		function addReBook(){
-
-			// if (!$('#ReBookForm form').valid()) {
-			// 	return; // 驗證失敗，不送出
-			// }
+			//2.5.17 在addReBook()函數中加入判斷是否驗證通過的程式
+			if(!$('#ReBookForm form').valid()){  //驗證沒有成功,表單不送出
+				return;
+			}
+			
 
 			$.ajax({
 				type:"Post",
