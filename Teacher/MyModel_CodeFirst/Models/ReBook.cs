@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MyModel_CodeFirst.Models
@@ -18,7 +19,7 @@ namespace MyModel_CodeFirst.Models
 
         //1.1.5 撰寫兩個類別間的關聯屬性做為未來資料表之間的關聯
         public string BookID { get; set; } = null!;
-       
+
         public virtual Book? Book { get; set; } //一個ReBook只能屬於一個Book
     }
 }

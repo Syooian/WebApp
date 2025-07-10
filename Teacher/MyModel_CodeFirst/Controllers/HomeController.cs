@@ -206,4 +206,6 @@ namespace MyModel_CodeFirst.Controllers
 //2.5.14 修改ReBooksController中的Create Action，使其Return JSON資料
 //2.5.15 在PostBooks\Display View中撰寫相關的JavaScript程式，以Ajax方式執行新增回覆留言
 //2.5.16 在ReBooksController中撰寫自VCRebook ViewComponent取得回覆留言資料的Action
+//       ※將表單的送出按鈕的type由submit改為button後，表單將不會自動觸發前端驗證器※
+//2.5.17 在addReBook()函數中加入啟動驗證器的程式碼
 //2.5.18 測試效果

@@ -35,6 +35,7 @@ namespace MyModel_CodeFirst.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ReBookID,Description,Author,CreatedDate,BookID")] ReBook reBook)
         {
+          
             if (ModelState.IsValid)
             {
                 _context.Add(reBook);
