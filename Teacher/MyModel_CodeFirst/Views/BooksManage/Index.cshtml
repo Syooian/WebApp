@@ -30,7 +30,7 @@
 	<tbody>
 		@foreach (var item in Model)
 		{
-			<tr>
+			<tr data-bs-toggle="collapse" data-bs-target="#B@(item.BookID)">
 
 				<td style="max-width:100px" class="d-none d-md-table-cell">
 					@if (item.Photo != null)
@@ -52,6 +52,12 @@
 				</td>
 				<td>
 					<a asp-action="Delete" asp-route-id="@item.BookID" class="btn btn-danger">刪除</a>
+				</td>
+			</tr>
+			<tr class="collapse" id="B@(item.BookID)">
+				<td style="width:80px"></td>
+				<td colspan="4">
+					@await Component.InvokeAsync("VCReBooks", new { bookID = item.BookID })
 				</td>
 			</tr>
 		}
