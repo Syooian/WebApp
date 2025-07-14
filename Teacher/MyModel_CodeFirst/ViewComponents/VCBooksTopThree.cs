@@ -17,7 +17,7 @@ namespace MyModel_CodeFirst.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var books =  await _context.Book.OrderByDescending(b => b.CreatedDate).Take(3).ToListAsync();
+            var books =  await _context.Book.OrderByDescending(b => b.CreatedDate).Take(4).ToListAsync();
             return View(books);
         }
 

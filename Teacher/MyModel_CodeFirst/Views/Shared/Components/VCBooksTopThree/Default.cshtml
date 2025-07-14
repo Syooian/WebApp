@@ -4,8 +4,10 @@
     Layout = null;
 }
 
+<div class="row">
 @foreach (var item in Model)
 {
+	<div class="col-6">
 	<div class="card mb-4">
 		@if (item.Photo != null)
 		{
@@ -17,9 +19,12 @@
 			<h3>@Html.DisplayFor(modelItem => item.Title)</h3>
 
 
-			<p class="text-truncate" style="width:10px">@Html.Raw(item.Description.Replace("\r\n", "<br>"))</p>
+			<p class="text-truncate">@Html.Raw(item.Description)</p>
 		</div>
 	
 
 	</div>
+		</div>
 }
+
+</div>
