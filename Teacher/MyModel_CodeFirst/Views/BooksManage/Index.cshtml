@@ -9,9 +9,10 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th class="d-none d-md-block">
+			<th style="max-width:100px" class="d-none d-md-table-cell">
 				@Html.DisplayNameFor(model => model.Photo)
 			</th>
+
 			<th>
 				@Html.DisplayNameFor(model => model.Title)
 			</th>
@@ -31,7 +32,7 @@
 		{
 			<tr>
 
-				<td style="width:150px" class="d-none d-md-block">
+				<td style="max-width:100px" class="d-none d-md-table-cell">
 					@if (item.Photo != null)
 					{
 						<img src="~/BookPhotos/@item.Photo" class="img-fluid" />
@@ -50,7 +51,6 @@
 					@Html.DisplayFor(modelItem => item.CreatedDate)
 				</td>
 				<td>
-
 					<a asp-action="Delete" asp-route-id="@item.BookID" class="btn btn-danger">刪除</a>
 				</td>
 			</tr>
