@@ -231,3 +231,22 @@ namespace MyModel_CodeFirst.Controllers
 //3.2.6 在Shared/Components資料夾中建立VCBooksTopThree資料夾，並在其中建立Default.cshtml檔
 //3.2.7 撰寫VCBooksTopThree的Default View，使其能顯示最新三筆留言
 //3.2.8 在Home/Index View中加入VCBooksTopThree ViewComponent
+
+
+
+//4.    製作留言板後台管理功能
+
+//4.1   製作自動生成的Book資料表CRUD
+//4.1.1 在Controllers資料夾上按右鍵→加入→控制器
+//4.1.2 選擇「使用EntityFramework執行檢視的MVC控制器」→按下「加入」鈕
+//4.1.3 在對話方塊中設定如下
+//      模型類別: Book(MyModel_CodeFirst.Models)
+//      資料內容類別: GuestBookContext(MyModel_CodeFirst.Models)
+//      勾選 產生檢視
+//      勾選 參考指令碼程式庫
+//      勾選 使用版面配置頁
+//      控制器名稱使用(BooksManageController)
+//      按下「新增」鈕
+//4.1.4 執行/BooksManage/Index 進行測試
+//4.1.5 修改Index View將Photo及ImageType欄位、Create、Edit及Details超鏈結移除
+//4.1.6 依喜好自行修改介面
