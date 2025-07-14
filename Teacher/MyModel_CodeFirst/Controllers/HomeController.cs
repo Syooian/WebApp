@@ -264,14 +264,13 @@ namespace MyModel_CodeFirst.Controllers
 
 
 //4.4   製作刪除留言功能
-//4.4.1 在BooksManageController中的Delete Action加入刪除圖片的程式
-//4.4.2 將BooksManage/Index View的刪除按鈕改寫成表單傳送
-//4.4.3 測試刪除留言功能
-//      ※這裡所製作的刪除會將有關聯的回覆留言資料一併刪除※
-//4.4.4 在BooksManageController加人中的DeleteReBook Action
-//4.4.5 將VCRebooks/Delete View的刪除鈕製作以Ajax方式刪除以保留頁面不整頁更新
-//4.4.6 撰寫Ajax程式以呼叫DeleteReBook Action
-//4.4.7 在BooksManageController中加入GetRebookByViewComponent Action
-//4.4.8 利用GetRebookByViewComponent Action局部更新畫面以顯示刪除後的回覆留言資料畫面
-//4.4.9 測試刪除留言功能
+//4.4.1 在BooksManageController加人中的DeleteReBook Action
+//4.4.2 將VCRebooks/Delete View的刪除鈕製作以Ajax方式刪除以保留頁面不整頁更新
+//4.4.3 撰寫Ajax程式以呼叫DeleteReBook Action
+//4.4.4 在BooksManageController中加入GetRebookByViewComponent Action
+//4.4.5 利用GetRebookByViewComponent Action局部更新畫面以顯示刪除後的回覆留言資料畫面
+//4.4.6 測試刪除回覆留言功能
+//4.4.7 在BooksManageController中的Delete Action加入刪除圖片的程式
+//4.4.8 將BooksManage/Index View的刪除按鈕改寫成表單傳送
+//4.4.9 測試刪除主留言功能
 //      ※這裡所製作的刪除會將有關聯的回覆留言資料一併刪除※

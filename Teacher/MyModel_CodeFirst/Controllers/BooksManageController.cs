@@ -24,96 +24,7 @@ namespace MyModel_CodeFirst.Controllers
             return View(await _context.Book.ToListAsync());
         }
 
-        // GET: BooksManage/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var book = await _context.Book
-                .FirstOrDefaultAsync(m => m.BookID == id);
-            if (book == null)
-            {
-                return NotFound();
-            }
-
-            return View(book);
-        }
-
-        // GET: BooksManage/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: BooksManage/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookID,Title,Description,Author,Photo,CreatedDate")] Book book)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(book);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(book);
-        }
-
-        // GET: BooksManage/Edit/5
-        public async Task<IActionResult> Edit(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var book = await _context.Book.FindAsync(id);
-            if (book == null)
-            {
-                return NotFound();
-            }
-            return View(book);
-        }
-
-        // POST: BooksManage/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("BookID,Title,Description,Author,Photo,CreatedDate")] Book book)
-        {
-            if (id != book.BookID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(book);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!BookExists(book.BookID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(book);
-        }
+       
 
         // GET: BooksManage/Delete/5
         public async Task<IActionResult> Delete(string id)
@@ -148,9 +59,21 @@ namespace MyModel_CodeFirst.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BookExists(string id)
+
+        //4.4.1 在BooksManageController加人中的DeleteReBook Action
+        [HttpPost]
+        public async Task<IActionResult> DeleteReBook(string id)
         {
-            return _context.Book.Any(e => e.BookID == id);
+            var reBook = await _context.ReBook.FindAsync(id);
+            if (reBook != null)
+            {
+                _context.ReBook.Remove(reBook);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Json(reBook);
+
         }
     }
 }

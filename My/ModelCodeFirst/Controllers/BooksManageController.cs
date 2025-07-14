@@ -148,6 +148,28 @@ namespace ModelCodeFirst.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// 刪除回覆留言
+        /// </summary>
+        /// <param name="ReID"></param>
+        /// <returns></returns>
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteReBook(string ReID)
+        {
+            var ReBook = await _context.ReBook.FindAsync(ReID);
+            if (ReBook != null)
+            {
+                _context.ReBook.Remove(ReBook);
+            }
+
+            await _context.SaveChangesAsync();
+
+            //不要整頁重新整理
+            //return RedirectToAction(nameof(Index));
+            return Json(ReBook);
+        }
+
         private bool BookExists(string id)
         {
             return _context.Book.Any(e => e.ID == id);
