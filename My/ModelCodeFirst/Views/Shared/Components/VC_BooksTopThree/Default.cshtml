@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Book>
+
+@{
+	Layout = null;
+}
+
+@foreach (var item in Model)
+{
+	<div class="card mb-4">
+		@if (item.Photo != null)
+		{
+
+
+			<img src="~/BookPhotos/@item.Photo" class="card-img-top img-thumbnail" />
+		}
+		<div class="card-body">
+			<h3>@Html.DisplayFor(modelItem => item.Title)</h3>
+
+
+			<p class="text-truncate" style="width:10px">@Html.Raw(item.Description.Replace("\r\n", "<br>"))</p>
+		</div>
+
+
+	</div>
+}
