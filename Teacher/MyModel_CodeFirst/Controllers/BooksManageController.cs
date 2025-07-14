@@ -24,7 +24,7 @@ namespace MyModel_CodeFirst.Controllers
             return View(await _context.Book.ToListAsync());
         }
 
-       
+
 
         // GET: BooksManage/Delete/5
         public async Task<IActionResult> Delete(string id)
@@ -65,12 +65,17 @@ namespace MyModel_CodeFirst.Controllers
         public async Task<IActionResult> DeleteReBook(string id)
         {
             var reBook = await _context.ReBook.FindAsync(id);
-            if (reBook != null)
+
+            if (string.IsNullOrEmpty(id))
             {
-                _context.ReBook.Remove(reBook);
+                return Json(reBook);
             }
 
+            _context.ReBook.Remove(reBook);
             await _context.SaveChangesAsync();
+
+
+
 
             return Json(reBook);
 

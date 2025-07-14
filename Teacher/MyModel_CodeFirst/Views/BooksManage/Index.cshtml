@@ -62,9 +62,29 @@
 				<td style="width:80px"></td>
 				<td colspan="4">
 					@*//4.3.1 在Index View中加入呈現回覆留言的ViewComponent *@
-					@await Component.InvokeAsync("VCReBooks", new { bookID = item.BookID, isDel = true })/* //4.3.5 在Index View中呈現回覆留言的ViewComponent增加isDel參數的傳遞 */
+					@await Component.InvokeAsync("VCReBooks", new { bookID = item.BookID, isDel = true }) @* //4.3.5 在Index View中呈現回覆留言的ViewComponent增加isDel參數的傳遞 *@
 				</td>
 			</tr>
 		}
 	</tbody>
 </table>
+
+@section Scripts {
+	<script>
+		function delReBook(reBookId){
+
+			//console.log(reBookId);
+
+			$.ajax({
+				type:"Post",
+				url:"/BooksManage/DeleteReBook",
+				data:{id:reBookId},
+				success:function(data){
+					console.log(data);
+				}
+
+			});
+
+		}
+	</script>
+}

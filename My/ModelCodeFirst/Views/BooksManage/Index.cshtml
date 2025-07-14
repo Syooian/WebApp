@@ -32,24 +32,40 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td style="width:100px">
-                <img src="~/BookPhotos/@item.Photo" class="img-fluid"/>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td style="width:100px">
+                    <img src="~/BookPhotos/@item.Photo" class="img-fluid" />
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        function DeleteReBook(ReID){
+            $.ajax({
+                type:"Post",
+                url:"/BooksManage/DeleteReBook",
+                data:ReID,
+                success:function(Data){
+                    console.log(Data);
+                }
+            });
+        }
+    </script>
+}
