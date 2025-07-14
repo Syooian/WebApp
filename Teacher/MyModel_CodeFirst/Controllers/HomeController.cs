@@ -248,5 +248,30 @@ namespace MyModel_CodeFirst.Controllers
 //      控制器名稱使用(BooksManageController)
 //      按下「新增」鈕
 //4.1.4 執行/BooksManage/Index 進行測試
-//4.1.5 修改Index View將Photo及ImageType欄位、Create、Edit及Details超鏈結移除
+//4.1.5 修改Index View將不需要的欄位、Create、Edit及Details超鏈結移除
 //4.1.6 依喜好自行修改介面
+
+
+//4.3   在Index View呈現回覆留言資料
+//4.3.1 在Index View中加入呈現回覆留言的ViewComponent
+//4.3.2 新增一個VCRebooks/Delete.cshtml View
+//4.3.3 將Delete View重新排版並加入刪除回覆留言的按鈕
+//4.3.4 在VCRebooks ViewComponent中加入isDel參數判斷是否呈現Delete View
+//4.3.5 在Index View中呈現回覆留言的ViewComponent增加isDel參數的傳遞
+//4.3.6 使用Bootstrap的Collapse Component來呈現留言資料
+//4.3.7 將呈現回覆留言的id改為動態產生
+//4.3.8 測試畫面效果
+
+
+//4.4   製作刪除留言功能
+//4.4.1 在BooksManageController中的Delete Action加入刪除圖片的程式
+//4.4.2 將BooksManage/Index View的刪除按鈕改寫成表單傳送
+//4.4.3 測試刪除留言功能
+//      ※這裡所製作的刪除會將有關聯的回覆留言資料一併刪除※
+//4.4.4 在BooksManageController加人中的DeleteReBook Action
+//4.4.5 將VCRebooks/Delete View的刪除鈕製作以Ajax方式刪除以保留頁面不整頁更新
+//4.4.6 撰寫Ajax程式以呼叫DeleteReBook Action
+//4.4.7 在BooksManageController中加入GetRebookByViewComponent Action
+//4.4.8 利用GetRebookByViewComponent Action局部更新畫面以顯示刪除後的回覆留言資料畫面
+//4.4.9 測試刪除留言功能
+//      ※這裡所製作的刪除會將有關聯的回覆留言資料一併刪除※
