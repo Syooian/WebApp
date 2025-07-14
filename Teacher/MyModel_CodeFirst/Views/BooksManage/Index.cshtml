@@ -1,0 +1,90 @@
+﻿@model IEnumerable<MyModel_CodeFirst.Models.Book>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+@* //4.1.5 修改Index View將不需要的欄位、Create、Edit及Details超鏈結移除 *@
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th style="max-width:100px" class="d-none d-md-table-cell">
+				@Html.DisplayNameFor(model => model.Photo)
+			</th>
+
+			<th>
+				@Html.DisplayNameFor(model => model.Title)
+			</th>
+
+			<th>
+				@Html.DisplayNameFor(model => model.Author)
+			</th>
+
+			<th>
+				@Html.DisplayNameFor(model => model.CreatedDate)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			//4.3.6 使用Bootstrap的Collapse Component來呈現留言資料
+			//4.3.7 將呈現回覆留言的id改為動態產生
+			<tr data-bs-toggle="collapse" data-bs-target="#B@(item.BookID)">
+
+				<td style="max-width:100px" class="d-none d-md-table-cell">
+					@if (item.Photo != null)
+					{
+						<img src="~/BookPhotos/@item.Photo" class="img-fluid" />
+					}
+				</td>
+
+				<td>
+					@Html.DisplayFor(modelItem => item.Title)
+				</td>
+
+				<td>
+					@Html.DisplayFor(modelItem => item.Author)
+				</td>
+
+				<td>
+					@Html.DisplayFor(modelItem => item.CreatedDate)
+				</td>
+				<td>
+					<a asp-action="Delete" asp-route-id="@item.BookID" class="btn btn-danger">刪除</a>
+				</td>
+			</tr>
+			//4.3.6 使用Bootstrap的Collapse Component來呈現留言資料
+			//4.3.7 將呈現回覆留言的id改為動態產生
+			<tr class="collapse" id="B@(item.BookID)">
+				<td style="width:80px"></td>
+				<td colspan="4">
+					@*//4.3.1 在Index View中加入呈現回覆留言的ViewComponent *@
+					@await Component.InvokeAsync("VCReBooks", new { bookID = item.BookID, isDel = true }) @* //4.3.5 在Index View中呈現回覆留言的ViewComponent增加isDel參數的傳遞 *@
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+@section Scripts {
+	<script>
+		function delReBook(reBookId){
+
+			//console.log(reBookId);
+
+			$.ajax({
+				type:"Post",
+				url:"/BooksManage/DeleteReBook",
+				data:{id:reBookId},
+				success:function(data){
+					console.log(data);
+				}
+
+			});
+
+		}
+	</script>
+}

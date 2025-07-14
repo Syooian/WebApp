@@ -7,3 +7,11 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<div class="p-5 border border-2 rounded">
+    <h3 class="text-center">最新三筆留言</h3>
+    @{
+        await Component.InvokeAsync("VC_BooksTopThree");
+    }
+    <h4 class="text-end"><a asp-action="Index" asp-controller="PostBooks">看更多...</a></h4>
+</div>

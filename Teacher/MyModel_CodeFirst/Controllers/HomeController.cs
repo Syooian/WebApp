@@ -227,7 +227,50 @@ namespace MyModel_CodeFirst.Controllers
 //3.2.2 將_UserLayout.cshtml的Bootstrap及jQuery置換為最新版本
 //3.2.3 設定Home/Index View的Layout為_UserLayout
 //3.2.4 建立VCBooksTopThree.cs 的 ViewComponent
-//3.2.5 撰寫VCBooksTopThree Class使其能讀出最新三筆留言
+//3.2.5 撰寫VCBooksTopThree Class使其能讀出最新n筆留言
 //3.2.6 在Shared/Components資料夾中建立VCBooksTopThree資料夾，並在其中建立Default.cshtml檔
-//3.2.7 撰寫VCBooksTopThree的Default View，使其能顯示最新三筆留言
+//3.2.7 撰寫VCBooksTopThree的Default View，使其能顯示最新n筆留言
 //3.2.8 在Home/Index View中加入VCBooksTopThree ViewComponent
+
+
+
+//4.    製作留言板後台管理功能
+
+//4.1   製作自動生成的Book資料表CRUD
+//4.1.1 在Controllers資料夾上按右鍵→加入→控制器
+//4.1.2 選擇「使用EntityFramework執行檢視的MVC控制器」→按下「加入」鈕
+//4.1.3 在對話方塊中設定如下
+//      模型類別: Book(MyModel_CodeFirst.Models)
+//      資料內容類別: GuestBookContext(MyModel_CodeFirst.Models)
+//      勾選 產生檢視
+//      勾選 參考指令碼程式庫
+//      勾選 使用版面配置頁
+//      控制器名稱使用(BooksManageController)
+//      按下「新增」鈕
+//4.1.4 執行/BooksManage/Index 進行測試
+//4.1.5 修改Index View將不需要的欄位、Create、Edit及Details超鏈結移除
+//4.1.6 依喜好自行修改介面
+
+
+//4.3   在Index View呈現回覆留言資料
+//4.3.1 在Index View中加入呈現回覆留言的ViewComponent
+//4.3.2 新增一個VCRebooks/Delete.cshtml View
+//4.3.3 將Delete View重新排版並加入刪除回覆留言的按鈕
+//4.3.4 在VCRebooks ViewComponent中加入isDel參數判斷是否呈現Delete View
+//4.3.5 在Index View中呈現回覆留言的ViewComponent增加isDel參數的傳遞
+//4.3.6 使用Bootstrap的Collapse Component來呈現留言資料
+//4.3.7 將呈現回覆留言的id改為動態產生
+//4.3.8 測試畫面效果
+
+
+//4.4   製作刪除留言功能
+//4.4.1 在BooksManageController加人中的DeleteReBook Action
+//4.4.2 將VCRebooks/Delete View的刪除鈕製作以Ajax方式刪除以保留頁面不整頁更新
+//4.4.3 撰寫Ajax程式以呼叫DeleteReBook Action
+//4.4.4 在BooksManageController中加入GetRebookByViewComponent Action
+//4.4.5 利用GetRebookByViewComponent Action局部更新畫面以顯示刪除後的回覆留言資料畫面
+//4.4.6 測試刪除回覆留言功能
+//4.4.7 在BooksManageController中的Delete Action加入刪除圖片的程式
+//4.4.8 將BooksManage/Index View的刪除按鈕改寫成表單傳送
+//4.4.9 測試刪除主留言功能
+//      ※這裡所製作的刪除會將有關聯的回覆留言資料一併刪除※

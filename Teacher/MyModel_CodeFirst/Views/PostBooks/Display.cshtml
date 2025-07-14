@@ -61,7 +61,7 @@
 <hr />
 @* //2.3.10 編寫Display View，加入VCReBooks ViewComponent *@
 <div id="ReBookList">
-	@await Component.InvokeAsync("VCReBooks", new { bookID = Model.BookID })
+	@await Component.InvokeAsync("VCReBooks", new { bookID = Model.BookID, isDel = false})
 </div>
 
 <div>

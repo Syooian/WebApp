@@ -6,9 +6,6 @@
     string a = "";
 }
 
-<div class="text-center">
-    <h1 class="fw-bold">歡迎蒞臨我的網站</h1>
-</div>
 
 
 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
@@ -34,7 +31,16 @@
 </div>
 
 
+<div class="text-center">
+    <h1 class="fw-bold">歡迎蒞臨我的網站</h1>
+</div>
 
+@* //3.2.8 在Home/Index View中加入VCBooksTopThree ViewComponent *@
+<div class="p-5 border border-1 rounded">
+    <h3 class="text-center">最新四筆留言</h3>
+    @await Component.InvokeAsync("VCBooksTopThree")
+    <h4 class="text-end"><a asp-action="Index" asp-controller="PostBooks">看更多留言...</a></h4>
+</div>
 
 
 

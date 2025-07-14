@@ -14,15 +14,18 @@ namespace MyModel_CodeFirst.ViewComponents
             _context = context;
         }
 
-
+        //4.3.4 在VCRebooks ViewComponent中加入isDel參數判斷是否呈現Delete View
         //2.3.4 撰寫InvokeAsync()方法取得回覆留言資料
-        public async Task<IViewComponentResult> InvokeAsync(string bookID)
+        public async Task<IViewComponentResult> InvokeAsync(string bookID, bool isDel=false)
         {
             //select*
             //from rebook
             //where BookID = @bookID
 
             var rebook = await _context.ReBook.Where(r=>r.BookID==bookID).OrderByDescending(r=>r.CreatedDate).ToListAsync();
+
+            if(isDel)
+                return View("Delete",rebook);
 
             return View(rebook);
         }
