@@ -13,7 +13,7 @@
 
 		@foreach (var item in Model)
 		{
-			<p>@Html.DisplayFor(modelItem => item.Description)</p>
+			<p>@Html.Raw(item.Description.Replace("\r\n", "<br>"))</p>
 			<p class="text-end">@Html.DisplayFor(modelItem => item.Author) 於 @Html.DisplayFor(modelItem => item.CreatedDate) 回覆</p>
 			<hr />
 		}

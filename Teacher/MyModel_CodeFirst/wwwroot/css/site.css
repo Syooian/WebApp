@@ -22,6 +22,6 @@ body {
 }
 
 
-.table-hover > tbody > tr:hover > * {
+.table-hover > tbody > tr:nth-child(2n+1):hover > * {
     background-color: #fcfcbf;
 }
