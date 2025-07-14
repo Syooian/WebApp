@@ -4,6 +4,7 @@ using MyModel_CodeFirst.Models;
 
 namespace MyModel_CodeFirst.ViewComponents
 {
+    //3.2.5 撰寫VCBooksTopThree Class使其能讀出最新n筆留言
     public class VCBooksTopThree:ViewComponent
     {
 

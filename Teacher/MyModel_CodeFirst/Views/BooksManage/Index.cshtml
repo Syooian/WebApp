@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MyModel_CodeFirst.Models.Book>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+@* //4.1.5 修改Index View將不需要的欄位、Create、Edit及Details超鏈結移除 *@
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th class="d-none d-md-block">
+				@Html.DisplayNameFor(model => model.Photo)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Title)
+			</th>
+
+			<th>
+				@Html.DisplayNameFor(model => model.Author)
+			</th>
+
+			<th>
+				@Html.DisplayNameFor(model => model.CreatedDate)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+
+				<td style="width:150px" class="d-none d-md-block">
+					@if (item.Photo != null)
+					{
+						<img src="~/BookPhotos/@item.Photo" class="img-fluid" />
+					}
+				</td>
+
+				<td>
+					@Html.DisplayFor(modelItem => item.Title)
+				</td>
+
+				<td>
+					@Html.DisplayFor(modelItem => item.Author)
+				</td>
+
+				<td>
+					@Html.DisplayFor(modelItem => item.CreatedDate)
+				</td>
+				<td>
+
+					<a asp-action="Delete" asp-route-id="@item.BookID" class="btn btn-danger">刪除</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
