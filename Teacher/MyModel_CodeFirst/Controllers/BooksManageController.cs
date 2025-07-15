@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using MyModel_CodeFirst.Models;
 
 namespace MyModel_CodeFirst.Controllers
 {
+
     public class BooksManageController : Controller
     {
         private readonly GuestBookContext _context;
@@ -26,37 +28,28 @@ namespace MyModel_CodeFirst.Controllers
         }
 
 
-
-        // GET: BooksManage/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var book = await _context.Book
-                .FirstOrDefaultAsync(m => m.BookID == id);
+            var book = await _context.Book.FindAsync(id);
             if (book == null)
             {
-                return NotFound();
+                return View();
             }
 
-            return View(book);
-        }
+            //4.4.7 在BooksManageController中的Delete Action加入刪除圖片的程式
 
-        // POST: BooksManage/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            var book = await _context.Book.FindAsync(id);
-            if (book != null)
-            {
-                _context.Book.Remove(book);
-            }
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "BookPhotos", book.Photo??string.Empty);
 
+            if (System.IO.File.Exists(filePath))
+                System.IO.File.Delete(filePath); //刪除圖片檔案
+
+
+
+            _context.Book.Remove(book);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
