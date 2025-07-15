@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using ModelCodeFirst.Models;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace ModelCodeFirst.Controllers
 {
@@ -29,12 +32,23 @@ namespace ModelCodeFirst.Controllers
         /// <param name="Login"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Login(Login Login)
+        public async Task<IActionResult> Login(Login Login)
         {
             var User = Context.Login.FirstOrDefault(U => U.Account == Login.Account && U.Password == Login.Password);
             if (User != null)
             {
+                var Claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name,User.Account),
+                    new Claim(ClaimTypes.Role,"Admin"),//角色(Admin, User, Guest...etc)，系統簡單的網站可加可不加
+                };
 
+                var Identity = new ClaimsIdentity(Claims, "AdminLogin");//
+                var Principal = new ClaimsPrincipal(Identity);//通行時管理存取狀態&存活時間
+
+                await HttpContext.SignInAsync("AdminLogin", Principal);//登入
+
+                return RedirectToAction("Index", "BooksManage");//登入成功後導向首頁
             }
 
             ViewData["Error"] = "帳號或密碼錯誤，請重新輸入！";
