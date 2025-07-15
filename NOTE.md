@@ -92,3 +92,7 @@ site.css, site.js檔：寫自定義內容，不要去改原始的css和js檔
 
 * on delete no action：不允許刪除父表中的資料，除非先移除或更新子表中對應的外鍵參考。
 * on delete cascade：刪除父表紀錄時，子表中與之相關的資料會自動刪除，避免孤兒資料
+
+# ASP.NET權限管理
+* Identity框架：極度複雜使用
+* Authentication：最基本權限管理

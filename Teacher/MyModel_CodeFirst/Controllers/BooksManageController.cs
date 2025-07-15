@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,7 @@ namespace MyModel_CodeFirst.Controllers
         public async Task<IActionResult> Index()
         {
 
-            return View(await _context.Book.OrderByDescending(b=>b.CreatedDate).ToListAsync());
+            return View(await _context.Book.OrderByDescending(b => b.CreatedDate).ToListAsync());
         }
 
 
@@ -40,7 +41,7 @@ namespace MyModel_CodeFirst.Controllers
 
             //4.4.7 在BooksManageController中的Delete Action加入刪除圖片的程式
 
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "BookPhotos", book.Photo??string.Empty);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "BookPhotos", book.Photo ?? string.Empty);
 
             if (System.IO.File.Exists(filePath))
                 System.IO.File.Delete(filePath); //刪除圖片檔案
@@ -80,7 +81,7 @@ namespace MyModel_CodeFirst.Controllers
         public IActionResult GetRebookByViewComponent(string id)
         {
             //呼叫ViewComponent
-            return ViewComponent("VCReBooks", new { bookID = id, isDel=true });
+            return ViewComponent("VCReBooks", new { bookID = id, isDel = true });
         }
     }
 }
