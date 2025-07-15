@@ -29,6 +29,9 @@
             <th class="d-none d-md-inline">
                 照片
             </th>
+            <th>
+
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -50,6 +53,18 @@
                 <td style="width:100px">
                     <img src="~/BookPhotos/@item.Photo" class="img-fluid" />
                 </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="p-0">
+                    @*//4.3.1 在Index View中加入呈現回覆留言的ViewComponent *@
+                    <div class="collapse" id="B@(item.ID)">
+                        @await Component.InvokeAsync("VC_ReBooks", new { bookID = item.ID, IsDelete = true })@* //4.3.5 在Index View中呈現回覆留言的ViewComponent增加isDel參數的傳遞 *@
+                    </div>
+
+                </td>
             </tr>
         }
     </tbody>
@@ -57,15 +72,18 @@
 
 @section Scripts {
     <script>
-        function DeleteReBook(ReID){
-            $.ajax({
-                type:"Post",
-                url:"/BooksManage/DeleteReBook",
-                data:ReID,
-                success:function(Data){
-                    console.log(Data);
-                }
-            });
+        function DeleteReBook(ReID, BookID){
+            if(confirm("Delete?")){
+                $.ajax({
+                    type:"Post",
+                    url:"/BooksManage/DeleteReBook",
+                    data:ReID,
+                    success:function(Data){
+                        console.log(Data);
+                        $('#B'+BookID).load("/BooksManage/GetReBookByViewComponent/"+BookID);
+                    }
+                });
+            }
         }
     </script>
 }

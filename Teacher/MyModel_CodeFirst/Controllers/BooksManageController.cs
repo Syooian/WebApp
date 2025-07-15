@@ -21,6 +21,7 @@ namespace MyModel_CodeFirst.Controllers
         // GET: BooksManage
         public async Task<IActionResult> Index()
         {
+
             return View(await _context.Book.ToListAsync());
         }
 
@@ -79,6 +80,14 @@ namespace MyModel_CodeFirst.Controllers
 
             return Json(reBook);
 
+        }
+
+
+        //4.4.4 在BooksManageController中加入GetRebookByViewComponent Action
+        public IActionResult GetRebookByViewComponent(string id)
+        {
+            //呼叫ViewComponent
+            return ViewComponent("VCReBooks", new { bookID = id, isDel=true });
         }
     }
 }

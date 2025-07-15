@@ -4,7 +4,8 @@
 	ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="text-center">留言管理</h1>
+<hr />
 @* //4.1.5 修改Index View將不需要的欄位、Create、Edit及Details超鏈結移除 *@
 <table class="table table-hover">
 	<thead>
@@ -58,33 +59,40 @@
 			</tr>
 			//4.3.6 使用Bootstrap的Collapse Component來呈現留言資料
 			//4.3.7 將呈現回覆留言的id改為動態產生
-			<tr class="collapse" id="B@(item.BookID)">
-				<td style="width:80px"></td>
-				<td colspan="4">
+			<tr >
+				<td colspan="5" class="p-0">
 					@*//4.3.1 在Index View中加入呈現回覆留言的ViewComponent *@
-					@await Component.InvokeAsync("VCReBooks", new { bookID = item.BookID, isDel = true }) @* //4.3.5 在Index View中呈現回覆留言的ViewComponent增加isDel參數的傳遞 *@
+					<div class="collapse" id="B@(item.BookID)">
+						@await Component.InvokeAsync("VCReBooks", new { bookID = item.BookID, isDel = true })@* //4.3.5 在Index View中呈現回覆留言的ViewComponent增加isDel參數的傳遞 *@
+					</div>
+					
 				</td>
 			</tr>
 		}
 	</tbody>
 </table>
 
+@* //4.4.3 在Index View中撰寫Ajax程式以呼叫DeleteReBook Action *@
 @section Scripts {
 	<script>
-		function delReBook(reBookId){
+		function delReBook(reBookId, bookID){
 
 			//console.log(reBookId);
+			if (confirm("確定要刪除嗎？")) {
+				$.ajax({
+					type:"Post",
+					url:"/BooksManage/DeleteReBook",
+					data:{id:reBookId},
+					success:function(data){
+						console.log(data);
+						//4.4.5 利用GetRebookByViewComponent Action局部更新畫面以顯示刪除後的回覆留言資料畫面
+						$('#B'+bookID).load("/BooksManage/GetRebookByViewComponent/"+bookID);
 
-			$.ajax({
-				type:"Post",
-				url:"/BooksManage/DeleteReBook",
-				data:{id:reBookId},
-				success:function(data){
-					console.log(data);
-				}
 
-			});
+					}
 
+				});
+			}
 		}
 	</script>
 }

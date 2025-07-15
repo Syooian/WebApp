@@ -266,7 +266,7 @@ namespace MyModel_CodeFirst.Controllers
 //4.4   製作刪除留言功能
 //4.4.1 在BooksManageController加人中的DeleteReBook Action
 //4.4.2 將VCRebooks/Delete View的刪除鈕製作以Ajax方式刪除以保留頁面不整頁更新
-//4.4.3 撰寫Ajax程式以呼叫DeleteReBook Action
+//4.4.3 在Index View中撰寫Ajax程式以呼叫DeleteReBook Action
 //4.4.4 在BooksManageController中加入GetRebookByViewComponent Action
 //4.4.5 利用GetRebookByViewComponent Action局部更新畫面以顯示刪除後的回覆留言資料畫面
 //4.4.6 測試刪除回覆留言功能

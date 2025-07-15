@@ -170,6 +170,17 @@ namespace ModelCodeFirst.Controllers
             return Json(ReBook);
         }
 
+        //4.4.4
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="BookID"></param>
+        /// <returns></returns>
+        public IActionResult GetReBookByViewComponent(string BookID)
+        {
+            return ViewComponent("VC_ReBooks", new { BookID = BookID, IsDelete=true});
+        }
+        
         private bool BookExists(string id)
         {
             return _context.Book.Any(e => e.ID == id);

@@ -12,6 +12,7 @@ builder.Services.AddDbContext<GuestBookContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("GuestBookConnection")));
 
 
+
 /////////////////////////////////////////////////////////////////////
 var app = builder.Build();
 

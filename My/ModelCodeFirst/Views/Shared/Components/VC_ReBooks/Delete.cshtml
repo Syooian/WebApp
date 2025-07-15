@@ -9,7 +9,7 @@
         @foreach (var item in Model)
         {
             <div class="text-truncate">@Html.DisplayFor(modelItem => item.Description)</div>
-            <div class="text-end">@Html.DisplayFor(modelItem => item.Author) | @Html.DisplayFor(modelItem => item.CreatedDate) | <button class="btn btn-outline-danger btn-sm" onclick="DeleteReBook('@item.ReID')">刪除</button></div>
+            <div class="text-end">@Html.DisplayFor(modelItem => item.Author) | @Html.DisplayFor(modelItem => item.CreatedDate) | <button class="btn btn-outline-danger btn-sm" onclick="DeleteReBook('@item.ReID','@item.ID')">刪除</button></div>
             <hr />
         }
     </div>
