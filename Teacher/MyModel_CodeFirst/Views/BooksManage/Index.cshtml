@@ -54,7 +54,13 @@
 					@Html.DisplayFor(modelItem => item.CreatedDate)
 				</td>
 				<td class="bg-primary">
-					<a asp-action="Delete" asp-route-id="@item.BookID" class="btn btn-danger">刪除</a>
+					@* //4.4.8 將BooksManage/Index View的刪除按鈕改寫成表單傳送 *@
+					<form asp-action="Delete" method="post">
+						<input type="hidden" value="@item.BookID" name="id" />
+						<input type="submit" value="刪除" class="btn btn-danger" onclick="return confirm('確定要刪除此筆留言嗎?')" />
+					</form>
+
+					@* <a asp-action="Delete" asp-route-id="@item.BookID" class="btn btn-danger">刪除</a> *@
 				</td>
 			</tr>
 			//4.3.6 使用Bootstrap的Collapse Component來呈現留言資料

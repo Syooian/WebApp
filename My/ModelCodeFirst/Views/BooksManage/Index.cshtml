@@ -53,8 +53,11 @@
                 <td style="width:100px">
                     <img src="~/BookPhotos/@item.Photo" class="img-fluid" />
                 </td>
-                <td>
-                    <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger">刪除</a>
+                <td class="bg-primary">
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" value="@item.ID" name="id"/>
+                        <input type="submit" value="刪除" class="btn btn-danger" onclick="return confirm('確定要刪除此筆留言嗎?')" />
+                    </form>
                 </td>
             </tr>
             <tr>
