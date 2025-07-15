@@ -241,3 +241,43 @@
 * 4.4.8 將BooksManage/Index View的刪除按鈕改寫成表單傳送
 * 4.4.9 測試刪除主留言功能  
 ※這裡所製作的刪除會將有關聯的回覆留言資料一併刪除※
+
+## 5. 登入功能製作
+
+<p>5.1   資料庫變更</P>
+
+* 5.1.1 用Code-First方式在資料庫裡新增一個Login資料表存放管理者帳號密碼
+* 5.1.2 在Models資料夾裡建立Login類別做為模型
+* 5.1.3 Models資料夾上按右鍵→加入→類別，檔名取名為Login.cs，按下「新增」鈕
+* 5.1.4 設計Login類別的各屬性，包括名稱、資料類型及其相關的驗證規則及顯示名稱(DisplayName)
+* 5.1.5 修改GuestBookContext類別的內容，加入描述資料庫裡Login的資料表
+* 5.1.6 在套件管理器主控台(檢視 > 其他視窗 > 套件管理器主控台)下指令  
+※※※注意注意※※※ 請先確定專案是否正確  
+※※※注意注意※※※ 請先確定專案是否正確  
+※※※注意注意※※※ 請先確定專案是否正確
+    1. Add-Migration AddLoginTable
+    2. Update-database
+* 5.1.7 至SSMS中查看是否有成功建立Login資料表
+* 5.1.8 在Login資料表中建立一筆帳號密碼的資料(admin, 12345678)
+
+<p>5.2   製作Login功能與畫面</p>
+※※※ 這裡將運用 ASP.NET Core 身分驗證（Authentication）進行實作※※※ 
+
+* 5.2.1 在Controllers資料夾上按右鍵→加入→控制器
+* 5.2.2 選擇「MVC控制器-空白」→按下「加入」鈕
+* 5.2.3 檔名取名為「LoginController」→按下「新增」鈕
+* 5.2.4 建立Get與Post的Login Action
+* 5.2.5 建立Login View(Login Action中按右鍵→新增檢視→Razor檢視→按下「加入」鈕)
+    * 在對話方塊中設定如下
+    * 檢視稱：Login (使用預設名稱)
+    * 範本：Create
+    * 模型類別：Login(MyModel_CodeFirst.Models)
+    * 資料內容類別：GuestBookContext(MyModel_CodeFirst.Models)
+    * 不勾選「建立成局部檢視」
+    * 勾選「參考指令碼程式庫」
+    * 勾選「使用版面配置頁」
+* 5.2.6 在 Program.cs 註冊 Cookie Authentication
+* 5.2.7 在需要驗證的 Controller 或 Action 加上 [Authorize]
+* 5.2.8 測試登入
+* 5.2.9 建立登出 Action
+* 5.2.10 測試登出

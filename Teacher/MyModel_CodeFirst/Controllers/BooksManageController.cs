@@ -24,7 +24,7 @@ namespace MyModel_CodeFirst.Controllers
         public async Task<IActionResult> Index()
         {
 
-            return View(await _context.Book.ToListAsync());
+            return View(await _context.Book.OrderByDescending(b=>b.CreatedDate).ToListAsync());
         }
 
 

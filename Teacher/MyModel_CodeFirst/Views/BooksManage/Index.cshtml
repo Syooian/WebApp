@@ -33,7 +33,7 @@
 		{
 			//4.3.6 使用Bootstrap的Collapse Component來呈現留言資料
 			//4.3.7 將呈現回覆留言的id改為動態產生
-			<tr data-bs-toggle="collapse" data-bs-target="#B@(item.BookID)">
+            <tr data-bs-toggle="collapse" data-bs-target="#B@(item.BookID)">
 
 				<td style="max-width:100px" class="d-none d-md-table-cell">
 					@if (item.Photo != null)
@@ -53,7 +53,7 @@
 				<td>
 					@Html.DisplayFor(modelItem => item.CreatedDate)
 				</td>
-				<td class="bg-primary">
+				<td>
 					@* //4.4.8 將BooksManage/Index View的刪除按鈕改寫成表單傳送 *@
 					<form asp-action="Delete" method="post">
 						<input type="hidden" value="@item.BookID" name="id" />
@@ -81,6 +81,8 @@
 @* //4.4.3 在Index View中撰寫Ajax程式以呼叫DeleteReBook Action *@
 @section Scripts {
 	<script>
+		
+
 		function delReBook(reBookId, bookID){
 
 			//console.log(reBookId);

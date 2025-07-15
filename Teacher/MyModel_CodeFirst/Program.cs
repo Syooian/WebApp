@@ -12,6 +12,12 @@ builder.Services.AddDbContext<GuestBookContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("GuestBookConnection")));
 
 
+builder.Services.AddAuthentication("MyCookieAuth")
+    .AddCookie("MyCookieAuth", options =>
+    {
+        options.LoginPath = "/Login/Login";
+        options.LogoutPath = "/Login/Logout";
+    });
 
 /////////////////////////////////////////////////////////////////////
 var app = builder.Build();
