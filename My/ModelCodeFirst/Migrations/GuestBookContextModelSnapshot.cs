@@ -62,6 +62,20 @@ namespace ModelCodeFirst.Migrations
                     b.ToTable("Book");
                 });
 
+            modelBuilder.Entity("ModelCodeFirst.Models.Login", b =>
+                {
+                    b.Property<string>("Account")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Account");
+
+                    b.ToTable("Login");
+                });
+
             modelBuilder.Entity("ModelCodeFirst.Models.ReBook", b =>
                 {
                     b.Property<string>("ReID")

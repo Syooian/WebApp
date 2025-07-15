@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MyModel_CodeFirst.Models;
+using ModelCodeFirst.Models;
 
 #nullable disable
 
-namespace MyModel_CodeFirst.Migrations
+namespace ModelCodeFirst.Migrations
 {
     [DbContext(typeof(GuestBookContext))]
-    partial class GuestBookContextModelSnapshot : ModelSnapshot
+    [Migration("20250715025630_AddLoginTable")]
+    partial class AddLoginTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,16 +25,19 @@ namespace MyModel_CodeFirst.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("MyModel_CodeFirst.Models.Book", b =>
+            modelBuilder.Entity("ModelCodeFirst.Models.Book", b =>
                 {
-                    b.Property<string>("BookID")
+                    b.Property<string>("ID")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar(36)")
+                        .HasDefaultValue("False");
 
                     b.Property<string>("Author")
                         .IsRequired()
                         .HasMaxLength(20)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<DateTime>("CreatedDate")
@@ -39,81 +45,77 @@ namespace MyModel_CodeFirst.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Photo")
                         .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(40)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(50)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("BookID")
+                    b.HasKey("ID")
                         .HasName("PK_BookID");
 
                     b.ToTable("Book");
                 });
 
-            modelBuilder.Entity("MyModel_CodeFirst.Models.Login", b =>
+            modelBuilder.Entity("ModelCodeFirst.Models.Login", b =>
                 {
                     b.Property<string>("Account")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Account");
 
                     b.ToTable("Login");
                 });
 
-            modelBuilder.Entity("MyModel_CodeFirst.Models.ReBook", b =>
+            modelBuilder.Entity("ModelCodeFirst.Models.ReBook", b =>
                 {
-                    b.Property<string>("ReBookID")
-                        .HasMaxLength(36)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(36)");
+                    b.Property<string>("ReID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Author")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("BookID")
-                        .IsRequired()
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ReBookID");
+                    b.Property<string>("ID")
+                        .HasColumnType("varchar(36)");
 
-                    b.HasIndex("BookID");
+                    b.HasKey("ReID")
+                        .HasName("PK_ReBookID");
+
+                    b.HasIndex("ID");
 
                     b.ToTable("ReBook");
                 });
 
-            modelBuilder.Entity("MyModel_CodeFirst.Models.ReBook", b =>
+            modelBuilder.Entity("ModelCodeFirst.Models.ReBook", b =>
                 {
-                    b.HasOne("MyModel_CodeFirst.Models.Book", "Book")
+                    b.HasOne("ModelCodeFirst.Models.Book", "Book")
                         .WithMany("ReBooks")
-                        .HasForeignKey("BookID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ID");
 
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("MyModel_CodeFirst.Models.Book", b =>
+            modelBuilder.Entity("ModelCodeFirst.Models.Book", b =>
                 {
                     b.Navigation("ReBooks");
                 });
