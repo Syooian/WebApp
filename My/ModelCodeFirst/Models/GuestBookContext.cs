@@ -26,6 +26,10 @@ namespace ModelCodeFirst.Models
         /// 留言回覆資料表
         /// </summary>
         public virtual DbSet<ReBook> ReBook { get; set; }
+        /// <summary>
+        /// 帳號資料表
+        /// </summary>
+        public virtual DbSet<Login> Login { get; set; }
         #endregion
 
         /// <summary>
