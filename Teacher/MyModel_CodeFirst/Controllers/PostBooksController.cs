@@ -10,7 +10,7 @@ using MyModel_CodeFirst.Models;
 
 namespace MyModel_CodeFirst.Controllers
 {
-    [Authorize(Roles = "Member")]
+
     public class PostBooksController : Controller
     {
         private readonly GuestBookContext _context;
@@ -19,6 +19,16 @@ namespace MyModel_CodeFirst.Controllers
         {
             _context = context;
         }
+
+        //6.1.1 在PostBooksController裡寫一個會發生例外的Action如下
+        public IActionResult ExceptionTest()
+        {
+            int a = 0;
+            
+            int s = 100 / a;  //會發生除以0的例外
+            return View();
+        }
+
 
         // GET: Books
         public async Task<IActionResult> Index()

@@ -96,3 +96,9 @@ site.css, site.js檔：寫自定義內容，不要去改原始的css和js檔
 # ASP.NET權限管理
 * Identity框架：極度複雜使用
 * Authentication：最基本權限管理
+
+# 命名慣例
+* 沒有Action的View，前面加上底線
+	* _Layout.cshtml
+* 有Action的View，前面不加底線
+	* Error.cshtml

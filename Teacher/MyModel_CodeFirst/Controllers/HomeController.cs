@@ -27,10 +27,8 @@ namespace MyModel_CodeFirst.Controllers
             return View(result);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        public IActionResult Privacy()=>View();
+       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -327,3 +325,20 @@ namespace MyModel_CodeFirst.Controllers
 //※※※補充：多角色或多層次權限的處理方式※※※
 
 
+//6     基本的錯誤處理(Error Handle)
+//6.1   測試:故意讓程式發生例外看看結果
+//6.1.1 在PostBooksController裡寫一個會發生例外的Action如下
+//public IActionResult ExceptionTest()
+//{
+//    int a = 0;
+//    int s = 100 / a;
+//    return View();
+//}
+//6.1.2 利用原本預設的Home Controller Error Handler來處理例外
+//6.1.3 修改 Program.cs中的程式碼，將是否在開發模式下的錯誤處理判斷註解掉
+//6.1.4 測試:再次故意讓程式發生例外看看結果
+//6.1.5 修改Error.cshtml內容
+//6.2   測試:故意讓程式發生HttpNotFound(404)錯誤
+//6.2.1 在Program.cs中的程式碼註冊處理HttpNotFound(404)錯誤的Error Handler
+//6.2.2 測試:再次故意讓程式發生HttpNotFound(404)錯誤
+//      ※最基本的錯誤處理，就是不讓使用者看到系統錯誤訊息※
