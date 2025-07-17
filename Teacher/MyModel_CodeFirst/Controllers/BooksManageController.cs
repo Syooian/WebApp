@@ -12,7 +12,7 @@ using MyModel_CodeFirst.Models;
 namespace MyModel_CodeFirst.Controllers
 {
     //5.2.7 在需要驗證的 Controller 或 Action 加上 [Authorize]
-    [Authorize]
+    [Authorize(Roles ="Manager")]
     public class BooksManageController : Controller
     {
         private readonly GuestBookContext _context;

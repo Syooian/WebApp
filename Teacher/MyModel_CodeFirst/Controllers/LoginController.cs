@@ -1,10 +1,12 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyModel_CodeFirst.Models;
 
 namespace MyModel_CodeFirst.Controllers
 {
+   
     public class LoginController : Controller
     {
         private readonly GuestBookContext _context;
@@ -14,11 +16,13 @@ namespace MyModel_CodeFirst.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
+     
         [HttpPost]
         public async Task<IActionResult> Login(Login login) // 修改方法為非同步，並將回傳型別改為 Task<IActionResult>
         {
@@ -44,7 +48,7 @@ namespace MyModel_CodeFirst.Controllers
             return View(login);
         }
 
-
+        [Authorize]
         //5.2.9 建立登出 Action
         public async Task<IActionResult> Logout()
         {

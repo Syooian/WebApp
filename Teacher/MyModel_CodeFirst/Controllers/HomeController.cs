@@ -1,10 +1,12 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyModel_CodeFirst.Models;
 
 namespace MyModel_CodeFirst.Controllers
 {
+  
     public class HomeController : Controller
     {
         private readonly GuestBookContext _context;
