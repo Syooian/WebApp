@@ -16,6 +16,8 @@ namespace MyModel_CodeFirst.Models
         public virtual DbSet<Book> Book { get; set; } //Book資料表
         public virtual DbSet<ReBook> ReBook { get; set; } //ReBook資料表
 
+        //5.1.5 修改GuestBookContext類別的內容，加入描述資料庫裡Login的資料表
+        public virtual DbSet<Login> Login { get; set; } //Login資料表
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

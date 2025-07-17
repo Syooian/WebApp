@@ -51,7 +51,7 @@
 <hr /><!--------------------------------------------------回覆留言框-------------------------------------------------->
 
 <div id="ReBookList">
-    @await Component.InvokeAsync("VC_ReBooks", new { ID = Model.ID })
+    @await Component.InvokeAsync("VC_ReBooks", new { ID = Model.ID, IsDelete=false })
 </div>
 
 <hr />

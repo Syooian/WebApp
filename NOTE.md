@@ -87,3 +87,18 @@ ViewComponents：將View的取得當成一個小組件
 使用NuGet安裝Bootstrap後，需手動至NuGet的Package下將Bootstrap和jQuery的檔案複製到專案內（因為.NET Core的問題）
 
 site.css, site.js檔：寫自定義內容，不要去改原始的css和js檔
+
+# 資料庫連動刪除
+
+* on delete no action：不允許刪除父表中的資料，除非先移除或更新子表中對應的外鍵參考。
+* on delete cascade：刪除父表紀錄時，子表中與之相關的資料會自動刪除，避免孤兒資料
+
+# ASP.NET權限管理
+* Identity框架：極度複雜使用
+* Authentication：最基本權限管理
+
+# 命名慣例
+* 沒有Action的View，前面加上底線
+	* _Layout.cshtml
+* 有Action的View，前面不加底線
+	* Error.cshtml

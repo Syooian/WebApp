@@ -1,10 +1,12 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyModel_CodeFirst.Models;
 
 namespace MyModel_CodeFirst.Controllers
 {
+  
     public class HomeController : Controller
     {
         private readonly GuestBookContext _context;
@@ -25,10 +27,8 @@ namespace MyModel_CodeFirst.Controllers
             return View(result);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        public IActionResult Privacy()=>View();
+       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -266,7 +266,7 @@ namespace MyModel_CodeFirst.Controllers
 //4.4   製作刪除留言功能
 //4.4.1 在BooksManageController加人中的DeleteReBook Action
 //4.4.2 將VCRebooks/Delete View的刪除鈕製作以Ajax方式刪除以保留頁面不整頁更新
-//4.4.3 撰寫Ajax程式以呼叫DeleteReBook Action
+//4.4.3 在Index View中撰寫Ajax程式以呼叫DeleteReBook Action
 //4.4.4 在BooksManageController中加入GetRebookByViewComponent Action
 //4.4.5 利用GetRebookByViewComponent Action局部更新畫面以顯示刪除後的回覆留言資料畫面
 //4.4.6 測試刪除回覆留言功能
@@ -274,3 +274,71 @@ namespace MyModel_CodeFirst.Controllers
 //4.4.8 將BooksManage/Index View的刪除按鈕改寫成表單傳送
 //4.4.9 測試刪除主留言功能
 //      ※這裡所製作的刪除會將有關聯的回覆留言資料一併刪除※
+
+
+
+//5   登入登出功能製作
+
+//5.1   資料庫變更
+//5.1.1 用Code-First方式在資料庫裡新增一個Login資料表存放管理者帳號密碼
+//5.1.2 在Models資料夾裡建立Login類別做為模型
+//5.1.3 Models資料夾上按右鍵→加入→類別，檔名取名為Login.cs，按下「新增」鈕
+//5.1.4 設計Login類別的各屬性，包括名稱、資料類型及其相關的驗證規則及顯示名稱(DisplayName)
+//5.1.5 修改GuestBookContext類別的內容，加入描述資料庫裡Login的資料表
+//5.1.6 在套件管理器主控台(檢視 > 其他視窗 > 套件管理器主控台)下指令
+//      ※※※注意注意※※※ 請先確定專案是否正確
+//      ※※※注意注意※※※ 請先確定專案是否正確
+//      ※※※注意注意※※※ 請先確定專案是否正確
+//      (1)Add-Migration AddLoginTable
+//      (2)Update-database
+//5.1.7 至SSMS中查看是否有成功建立Login資料表
+//5.1.8 在Login資料表中建立一筆帳號密碼的資料(admin, 12345678)
+
+
+
+//5.2   製作Login功能與畫面
+//      ※※※ 這裡將運用 ASP.NET Core 身分驗證（Authentication）進行實作※※※ 
+//5.2.1 在Controllers資料夾上按右鍵→加入→控制器
+//5.2.2 選擇「MVC控制器-空白」→按下「加入」鈕
+//5.2.3 檔名取名為「LoginController」→按下「新增」鈕
+//5.2.4 建立Get與Post的Login Action
+//5.2.5 建立Login View(Login Action中按右鍵→新增檢視→Razor檢視→按下「加入」鈕)
+//      在對話方塊中設定如下
+//      檢視稱: Login (使用預設名稱)
+//      範本: Create
+//      模型類別: Login(MyModel_CodeFirst.Models)
+//      資料內容類別: GuestBookContext(MyModel_CodeFirst.Models)
+//      不勾選 建立成局部檢視
+//      勾選 參考指令碼程式庫
+//      勾選 使用版面配置頁
+//5.2.6 在 Program.cs 註冊 Cookie Authentication
+//5.2.7 在需要驗證的 Controller 或 Action 加上 [Authorize]
+//5.2.8 測試登入
+//5.2.9 建立登出 Action
+//5.2.10 測試登出
+
+
+//5.3   配合登出登入功能進行畫面設計
+//5.3.1 在_ViewStart.cshtml中加入前台及後台使用不同Layout的判斷式
+//5.3.2 在_UserLayout.cshtml中加入登入後台的按鈕(這個在實務上基本上不會做)
+//5.3.3 測試
+//※※※補充：多角色或多層次權限的處理方式※※※
+
+
+//6     基本的錯誤處理(Error Handle)
+//6.1   測試:故意讓程式發生例外看看結果
+//6.1.1 在PostBooksController裡寫一個會發生例外的Action如下
+//public IActionResult ExceptionTest()
+//{
+//    int a = 0;
+//    int s = 100 / a;
+//    return View();
+//}
+//6.1.2 利用原本預設的Home Controller Error Handler來處理例外
+//6.1.3 修改 Program.cs中的程式碼，將是否在開發模式下的錯誤處理判斷註解掉
+//6.1.4 測試:再次故意讓程式發生例外看看結果
+//6.1.5 修改Error.cshtml內容
+//6.2   測試:故意讓程式發生HttpNotFound(404)錯誤
+//6.2.1 在Program.cs中的程式碼註冊處理HttpNotFound(404)錯誤的Error Handler
+//6.2.2 測試:再次故意讓程式發生HttpNotFound(404)錯誤
+//      ※最基本的錯誤處理，就是不讓使用者看到系統錯誤訊息※

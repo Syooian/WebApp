@@ -12,11 +12,21 @@ namespace ModelCodeFirst.ViewComponent
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string ID)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="IsDelete"></param>
+        /// <returns></returns>
+        public async Task<IViewComponentResult> InvokeAsync(string ID, bool IsDelete = false)
         {
             Console.WriteLine($"ID：{ID}");
 
             var Result = await _context.ReBook.Where(R => R.ID == ID).OrderByDescending(R => R.CreatedDate).ToListAsync();
+
+            if (IsDelete)
+                return View("Delete", Result);
+
             return View(Result);
             //return View(await Task.FromResult(new List<ReBook>()));
         }

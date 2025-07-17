@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyModel_CodeFirst.Models;
 
@@ -11,9 +12,11 @@ using MyModel_CodeFirst.Models;
 namespace MyModel_CodeFirst.Migrations
 {
     [DbContext(typeof(GuestBookContext))]
-    partial class GuestBookContextModelSnapshot : ModelSnapshot
+    [Migration("20250715025608_AddLoginTable")]
+    partial class AddLoginTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
