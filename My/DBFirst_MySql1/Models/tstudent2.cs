@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace DBFirst_MySql1.Models;
+
+public partial class tstudent2
+{
+    /// <summary>
+    /// 學號
+    /// </summary>
+    public string fStuId { get; set; } = null!;
+
+    /// <summary>
+    /// 分數
+    /// </summary>
+    public int? fScore { get; set; }
+
+    /// <summary>
+    /// 科系ID
+    /// </summary>
+    public string DeptID { get; set; } = null!;
+
+    public virtual department Dept { get; set; } = null!;
+}
