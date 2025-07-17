@@ -35,13 +35,24 @@ namespace MyModel_CodeFirst.Controllers
 
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
-                //await HttpContext.SignInAsync("ManagerLogin", claimsPrincipal); //把資料寫入 Cookie 進行登入狀態管理
+                await HttpContext.SignInAsync("ManagerLogin", claimsPrincipal); //把資料寫入 Cookie 進行登入狀態管理
 
                 return RedirectToAction("Index", "BooksManage"); // 登入成功後導向到 BooksManage 的 Index 頁面
             }
 
             ViewData["Error"] = "帳號或密碼錯誤，請重新輸入";
             return View(login);
+        }
+
+
+        //5.2.9 建立登出 Action
+        public async Task<IActionResult> Logout()
+        {
+
+            await HttpContext.SignOutAsync("ManagerLogin");// 清除登入狀態(清除Cookie的ManagerLogin紀錄)
+            return RedirectToAction("Login", "Login"); // 登出後導向到 Login 頁面
+
+
         }
     }
 }

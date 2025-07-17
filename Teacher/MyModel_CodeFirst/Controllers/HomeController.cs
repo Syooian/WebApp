@@ -316,3 +316,12 @@ namespace MyModel_CodeFirst.Controllers
 //5.2.8 測試登入
 //5.2.9 建立登出 Action
 //5.2.10 測試登出
+
+
+//5.3   配合登出登入功能進行畫面設計
+//5.3.1 在_ViewStart.cshtml中加入前台及後台使用不同Layout的判斷式
+//5.3.2 在_UserLayout.cshtml中加入登入後台的按鈕(這個在實務上基本上不會做)
+//5.3.3 測試
+//※※※補充：多角色或多層次權限的處理方式※※※
+
+

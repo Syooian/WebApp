@@ -11,7 +11,8 @@ using MyModel_CodeFirst.Models;
 
 namespace MyModel_CodeFirst.Controllers
 {
-
+    //5.2.7 在需要驗證的 Controller 或 Action 加上 [Authorize]
+    [Authorize]
     public class BooksManageController : Controller
     {
         private readonly GuestBookContext _context;
@@ -21,14 +22,14 @@ namespace MyModel_CodeFirst.Controllers
             _context = context;
         }
 
-        // GET: BooksManage
+
         public async Task<IActionResult> Index()
         {
 
             return View(await _context.Book.OrderByDescending(b => b.CreatedDate).ToListAsync());
         }
 
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string id)

@@ -11,6 +11,16 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<GuestBookContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("GuestBookConnection")));
 
+//5.2.6 在 Program.cs 註冊 Cookie Authentication
+builder.Services.AddAuthentication("ManagerLogin").AddCookie("ManagerLogin", options =>
+    {
+        options.LoginPath = "/Login/Login"; // 設定登入頁面路徑
+        options.LogoutPath = "/Login/Logout"; // 設定登出頁面路徑
+        //options.AccessDeniedPath = "/Home/Index"; // 設定存取拒絕頁面路徑
+    });
+
+
+
 
 /////////////////////////////////////////////////////////////////////
 var app = builder.Build();

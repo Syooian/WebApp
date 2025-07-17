@@ -1,3 +1,21 @@
 ﻿@{
-    Layout = "_Layout";
+
+	if (User.IsInRole("Manager"))
+	{
+		Layout = "_Layout";
+	}
+	else if (User.IsInRole("Administrator"))
+	{
+		Layout = "_AdminLayout";
+	}
+	else if (User.IsInRole("Member"))
+	{
+		Layout = "_MemberLayout";
+	}
+	else
+	{
+		Layout = "_UserLayout";
+	}
+
+
 }
