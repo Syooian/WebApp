@@ -4,7 +4,9 @@
 
 namespace MyWebAPI.Controllers
 {
-    [Route("api/[controller]")]
+
+    //1.3.3 修改ValuesController的路由介接位址並測試 ([Route("api/[controller]")])
+    [Route("api[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {

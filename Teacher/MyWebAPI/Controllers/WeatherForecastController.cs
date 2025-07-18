@@ -54,3 +54,12 @@ namespace MyWebAPI.Controllers
 //      ※Swagger是由一家叫SmartBear的公司所發行，屬於無償使用的OpenAPI套件，以使用於API開發時的測試※
 //      ※以往開發多使用Postman這個軟體進行API測試，目前Swagger成為主流※
 //      ※若建立專案時為WebAPI專案並勾選Open API，Swagger將直接安裝在專案上※  
+
+
+//1.3   使用Swagger Tool來進行ValuesController API的操作測試
+//1.3.1 修改Get Action的內容並測試
+//1.3.2 進行增加Action、修改介接口等測試
+//1.3.3 修改ValuesController的路由介接位址並測試 ([Route("api/[controller]")])
+//      ※Web API因為沒有UI，利用瀏覽器只能就Get的動作進行測試，無法對Post、Put及Delete的動作進行測試※ 
+//      ※還有一個強大的API軟體叫Postman，以前還沒有Swagger時大都是用Postman進行測試※
+//      ※因此這裡的操作目的是熟悉Swagger的用法，以利Web API在開發時能使用它來進行測試※

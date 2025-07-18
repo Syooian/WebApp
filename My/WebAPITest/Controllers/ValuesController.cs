@@ -4,7 +4,11 @@
 
 namespace WebAPITest.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]")]//路由界接位址
+    /**
+     * [Route("api/[controller]")]：localhost:xxxx/api/Values
+     * [Route("[controller]"：localhost:xxxx/Values
+     */
     [ApiController]
     public class ValuesController : ControllerBase
     {
