@@ -102,3 +102,7 @@ site.css, site.js檔：寫自定義內容，不要去改原始的css和js檔
 	* _Layout.cshtml
 * 有Action的View，前面不加底線
 	* Error.cshtml
+
+# ASP.NET Core Web API
+* 啟用OpenAPI支援
+* 使用控制器
