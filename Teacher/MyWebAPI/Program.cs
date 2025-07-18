@@ -16,6 +16,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+//2.1.3 在Program.cs中加入app.UseStaticFiles(); (因為我們開的是 純WebAPI專案)
+app.UseStaticFiles();
+
 app.UseAuthorization();
 
 app.MapControllers();
