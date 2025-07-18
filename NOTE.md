@@ -106,3 +106,9 @@ site.css, site.js檔：寫自定義內容，不要去改原始的css和js檔
 # ASP.NET Core Web API
 * 啟用OpenAPI支援
 * 使用控制器
+
+# REST撰寫風格
+* Get
+* Post
+* Put
+* Delete

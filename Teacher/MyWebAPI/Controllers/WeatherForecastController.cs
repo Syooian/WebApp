@@ -31,3 +31,26 @@ namespace MyWebAPI.Controllers
         }
     }
 }
+
+
+
+
+//1     製作我的第一個Web API(Restful API)
+
+//1.1   建立CRUD API Ccontroller 
+//1.1.1 在Controllers資料夾上按右鍵→加入→控制器
+//1.1.2 左側選單點選「API」→ 中間主選單選擇「執行讀取/寫入動作的API控制器」→按下「加入」鈕
+//1.1.3 檔名使用預設的ValuesController.cs 即可，按下「新增」鈕
+//      ※我們會得到一個已經撰寫好基本CRUD架構的API Ccontroller※
+//      ※該Ccontroller的撰寫風格符合Rest，使用Get、Get/{id}、Post、Put、Delete 進行各項動作※
+
+
+//1.2   安裝Swagger Tool(如果有需要的話)
+//1.2.1 使用NuGet(專案名稱上按右鍵→管理NuGet套件)安裝Swashbuckle.AspNetCore套件
+//1.2.2 在Program.cs中註冊及啟用Swagger
+//1.2.3 安裝完後請執行本專案讓伺服器執行
+//1.2.4 在網址列輸入http://localhost:xxxx/swagger/index.html (其中xxxx是您的port)
+//1.2.5 測試及瞭解Swagger
+//      ※Swagger是由一家叫SmartBear的公司所發行，屬於無償使用的OpenAPI套件，以使用於API開發時的測試※
+//      ※以往開發多使用Postman這個軟體進行API測試，目前Swagger成為主流※
+//      ※若建立專案時為WebAPI專案並勾選Open API，Swagger將直接安裝在專案上※  
