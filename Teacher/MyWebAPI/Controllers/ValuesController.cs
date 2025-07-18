@@ -14,14 +14,18 @@ namespace MyWebAPI.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            //1.3.1 修改Get Action的內容並測試
+            return new string[] { "超級無敵海景佛跳牆", "清香白玉板紅嘴綠鸚鴿", "玉笛誰家聽落梅" };
         }
 
         // GET api/<ValuesController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            string[] items= { "超級無敵海景佛跳牆", "清香白玉板紅嘴綠鸚鴿", "玉笛誰家聽落梅" };
+            
+
+            return items[id];
         }
 
         // POST api/<ValuesController>

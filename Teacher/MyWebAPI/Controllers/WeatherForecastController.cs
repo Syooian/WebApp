@@ -63,3 +63,16 @@ namespace MyWebAPI.Controllers
 //      ※Web API因為沒有UI，利用瀏覽器只能就Get的動作進行測試，無法對Post、Put及Delete的動作進行測試※ 
 //      ※還有一個強大的API軟體叫Postman，以前還沒有Swagger時大都是用Postman進行測試※
 //      ※因此這裡的操作目的是熟悉Swagger的用法，以利Web API在開發時能使用它來進行測試※
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+///
+
+//2     範例專案開發準備
+
+//2.1   利用素材建利範例專案環境
+//2.1.1 建立GoodStore範例資料庫
+//2.1.2 將ProductPhotos資料夾及內含之檔案放至專案中的wwwroot下
+//2.1.3 在Program.cs中加入app.UseStaticFiles(); (因為我們開的是 純WebAPI專案)
+//2.1.4 在瀏覽器中輸入「http://localhost:XXXX/ProductPhotos/A3001.jpg」(XXXX為您的port)測試是否能看到照片

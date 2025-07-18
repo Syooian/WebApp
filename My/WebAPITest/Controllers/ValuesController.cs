@@ -12,24 +12,27 @@ namespace WebAPITest.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        string[] ReturnArray = { "アマガミ", "涼宮ハルヒ", "響けユーフォニアム" };
+
         // GET: api/<ValuesController>
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return ReturnArray;
         }
 
         // GET api/<ValuesController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            return ReturnArray[id];
         }
 
         // POST api/<ValuesController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
+            //[FromBody]：從Body裡送資料
         }
 
         // PUT api/<ValuesController>/5
