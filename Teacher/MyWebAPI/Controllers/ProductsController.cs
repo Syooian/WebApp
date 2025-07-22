@@ -29,9 +29,21 @@ namespace MyWebAPI.Controllers
             //4.1.3 使用Where()改變查詢的條件並測試
             //4.1.4 使用OrderBy()相關排序方法改變資料排序並測試
 
-            var products = await _context.Product.Include(c => c.Cate).Where(p=>p.Price>= price)
-                .OrderBy(p=>p.Price).ToListAsync();
+            //var products = await _context.Product.Include(c => c.Cate).Where(p=>p.Price>= price)
+            //    .OrderBy(p=>p.Price).ToListAsync();
 
+            //4.1.5 使用Select()抓取特定的欄位並測試
+            var products = await _context.Product.Include(c => c.Cate).Where(p => p.Price >= price)
+                .OrderBy(p => p.Price).Select(p => new { 
+                    p.ProductID,
+                    p.ProductName,
+                    p.Price,
+                    p.Description,
+                    p.Picture,
+                    p.CreatedDate,
+                    p.CateID,
+                    p.Cate.CateName 
+                }).ToListAsync();
 
 
             return products;
