@@ -23,9 +23,17 @@ namespace MyWebAPI.Controllers
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
+        public async Task<ActionResult<IEnumerable<Product>>> GetProduct(decimal price=0)
         {
-            return await _context.Product.ToListAsync();
+            //4.1.2 使用Include()同時取得關聯資料
+            //4.1.3 使用Where()改變查詢的條件並測試
+            //4.1.4 使用OrderBy()相關排序方法改變資料排序並測試
+
+            var products = await _context.Product.Include(c => c.Cate).Where(p=>p.Price>= price).OrderBy(p=>p.Price).ToListAsync();
+
+
+
+            return products;
         }
 
         // GET: api/Products/5
