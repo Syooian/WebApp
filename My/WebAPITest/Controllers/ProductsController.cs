@@ -22,21 +22,16 @@ namespace WebAPITest.Controllers
         }
 
         // GET: api/Products
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
-        {
-            return await _context.Product.ToListAsync();
-        }
-
         /// <summary>
         /// 
         /// </summary>
         /// <param name="Price">價格</param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProduct(decimal Price)
+        public async Task<ActionResult<IEnumerable<Product>>> GetProduct(decimal Price = 0)
         {
-            var Products = await _context.Product.Include(C => C.Cate).Where(P => P.Price >= Price).OrderBy(P => P.Price).ToListAsync();
+            var Products = await _context.Product.ToListAsync();
+            //var Products = await _context.Product.Include(C => C.Cate).Where(P => P.Price >= Price).OrderBy(P => P.Price).ToListAsync();
 
             return Products;
         }

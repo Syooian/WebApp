@@ -91,3 +91,24 @@ Scaffold-DbContext "Data Source=伺服器位址;Database=GoodStore;TrustServerCe
 * [FromQuery]：將URL中的參數綁定到Action的參數上，當你希望從 URL 的取得資料時使用。
 * [FromHeader]：將HTTP請求中的標頭值綁定到Action的參數上，適合從Request Header中取得資料，例如Authentication Token、Client端資訊等。
 * [FromRoute]：將URL路由中的參數綁定到Action的參數上，當URL的某部分是動態的，需要取得這些路由參數時使用。
+
+## 4. 使用Get取得資料
+
+<p>4.1   取得資料清單(ProductsController裡的第一個Get Action)</p>
+
+* 4.1.1 先使用Swagger測試及觀查目前Product的資料取得狀況
+* 4.1.2 使用Include()同時取得關聯資料
+* 4.1.3 使用Where()改變查詢的條件並測試
+* 4.1.4 使用OrderBy()相關排序方法改變資料排序並測試
+* 4.1.5 使用Select()抓取特定的欄位並測試
+* 4.1.6 使用Swagger測試及觀查目前Product的資料取得狀況，並進行上述相關測試  
+※這裡有一些重要的觀念必須解釋及透過實作來加強印象，尤其資料表之間的關聯特性將會影響實作的方式※  
+※發生循環參照時可使用JsonIgnore來解決※
+
+<p>4.2   使用DTO(Data Transfer Object)資料傳輸物件</p>
+
+* 4.2.1 建立DTOs資料夾(這個步驟可視需求而定)來放置相關檔案
+* 4.2.2 建立ProductDTO類別
+* 4.2.3 改寫ProductsController裡的Get Action
+* 4.2.4 使用Swagger測試  
+※想要抓取特定欄位最典型的方法就是使用DTO來傳輸※

@@ -18,8 +18,4 @@ public partial class Product
     public DateTime CreatedDate { get; set; }
 
     public string CateID { get; set; } = null!;
-
-    public virtual Category Cate { get; set; } = null!;
-
-    public virtual ICollection<OrderDetail> OrderDetail { get; set; } = new List<OrderDetail>();
 }
