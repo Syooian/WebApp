@@ -9,7 +9,8 @@ using MyWebAPI.Models;
 
 namespace MyWebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    //3.1.4 修改API介接路由為「api[controller]」
+    [Route("api[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
