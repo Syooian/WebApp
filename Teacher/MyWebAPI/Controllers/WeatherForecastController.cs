@@ -88,3 +88,19 @@ namespace MyWebAPI.Controllers
 //      若成功的話，會看到Build succeeded.字眼，並在Models資料夾裡看到GoodStoreContext.cs、Category.cs、Product.cs等資料庫相關類別檔
 //2.2.4 在appsettings.json檔中撰寫連線字串(ConnectionString)
 //2.2.5 在Program.cs註冊DbContext物件(GoodStoreContext.cs)並指定appsettings.json中的連線字串程式碼(這段必須寫在var builder這行後面)
+
+
+/////////////////////////////////////////////////////////////////////////////
+
+
+//3     製作具CRUD 的 Restful API(Web API)
+
+//3.1   建立Category資料的 API Ccontroller 
+//3.1.1 在Controllers資料夾上按右鍵→加入→控制器
+//3.1.2 左側選單點選「API」→ 中間主選單選擇「使用Entity Framework執行動作的API控制器」→按下「加入」鈕
+//3.1.3 在對話方塊中設定如下
+//      模型類別: Category(MyStoreAPI.Models)
+//      資料內容類別: GoodStoreContext(MyStoreAPI.Models)
+//      控制器名稱使用預設即可(CategoriesController)
+//      按下「新增」鈕
+//3.1.4 修改API介接路由為「api[controller]」
