@@ -66,3 +66,28 @@ Scaffold-DbContext "Data Source=伺服器位址;Database=GoodStore;TrustServerCe
     * 控制器名稱使用預設即可(CategoriesController)
     * 按下「新增」鈕
 * 3.1.4 修改API介接路由為「**api[controller]**」
+
+<p>3.2   建立Product資料的 API Ccontroller </p>
+
+* 3.2.1 在Controllers資料夾上按右鍵→加入→控制器
+* 3.2.2 左側選單點選「API」→ 中間主選單選擇「使用Entity Framework執行動作的API控制器」→按下「加入」鈕
+* 3.2.3 在對話方塊中設定如下
+    * 模型類別：Product(MyStoreAPI.Models)
+    * 資料內容類別：GoodStoreContext(MyStoreAPI.Models)
+    * 控制器名稱使用預設即可(ProductsController)
+    * 按下「新增」鈕
+* 3.2.4 修改API介接路由為「**api[controller]**」  
+※使用Swagger Tool分別對上面兩個 API進行操作測試※
+
+<p>3.3   資料接收來源</p>
+
+* 3.3.1 以Swagger測試查看目前CategoriesController及ProductsController的資料來源
+* 3.3.2 將CategoriesController及ProductsController中的Action參數改變資料接收來源並以Swagger測試及交叉比較  
+※資料接收來源的觀念很重要，必須配合實作的測試，透過Swagger觀查變化，就能知道使用時機※
+
+### ※補充說明※
+* [FromBody]：HTTP 請求的主體內容(Body)綁定到Action的參數上，通常用於取得JSON、XML或其他格式的文字資料。
+* [FromForm]：將來自HTTP請求主體的表單資料綁定到Action的參數上，常用於接收來自表單form提交的資料，例如 application/x-www-form-urlencoded 或 multipart/form-data。
+* [FromQuery]：將URL中的參數綁定到Action的參數上，當你希望從 URL 的取得資料時使用。
+* [FromHeader]：將HTTP請求中的標頭值綁定到Action的參數上，適合從Request Header中取得資料，例如Authentication Token、Client端資訊等。
+* [FromRoute]：將URL路由中的參數綁定到Action的參數上，當URL的某部分是動態的，需要取得這些路由參數時使用。
