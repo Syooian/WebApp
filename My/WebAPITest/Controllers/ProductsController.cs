@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPITest.Data;
+using WebAPITest.DTOs;
 using WebAPITest.Models;
 
 namespace WebAPITest.Controllers
@@ -28,10 +29,22 @@ namespace WebAPITest.Controllers
         /// <param name="Price">價格</param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProduct(decimal Price = 0)
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct(decimal Price = 0)
         {
-            var Products = await _context.Product.ToListAsync();
-            //var Products = await _context.Product.Include(C => C.Cate).Where(P => P.Price >= Price).OrderBy(P => P.Price).ToListAsync();
+            var Products = await _context.Product
+                .Include(C => C.Cate)
+                .Where(P => P.Price >= Price)
+                .OrderBy(P => P.Price)
+                .Select(P => new ProductDTO
+                {
+                    ProductID = P.ProductID,
+                    ProductName = P.ProductName,
+                    Price = P.Price,
+                    Description = P.Description,
+                    Picture = P.Picture,
+                    CateID = P.CateID,
+                    CateName = P.Cate.CateName
+                }).ToListAsync();
 
             return Products;
         }

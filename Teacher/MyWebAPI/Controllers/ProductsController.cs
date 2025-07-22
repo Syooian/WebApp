@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MyWebAPI.DTOs;
 using MyWebAPI.Models;
 
 namespace MyWebAPI.Controllers
@@ -23,7 +24,7 @@ namespace MyWebAPI.Controllers
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProduct(decimal price=0)
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct(decimal price = 0)
         {
             //4.1.2 使用Include()同時取得關聯資料
             //4.1.3 使用Where()改變查詢的條件並測試
@@ -32,18 +33,31 @@ namespace MyWebAPI.Controllers
             //var products = await _context.Product.Include(c => c.Cate).Where(p=>p.Price>= price)
             //    .OrderBy(p=>p.Price).ToListAsync();
 
-            //4.1.5 使用Select()抓取特定的欄位並測試
+            //4.1.5 使用Select()抓取特定的欄位並測試(這樣做無法return)
+            //var products = await _context.Product.Include(c => c.Cate).Where(p => p.Price >= price)
+            //    .OrderBy(p => p.Price).Select(p => new { 
+            //        p.ProductID,
+            //        p.ProductName,
+            //        p.Price,
+            //        p.Description,
+            //        p.Picture,
+            //        p.CreatedDate,
+            //        p.CateID,
+            //        p.Cate.CateName 
+            //    }).ToListAsync();
+
+            //4.2.3 改寫ProductsController裡的Get Action
             var products = await _context.Product.Include(c => c.Cate).Where(p => p.Price >= price)
-                .OrderBy(p => p.Price).Select(p => new { 
-                    p.ProductID,
-                    p.ProductName,
-                    p.Price,
-                    p.Description,
-                    p.Picture,
-                    p.CreatedDate,
-                    p.CateID,
-                    p.Cate.CateName 
-                }).ToListAsync();
+             .OrderBy(p => p.Price).Select(p => new ProductDTO
+             {
+                 ProductID = p.ProductID,
+                 ProductName = p.ProductName,
+                 Price = p.Price,
+                 Description = p.Description,
+                 Picture = p.Picture,
+                 CateID = p.CateID,
+                 CateName = p.Cate.CateName
+             }).ToListAsync();
 
 
             return products;
