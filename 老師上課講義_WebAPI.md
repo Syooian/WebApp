@@ -112,3 +112,10 @@ Scaffold-DbContext "Data Source=伺服器位址;Database=GoodStore;TrustServerCe
 * 4.2.3 改寫ProductsController裡的Get Action
 * 4.2.4 使用Swagger測試  
 ※想要抓取特定欄位最典型的方法就是使用DTO來傳輸※
+
+<p>4.3   取得特定資料(ProductsController裡的第二個Get Action)</p>
+
+* 4.3.1 先使用Swagger測試及觀查目前Product的資料取得狀況(理解參數及介接口)
+* 4.3.2 使用Include()同時取得關聯資料並使用ProductDTO來傳遞資料
+* 4.3.3 使用Swagger測試  
+※發生循環參照時可使用JsonIgnore來解決※

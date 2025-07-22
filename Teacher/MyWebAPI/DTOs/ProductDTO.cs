@@ -1,5 +1,6 @@
 ﻿namespace MyWebAPI.DTOs
 {
+    //4.2.2 建立ProductDTO類別
     public class ProductDTO
     {
         public string ProductID { get; set; } = null!;

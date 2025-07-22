@@ -23,7 +23,7 @@ namespace MyWebAPI.Controllers
         }
 
         // GET: api/Products
-        [HttpGet]
+        [HttpGet()]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct(decimal price = 0)
         {
             //4.1.2 使用Include()同時取得關聯資料
@@ -65,13 +65,27 @@ namespace MyWebAPI.Controllers
 
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(string id)
+        public async Task<ActionResult<ProductDTO>> GetProduct(string id)
         {
-            var product = await _context.Product.FindAsync(id);
+
+
+            //4.3.2 使用Include()同時取得關聯資料並使用ProductDTO來傳遞資料
+            var product = await _context.Product.Include(c => c.Cate).Where(p => p.ProductID == id)
+              .OrderBy(p => p.Price).Select(p => new ProductDTO
+              {
+                  ProductID = p.ProductID,
+                  ProductName = p.ProductName,
+                  Price = p.Price,
+                  Description = p.Description,
+                  Picture = p.Picture,
+                  CateID = p.CateID,
+                  CateName = p.Cate.CateName
+              }).FirstOrDefaultAsync();
+
 
             if (product == null)
             {
-                return NotFound();
+                return NotFound("找不到產品資料");
             }
 
             return product;
