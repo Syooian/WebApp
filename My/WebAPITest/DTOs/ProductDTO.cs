@@ -1,4 +1,7 @@
-﻿namespace WebAPITest.DTOs
+﻿using System.Text.Json.Serialization;
+using WebAPITest.Models;
+
+namespace WebAPITest.DTOs
 {
     public class ProductDTO
     {
@@ -15,5 +18,8 @@
         public string CateID { get; set; } = null!;
 
         public string CateName { get; set; } = null!;
+
+        [JsonIgnore]
+        public virtual Category Cate { get; set; } = null!;
     }
 }

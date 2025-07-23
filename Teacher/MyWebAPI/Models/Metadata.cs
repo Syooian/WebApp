@@ -1,14 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace WebAPITest.Models
+namespace MyWebAPI.Models
 {
-    public partial class Product
+    public class ProductData
     {
+
         [JsonIgnore]
         public virtual Category? Cate { get; set; } = null!;
 
         [JsonIgnore]
         public virtual ICollection<OrderDetail> OrderDetail { get; set; } = new List<OrderDetail>();
     }
+
+    [ModelMetadataType(typeof(ProductData))]
+    public partial class Product
+    { }
 }
