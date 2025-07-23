@@ -47,40 +47,36 @@ namespace MyWebAPI.Controllers
             //    }).ToListAsync();
 
             //4.2.3 改寫ProductsController裡的Get Action
+            //var products = await _context.Product.Include(c => c.Cate).Where(p => p.Price >= price)
+            // .OrderBy(p => p.Price).Select(p => new ProductDTO
+            // {
+            //     ProductID = p.ProductID,
+            //     ProductName = p.ProductName,
+            //     Price = p.Price,
+            //     Description = p.Description,
+            //     Picture = p.Picture,
+            //     CateID = p.CateID,
+            //     CateName = p.Cate.CateName
+            // }).ToListAsync();
+
+
+            //4.4.1 將資料轉換的程式寫成函數並再次改寫Get Action(※這種寫法架構才會好※)
             var products = await _context.Product.Include(c => c.Cate).Where(p => p.Price >= price)
-             .OrderBy(p => p.Price).Select(p => new ProductDTO
-             {
-                 ProductID = p.ProductID,
-                 ProductName = p.ProductName,
-                 Price = p.Price,
-                 Description = p.Description,
-                 Picture = p.Picture,
-                 CateID = p.CateID,
-                 CateName = p.Cate.CateName
-             }).ToListAsync();
+             .OrderBy(p => p.Price).Select(p=>ItemProduct(p)).ToListAsync();
 
 
             return products;
         }
 
-        // GET: api/Products/5
+
+        //4.3.1 先使用Swagger測試及觀查目前Product的資料取得狀況(理解參數及介接口)
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDTO>> GetProduct(string id)
         {
-
-
+            //4.4.1 將資料轉換的程式寫成函數並再次改寫Get Action(※這種寫法架構才會好※)
             //4.3.2 使用Include()同時取得關聯資料並使用ProductDTO來傳遞資料
             var product = await _context.Product.Include(c => c.Cate).Where(p => p.ProductID == id)
-              .OrderBy(p => p.Price).Select(p => new ProductDTO
-              {
-                  ProductID = p.ProductID,
-                  ProductName = p.ProductName,
-                  Price = p.Price,
-                  Description = p.Description,
-                  Picture = p.Picture,
-                  CateID = p.CateID,
-                  CateName = p.Cate.CateName
-              }).FirstOrDefaultAsync();
+              .OrderBy(p => p.Price).Select(p => ItemProduct(p)).FirstOrDefaultAsync();
 
 
             if (product == null)
@@ -167,5 +163,30 @@ namespace MyWebAPI.Controllers
         {
             return _context.Product.Any(e => e.ProductID == id);
         }
-    }
+
+
+
+        //4.4.1 將資料轉換的程式寫成函數並再次改寫Get Action(※這種寫法架構才會好※)
+        private static ProductDTO ItemProduct(Product p)
+        {
+            var result = new ProductDTO
+            {
+                ProductID = p.ProductID,
+                ProductName = p.ProductName,
+                Price = p.Price,
+                Description = p.Description,
+                Picture = p.Picture,
+                CateID = p.CateID,
+                CateName = p.Cate.CateName
+            };
+
+            return result;
+
+        }
+
+
+         
+
+
+}
 }

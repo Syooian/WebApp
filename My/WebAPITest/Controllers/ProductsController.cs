@@ -29,31 +29,33 @@ namespace WebAPITest.Controllers
         /// <param name="Price">價格</param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct(decimal Price = 0)
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts(decimal Price = 0)
         {
             var Products = await _context.Product
                 .Include(C => C.Cate)
                 .Where(P => P.Price >= Price)
                 .OrderBy(P => P.Price)
-                .Select(P => new ProductDTO
-                {
-                    ProductID = P.ProductID,
-                    ProductName = P.ProductName,
-                    Price = P.Price,
-                    Description = P.Description,
-                    Picture = P.Picture,
-                    CateID = P.CateID,
-                    CateName = P.Cate.CateName
-                }).ToListAsync();
+                .Select(P => GetProductDTO(P))
+                .ToListAsync();
 
             return Products;
         }
 
         // GET: api/Products/5
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(string id)
+        public async Task<ActionResult<ProductDTO>> GetProduct(string id)
         {
-            var product = await _context.Product.FindAsync(id);
+            var product = await _context.Product
+                .Include(c => c.Cate)
+                .Where(p => p.ProductID == id)
+                .OrderBy(p => p.Price)
+                .Select(p => GetProductDTO(p))
+                .FirstOrDefaultAsync();
 
             if (product == null)
             {
@@ -138,6 +140,25 @@ namespace WebAPITest.Controllers
         private bool ProductExists(string id)
         {
             return _context.Product.Any(e => e.ProductID == id);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="P"></param>
+        /// <returns></returns>
+        ProductDTO GetProductDTO(Product P)
+        {
+            return new ProductDTO
+            {
+                ProductID = P.ProductID,
+                ProductName = P.ProductName,
+                Price = P.Price,
+                Description = P.Description,
+                Picture = P.Picture,
+                CateID = P.CateID,
+                CateName = P.Cate.CateName
+            };
         }
     }
 }
