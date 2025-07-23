@@ -71,30 +71,35 @@ namespace WebAPITest.Controllers
         [HttpGet("FromSQL")]//界接口，不可重複
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsFromSQL(string? CateID, string? ProductName, decimal? MaxPrice, decimal? MinPrice, string? Description)
         {
-            var SQLQuery = $"select P.ProductID, P.ProductName, P.Price, P.Description, P.Picture, P.CateID, C.CateName from Product as P inner join Category as C on C.CateID = P.CateID";
-
-            var Products = _context.Product.FromSqlRaw(SQLQuery).AsQueryable();
+            var SQLQuery = $"select P.ProductID, P.ProductName, P.Price, P.Description, P.Picture, P.CateID, C.CateName from Product as P inner join Category as C on C.CateID = P.CateID where 1=1 ";
+            //加入where 1=1，讓此判斷式在所有情況下都成立，便於後續添加其他條件
+            /*
+             * SQL Injection攻擊：
+             * ' or 1=1'--
+             */
 
             //產品類別搜尋
             if (!string.IsNullOrEmpty(CateID))
-                Products = Products.Where(P => P.CateID == CateID);
+                SQLQuery += $"and P.CateID = '{CateID}' ";
 
             //產品名稱關鍵字搜尋
             if (!string.IsNullOrEmpty(ProductName))
-                Products = Products.Where(P => P.ProductName.Contains(ProductName));
+                SQLQuery += $"and P.ProductName like '%{ProductName}%' ";
 
             //價格區間搜尋
             if (MaxPrice != null && MinPrice != null)
-                Products = Products.Where(P => P.Price >= MinPrice && P.Price <= MaxPrice);
+                SQLQuery += $"and P.Price between {MinPrice} and {MaxPrice} ";
 
             //產品描述關鍵字搜尋
             if (!string.IsNullOrEmpty(Description))
-                Products = Products.Where(P => !string.IsNullOrEmpty(P.Description) && P.Description.Contains(Description));
+                SQLQuery += $"and P.Description like '%{Description}%' ";
+
+            var Products = await _context.Product.FromSqlRaw(SQLQuery).Select(P => GetProductDTO(P)).ToListAsync();
 
             if (!Products.Any())
                 return NotFound("沒有符合條件的商品");
             else
-                return await Products.Select(P => GetProductDTO(P)).ToListAsync();
+                return Products;
         }
 
         // GET: api/Products/5

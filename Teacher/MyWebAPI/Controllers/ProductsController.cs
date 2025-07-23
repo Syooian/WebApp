@@ -117,34 +117,32 @@ namespace MyWebAPI.Controllers
 
 
             string sql = "select p.ProductID, p.ProductName, p.Price, p.Description, p.Picture, p.CateID, c.CateName " +
-                " from Product as p inner join Category as c on p.CateID=c.CateID";
+                " from Product as p inner join Category as c on p.CateID=c.CateID where 1=1 ";
 
 
-            //if (!string.IsNullOrEmpty(cateID))
-            //{
 
-            //    products = products.Where(p => p.CateID == cateID);
+            if (!string.IsNullOrEmpty(cateID))
+            {
 
-            //}
+                sql += $" and p.CateID = '{cateID}' ";
+            }
 
-            //if (!string.IsNullOrEmpty(productName))
-            //{
+            if (!string.IsNullOrEmpty(productName))
+            {
 
-            //    products = products.Where(p => p.ProductName.Contains(productName));
-            //}
+                sql += $" and p.ProductName like '%{productName}%' ";
+            }
 
-            //if (minPrice.HasValue && maxPrice.HasValue)
-            //{
-            //    //products = products.Where(p => p.Price >= minPrice && p.Price <= maxPrice).ToList();
-            //    products = products.Where(p => p.Price >= minPrice && p.Price <= maxPrice);
-            //}
+            if (minPrice.HasValue && maxPrice.HasValue)
+            {
+                sql += $" and between {minPrice} and {maxPrice} ";
+            }
 
 
-            //if (!string.IsNullOrEmpty(description))
-            //{
-
-            //    products = products.Where(p => p.Description.Contains(description));
-            //}
+            if (!string.IsNullOrEmpty(description))
+            {
+                sql += $" and p.Description like '%{description}%' ";
+            }
 
 
             var products = await _context.Product.FromSqlRaw(sql).Select(p=>ItemProduct(p)).ToListAsync();
