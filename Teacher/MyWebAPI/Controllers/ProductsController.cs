@@ -24,7 +24,7 @@ namespace MyWebAPI.Controllers
 
         // GET: api/Products
         [HttpGet()]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct(decimal price = 0)
+        public  Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct(string? cateID, string? productName ,decimal? minPrice, decimal? maxPrice, string? description  )
         {
             //4.1.2 使用Include()同時取得關聯資料
             //4.1.3 使用Where()改變查詢的條件並測試
@@ -61,8 +61,41 @@ namespace MyWebAPI.Controllers
 
 
             //4.4.1 將資料轉換的程式寫成函數並再次改寫Get Action(※這種寫法架構才會好※)
-            var products = await _context.Product.Include(c => c.Cate).Where(p => p.Price >= price)
-             .OrderBy(p => p.Price).Select(p=>ItemProduct(p)).ToListAsync();
+            //var products = await _context.Product.Include(c => c.Cate).Where(p=>p.Price>=price)
+            //    .OrderBy(p => p.Price).Select(p=>ItemProduct(p)).ToListAsync();
+
+
+
+            var products = _context.Product.Include(c => c.Cate).OrderBy(p => p.Price).Select(p => ItemProduct(p)); ;
+
+            //4.4.2 加入產品類別搜尋
+            if (!string.IsNullOrEmpty(cateID))
+            {
+                products = products.Where(p => p.CateID == cateID).ToList();
+
+            }
+            //4.4.3 加入產品名稱關鍵字搜尋
+            if (!string.IsNullOrEmpty(productName))
+            {
+                products = products.Where(p => p.ProductName.Contains(productName)).ToList();
+            }
+            //4.4.4 加入價格區間搜區
+            if (minPrice.HasValue && maxPrice.HasValue)
+            {
+                products = products.Where(p => p.Price >= minPrice && p.Price <= maxPrice).ToList();
+            }
+
+            //4.4.5 加入產品敘述關鍵字搜尋
+            if (!string.IsNullOrEmpty(description))
+            {
+                products = products.Where(p => p.Description.Contains(description)).ToList();
+            }
+
+
+            if(products == null || products.Count()==0)
+            {
+                return NotFound("找不到產品資料");
+            }
 
 
             return products;

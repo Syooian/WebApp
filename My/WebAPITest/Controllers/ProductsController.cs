@@ -26,19 +26,37 @@ namespace WebAPITest.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="Price">價格</param>
+        /// <param name="CateID"></param>
+        /// <param name="ProductName">商品名稱</param>
+        /// <param name="MaxPrice">最高價格</param>
+        /// <param name="MinPrice">最低價格</param>
+        /// <param name="Description">商品描述</param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts(decimal Price = 0)
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts(string? CateID, string? ProductName, decimal? MaxPrice, decimal? MinPrice, string? Description)
         {
-            var Products = await _context.Product
-                .Include(C => C.Cate)
-                .Where(P => P.Price >= Price)
-                .OrderBy(P => P.Price)
-                .Select(P => GetProductDTO(P))
-                .ToListAsync();
+            var Products = _context.Product.Include(C => C.Cate).OrderBy(P => P.Price).Select(P => GetProductDTO(P));
 
-            return Products;
+            //產品類別搜尋
+            if (!string.IsNullOrEmpty(CateID))
+                Products = Products.Where(P => P.CateID == CateID);
+
+            //產品名稱關鍵字搜尋
+            if (!string.IsNullOrEmpty(ProductName))
+                Products = Products.Where(P => P.ProductName.Contains(ProductName));
+
+            //價格區間搜尋
+            if (MaxPrice != null && MinPrice != null)
+                Products = Products.Where(P => P.Price >= MinPrice && P.Price <= MaxPrice);
+
+            //產品描述關鍵字搜尋
+            if (!string.IsNullOrEmpty(Description))
+                Products = Products.Where(P => !string.IsNullOrEmpty(P.Description) && P.Description.Contains(Description));
+
+            if (!Products.Any())
+                return NotFound("沒有符合條件的商品");
+            else
+                return await Products.ToListAsync();
         }
 
         // GET: api/Products/5
