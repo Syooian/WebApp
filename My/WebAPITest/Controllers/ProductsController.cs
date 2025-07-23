@@ -35,28 +35,28 @@ namespace WebAPITest.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts(string? CateID, string? ProductName, decimal? MaxPrice, decimal? MinPrice, string? Description)
         {
-            var Products = _context.Product.Include(C => C.Cate).OrderBy(P => P.Price).Select(P => GetProductDTO(P));
+            var Products = await _context.Product.Include(C => C.Cate).OrderBy(P => P.Price).Select(P => GetProductDTO(P)).ToListAsync();
 
             //產品類別搜尋
             if (!string.IsNullOrEmpty(CateID))
-                Products = Products.Where(P => P.CateID == CateID);
+                Products = Products.Where(P => P.CateID == CateID).ToList();
 
             //產品名稱關鍵字搜尋
             if (!string.IsNullOrEmpty(ProductName))
-                Products = Products.Where(P => P.ProductName.Contains(ProductName));
+                Products = Products.Where(P => P.ProductName.Contains(ProductName)).ToList();
 
             //價格區間搜尋
             if (MaxPrice != null && MinPrice != null)
-                Products = Products.Where(P => P.Price >= MinPrice && P.Price <= MaxPrice);
+                Products = Products.Where(P => P.Price >= MinPrice && P.Price <= MaxPrice).ToList();
 
             //產品描述關鍵字搜尋
             if (!string.IsNullOrEmpty(Description))
-                Products = Products.Where(P => !string.IsNullOrEmpty(P.Description) && P.Description.Contains(Description));
+                Products = Products.Where(P => !string.IsNullOrEmpty(P.Description) && P.Description.Contains(Description)).ToList();
 
             if (!Products.Any())
                 return NotFound("沒有符合條件的商品");
             else
-                return await Products.ToListAsync();
+                return Products;
         }
 
         // GET: api/Products/5
@@ -165,7 +165,7 @@ namespace WebAPITest.Controllers
         /// </summary>
         /// <param name="P"></param>
         /// <returns></returns>
-        ProductDTO GetProductDTO(Product P)
+        static ProductDTO GetProductDTO(Product P)
         {
             return new ProductDTO
             {

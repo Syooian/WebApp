@@ -24,7 +24,7 @@ namespace MyWebAPI.Controllers
 
         // GET: api/Products
         [HttpGet()]
-        public  Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct(string? cateID, string? productName ,decimal? minPrice, decimal? maxPrice, string? description  )
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct(string? cateID, string? productName ,decimal? minPrice, decimal? maxPrice, string? description  )
         {
             //4.1.2 使用Include()同時取得關聯資料
             //4.1.3 使用Where()改變查詢的條件並測試
@@ -61,12 +61,10 @@ namespace MyWebAPI.Controllers
 
 
             //4.4.1 將資料轉換的程式寫成函數並再次改寫Get Action(※這種寫法架構才會好※)
-            //var products = await _context.Product.Include(c => c.Cate).Where(p=>p.Price>=price)
-            //    .OrderBy(p => p.Price).Select(p=>ItemProduct(p)).ToListAsync();
+            //var products = await _context.Product.Include(c => c.Cate).Where(p => p.Price >= price)
+            //    .OrderBy(p => p.Price).Select(p => ItemProduct(p)).ToListAsync();
 
-
-
-            var products = _context.Product.Include(c => c.Cate).OrderBy(p => p.Price).Select(p => ItemProduct(p)); ;
+            var products = await _context.Product.Include(c => c.Cate).OrderBy(p => p.Price).Select(p => ItemProduct(p)).ToListAsync();
 
             //4.4.2 加入產品類別搜尋
             if (!string.IsNullOrEmpty(cateID))
