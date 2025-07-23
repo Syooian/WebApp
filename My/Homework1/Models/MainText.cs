@@ -19,14 +19,14 @@ namespace Homework1.Models
         /// </summary>
         [Display(Name = "主題")]
         [Required(ErrorMessage = "請輸入主題")]
-        [StringLength(20)]
+        [StringLength(50)]
         public string Title { get; set; } = null!;
         /// <summary>
         /// 發表內容
         /// </summary>
         [Display(Name = "發表內容")]
         [Required(ErrorMessage = "請輸入發表內容")]
-        [StringLength(100)]
+        [StringLength(500)]
         public string Content { get; set; } = null!;
         /// <summary>
         /// 照片

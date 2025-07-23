@@ -19,7 +19,7 @@ namespace Homework1.Models
         /// </summary>
         [Display(Name = "回覆內容")]
         [Required(ErrorMessage = "請輸入回覆內容")]
-        [StringLength(100)]
+        [StringLength(500)]
         public string Content { get; set; } = null!;
         /// <summary>
         /// 張貼時間
