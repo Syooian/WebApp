@@ -161,3 +161,18 @@ Scaffold-DbContext "Data Source=伺服器位址;Database=GoodStore;TrustServerCe
 ※使用SQL語法進行查詢是SQL老手的習慣，雖然EF Core已經使用一段時間，但很多開發人員仍鍾情於SQL※  
 ※不過使用SQL時需注意SQL Injection的問題，而我們使用SqlParameter來避免SQL Injection※  
 ※使用參數化查詢是防止 SQL Injection 的有效方式，使用SqlParameter避免SQ字串接寫法，直接避免SQL Injection風險※
+
+<p>4.7   關於DbContext修改的優化做法</p>
+
+* 4.7.1 複製GoodStoreContext.cs並更名為GoodStoreContext2.cs
+* 4.7.2 修改類別、建構子名稱及繼承父類別
+* 4.7.3 只留下DTO的DbSet其他的DbSet全數刪除
+* 4.7.4 OnModelCreating方法中只留下ProductDTO的Entity設定其他刪除
+* 4.7.5 加入base.OnModelCreating(modelBuilder);來繼承父類別所的方法
+* 4.7.6 將GoodStoreContext.cs中與ProductDTO有關的設置刪除
+* 4.7.7 在Program裡註冊GoodStoreContext2的Service(※注意※原本註冊的GoodStoreContext不可刪掉)
+* 4.7.8 修改ProductsController上方所注入的GoodStoreContext為GoodStoreContext2
+* 4.7.9 使用Swagger測試  
+※如果我們只是直接去改了原本的Context，在開發的過程中如果發生必須重新執行DB First的動作時，Context內容將被重置※  
+※因此請善加利用物件導向的繼承寫法保持程式碼的彈性及再用性※
+* 4.7.10 最後一併用Metadata來設定目前Product.cs 類別中的 [JsonIgnore]

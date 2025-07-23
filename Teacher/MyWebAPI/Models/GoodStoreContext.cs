@@ -24,14 +24,15 @@ public partial class GoodStoreContext : DbContext
 
 
     //4.6.5 修改GoodStoreContext，增加ProductDTO的DbSet屬性
-    public virtual DbSet<ProductDTO> ProductDTO { get; set; }
+    //public virtual DbSet<ProductDTO> ProductDTO { get; set; }
 
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         //4.6.8 修改GoodStoreContext的OnModelCreating()，標示ProductDTO為HasNoKey
-        modelBuilder.Entity<ProductDTO>(entity=>entity.HasNoKey());
+        //modelBuilder.Entity<ProductDTO>(entity=>entity.HasNoKey());
+
 
         modelBuilder.Entity<Category>(entity =>
         {
@@ -80,6 +81,7 @@ public partial class GoodStoreContext : DbContext
                 .HasForeignKey(d => d.MemberID)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Order__MemberID__412EB0B6");
+
         });
 
         modelBuilder.Entity<OrderDetail>(entity =>
