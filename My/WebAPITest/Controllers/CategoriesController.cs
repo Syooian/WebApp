@@ -143,6 +143,7 @@ namespace WebAPITest.Controllers
             {
                 CateID = C.CateID,
                 CateName = C.CateName,
+                //ProductCount = C.Product.Count,//可在Controller內return數量，但是以MVC的習慣和設計邏輯來說，商業邏輯應該要寫在Model上
                 Products = C.Product
             };
         }

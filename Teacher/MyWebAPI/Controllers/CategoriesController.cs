@@ -131,6 +131,7 @@ namespace MyWebAPI.Controllers
             {
                 CateID = c.CateID,
                 CateName = c.CateName,
+                //ProductCount = c.Product.Count(),
                 Product = c.Product
             };
 

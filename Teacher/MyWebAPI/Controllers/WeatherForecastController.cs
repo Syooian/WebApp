@@ -189,3 +189,5 @@ namespace MyWebAPI.Controllers
 //4.5.6 改寫CategoriesController裡的第二個Get Action
 //4.5.7 使用Include()同時取得關聯資料並以CategoryDTO傳遞
 //4.5.8 使用Swagger測試
+//4.5.9 在CategoryDTO裡加入統計該類別有幾種商品的屬性
+//4.5.10 使用Swagger測試

@@ -218,6 +218,7 @@ namespace MyWebAPI.Controllers
                 Picture = p.Picture,
                 CateID = p.CateID,
                 CateName = p.Cate.CateName
+               
             };
 
             return result;

@@ -1,4 +1,6 @@
-﻿namespace MyWebAPI.DTOs
+﻿using MyWebAPI.Models;
+
+namespace MyWebAPI.DTOs
 {
     //4.2.2 建立ProductDTO類別
     public class ProductDTO
@@ -17,5 +19,9 @@
 
         //在這裡補上CateName屬性
         public string CateName { get; set; } = null!;
+
+
+
+      
     }
 }
