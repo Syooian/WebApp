@@ -35,7 +35,7 @@ namespace WebAPITest.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts(string? CateID, string? ProductName, decimal? MaxPrice, decimal? MinPrice, string? Description)
         {
-            var Products = _context.Product.Include(C => C.Cate).OrderBy(P => P.Price).Select(P => GetProductDTO(P));
+            var Products = _context.Product.Include(C => C.Cate).OrderBy(P => P.Price).AsQueryable();
 
             //產品類別搜尋
             if (!string.IsNullOrEmpty(CateID))
@@ -56,7 +56,7 @@ namespace WebAPITest.Controllers
             if (!Products.Any())
                 return NotFound("沒有符合條件的商品");
             else
-                return await Products.ToListAsync();
+                return await Products.Select(P => GetProductDTO(P)).ToListAsync();
         }
 
         // GET: api/Products/5

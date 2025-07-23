@@ -68,7 +68,7 @@ namespace MyWebAPI.Controllers
             //var products = await _context.Product.Include(c => c.Cate).OrderBy(p => p.Price).Select(p => ItemProduct(p)).ToListAsync();
 
             //4.4.8 修改先將資料載入內存的寫法
-            var products = _context.Product.Include(c => c.Cate).OrderBy(p => p.Price).Select(p => ItemProduct(p));
+            var products = _context.Product.Include(c => c.Cate).OrderBy(p => p.Price).AsQueryable();
 
             //4.4.2 加入產品類別搜尋
             if (!string.IsNullOrEmpty(cateID))
@@ -100,7 +100,7 @@ namespace MyWebAPI.Controllers
             }
 
 
-            return await products.ToListAsync();
+            return await products.Select(p => ItemProduct(p)).ToListAsync();
         }
 
 
