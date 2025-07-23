@@ -211,7 +211,7 @@ namespace MyWebAPI.Controllers
 
 
 //4.7   關於DbContext修改的優化做法
-//4.7.1 複製GoodStoreContext.cs並更名為GoodStoreContext2.cs
+//4.7.1 複製GoodStoreContext.cs並更名為GoodStoreContextG2.cs
 //4.7.2 修改類別、建構子名稱及繼承父類別
 //4.7.3 只留下DTO的DbSet其他的DbSet全數刪除
 //4.7.4 OnModelCreating方法中只留下ProductDTO的Entity設定其他刪除

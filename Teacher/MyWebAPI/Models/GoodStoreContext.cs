@@ -22,7 +22,7 @@ public partial class GoodStoreContext : DbContext
 
     public virtual DbSet<Product> Product { get; set; }
 
-
+    //4.7.6 將GoodStoreContext.cs中與ProductDTO有關的設置刪除
     //4.6.5 修改GoodStoreContext，增加ProductDTO的DbSet屬性
     //public virtual DbSet<ProductDTO> ProductDTO { get; set; }
 
@@ -30,6 +30,7 @@ public partial class GoodStoreContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        //4.7.6 將GoodStoreContext.cs中與ProductDTO有關的設置刪除
         //4.6.8 修改GoodStoreContext的OnModelCreating()，標示ProductDTO為HasNoKey
         //modelBuilder.Entity<ProductDTO>(entity=>entity.HasNoKey());
 

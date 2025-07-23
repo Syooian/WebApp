@@ -15,9 +15,18 @@ namespace MyWebAPI.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly GoodStoreContext _context;
+        //private readonly GoodStoreContext _context;
 
-        public ProductsController(GoodStoreContext context)
+        //public ProductsController(GoodStoreContext context)
+        //{
+        //    _context = context;
+        //}
+
+
+        //4.7.8 修改ProductsController上方所注入的GoodStoreContext為GoodStoreContext2
+        private readonly GoodStoreContextG2 _context;
+
+        public ProductsController(GoodStoreContextG2 context)
         {
             _context = context;
         }
