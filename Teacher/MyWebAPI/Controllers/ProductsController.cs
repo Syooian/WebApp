@@ -144,9 +144,11 @@ namespace MyWebAPI.Controllers
                 sql += $" and p.Description like '%{description}%' ";
             }
 
+            //4.6.4 使用Swagger測試(這裡會發生錯誤，因為使用了合併查詢)
+            //var products = await _context.Product.FromSqlRaw(sql).ToListAsync();
 
-            var products = await _context.Product.FromSqlRaw(sql).Select(p=>ItemProduct(p)).ToListAsync();
-
+            //4.6.6 將_context.Product.FromSqlRaw(sql).ToListAsync();改為_context.ProductDTO.FromSqlRaw(sql).ToListAsync();
+            var products = await _context.ProductDTO.FromSqlRaw(sql).ToListAsync();
 
             if (products == null || products.Count() == 0)
             {

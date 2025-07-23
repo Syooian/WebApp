@@ -94,7 +94,7 @@ namespace WebAPITest.Controllers
             if (!string.IsNullOrEmpty(Description))
                 SQLQuery += $"and P.Description like '%{Description}%' ";
 
-            var Products = await _context.Product.FromSqlRaw(SQLQuery).Select(P => GetProductDTO(P)).ToListAsync();
+            var Products = await _context.ProductDTO.FromSqlRaw(SQLQuery).ToListAsync();
 
             if (!Products.Any())
                 return NotFound("沒有符合條件的商品");
