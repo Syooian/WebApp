@@ -17,7 +17,7 @@ public partial class Member
 
     public string Password { get; set; } = null!;
 
-    public DateTime CreatedDate { get; set; }
+    //public DateTime CreatedDate { get; set; }
 
     public virtual ICollection<Order> Order { get; set; } = new List<Order>();
 }

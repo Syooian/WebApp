@@ -15,7 +15,7 @@ public partial class Product
 
     public string Picture { get; set; } = null!;
 
-    public DateTime CreatedDate { get; set; }
+    //public DateTime CreatedDate { get; set; }
 
     public string CateID { get; set; } = null!;
 }
