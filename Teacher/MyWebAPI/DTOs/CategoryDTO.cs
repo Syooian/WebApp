@@ -11,6 +11,9 @@ namespace MyWebAPI.DTOs
 
 
         public virtual ICollection<Product> Product { get; set; } = new List<Product>();
+
+
+     
     }
 }
 

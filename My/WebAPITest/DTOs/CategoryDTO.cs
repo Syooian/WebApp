@@ -1,4 +1,6 @@
-﻿namespace WebAPITest.DTOs
+﻿using WebAPITest.Models;
+
+namespace WebAPITest.DTOs
 {
     public class CategoryDTO
     {
@@ -6,6 +8,6 @@
 
         public string CateName { get; set; } = null!;
 
-        public List<ProductDTO> Products { get; set; } = new List<ProductDTO>();
+        public virtual ICollection<Product> Products { get; set; } = new List<Product>();//雖然可以使用原本的模型，但是實務上還是習慣把要Return的東西一律另外做成新的DTO
     }
 }

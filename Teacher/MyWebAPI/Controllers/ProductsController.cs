@@ -80,16 +80,21 @@ namespace MyWebAPI.Controllers
             //4.4.3 加入產品名稱關鍵字搜尋
             if (!string.IsNullOrEmpty(productName))
             {
+                //products = products.Where(p => p.ProductName.Contains(productName)).ToList();
                 products = products.Where(p => p.ProductName.Contains(productName));
             }
             //4.4.4 加入價格區間搜區
             if (minPrice.HasValue && maxPrice.HasValue)
             {
-                products = products.Where(p => p.Price >= minPrice && p.Price <= maxPrice);       }
+                //products = products.Where(p => p.Price >= minPrice && p.Price <= maxPrice).ToList();
+                products = products.Where(p => p.Price >= minPrice && p.Price <= maxPrice);
+            }
+                
 
             //4.4.5 加入產品敘述關鍵字搜尋
             if (!string.IsNullOrEmpty(description))
             {
+                //products = products.Where(p => p.Description.Contains(description)).ToList();
                 products = products.Where(p => p.Description.Contains(description));
             }
 

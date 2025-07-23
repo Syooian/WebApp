@@ -48,9 +48,9 @@ namespace WebAPITest.Controllers
 
         // GET: api/Categories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(string id)
+        public async Task<ActionResult<CategoryDTO>> GetCategory(string id)
         {
-            var category = await _context.Category.FindAsync(id);
+            var category = await _context.Category.Include(C => C.Product).Where(C => C.CateID == id).Select(C => GetCategoryDTO(C)).FirstOrDefaultAsync();
 
             if (category == null)
             {
@@ -143,7 +143,7 @@ namespace WebAPITest.Controllers
             {
                 CateID = C.CateID,
                 CateName = C.CateName,
-                Products = (List<ProductDTO>)C.Product
+                Products = C.Product
             };
         }
     }
