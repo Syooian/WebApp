@@ -1,4 +1,5 @@
 ﻿using Homework1.Data;
+using Homework1.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,13 @@ builder.Services.AddDbContext<DBContext>(Options =>
     Options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnectionStrings")));
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var service = scope.ServiceProvider;
+
+    SeedData.Initialize(service);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
