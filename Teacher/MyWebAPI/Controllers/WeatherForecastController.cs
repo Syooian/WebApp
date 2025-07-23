@@ -190,4 +190,20 @@ namespace MyWebAPI.Controllers
 //4.5.7 使用Include()同時取得關聯資料並以CategoryDTO傳遞
 //4.5.8 使用Swagger測試
 //4.5.9 在CategoryDTO裡加入統計該類別有幾種商品的屬性
-//4.5.10 使用Swagger測試
+//4.5.10 在ProductDTO裡也加入一些統計資料的屬性
+//4.5.11 使用Swagger測試
+
+
+//4.6   使用SQL語法進行查詢
+//4.6.1 新增一個Get Action GetProductFromSQL()並設定介接口為[HttpGet("fromSQL")]
+//4.6.2 用SQL語法撰寫與先前一樣的功能並使用DTO傳遞結果
+//4.6.3 製作關鍵字查詢
+//4.6.4 使用Swagger測試(這裡會發生錯誤，因為使用了合併查詢)
+//4.6.5 修改GoodStoreContext，增加ProductDTO的DbSet屬性
+//4.6.6 將_context.Product.FromSqlRaw(sql).ToListAsync();改為_context.ProductDTO.FromSqlRaw(sql).ToListAsync();
+//4.6.7 使用Swagger測試(這裡會發生ProductDTO沒有設定Primary Key的例外)
+//4.6.8 修改GoodStoreContext的OnModelCreating()，標示ProductDTO為HasNoKey
+//4.6.9 使用Swagger測試
+//※使用SQL語法進行查詢是SQL老手的習慣，雖然EF Core已經使用一段時間，但很多開發人員仍鍾情於SQL※
+//※不過使用SQL時需注意SQL Injection的問題，而我們使用SqlParameter來避免SQL Injection※
+//※使用參數化查詢是防止 SQL Injection 的有效方式，使用SqlParameter避免SQ字串接寫法，直接避免SQL Injection風險※

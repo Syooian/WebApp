@@ -127,7 +127,7 @@ namespace MyWebAPI.Controllers
 
         private static CategoryDTO ItemCategory(Category c)
         {
-            var result = new CategoryDTO
+            var result = new CategoryDTO()
             {
                 CateID = c.CateID,
                 CateName = c.CateName,

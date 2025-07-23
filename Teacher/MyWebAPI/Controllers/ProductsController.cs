@@ -108,6 +108,49 @@ namespace MyWebAPI.Controllers
             return await products.Select(p => ItemProduct(p)).ToListAsync();
         }
 
+        //4.6.1 新增一個Get Action GetProductFromSQL()並設定介接口為[HttpGet("fromSQL")]
+        [HttpGet("fromSQL")]
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductFromSQL(string? cateID, string? productName, decimal? minPrice, decimal? maxPrice, string? description)
+        {
+            
+            var products = _context.Product.Include(c => c.Cate).OrderBy(p => p.Price).AsQueryable();
+
+           
+            if (!string.IsNullOrEmpty(cateID))
+            {
+                
+                products = products.Where(p => p.CateID == cateID);
+
+            }
+          
+            if (!string.IsNullOrEmpty(productName))
+            {
+              
+                products = products.Where(p => p.ProductName.Contains(productName));
+            }
+          
+            if (minPrice.HasValue && maxPrice.HasValue)
+            {
+                //products = products.Where(p => p.Price >= minPrice && p.Price <= maxPrice).ToList();
+                products = products.Where(p => p.Price >= minPrice && p.Price <= maxPrice);
+            }
+
+          
+            if (!string.IsNullOrEmpty(description))
+            {
+              
+                products = products.Where(p => p.Description.Contains(description));
+            }
+
+
+            if (products == null || products.Count() == 0)
+            {
+                return NotFound("找不到產品資料");
+            }
+
+
+            return await products.Select(p => ItemProduct(p)).ToListAsync();
+        }
 
         //4.3.1 先使用Swagger測試及觀查目前Product的資料取得狀況(理解參數及介接口)
         [HttpGet("{id}")]

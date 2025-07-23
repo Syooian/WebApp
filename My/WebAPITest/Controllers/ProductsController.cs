@@ -59,6 +59,42 @@ namespace WebAPITest.Controllers
                 return await Products.Select(P => GetProductDTO(P)).ToListAsync();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="CateID"></param>
+        /// <param name="ProductName"></param>
+        /// <param name="MaxPrice"></param>
+        /// <param name="MinPrice"></param>
+        /// <param name="Description"></param>
+        /// <returns></returns>
+        [HttpGet("FromSQL")]//界接口，不可重複
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsFromSQL(string? CateID, string? ProductName, decimal? MaxPrice, decimal? MinPrice, string? Description)
+        {
+            var Products = _context.Product.Include(C => C.Cate).OrderBy(P => P.Price).AsQueryable();
+
+            //產品類別搜尋
+            if (!string.IsNullOrEmpty(CateID))
+                Products = Products.Where(P => P.CateID == CateID);
+
+            //產品名稱關鍵字搜尋
+            if (!string.IsNullOrEmpty(ProductName))
+                Products = Products.Where(P => P.ProductName.Contains(ProductName));
+
+            //價格區間搜尋
+            if (MaxPrice != null && MinPrice != null)
+                Products = Products.Where(P => P.Price >= MinPrice && P.Price <= MaxPrice);
+
+            //產品描述關鍵字搜尋
+            if (!string.IsNullOrEmpty(Description))
+                Products = Products.Where(P => !string.IsNullOrEmpty(P.Description) && P.Description.Contains(Description));
+
+            if (!Products.Any())
+                return NotFound("沒有符合條件的商品");
+            else
+                return await Products.Select(P => GetProductDTO(P)).ToListAsync();
+        }
+
         // GET: api/Products/5
         /// <summary>
         /// 
