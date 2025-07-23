@@ -33,5 +33,19 @@ namespace Homework1.Models
         [StringLength(20)]
         [Required(ErrorMessage = "請輸入發表人")]
         public string UserName { get; set; } = null!;
+
+        #region 關聯屬性
+        /// <summary>
+        /// 
+        /// </summary>
+        [HiddenInput]
+        [ForeignKey(nameof(MainText))]
+
+        public string MainTextID { get; set; } = null!;
+        /// <summary>
+        /// 
+        /// </summary>
+        public MainText? MainText { get; set; }
+        #endregion
     }
 }

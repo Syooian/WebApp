@@ -54,5 +54,12 @@ namespace Homework1.Models
         [StringLength(20)]
         [Required(ErrorMessage = "請輸入發表人")]
         public string UserName { get; set; } = null!;
+
+        #region 關聯屬性
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual List<Reply> Replies { get; set; } = new List<Reply>();
+        #endregion
     }
 }
