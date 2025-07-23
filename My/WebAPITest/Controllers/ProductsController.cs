@@ -71,7 +71,9 @@ namespace WebAPITest.Controllers
         [HttpGet("FromSQL")]//界接口，不可重複
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsFromSQL(string? CateID, string? ProductName, decimal? MaxPrice, decimal? MinPrice, string? Description)
         {
-            var Products = _context.Product.Include(C => C.Cate).OrderBy(P => P.Price).AsQueryable();
+            var SQLQuery = $"select P.ProductID, P.ProductName, P.Price, P.Description, P.Picture, P.CateID, C.CateName from Product as P inner join Category as C on C.CateID = P.CateID";
+
+            var Products = _context.Product.FromSqlRaw(SQLQuery).AsQueryable();
 
             //產品類別搜尋
             if (!string.IsNullOrEmpty(CateID))

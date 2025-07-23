@@ -106,9 +106,7 @@ public partial class GoodStoreContext : DbContext
             entity.Property(e => e.CateID)
                 .HasMaxLength(2)
                 .IsFixedLength();
-            entity.Property(e => e.CreatedDate)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
+        
             entity.Property(e => e.Description).HasMaxLength(200);
             entity.Property(e => e.Picture).HasMaxLength(12);
             entity.Property(e => e.Price).HasColumnType("money");

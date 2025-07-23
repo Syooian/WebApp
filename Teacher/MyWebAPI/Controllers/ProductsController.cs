@@ -112,35 +112,42 @@ namespace MyWebAPI.Controllers
         [HttpGet("fromSQL")]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductFromSQL(string? cateID, string? productName, decimal? minPrice, decimal? maxPrice, string? description)
         {
-            
-            var products = _context.Product.Include(c => c.Cate).OrderBy(p => p.Price).AsQueryable();
+            //4.6.2 用SQL語法撰寫與先前一樣的功能並使用DTO傳遞結果
+            //var products = _context.Product.Include(c => c.Cate).OrderBy(p => p.Price).AsQueryable();
 
-           
-            if (!string.IsNullOrEmpty(cateID))
-            {
-                
-                products = products.Where(p => p.CateID == cateID);
 
-            }
-          
-            if (!string.IsNullOrEmpty(productName))
-            {
-              
-                products = products.Where(p => p.ProductName.Contains(productName));
-            }
-          
-            if (minPrice.HasValue && maxPrice.HasValue)
-            {
-                //products = products.Where(p => p.Price >= minPrice && p.Price <= maxPrice).ToList();
-                products = products.Where(p => p.Price >= minPrice && p.Price <= maxPrice);
-            }
+            string sql = "select p.ProductID, p.ProductName, p.Price, p.Description, p.Picture, p.CateID, c.CateName " +
+                " from Product as p inner join Category as c on p.CateID=c.CateID";
 
-          
-            if (!string.IsNullOrEmpty(description))
-            {
-              
-                products = products.Where(p => p.Description.Contains(description));
-            }
+
+            //if (!string.IsNullOrEmpty(cateID))
+            //{
+
+            //    products = products.Where(p => p.CateID == cateID);
+
+            //}
+
+            //if (!string.IsNullOrEmpty(productName))
+            //{
+
+            //    products = products.Where(p => p.ProductName.Contains(productName));
+            //}
+
+            //if (minPrice.HasValue && maxPrice.HasValue)
+            //{
+            //    //products = products.Where(p => p.Price >= minPrice && p.Price <= maxPrice).ToList();
+            //    products = products.Where(p => p.Price >= minPrice && p.Price <= maxPrice);
+            //}
+
+
+            //if (!string.IsNullOrEmpty(description))
+            //{
+
+            //    products = products.Where(p => p.Description.Contains(description));
+            //}
+
+
+            var products = await _context.Product.FromSqlRaw(sql).Select(p=>ItemProduct(p)).ToListAsync();
 
 
             if (products == null || products.Count() == 0)
@@ -149,7 +156,7 @@ namespace MyWebAPI.Controllers
             }
 
 
-            return await products.Select(p => ItemProduct(p)).ToListAsync();
+            return products;
         }
 
         //4.3.1 先使用Swagger測試及觀查目前Product的資料取得狀況(理解參數及介接口)
