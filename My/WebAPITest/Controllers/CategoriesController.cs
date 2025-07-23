@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPITest.Data;
+using WebAPITest.DTOs;
 using WebAPITest.Models;
 
 namespace WebAPITest.Controllers
@@ -22,10 +23,27 @@ namespace WebAPITest.Controllers
         }
 
         // GET: api/Categories
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="CateID"></param>
+        /// <param name="CateName"></param>
+        /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategory()
+        public async Task<ActionResult<IEnumerable<CategoryDTO>>> GetCategorys(string? CateID, string? CateName)
         {
-            return await _context.Category.ToListAsync();
+            var Categories = _context.Category.Include(P => P.Product).OrderBy(C => C.CateID).AsQueryable();
+
+            if (!string.IsNullOrEmpty(CateID))
+                Categories = Categories.Where(C => C.CateID == CateID);
+
+            if (!string.IsNullOrEmpty(CateName))
+                Categories = Categories.Where(C => C.CateName.Contains(CateName));
+
+            if (!Categories.Any())
+                return NotFound("沒有符合條件的Category");
+            else
+                return await Categories.Select(C => GetCategoryDTO(C)).ToListAsync();
         }
 
         // GET: api/Categories/5
@@ -117,6 +135,16 @@ namespace WebAPITest.Controllers
         private bool CategoryExists(string id)
         {
             return _context.Category.Any(e => e.CateID == id);
+        }
+
+        static CategoryDTO GetCategoryDTO(Category C)
+        {
+            return new CategoryDTO
+            {
+                CateID = C.CateID,
+                CateName = C.CateName,
+                Products = (List<ProductDTO>)C.Product
+            };
         }
     }
 }

@@ -178,3 +178,14 @@ namespace MyWebAPI.Controllers
 //※這個部份在做時會因Linq的寫法不同造成資料處理完的型態有不同的結果※
 //※需依照Linq撰寫的方式及資料的同步或非同步取得，依其所需改變寫法※
 //4.4.8 修改先將資料載入內存的寫法
+
+
+//4.5   同時取得Category及Product一對多的關聯資料
+//4.5.1 先使用Swagger測試及觀查目前Category的資料取得狀況
+//4.5.2 建立CategoryDTO類別
+//4.5.3 改寫CategoriesController裡的第一個Get Action
+//4.5.4 使用Include()同時取得關聯資料並以CategoryDTO傳遞
+//4.5.5 使用Swagger測試
+//4.5.6 改寫CategoriesController裡的第二個Get Action
+//4.5.7 使用Include()同時取得關聯資料並以CategoryDTO傳遞
+//4.5.8 使用Swagger測試

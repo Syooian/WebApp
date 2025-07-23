@@ -25,14 +25,15 @@ namespace MyWebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategory()
         {
-            return await _context.Category.ToListAsync();
+            return await _context.Category.Include(c=>c.Product).ToListAsync();
         }
 
         // GET: api/Categories/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Category>> GetCategory(string id)
         {
-            var category = await _context.Category.FindAsync(id);
+            var category = await _context.Category.Include(c => c.Product).Where(c=>c.CateID==id).FirstOrDefaultAsync();
+
 
             if (category == null)
             {
