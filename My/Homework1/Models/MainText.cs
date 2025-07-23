@@ -52,6 +52,7 @@ namespace Homework1.Models
         /// </summary>
         [Display(Name = "發表人")]
         [StringLength(20)]
+        [Required(ErrorMessage = "請輸入發表人")]
         public string UserName { get; set; } = null!;
     }
 }
