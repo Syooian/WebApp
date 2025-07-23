@@ -1,3 +1,4 @@
+﻿using Homework1.Data;
 using Homework1.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -7,10 +8,12 @@ namespace Homework1.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        readonly DBContext Context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, DBContext Context)
         {
             _logger = logger;
+            this.Context = Context;
         }
 
         public IActionResult Index()
