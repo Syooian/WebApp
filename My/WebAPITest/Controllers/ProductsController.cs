@@ -35,28 +35,28 @@ namespace WebAPITest.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts(string? CateID, string? ProductName, decimal? MaxPrice, decimal? MinPrice, string? Description)
         {
-            var Products = await _context.Product.Include(C => C.Cate).OrderBy(P => P.Price).Select(P => GetProductDTO(P)).ToListAsync();
+            var Products = _context.Product.Include(C => C.Cate).OrderBy(P => P.Price).Select(P => GetProductDTO(P));
 
             //產品類別搜尋
             if (!string.IsNullOrEmpty(CateID))
-                Products = Products.Where(P => P.CateID == CateID).ToList();
+                Products = Products.Where(P => P.CateID == CateID);
 
             //產品名稱關鍵字搜尋
             if (!string.IsNullOrEmpty(ProductName))
-                Products = Products.Where(P => P.ProductName.Contains(ProductName)).ToList();
+                Products = Products.Where(P => P.ProductName.Contains(ProductName));
 
             //價格區間搜尋
             if (MaxPrice != null && MinPrice != null)
-                Products = Products.Where(P => P.Price >= MinPrice && P.Price <= MaxPrice).ToList();
+                Products = Products.Where(P => P.Price >= MinPrice && P.Price <= MaxPrice);
 
             //產品描述關鍵字搜尋
             if (!string.IsNullOrEmpty(Description))
-                Products = Products.Where(P => !string.IsNullOrEmpty(P.Description) && P.Description.Contains(Description)).ToList();
+                Products = Products.Where(P => !string.IsNullOrEmpty(P.Description) && P.Description.Contains(Description));
 
             if (!Products.Any())
                 return NotFound("沒有符合條件的商品");
             else
-                return Products;
+                return await Products.ToListAsync();
         }
 
         // GET: api/Products/5

@@ -64,29 +64,33 @@ namespace MyWebAPI.Controllers
             //var products = await _context.Product.Include(c => c.Cate).Where(p => p.Price >= price)
             //    .OrderBy(p => p.Price).Select(p => ItemProduct(p)).ToListAsync();
 
-            var products = await _context.Product.Include(c => c.Cate).OrderBy(p => p.Price).Select(p => ItemProduct(p)).ToListAsync();
+
+            //var products = await _context.Product.Include(c => c.Cate).OrderBy(p => p.Price).Select(p => ItemProduct(p)).ToListAsync();
+
+            //4.4.8 修改先將資料載入內存的寫法
+            var products = _context.Product.Include(c => c.Cate).OrderBy(p => p.Price).Select(p => ItemProduct(p));
 
             //4.4.2 加入產品類別搜尋
             if (!string.IsNullOrEmpty(cateID))
             {
-                products = products.Where(p => p.CateID == cateID).ToList();
+                //products = products.Where(p => p.CateID == cateID).ToList();
+                products = products.Where(p => p.CateID == cateID);
 
             }
             //4.4.3 加入產品名稱關鍵字搜尋
             if (!string.IsNullOrEmpty(productName))
             {
-                products = products.Where(p => p.ProductName.Contains(productName)).ToList();
+                products = products.Where(p => p.ProductName.Contains(productName));
             }
             //4.4.4 加入價格區間搜區
             if (minPrice.HasValue && maxPrice.HasValue)
             {
-                products = products.Where(p => p.Price >= minPrice && p.Price <= maxPrice).ToList();
-            }
+                products = products.Where(p => p.Price >= minPrice && p.Price <= maxPrice);       }
 
             //4.4.5 加入產品敘述關鍵字搜尋
             if (!string.IsNullOrEmpty(description))
             {
-                products = products.Where(p => p.Description.Contains(description)).ToList();
+                products = products.Where(p => p.Description.Contains(description));
             }
 
 
@@ -96,7 +100,7 @@ namespace MyWebAPI.Controllers
             }
 
 
-            return products;
+            return await products.ToListAsync();
         }
 
 
