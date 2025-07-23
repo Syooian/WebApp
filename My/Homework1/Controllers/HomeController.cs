@@ -1,6 +1,7 @@
 ﻿using Homework1.Data;
 using Homework1.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Homework1.Controllers
@@ -16,9 +17,11 @@ namespace Homework1.Controllers
             this.Context = Context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var Result = await Context.MainTexts.Include(R => R.Replies).OrderByDescending(T => T.CreatedDate).ToListAsync();
+
+            return View(Result);
         }
 
         public IActionResult Privacy()
