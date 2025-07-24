@@ -32,15 +32,15 @@ namespace Homework1.Models
                         CreatedDate = DateTime.Now.AddMinutes(-10 * (a + 1)),
                         UserName = $"MainText User{a + 1}",
                         Photo = MainTextID,
-                        PhotoType = "jpg"
+                        PhotoType = ".jpg"
                     };
 
                     context.MainTexts.Add(MainText);
 
                     #region 圖片處理
                     File.Copy(
-                        Path.Combine(Directory.GetCurrentDirectory(), "SeedPhotos", $"{a + 1}.{MainText.PhotoType}"),
-                        Path.Combine(PathCheck, $"{MainText.Photo}.{MainText.PhotoType}")
+                        Path.Combine(Directory.GetCurrentDirectory(), "SeedPhotos", $"{a + 1}{MainText.PhotoType}"),
+                        Path.Combine(PathCheck, $"{MainText.Photo}{MainText.PhotoType}")
                         );
                     #endregion
 

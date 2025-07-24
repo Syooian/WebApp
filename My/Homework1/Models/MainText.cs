@@ -39,13 +39,14 @@ namespace Homework1.Models
         /// 照片類型
         /// </summary>
         [HiddenInput]
-        [StringLength(4, MinimumLength = 4)]
-        [Column(TypeName = "char")]
+        [StringLength(5)]
+        [Column(TypeName = "varchar")]
         public string? PhotoType { get; set; }
         /// <summary>
         /// 張貼時間
         /// </summary>
         [HiddenInput]
+        [Display(Name = "張貼時間")]
         public DateTime CreatedDate { get; set; }
         /// <summary>
         /// 發表人

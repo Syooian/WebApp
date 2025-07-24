@@ -25,6 +25,7 @@ namespace Homework1.Models
         /// 張貼時間
         /// </summary>
         [HiddenInput]
+        [Display(Name = "張貼時間")]
         public DateTime CreatedDate { get; set; }
         /// <summary>
         /// 發表人
