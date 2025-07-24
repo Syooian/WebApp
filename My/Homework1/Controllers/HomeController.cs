@@ -59,6 +59,30 @@ namespace Homework1.Controllers
             return View(MainText);
         }
 
+        /// <summary>
+        /// 詳細檢視
+        /// </summary>
+        /// <param name="MainTextID">主文編號</param>
+        /// <returns></returns>
+        public async Task<IActionResult> Details(string MainTextID)
+        {
+            if (string.IsNullOrEmpty(MainTextID))
+            {
+                return NotFound();
+            }
+
+            var MainText = await Context.MainTexts
+                .Include(M => M.Replies)
+                .FirstOrDefaultAsync(M => M.MainTextID == MainTextID);
+
+            if (MainText == null)
+            {
+                return NotFound();
+            }
+
+            return View(MainText);
+        }
+
         public IActionResult Privacy()
         {
             return View();
