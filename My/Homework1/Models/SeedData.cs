@@ -1,4 +1,5 @@
 ﻿using Homework1.Data;
+using Homework1.Views.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace Homework1.Models
@@ -17,7 +18,7 @@ namespace Homework1.Models
                 }
 
                 //圖片路徑檢查
-                var PathCheck = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "MainTextPhotos");
+                var PathCheck = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", Shared.MainTextPhotosPath);
                 if (!Directory.Exists(PathCheck)) Directory.CreateDirectory(PathCheck);
 
                 for (int a = 0; a < 5; a++)

@@ -1,5 +1,6 @@
 ﻿using Homework1.Data;
 using Homework1.Models;
+using Homework1.Views.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -71,7 +72,7 @@ namespace Homework1.Controllers
                     //取新檔名
                     var FileName = MainText.MainTextID + Path.GetExtension(MainTextPhoto.FileName);
 
-                    var FilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "MainTextPhotos", FileName);
+                    var FilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", Shared.MainTextPhotosPath, FileName);
 
                     using (FileStream FS = new FileStream(FilePath, FileMode.Create))
                     {
