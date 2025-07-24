@@ -16,21 +16,33 @@ namespace Homework1.Models
                     return;   // DB has been seeded
                 }
 
-                //var MainTexts = new List<MainText>();
-                //var Replies = new List<Reply>();
+                //圖片路徑檢查
+                var PathCheck = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "MainTextPhotos");
+                if (!Directory.Exists(PathCheck)) Directory.CreateDirectory(PathCheck);
 
                 for (int a = 0; a < 5; a++)
                 {
+                    var MainTextID = Guid.NewGuid().ToString();
+
                     var MainText = new MainText()
                     {
-                        MainTextID = Guid.NewGuid().ToString(),
+                        MainTextID = MainTextID,
                         Title = $"MainText Title Post {a + 1}",
                         Content = $"This is the content of sample post {a + 1}.",
                         CreatedDate = DateTime.Now.AddMinutes(-10 * (a + 1)),
-                        UserName = $"MainText User{a + 1}"
+                        UserName = $"MainText User{a + 1}",
+                        Photo = MainTextID,
+                        PhotoType = "jpg"
                     };
 
                     context.MainTexts.Add(MainText);
+
+                    #region 圖片處理
+                    File.Copy(
+                        Path.Combine(Directory.GetCurrentDirectory(), "SeedPhotos", $"{a + 1}.{MainText.PhotoType}"),
+                        Path.Combine(PathCheck, $"{MainText.Photo}.{MainText.PhotoType}")
+                        );
+                    #endregion
 
                     for (int b = 0; b < 5; b++)
                     {
