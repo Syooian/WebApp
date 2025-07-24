@@ -1,0 +1,118 @@
+﻿@using Homework1.Views.Shared
+@model Homework1.Models.MainText
+
+<div>
+    <h4>@Html.DisplayFor(model => model.Title)</h4>
+    <hr />
+    <div class="row">
+        <dl class="row col-6">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Content)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.Raw(Model.Content.Replace("\r\n", "<br>"))
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CreatedDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+        </dl>
+        <div class="col-6">
+            @if (Model.Photo != null)
+            {
+                <img src=@($"/{Shared.MainTextPhotosPath}/{Model.Photo}{Model.PhotoType}") width="500" class="card-img-top img-thumbnail">
+            }
+        </div>
+    </div>
+</div>
+<div>
+    @*<a asp-action="Edit" asp-route-id="@Model?.MainTextID">Edit</a> |*@
+    <a asp-action="Index" class="btn btn-primary">返回列表</a>
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ReplyFormModal">回覆</button>
+</div>
+
+<hr />
+<div id="ReplyList">
+    @await Component.InvokeAsync("VC_Replies", new { MainTextID = Model.MainTextID })
+</div>
+
+<!--回覆留言彈出框-->
+<div class="modal fade" id="ReplyFormModal" tabindex="-1" aria-labelledby="ReplyFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ReplyFormModalLabel">回覆</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="ReplyForm">
+                </div>
+            </div>
+            @*             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                <button type="button" class="btn btn-primary">送出</button>
+            </div> *@
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @*前端驗證套件*@
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        //呼叫載入回覆留言資訊
+        function LoadForm(){
+            console.log('LoadForm @(Model.MainTextID)');
+            $('#ReplyForm').load('/Replies/Create?MainTextID=@(Model.MainTextID)', function(){
+                $.validator.unobtrusive.parse($('#ReplyForm'));
+            });
+        }
+
+        LoadForm();
+
+        //抓Model用於送出回覆後把Model關閉
+        const ReplyFormModal=new bootstrap.Modal(document.getElementById('ReplyFormModal'));
+
+        //送出回覆
+        function SendReply(){
+            //驗證失敗，表單不送出
+            if(!$('#ReplyForm form').valid()){
+                console.log("表單驗證失敗");
+                return;
+            }
+
+            //console.log("Call AJAX");
+            $.ajax({
+                type:"post",
+                url:"/Replies/Create",
+                data:$('#ReplyForm form').serialize(),
+                success:function(){
+                    //console.log("SendReply Success");
+
+                    //更新底下的回覆留言區
+                    $('#ReplyList').load('/Replies/GetViewComponent?MainTextID=@(Model.MainTextID)');
+
+                    //表單重新載入
+                    LoadForm();
+
+                    //關閉Modal
+                    ReplyFormModal.hide();
+                },
+                error:function(){
+                    //console.log("SendReply Fail");
+                }
+            });
+        }
+    </script>
+}
