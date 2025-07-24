@@ -27,6 +27,8 @@ namespace Homework1.Controllers
         /// <returns></returns>
         public IActionResult Create(string MainTextID)
         {
+            Console.WriteLine($"Create MainTextID : {MainTextID}");
+
             ViewData["MainTextID"] = MainTextID;
             return View();
         }

@@ -44,6 +44,7 @@
     @await Component.InvokeAsync("VC_Replies", new { MainTextID = Model.MainTextID })
 </div>
 
+<!--回覆留言彈出框-->
 <div class="modal fade" id="ReplyFormModal" tabindex="-1" aria-labelledby="ReplyFormModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -52,7 +53,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ...
+                <div id="ReplyForm">
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
@@ -61,3 +63,17 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @*前端驗證套件*@
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        //呼叫載入回覆留言資訊
+        $('#ReplyForm').load('/Replies/Create?MainTextID=@(Model.MainTextID)', function(){
+            $.validator.unobtrusive.parse($('#ReplyForm'));
+        });
+    </script>
+}
