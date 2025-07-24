@@ -38,18 +38,35 @@ namespace Homework1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReplyID,Content,CreatedDate,UserName,MainTextID")] Reply reply)
+        public async Task<IActionResult> Create([Bind("ReplyID,Content,CreatedDate,UserName,MainTextID")] Reply Reply)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(reply);
+                Reply.CreatedDate = DateTime.Now;
+
+                _context.Add(Reply);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Json(Reply);
             }
-            ViewData["MainTextID"] = new SelectList(_context.MainTexts, "MainTextID", "MainTextID", reply.MainTextID);
-            return View(reply);
+
+            //Model驗證失敗
+            Console.WriteLine("ModelState is invalid. Errors: " + string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage)));
+
+            return Json(Reply);
         }
 
+        /// <summary>
+        /// 取得回覆留言資料的Action
+        /// </summary>
+        /// <param name="MainTextID"></param>
+        /// <returns></returns>
+        public IActionResult GetViewComponent(string MainTextID) => ViewComponent("VC_Replies", new { MainTextID = MainTextID });
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool ReplyExists(string id)
         {
             return _context.Replies.Any(e => e.ReplyID == id);

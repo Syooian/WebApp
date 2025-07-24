@@ -9,7 +9,7 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             @*<label asp-for="ReplyID" class="control-label"></label>*@
-            <input asp-for="ReplyID" class="form-control" value="@Guid.NewGuid().ToString()" />
+            <input asp-for="ReplyID" class="form-control" value="@(Guid.NewGuid().ToString())" />
             <span asp-validation-for="ReplyID" class="text-danger"></span>
         </div>
         <div class="form-group">
@@ -32,7 +32,7 @@
             <input asp-for="MainTextID" class="form-control" asp-items="ViewBag.MainTextID">
         </div>
         <div class="form-group d-grid">
-            <input type="submit" value="送出" class="btn btn-primary" />
+            <input type="button" onclick="SendReply()" value="送出" class="btn btn-primary" />
         </div>
     </form>
 </div>

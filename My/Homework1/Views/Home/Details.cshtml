@@ -56,7 +56,7 @@
                 <div id="ReplyForm">
                 </div>
             </div>
-@*             <div class="modal-footer">
+            @*             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
                 <button type="button" class="btn btn-primary">送出</button>
             </div> *@
@@ -72,8 +72,47 @@
 
     <script>
         //呼叫載入回覆留言資訊
-        $('#ReplyForm').load('/Replies/Create?MainTextID=@(Model.MainTextID)', function(){
-            $.validator.unobtrusive.parse($('#ReplyForm'));
-        });
+        function LoadForm(){
+            console.log('LoadForm @(Model.MainTextID)');
+            $('#ReplyForm').load('/Replies/Create?MainTextID=@(Model.MainTextID)', function(){
+                $.validator.unobtrusive.parse($('#ReplyForm'));
+            });
+        }
+
+        LoadForm();
+
+        //抓Model用於送出回覆後把Model關閉
+        const ReplyFormModal=new bootstrap.Modal(document.getElementById('ReplyFormModal'));
+
+        //送出回覆
+        function SendReply(){
+            //驗證失敗，表單不送出
+            if(!$('#ReplyForm form').valid()){
+                console.log("表單驗證失敗");
+                return;
+            }
+
+            //console.log("Call AJAX");
+            $.ajax({
+                type:"post",
+                url:"/Replies/Create",
+                data:$('#ReplyForm form').serialize(),
+                success:function(){
+                    //console.log("SendReply Success");
+
+                    //更新底下的回覆留言區
+                    $('#ReplyList').load('/Replies/GetViewComponent?MainTextID=@(Model.MainTextID)');
+
+                    //表單重新載入
+                    LoadForm();
+
+                    //關閉Modal
+                    ReplyFormModal.hide();
+                },
+                error:function(){
+                    //console.log("SendReply Fail");
+                }
+            });
+        }
     </script>
 }
