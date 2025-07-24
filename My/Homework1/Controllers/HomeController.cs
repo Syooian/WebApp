@@ -53,6 +53,21 @@ namespace Homework1.Controllers
                 //圖片上傳
                 if (MainTextPhoto != null && MainTextPhoto.Length != 0)
                 {
+                    //只允許上傳圖片
+                    switch (MainTextPhoto.ContentType)
+                    {
+                        case "image/gif":
+                        case "image/bmp":
+                        case "image/jpg":
+                        case "image/jpeg":
+                        case "image/png":
+                        case "image/jfif":
+                            break;
+                        default:
+                            ViewData["PhotoError"] = "只允許上傳圖片";
+                            return View();
+                    }
+
                     //取新檔名
                     var FileName = MainText.MainTextID + Path.GetExtension(MainTextPhoto.FileName);
 
