@@ -113,4 +113,15 @@ site.css, site.js檔：寫自定義內容，不要去改原始的css和js檔
 * Put
 * Delete
 
-# 模型上面如果有看到virtual，代表是此模型的關聯，並不是資料庫上實際的屬性
+### 模型上面如果有看到virtual，代表是此模型的關聯，並不是資料庫上實際的屬性
+
+# 在資料庫或本機記憶體執行排序
+* 在資料庫執行排序
+```csharp
+var Result = await _context.Book.OrderByDescending(R => R.CreatedDate).ToListAsync();
+```
+* 在本機記憶體執行排序
+```csharp
+var Result = await _context.Book.ToListAsync();
+Result.OrderByDescending(R => R.CreatedDate);
+```
