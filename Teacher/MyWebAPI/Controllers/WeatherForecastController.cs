@@ -222,4 +222,4 @@ namespace MyWebAPI.Controllers
 //4.7.9 使用Swagger測試
 //※如果我們只是直接去改了原本的Context，在開發的過程中如果發生必須重新執行DB First的動作時，Context內容將被重置※
 //※因此請善加利用物件導向的繼承寫法保持程式碼的彈性及再用性※
-//4.7.10 最後一併用Metadata來設定目前Product.cs 類別中的 [JsonIgnore]
+//4.7.10 在Program裡全域啟用 ReferenceHandler.Preserve

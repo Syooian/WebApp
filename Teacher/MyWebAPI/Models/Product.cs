@@ -19,9 +19,9 @@ public partial class Product
 
     public string CateID { get; set; } = null!;
 
-
+    //[JsonIgnore]
     public virtual Category Cate { get; set; } = null!;
 
-
+    //[JsonIgnore]
     public virtual ICollection<OrderDetail> OrderDetail { get; set; } = new List<OrderDetail>();
 }

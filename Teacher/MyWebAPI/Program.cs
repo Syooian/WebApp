@@ -5,7 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+//4.7.10 在Program裡全域啟用 ReferenceHandler.Preserve
+//builder.Services.AddControllers();
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>

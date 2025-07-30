@@ -20,7 +20,7 @@ namespace MyWebAPI.DTOs
 
         //在這裡補上CateName屬性
         public string CateName { get; set; } = null!;
-      
+
         //4.5.10 在ProductDTO裡也加入一些統計資料的屬性
         [JsonIgnore]
         public virtual ICollection<OrderDetail> OrderDetail { get; set; } = new List<OrderDetail>();

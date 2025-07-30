@@ -1,4 +1,5 @@
-﻿using MyWebAPI.Models;
+﻿using System.Text.Json.Serialization;
+using MyWebAPI.Models;
 
 namespace MyWebAPI.DTOs
 {
