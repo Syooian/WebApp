@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:5028/apiProducts",
+            success: function (Data) {
+                console.log(Data);
+            }
+        });
+    </script>
+</body>
+</html>
