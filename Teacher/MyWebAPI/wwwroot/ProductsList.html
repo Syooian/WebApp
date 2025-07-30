@@ -5,16 +5,25 @@
     <title></title>
 </head>
 <body>
+
+    <input type="text" id="description" placeholder="Search for products..." />
+    <button onclick="searchProducts()">搜尋</button>
+
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
+    function searchProducts() {
+
         $.ajax({
             type: "get",
-            url: "http://localhost:5170/apiProducts",
+            url: "http://localhost:5170/apiProducts?description="+$('#description').val(),
             success: function (reps) {
                 console.log(reps.$values);
             }
             
         });
+    }
     </script>
 </body>
 </html>
