@@ -177,3 +177,22 @@ Scaffold-DbContext "Data Source=伺服器位址;Database=GoodStore;TrustServerCe
 ※因此請善加利用物件導向的繼承寫法保持程式碼的彈性及再用性※  
 <del>4.7.10 最後一併用Metadata來設定目前Product.cs 類別中的 [JsonIgnore]</del>
 * 4.7.10 在Program裡全域啟用 ReferenceHandler.Preserve
+
+<p>4.8   使用資料庫裡的預存程序</p>
+
+* 4.8.1 在GoodStore資料庫中建立預存程序，程式碼如下(這個預存程序可以讓我們使用類別ID查詢到產品資料)
+```sql
+use GoodStore
+go
+create proc getProductWithCateName
+	@cateID char(2)='A1'
+as
+begin
+	select p.ProductID, p.ProductName, p.Price, p.Description, p.CateID, c.CateName
+    from Product as p inner join Category as c on p.CateID=c.CateID where p.CateID=@cateID
+end
+```
+* 4.8.2 在ProductsController中建立一個新的Get Action
+* 4.8.3 設置介接口為[HttpGet("fromProc/{id}")]，Action名稱可自訂，並使用ProductDTO來傳遞資料
+* 4.8.4 使用預存程序進行查詢(參數的傳遞請使用SqlParameter)
+* 4.8.5 使用Swagger測試

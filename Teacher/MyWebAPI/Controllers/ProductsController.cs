@@ -168,6 +168,15 @@ namespace MyWebAPI.Controllers
             return products;
         }
 
+        //4.8.2 在ProductsController中建立一個新的Get Action
+        //4.8.3 設置介接口為[HttpGet("fromProc/{id}")]，Action名稱可自訂，並使用ProductDTO來傳遞資料
+        [HttpGet("fromProc/{id}")]
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductFromProc(string id)
+        {
+
+        }
+
+
         //4.3.1 先使用Swagger測試及觀查目前Product的資料取得狀況(理解參數及介接口)
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDTO>> GetProduct(string id)

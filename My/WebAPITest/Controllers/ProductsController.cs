@@ -102,6 +102,17 @@ namespace WebAPITest.Controllers
                 return Products;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="CateID"></param>
+        /// <returns></returns>
+        [HttpGet("fromProc/{CateID}")]
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsFromProc(string CateID)
+        {
+
+        }
+
         // GET: api/Products/5
         /// <summary>
         /// 
