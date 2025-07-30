@@ -125,3 +125,11 @@ var Result = await _context.Book.OrderByDescending(R => R.CreatedDate).ToListAsy
 var Result = await _context.Book.ToListAsync();
 Result.OrderByDescending(R => R.CreatedDate);
 ```
+
+# 跨域政策限制 (CORS)
+e.g.   
+Server：192.168.1.2  
+Client：192.168.2.8  
+網域不同，會觸發CORS  
+預設狀態下Server會對Client有跨域存取限制
+通常需要自己架伺服器先接API後再傳給自己的Client (Server可設定跨域存取政策)
