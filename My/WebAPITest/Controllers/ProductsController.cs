@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WebAPITest.Data;
 using WebAPITest.DTOs;
@@ -78,23 +79,42 @@ namespace WebAPITest.Controllers
              * ' or 1=1'--
              */
 
+            var SQLPara = new List<SqlParameter>();
+
             //產品類別搜尋
             if (!string.IsNullOrEmpty(CateID))
-                SQLQuery += $"and P.CateID = '{CateID}' ";
+            {
+                //SQLQuery += $"and P.CateID = '{CateID}' ";
+                SQLQuery += $"and P.CateID = @cate ";
+                SQLPara.Add(new SqlParameter("@cate", CateID));
+            }
 
             //產品名稱關鍵字搜尋
             if (!string.IsNullOrEmpty(ProductName))
-                SQLQuery += $"and P.ProductName like '%{ProductName}%' ";
+            {
+                //SQLQuery += $"and P.ProductName like '%{ProductName}%' ";
+                SQLQuery += $"and P.ProductName like @productName ";
+                SQLPara.Add(new SqlParameter("@productName", $"%{ProductName}%"));
+            }
 
             //價格區間搜尋
             if (MaxPrice != null && MinPrice != null)
-                SQLQuery += $"and P.Price between {MinPrice} and {MaxPrice} ";
+            {
+                //SQLQuery += $"and P.Price between {MinPrice} and {MaxPrice} ";
+                SQLQuery += $"and P.Price between @minPrice and @maxPrice ";
+                SQLPara.Add(new SqlParameter("@minPrice", MinPrice));
+                SQLPara.Add(new SqlParameter("@maxPrice", MaxPrice));
+            }
 
             //產品描述關鍵字搜尋
             if (!string.IsNullOrEmpty(Description))
-                SQLQuery += $"and P.Description like '%{Description}%' ";
+            {
+                //SQLQuery += $"and P.Description like '%{Description}%' ";
+                SQLQuery += $"and P.Description like @description ";
+                SQLPara.Add(new SqlParameter("@description", $"%{Description}%"));
+            }
 
-            var Products = await _context.ProductDTO.FromSqlRaw(SQLQuery).ToListAsync();
+            var Products = await _context.ProductDTO.FromSqlRaw(SQLQuery, SQLPara.ToArray()).ToListAsync();
 
             if (!Products.Any())
                 return NotFound("沒有符合條件的商品");
@@ -111,9 +131,11 @@ namespace WebAPITest.Controllers
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsFromProc(string CateID)
         {
             //4.8.4 使用預存程序進行查詢(參數的傳遞請使用SqlParameter)
-            string SQL = $"exec getProductWithCateName '{CateID}'";//會發生SQL Injection錯誤
+            //string SQL = $"exec getProductWithCateName '{CateID}'";//會發生SQL Injection錯誤
+            string SQL = $"exec getProductWithCateName @cateID";
+            var cateID = new SqlParameter("@cateID", CateID);
 
-            var Products = await _context.ProductDTO.FromSqlRaw(SQL).ToListAsync();
+            var Products = await _context.ProductDTO.FromSqlRaw(SQL, cateID).ToListAsync();
 
             if (Products == null || Products.Count == 0)
                 return NotFound("找不到產品資料");

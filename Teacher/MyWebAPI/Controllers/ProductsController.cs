@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using MyWebAPI.DTOs;
 using MyWebAPI.Models;
@@ -128,36 +129,43 @@ namespace MyWebAPI.Controllers
             string sql = "select p.ProductID, p.ProductName, p.Price, p.Description, p.Picture, p.CateID, c.CateName " +
                 " from Product as p inner join Category as c on p.CateID=c.CateID where 1=1 ";
 
-
+            List<SqlParameter> parameters = new List<SqlParameter>();
 
             if (!string.IsNullOrEmpty(cateID))
             {
-
-                sql += $" and p.CateID = '{cateID}' ";
+                //sql += $" and p.CateID = '{cateID}' ";
+                sql += " and p.CateID = @cate ";
+                parameters.Add(new SqlParameter("@cate", cateID));
             }
 
             if (!string.IsNullOrEmpty(productName))
             {
-
-                sql += $" and p.ProductName like '%{productName}%' ";
+                //sql += $" and p.ProductName like '%{productName}%' ";
+                sql += " and p.ProductName like @productName ";
+                parameters.Add(new SqlParameter("@productName", $"%{productName}%"));
             }
 
             if (minPrice.HasValue && maxPrice.HasValue)
             {
-                sql += $" and between {minPrice} and {maxPrice} ";
+                //sql += $" and between {minPrice} and {maxPrice} ";
+                sql += " and p.Price between @minPrice and @maxPrice ";
+                parameters.Add(new SqlParameter("@minPrice", minPrice));
+                parameters.Add(new SqlParameter("@maxPrice", maxPrice));
             }
 
 
             if (!string.IsNullOrEmpty(description))
             {
-                sql += $" and p.Description like '%{description}%' ";
+                //sql += $" and p.Description like '%{description}%' ";
+                sql += $" and p.Description like @description ";
+                parameters.Add(new SqlParameter("@description", $"%{description}%"));
             }
 
             //4.6.4 使用Swagger測試(這裡會發生錯誤，因為使用了合併查詢)
             //var products = await _context.Product.FromSqlRaw(sql).ToListAsync();
 
             //4.6.6 將_context.Product.FromSqlRaw(sql).ToListAsync();改為_context.ProductDTO.FromSqlRaw(sql).ToListAsync();
-            var products = await _context.ProductDTO.FromSqlRaw(sql).ToListAsync();
+            var products = await _context.ProductDTO.FromSqlRaw(sql, parameters.ToArray()).ToListAsync();
 
             if (products == null || products.Count() == 0)
             {
@@ -174,9 +182,11 @@ namespace MyWebAPI.Controllers
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductFromProc(string id)
         {
             //4.8.4 使用預存程序進行查詢(參數的傳遞請使用SqlParameter)
-            string sql = $"exec getProductWithCateName '{id}'";
+            string sql = $"exec getProductWithCateName @cateID";
 
-            var products= await _context.ProductDTO.FromSqlRaw(sql).ToListAsync();
+            var cateID = new SqlParameter("@cateID", id);
+
+            var products= await _context.ProductDTO.FromSqlRaw(sql, cateID).ToListAsync();
 
             if (products == null || products.Count() == 0)
             {
