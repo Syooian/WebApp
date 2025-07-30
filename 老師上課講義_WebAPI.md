@@ -196,3 +196,14 @@ end
 * 4.8.3 設置介接口為[HttpGet("fromProc/{id}")]，Action名稱可自訂，並使用ProductDTO來傳遞資料
 * 4.8.4 使用預存程序進行查詢(參數的傳遞請使用SqlParameter)
 * 4.8.5 使用Swagger測試
+
+### 修改預存程序，增加回傳picture欄位
+```sql
+alter proc getProductWithCateName
+	@cateID char(2)='A1'
+as
+begin
+	select p.ProductID, p.ProductName, p.Price, p.Description, p.picture, p.CateID, c.CateName
+    from Product as p inner join Category as c on p.CateID=c.CateID where p.CateID=@cateID
+end
+```
