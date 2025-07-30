@@ -107,10 +107,17 @@ namespace WebAPITest.Controllers
         /// </summary>
         /// <param name="CateID"></param>
         /// <returns></returns>
-        [HttpGet("fromProc/{CateID}")]
+        [HttpGet("fromProc/{CateID}")]//Path
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsFromProc(string CateID)
         {
+            //4.8.4 使用預存程序進行查詢(參數的傳遞請使用SqlParameter)
+            string SQL = $"exec getProductWithCateName '{CateID}'";//會發生SQL Injection錯誤
 
+            var Products = await _context.ProductDTO.FromSqlRaw(SQL).ToListAsync();
+
+            if (Products == null || Products.Count == 0)
+                return NotFound("找不到產品資料");
+            return Products;
         }
 
         // GET: api/Products/5

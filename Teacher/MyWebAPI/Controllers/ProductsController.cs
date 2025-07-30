@@ -173,7 +173,18 @@ namespace MyWebAPI.Controllers
         [HttpGet("fromProc/{id}")]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductFromProc(string id)
         {
+            //4.8.4 使用預存程序進行查詢(參數的傳遞請使用SqlParameter)
+            string sql = $"exec getProductWithCateName '{id}'";
 
+            var products= await _context.ProductDTO.FromSqlRaw(sql).ToListAsync();
+
+            if (products == null || products.Count() == 0)
+            {
+                return NotFound("找不到產品資料");
+            }
+
+
+            return products;
         }
 
 
