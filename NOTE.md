@@ -136,3 +136,5 @@ Client：192.168.2.8
 網域不同，會觸發CORS  
 預設狀態下Server會對Client有跨域存取限制
 通常需要自己架伺服器先接API後再傳給自己的Client (Server可設定跨域存取政策)
+
+JsonIgnore對FromForm無效

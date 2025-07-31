@@ -263,5 +263,19 @@ namespace MyWebAPI.Controllers
 
 
 
+//5.2   新增Product資料加入上傳照片功能
+//5.2.1 將ProductsController的Post Action標示為[FromForm]，使其能直接由前端表單接收資料
+//5.2.2 使用Swagger測試是否能正常新增(目前應會有錯誤,無法正常新增)
+//5.2.3 建立一個ProductPostDTO給Post利用DTO傳遞資料
+//5.2.4 建立一個新的Post Action，介接口設定為[HttpPost("PostWithPhoto")]，並加入上傳檔案的動作(注入IWebHostEnvironment)
+//(這裡我們不要把原來的Post刪掉，而是新做一個以利測試)
+//5.2.5 將上傳檔案寫成一個獨立的方法
+//5.2.6 使用Swagger測試
+//※如果Bind的資料模型類別中具有上傳檔案的物件(如IFormFile)，即使不標示資料來源為[FromForm]，它仍能自己判斷匹配為[FromForm]※//
+
+
+
+
+
 
 
