@@ -282,27 +282,7 @@ namespace WebAPITest.Controllers
             };
 
             //上傳檔案
-            if (ProductPostDTO.Picture != null || ProductPostDTO.Picture.Length == 0)
-            {
-                //檔案上傳路徑
-                var UploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "ProductPhotos");
-
-                //檢查路徑
-                if (!Directory.Exists(UploadPath))
-                    Directory.CreateDirectory(UploadPath);
-
-                //檔案名稱(ProductID.jpg)
-                var FileName = ProductPostDTO.ProductID + Path.GetExtension(ProductPostDTO.Picture.FileName);
-                var FilePath = Path.Combine(UploadPath, FileName);
-
-                //上傳
-                using (var Stream = new FileStream(FilePath, FileMode.Create))
-                {
-                    ProductPostDTO.Picture.CopyTo(Stream);
-                }
-
-                Product.Picture = FileName;
-            }
+            UploadPhoto(Product, ProductPostDTO);
 
             _context.Product.Add(Product);
             try
@@ -404,6 +384,36 @@ namespace WebAPITest.Controllers
                 CateID = P.CateID,
                 CateName = P.Cate.CateName
             };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Product"></param>
+        /// <param name="ProductPostDTO"></param>
+        static void UploadPhoto(Product Product, ProductPostDTO ProductPostDTO)
+        {
+            if (ProductPostDTO.Picture != null || ProductPostDTO.Picture.Length == 0)
+            {
+                //檔案上傳路徑
+                var UploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "ProductPhotos");
+
+                //檢查路徑
+                if (!Directory.Exists(UploadPath))
+                    Directory.CreateDirectory(UploadPath);
+
+                //檔案名稱(ProductID.jpg)
+                var FileName = ProductPostDTO.ProductID + Path.GetExtension(ProductPostDTO.Picture.FileName);
+                var FilePath = Path.Combine(UploadPath, FileName);
+
+                //上傳
+                using (var Stream = new FileStream(FilePath, FileMode.Create))
+                {
+                    ProductPostDTO.Picture.CopyTo(Stream);
+                }
+
+                Product.Picture = FileName;
+            }
         }
     }
 }
