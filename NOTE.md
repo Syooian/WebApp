@@ -111,7 +111,9 @@ site.css, site.js檔：寫自定義內容，不要去改原始的css和js檔
 * Get
 * Post
 * Put
-* Delete
+* Delete  
+%但不管如何底層運作還是會回歸到HTTP的POST和GET%
+只要從網址送值大部分都是GET(有例外，有時會是POST)，其餘都是POST
 
 ### 模型上面如果有看到virtual，代表是此模型的關聯，並不是資料庫上實際的屬性
 
