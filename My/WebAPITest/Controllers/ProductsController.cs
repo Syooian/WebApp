@@ -267,6 +267,66 @@ namespace WebAPITest.Controllers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="ProductPostDTO"></param>
+        /// <returns></returns>
+        [HttpPost("PostWithPhoto")]
+        public async Task<ActionResult<ProductPostDTO>> PostProductWithPhoto([FromForm] ProductPostDTO ProductPostDTO)
+        {
+            var Product = new Product()
+            {
+                ProductID = ProductPostDTO.ProductID,
+                ProductName = ProductPostDTO.ProductName,
+                Price = ProductPostDTO.Price,
+                Description = ProductPostDTO.Description,
+                CateID = ProductPostDTO.CateID
+            };
+
+            //上傳檔案
+            if (ProductPostDTO.Picture != null || ProductPostDTO.Picture.Length == 0)
+            {
+                //檔案上傳路徑
+                var UploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "ProductPhotos");
+
+                //檢查路徑
+                if (!Directory.Exists(UploadPath))
+                    Directory.CreateDirectory(UploadPath);
+
+                //檔案名稱(ProductID.jpg)
+                var FileName = ProductPostDTO.ProductID + Path.GetExtension(ProductPostDTO.Picture.FileName);
+                var FilePath = Path.Combine(UploadPath, FileName);
+
+                //上傳
+                using (var Stream = new FileStream(FilePath, FileMode.Create))
+                {
+                    ProductPostDTO.Picture.CopyTo(Stream);
+                }
+
+                Product.Picture = FileName;
+            }
+
+            _context.Product.Add(Product);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (ProductExists(Product.ProductID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtAction("GetProduct", new { id = Product.ProductID }, Product);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="ProductID"></param>
         /// <param name="ProductName"></param>
         /// <param name="Price"></param>

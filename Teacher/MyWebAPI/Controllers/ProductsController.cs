@@ -272,6 +272,69 @@ namespace MyWebAPI.Controllers
             return CreatedAtAction("GetProduct", new { id = product.ProductID }, product);
         }
 
+        //5.2.4 建立一個新的Post Action，介接口設定為[HttpPost("PostWithPhoto")]，並加入上傳檔案的動作(注入IWebHostEnvironment)
+        [HttpPost("PostWithPhoto")]
+        public async Task<ActionResult<ProductPostDTO>> PostProductWithPhoto([FromForm] ProductPostDTO product)
+        {
+            //上傳檔案的處理
+            if (product.Picture != null || product.Picture.Length == 0)
+            {
+                //檔案上傳的路徑
+                var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "ProductPhotos");
+
+                //確保目錄存在
+                if (!Directory.Exists(uploadPath))
+                {
+                    Directory.CreateDirectory(uploadPath);
+                }
+
+                //檔案名稱(ProductID+副檔名)
+                var fileName = product.ProductID + Path.GetExtension(product.Picture.FileName);
+
+                var filePath = Path.Combine(uploadPath, fileName); //"/wwwroot/ProductPhotos/XXXXX.jpg";
+
+                //儲存檔案
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    product.Picture.CopyTo(stream);
+                }
+
+
+
+                Product p = new Product
+                {
+                    ProductID = product.ProductID,
+                    ProductName = product.ProductName,
+                    Price = product.Price,
+                    Description = product.Description,
+                    Picture = fileName,
+                    CateID = product.CateID
+                };
+
+
+
+                //寫入資料庫
+                _context.Product.Add(p);
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateException)
+                {
+                    if (ProductExists(product.ProductID))
+                    {
+                        return Conflict();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+
+            return CreatedAtAction("GetProduct", new { id = product.ProductID }, product);
+        }
+
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(string id)
