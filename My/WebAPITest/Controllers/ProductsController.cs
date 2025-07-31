@@ -200,7 +200,7 @@ namespace WebAPITest.Controllers
         // POST: api/Products
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
+        public async Task<ActionResult<Product>> PostProduct(Product product)//沒標註就是FromBody
         {
             _context.Product.Add(product);
             try
@@ -220,6 +220,90 @@ namespace WebAPITest.Controllers
             }
 
             return CreatedAtAction("GetProduct", new { id = product.ProductID }, product);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ProductID"></param>
+        /// <param name="ProductName"></param>
+        /// <param name="Price"></param>
+        /// <param name="Description"></param>
+        /// <param name="CateID"></param>
+        /// <returns></returns>
+        [HttpPost("fromQuery")]
+        public async Task<ActionResult<Product>> PostProduct(/*[FromQuery]*/ string ProductID, string ProductName, decimal Price, string? Description, string CateID)
+        {
+            var Product = new Product()
+            {
+                ProductID = ProductID,
+                ProductName = ProductName,
+                Price = Price,
+                Description = Description,
+                Picture = ProductID,
+                CateID = CateID
+            };
+
+            _context.Product.Add(Product);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (ProductExists(Product.ProductID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtAction("GetProduct", new { id = Product.ProductID }, Product);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ProductID"></param>
+        /// <param name="ProductName"></param>
+        /// <param name="Price"></param>
+        /// <param name="Description"></param>
+        /// <param name="CateID"></param>
+        /// <returns></returns>
+        [HttpPost("fromForm")]
+        public async Task<ActionResult<Product>> PostProductFromForm([FromForm] string ProductID, string ProductName, decimal Price, string? Description, string CateID)
+        {
+            var Product = new Product()
+            {
+                ProductID = ProductID,
+                ProductName = ProductName,
+                Price = Price,
+                Description = Description,
+                Picture = ProductID,
+                CateID = CateID
+            };
+
+            _context.Product.Add(Product);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (ProductExists(Product.ProductID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtAction("GetProduct", new { id = Product.ProductID }, Product);
         }
 
         // DELETE: api/Products/5
