@@ -249,3 +249,21 @@ end
 * 5.3.10 修改CategoriesController的Post方法，使其傳遞CategoryPostDTO
 * 5.3.11 修改Post Action 內的寫法
 * 5.3.12 使用Swagger測試
+
+#### 小結
+* ※程式撰寫至此，我們可以發現DTO在WebAPI的建置中是相當重要的資料傳輸物件※
+* ※除非你的API非常單純，否則您無法避免使用DTO物件※
+* ※因此在API設計的時候，我們盡量不去動到原來的Model物件，資料的傳輸皆用DTO來取代※
+* ※若DbContext物件的設計需求，我們則使用繼承的方式來使程式碼保持彈性※
+
+## 6     使用Put修改資料
+<p>6.1   基本修改資料方式</p>
+
+* 6.1.1 先使用Swagger測試及觀查目前Product及Category的Put(注意其接收格式為JSON)
+* 6.1.2 使用Swagger對此二個資料表做資料修改測試(這邊主要是觀察一下它們的資料呈現)
+* 6.1.3 新增CategoryPutDTO類別
+* 6.1.4 改寫CategoriesController中Put Action內容
+* 6.1.5 使用Swagger測試
+* 6.1.6 新增ProductPutDTO類別
+* 6.1.7 改寫ProductsController中Put Action內容
+* 6.1.8 使用Swagger測試
