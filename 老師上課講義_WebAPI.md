@@ -256,7 +256,7 @@ end
 * ※因此在API設計的時候，我們盡量不去動到原來的Model物件，資料的傳輸皆用DTO來取代※
 * ※若DbContext物件的設計需求，我們則使用繼承的方式來使程式碼保持彈性※
 
-## 6     使用Put修改資料
+## 6. 使用Put修改資料
 <p>6.1   基本修改資料方式</p>
 
 * 6.1.1 先使用Swagger測試及觀查目前Product及Category的Put(注意其接收格式為JSON)
@@ -267,3 +267,16 @@ end
 * 6.1.6 新增ProductPutDTO類別
 * 6.1.7 改寫ProductsController中Put Action內容
 * 6.1.8 使用Swagger測試
+
+## 7. 使用Delete刪除資料
+
+<p>7.1   基本刪除資料方式</p>
+
+* 7.1.1 改寫ProductsController中Delete Action內容，加入刪除照片的功能
+* 7.1.2 將刪除照片功能另建立FileDelete()方法
+* 7.1.3 使用Swagger測試
+* 7.1.4 使用Swagger測試刪除Category資料(這裡會發生資料表關聯的完整性限制)
+* 7.1.5 建立可刪除多筆資料的Delete Action，介接口設為[HttpDelete("ByCatID")]，方法名稱可自訂，傳入的參為為商品類別ID
+* 7.1.6 使用Swagger測試
+* 7.1.7 再次使用Swagger測試刪除Category資料  
+※一般要刪除父資料表的資料前，需先刪除與之關聯的子資料表所有資料，以確保資料不會被批次誤刪※
