@@ -47,8 +47,7 @@ namespace MyWebAPI.Controllers
             return category;
         }
 
-        // PUT: api/Categories/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //6.1.4 改寫CategoriesController中Put Action內容
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCategory(string id,[FromForm] CategoryPutDTO category)
         {

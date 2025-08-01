@@ -216,17 +216,39 @@ namespace MyWebAPI.Controllers
             return product;
         }
 
-        // PUT: api/Products/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
+        //6.1.7 改寫ProductsController中Put Action內容
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(string id, Product product)
+        public async Task<IActionResult> PutProduct(string id, [FromForm]ProductPutDTO product)
         {
-            if (id != product.ProductID)
+            //if (id != product.ProductID)
+            //{
+            //    return BadRequest();
+            //}
+            if (id == null)
             {
                 return BadRequest();
             }
 
-            _context.Entry(product).State = EntityState.Modified;
+            var p = await _context.Product.FindAsync(id);
+            if (p == null)
+            {
+                return NotFound("查無資料");
+            }
+
+            //檢查是否有新照片上傳
+            if (product.Picture != null || product.Picture.Length != 0)
+            {
+                FileUpload(product.Picture, id);
+
+            }
+
+            p.ProductName = product.ProductName;
+            p.Price = product.Price;
+            p.Description = product.Description;
+
+
+            _context.Entry(p).State = EntityState.Modified;
 
             try
             {
@@ -244,7 +266,7 @@ namespace MyWebAPI.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(p);
         }
 
         // POST: api/Products

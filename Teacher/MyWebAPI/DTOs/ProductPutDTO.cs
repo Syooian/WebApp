@@ -17,8 +17,8 @@ namespace MyWebAPI.DTOs
         [StringLength(200)]
         public string? Description { get; set; }
 
-        [Required]
-        public IFormFile Picture { get; set; } = null!;
+
+        public IFormFile? Picture { get; set; }
 
     }
 }
