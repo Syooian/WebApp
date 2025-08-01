@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using WebAPITest.Data;
 using WebAPITest.DTOs;
 using WebAPITest.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebAPITest.Controllers
 {
@@ -89,6 +90,50 @@ namespace WebAPITest.Controllers
             }
 
             return NoContent();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        [HttpPut("PutCategoryDTO/{id}")]
+        public async Task<IActionResult> PutCategory(string id, CategoryPutDTO category)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+
+            var Cate = await _context.Category.FindAsync(id);
+            //if (Cate == null)
+            //{
+            //    return NotFound("查無資料");
+            //}
+
+            Cate.CateName = category.CateName;
+
+            _context.Entry(Cate).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CategoryExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            //return NoContent();//代表成功但沒有內容返回 (204)
+            return Ok(Cate);//代表成功並返回內容 (200)
         }
 
         // POST: api/Categories
