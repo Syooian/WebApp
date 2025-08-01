@@ -116,6 +116,54 @@ namespace WebAPITest.Controllers
             return CreatedAtAction("GetCategory", new { id = category.CateID }, category);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="CateID"></param>
+        /// <param name="CateName"></param>
+        /// <returns></returns>
+        [HttpPost("FromPostDTO")]
+        //public async Task<ActionResult<CategoryPostDTO>> PostCategory(string CateID, string CateName)
+        public async Task<ActionResult<CategoryPostDTO>> PostCategory(CategoryPostDTO CategoryPostDTO)
+        {
+            //CategoryPostDTO DTO = new CategoryPostDTO()
+            //{
+            //    CateID = CateID,
+            //    CateName = CateName
+            //};
+            //var Category = new Category
+            //{
+            //    CateID = DTO.CateID,
+            //    CateName = DTO.CateName
+            //};
+
+            var Category = new Category
+            {
+                CateID = CategoryPostDTO.CateID,
+                CateName = CategoryPostDTO.CateName
+            };
+
+            _context.Category.Add(Category);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (CategoryExists(Category.CateID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtAction("GetCategory", new { id = Category.CateID }, Category);
+        }
+
         // DELETE: api/Categories/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(string id)

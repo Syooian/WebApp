@@ -14,7 +14,7 @@ namespace MyWebAPI.DTOs
 
         [Required]
         [StringLength(40)]
-        [ProudctNameCheck]
+        [ProudctNameCheck] //5.3.4 在需要使用此驗證器的屬性上加入標籤(這裡範例為ProductName屬性)
         public string ProductName { get; set; } = null!;
 
         [Required]
