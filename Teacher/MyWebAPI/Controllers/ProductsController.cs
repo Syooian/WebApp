@@ -282,7 +282,7 @@ namespace MyWebAPI.Controllers
                 return BadRequest("未上傳商品圖片");
             }
 
-            string fileName = FileUpload(product.Picture, product.ProductID);
+            string fileName = await FileUpload(product.Picture, product.ProductID);
 
             if(fileName=="")
             {
@@ -367,7 +367,7 @@ namespace MyWebAPI.Controllers
         }
 
         //5.2.5 將上傳檔案寫成一個獨立的方法
-        private string FileUpload(IFormFile Photo, string PID)
+        private async Task<string> FileUpload(IFormFile Photo, string PID)
         {
             //判斷上傳的檔案是否為圖片格式
             var extension = Path.GetExtension(Photo.FileName).ToLower();
@@ -396,7 +396,7 @@ namespace MyWebAPI.Controllers
             //儲存檔案
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                Photo.CopyTo(stream);
+                await Photo.CopyToAsync(stream);
             }
 
 

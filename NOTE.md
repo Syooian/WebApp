@@ -138,3 +138,9 @@ Client：192.168.2.8
 通常需要自己架伺服器先接API後再傳給自己的Client (Server可設定跨域存取政策)
 
 JsonIgnore對FromForm無效
+
+# 控制邏輯與商業邏輯
+* 控制邏輯寫在Controller
+	* 動作要去到哪裡
+* 商業邏輯寫在Model
+	* 演算法

@@ -274,6 +274,22 @@ namespace MyWebAPI.Controllers
 //※如果Bind的資料模型類別中具有上傳檔案的物件(如IFormFile)，即使不標示資料來源為[FromForm]，它仍能自己判斷匹配為[FromForm]※//
 
 
+//5.3   資料驗證
+//5.3.1 在ProductPostDTO.cs加入需要的內建驗證器(Validator)
+//5.3.2 使用Swagger測試
+//※在一般的情況下我們只會在接收資料(Post、Put、Delete)時進行驗證，讀取資料則不會※
+//5.3.3 在ProductPostDTO.cs加入自訂驗證器(使用ValidationAttribute物件)
+//5.3.4 在需要使用此驗證器的屬性上加入標籤(這裡範例為ProductName屬性)
+//5.3.5 使用Swagger測試
+//5.3.6 建立CategoryPostDTO類別
+//5.3.7 在CategoryPostDTO.cs加入需要的內建驗證器(Validator)
+//5.3.8 在CategoryPostDTO.cs加入自訂驗證器(使用ValidationAttribute物件)
+//5.3.9 在需要使用此驗證器的屬性上加入標籤
+//5.3.10 修改CategoriesController的Post方法，使其傳遞CategoryPostDTO
+//5.3.11 修改Post Action 內的寫法
+//5.3.12 使用Swagger測試
+
+
 
 
 
