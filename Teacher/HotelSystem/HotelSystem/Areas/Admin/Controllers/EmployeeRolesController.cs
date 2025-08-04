@@ -11,6 +11,7 @@ using HotelSystem.Models;
 namespace HotelSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("ER/{action=Index}")]
     public class EmployeeRolesController : Controller
     {
         private readonly HotelSysDBContext2 _context;
@@ -20,7 +21,7 @@ namespace HotelSystem.Areas.Admin.Controllers
             _context = context;
         }
 
-        // GET: EmployeeRoles
+        [Route("/aaa")]
         public async Task<IActionResult> Index()
         {
             _context.GetRoomServiceCount();
