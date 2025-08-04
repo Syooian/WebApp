@@ -169,14 +169,32 @@ namespace WebAPITest.Controllers
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(string id, Product product)
+        public async Task<IActionResult> PutProduct(string id,[FromForm] ProductPutDTO Product)
         {
-            if (id != product.ProductID)
-            {
+            //if (id != product.ProductID)
+            //{
+            //    return BadRequest();
+            //}
+            if (id == null)
                 return BadRequest();
+
+            var P = await _context.Product.FindAsync(id);
+            if(P == null)
+            {
+                return NotFound("查無資料");
             }
 
-            _context.Entry(product).State = EntityState.Modified;
+            //檢查是否有新照片上傳
+            if (Product.Picture != null && Product.Picture.Length != 0)
+            {
+                FileUpload(Product.Picture, id);
+            }
+
+            P.ProductName = Product.ProductName;
+            P.Price = Product.Price;
+            P.Description = Product.Description;
+
+            _context.Entry(P).State = EntityState.Modified;
 
             try
             {
@@ -194,7 +212,7 @@ namespace WebAPITest.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(P);
         }
 
         // POST: api/Products
@@ -356,6 +374,12 @@ namespace WebAPITest.Controllers
                 return NotFound();
             }
 
+            //刪除商品照片
+            if (!await FileDelete(product.Picture))
+            {
+                return BadRequest("刪除商品照片失敗，請檢查檔案是否存在或權限問題。");
+            }
+
             _context.Product.Remove(product);
             await _context.SaveChangesAsync();
 
@@ -414,6 +438,69 @@ namespace WebAPITest.Controllers
 
                 Product.Picture = FileName;
             }
+        }
+
+        private async Task<string> FileUpload(IFormFile Photo, string PID)
+        {
+            //判斷上傳的檔案是否為圖片格式
+            var extension = Path.GetExtension(Photo.FileName).ToLower();
+            var allowedExtension = new[] { ".jpg", ".jpeg", ".png" };
+
+            if (!allowedExtension.Contains(extension))
+            {
+                return "";
+            }
+
+
+            //檔案上傳的路徑
+            var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "ProductPhotos");
+
+            //確保目錄存在
+            if (!Directory.Exists(uploadPath))
+            {
+                Directory.CreateDirectory(uploadPath);
+            }
+
+            //檔案名稱(ProductID+副檔名)
+            var fileName = PID + Path.GetExtension(Photo.FileName);
+
+            var filePath = Path.Combine(uploadPath, fileName); //"/wwwroot/ProductPhotos/XXXXX.jpg";
+
+            //儲存檔案
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await Photo.CopyToAsync(stream);
+            }
+
+
+            return fileName; //回傳檔案名稱
+        }
+
+        //7.1.2 將刪除照片功能另建立FileDelete()方法
+        private async Task<bool> FileDelete(string fileName)
+        {
+
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "ProductPhotos");
+
+            var filePath = Path.Combine(path, fileName);
+
+            if (System.IO.File.Exists(filePath))
+            {
+                try
+                {
+                    System.IO.File.Delete(filePath);
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+
+
+                    return false;
+                }
+            }
+
+            return false;
         }
     }
 }

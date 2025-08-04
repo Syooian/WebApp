@@ -219,7 +219,7 @@ namespace MyWebAPI.Controllers
 
         //6.1.7 改寫ProductsController中Put Action內容
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(string id, [FromForm]ProductPutDTO product)
+        public async Task<IActionResult> PutProduct(string id, [FromForm] ProductPutDTO product)
         {
             //if (id != product.ProductID)
             //{
@@ -237,7 +237,7 @@ namespace MyWebAPI.Controllers
             }
 
             //檢查是否有新照片上傳
-            if (product.Picture != null || product.Picture.Length != 0)
+            if (product.Picture != null && product.Picture.Length != 0)
             {
                 FileUpload(product.Picture, id);
 
@@ -306,7 +306,7 @@ namespace MyWebAPI.Controllers
 
             string fileName = await FileUpload(product.Picture, product.ProductID);
 
-            if(fileName=="")
+            if (fileName == "")
             {
                 return BadRequest("上傳的檔案格式不正確，請上傳jpg、jpeg或png格式的圖片");
             }
@@ -346,7 +346,7 @@ namespace MyWebAPI.Controllers
             return CreatedAtAction("GetProduct", new { id = product.ProductID }, product);
         }
 
-        // DELETE: api/Products/5
+        //7.1.1 改寫ProductsController中Delete Action內容，加入刪除照片的功能
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(string id)
         {
@@ -355,6 +355,13 @@ namespace MyWebAPI.Controllers
             {
                 return NotFound();
             }
+
+            //刪除商品照片
+            if(! await FileDelete(product.Picture))
+            {
+                return BadRequest("刪除商品照片失敗，請檢查檔案是否存在或權限問題。");
+            }
+
 
             _context.Product.Remove(product);
             await _context.SaveChangesAsync();
@@ -423,6 +430,37 @@ namespace MyWebAPI.Controllers
 
 
             return fileName; //回傳檔案名稱
+        }
+
+
+        //7.1.2 將刪除照片功能另建立FileDelete()方法
+        private async Task<bool> FileDelete(string fileName)
+        {
+
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "ProductPhotos");
+
+            var filePath = Path.Combine(path, fileName);
+
+            if(System.IO.File.Exists(filePath))
+            {
+                try
+                {
+                    System.IO.File.Delete(filePath);
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                  
+                  
+                    return false;
+                }
+            }
+
+
+          
+
+            return false;
         }
     }
 }
