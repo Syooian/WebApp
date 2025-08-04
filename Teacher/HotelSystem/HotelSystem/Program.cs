@@ -41,7 +41,7 @@ app.UseAuthorization();
 //多層次路由
 app.MapControllerRoute(
     name: "EmployeeRole",
-    pattern: "Manger/{action}/{id?}",
+    pattern: "Manager/{action=Index}/{id?}",
     defaults: new { controller = "EmployeeRoles", action = "Index" });
 
 
@@ -50,7 +50,7 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "about",
     pattern: "about-us",
-    defaults: new { area = "Guest", controller = "Home", action = "Privacy" });
+    defaults: new {  controller = "Home", action = "Privacy" });
 
 
 
