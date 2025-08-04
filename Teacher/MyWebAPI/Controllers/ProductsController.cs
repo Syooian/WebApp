@@ -369,6 +369,43 @@ namespace MyWebAPI.Controllers
             return NoContent();
         }
 
+        //7.1.5 建立可刪除多筆資料的Delete Action(批次刪除)，介接口設為[HttpDelete("ByCatID")]，方法名稱可自訂，傳入的參為為商品類別ID
+        //方法名稱可自訂，傳入的參為為商品類別ID
+        [HttpDelete("ByCateID")]
+        public async Task<IActionResult> DeleteProductsByCateID(string cateID)
+        {
+            var products = await _context.Product.Where(p => p.CateID == cateID).ToListAsync();
+
+            if (products == null)
+            {
+                return NotFound();
+            }
+
+
+            foreach(var p in products)
+            {
+                //刪除商品照片
+                if (!await FileDelete(p.Picture))
+                {
+                    return BadRequest("刪除商品照片失敗，請檢查檔案是否存在或權限問題。");
+                }
+                //刪除商品資料
+                _context.Product.Remove(p);
+            }
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                return NotFound("刪除商品失敗，請檢查商品是否存在。");
+            }
+
+            return NoContent();
+        }
+
+
         private bool ProductExists(string id)
         {
             return _context.Product.Any(e => e.ProductID == id);

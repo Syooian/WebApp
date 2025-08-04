@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -169,7 +170,7 @@ namespace WebAPITest.Controllers
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(string id,[FromForm] ProductPutDTO Product)
+        public async Task<IActionResult> PutProduct(string id, [FromForm] ProductPutDTO Product)
         {
             //if (id != product.ProductID)
             //{
@@ -179,7 +180,7 @@ namespace WebAPITest.Controllers
                 return BadRequest();
 
             var P = await _context.Product.FindAsync(id);
-            if(P == null)
+            if (P == null)
             {
                 return NotFound("查無資料");
             }
@@ -382,6 +383,45 @@ namespace WebAPITest.Controllers
 
             _context.Product.Remove(product);
             await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="CateID"></param>
+        /// <returns></returns>
+        [HttpDelete("ByCateID")]
+        public async Task<IActionResult> DeleteProductsByCateID(string CateID)
+        {
+            var Products = await _context.Product.Where(P => P.CateID == CateID).ToListAsync();
+            if (Products == null)
+            {
+                return NotFound();
+            }
+
+            //刪除商品照片
+            foreach (var Product in Products)
+            {
+                if (!await FileDelete(Product.Picture))
+                {
+                    return BadRequest("刪除商品照片失敗，請檢查檔案是否存在或權限問題。");
+                }
+
+                //刪除商品資料
+                _context.Product.Remove(Product);
+            }
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"刪除商品失敗 : {ex.Message}");
+                return BadRequest("刪除商品失敗");
+            }
 
             return NoContent();
         }
