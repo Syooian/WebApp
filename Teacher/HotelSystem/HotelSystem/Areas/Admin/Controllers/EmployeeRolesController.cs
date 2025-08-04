@@ -28,8 +28,8 @@ namespace HotelSystem.Areas.Admin.Controllers
             return View(await _context.EmployeeRole.ToListAsync());
         }
 
-        // GET: EmployeeRoles/Details/5
-        public async Task<IActionResult> Details(string id)
+        [Route("/Guest/{ERName}-{id}.html")]
+        public async Task<IActionResult> Details(string id, string ERName)
         {
             if (id == null)
             {
