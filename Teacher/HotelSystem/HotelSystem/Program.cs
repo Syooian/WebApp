@@ -33,9 +33,20 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+
+//多層次路由
+
+//區域路由型態
+app.MapControllerRoute(
+    name: "default2",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}");
+
 
 
 
