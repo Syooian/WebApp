@@ -10,6 +10,7 @@ using HotelSystem.Models;
 
 namespace HotelSystem.Areas.Admin.Controllers
 {
+    [Area("Guest")]
     public class EmployeeRolesController : Controller
     {
         private readonly HotelSysDBContext2 _context;
