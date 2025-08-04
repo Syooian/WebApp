@@ -289,3 +289,13 @@ end
 * 8.0.3 將原先的ValidationAttributes註解或刪除
 * 8.0.4 在用到自訂驗證器的DTO中using static的 MyValidator類別
 * 8.0.5 使用Swagger測試
+
+<p>8.1   實作Service及DI</p>
+
+* 8.1.1 創建一個Service資料夾
+* 8.1.2 在資料夾中建立SomeService.cs類別並實作內容
+* 8.1.3 在Program.cs裡註冊SomeService服務
+* 8.1.4 建立API控制器 SomeController
+* 8.1.5 在SomeController裡注入SomeService服務(這裡就是DI的寫法，不使用 new 關鍵字)
+* 8.1.6 撰寫兩個Get Action
+* 8.1.7 使用Swagger測試
