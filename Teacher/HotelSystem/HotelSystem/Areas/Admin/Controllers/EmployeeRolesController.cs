@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using HotelSystem.Access.Data;
 using HotelSystem.Models;
 
-namespace HotelSystem.Controllers
+namespace HotelSystem.Areas.Admin.Controllers
 {
     public class EmployeeRolesController : Controller
     {
