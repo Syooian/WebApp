@@ -10,7 +10,11 @@ namespace WebAPITest.Controllers
         /// <summary>
         /// 
         /// </summary>
-        TestProductService Service = new TestProductService();
+        readonly TestProductService Service = new TestProductService();
+        public TestProductController(TestProductService Service)
+        {
+            this.Service = Service;
+        }
 
         /// <summary>
         /// 

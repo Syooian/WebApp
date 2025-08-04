@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using WebAPITest.Data;
 using WebAPITest.DTOs;
 using WebAPITest.Models;
+using WebAPITest.Services;
 
 namespace WebAPITest.Controllers
 {
@@ -18,10 +19,12 @@ namespace WebAPITest.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly GoodStoreContext _context;
+        readonly TestProductService Service;
 
-        public ProductsController(GoodStoreContext context)
+        public ProductsController(GoodStoreContext context, TestProductService Service)
         {
             _context = context;
+            this.Service = Service;
         }
 
         // GET: api/Products

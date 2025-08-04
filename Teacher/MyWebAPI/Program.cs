@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MyWebAPI.Models;
+using MyWebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +36,10 @@ builder.Services.AddDbContext<GoodStoreContext>(options =>
 //4.7.7 在Program裡註冊GoodStoreContext2的Service(※注意※原本註冊的GoodStoreContext不可刪掉)
 builder.Services.AddDbContext<GoodStoreContextG2>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("GoodStoreConnection")));
+
+
+//8.1.6 在Program.cs裡註冊SomeService服務
+builder.Services.AddScoped<SomeService>();
 
 
 

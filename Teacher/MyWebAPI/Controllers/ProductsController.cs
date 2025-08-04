@@ -8,6 +8,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using MyWebAPI.DTOs;
 using MyWebAPI.Models;
+using MyWebAPI.Services;
 
 namespace MyWebAPI.Controllers
 {
@@ -26,16 +27,19 @@ namespace MyWebAPI.Controllers
 
         //4.7.8 修改ProductsController上方所注入的GoodStoreContext為GoodStoreContext2
         private readonly GoodStoreContextG2 _context;
+        private readonly SomeService _service;
 
-        public ProductsController(GoodStoreContextG2 context)
+        public ProductsController(GoodStoreContextG2 context, SomeService service)
         {
             _context = context;
+            _service = service;
         }
 
         // GET: api/Products
         [HttpGet()]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct(string? cateID, string? productName, decimal? minPrice, decimal? maxPrice, string? description)
         {
+
             //4.1.2 使用Include()同時取得關聯資料
             //4.1.3 使用Where()改變查詢的條件並測試
             //4.1.4 使用OrderBy()相關排序方法改變資料排序並測試

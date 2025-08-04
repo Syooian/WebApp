@@ -294,8 +294,8 @@ end
 
 * 8.1.1 創建一個Service資料夾
 * 8.1.2 在資料夾中建立SomeService.cs類別並實作內容
-* 8.1.3 在Program.cs裡註冊SomeService服務
-* 8.1.4 建立API控制器 SomeController
-* 8.1.5 在SomeController裡注入SomeService服務(這裡就是DI的寫法，不使用 new 關鍵字)
-* 8.1.6 撰寫兩個Get Action
+* 8.1.3 建立API控制器 SomeController
+* 8.1.4 在SomeController裡注入SomeService服務(這裡就是DI的寫法，不使用 new 關鍵字)
+* 8.1.5 撰寫兩個Get Action
+* 8.1.6 在Program.cs裡註冊SomeService服務
 * 8.1.7 使用Swagger測試
