@@ -27,26 +27,4 @@ namespace WebAPITest.DTOs
         [RegularExpression("[A-Z][1-9]")]
         public string CateID { get; set; } = null!;
     }
-
-
-    public class ProductNameCheck : ValidationAttribute//自訂驗證器
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Value"></param>
-        /// <param name="ValidationContext"></param>
-        /// <returns></returns>
-        protected override ValidationResult? IsValid(object Value, ValidationContext ValidationContext)
-        {
-            var ProductName = Value.ToString();
-
-            if (ProductName.Length < 3)
-            {
-                return new ValidationResult("產品名稱長度不足");
-            }
-
-            return ValidationResult.Success;
-        }
-    }
 }

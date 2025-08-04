@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static MyWebAPI.ValidationAttributes.MyValidator; //8.5.4 在用到自訂驗證器的DTO中using static的 MyValidator類別
 
 namespace MyWebAPI.DTOs
 {
@@ -34,21 +35,21 @@ namespace MyWebAPI.DTOs
 
 
     //5.3.3 在ProductPostDTO.cs加入自訂驗證器(使用ValidationAttribute物件)
-    public class ProudctNameCheck:ValidationAttribute
-    {
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {
-            string PName = value.ToString();
+    //public class ProudctNameCheck:ValidationAttribute
+    //{
+    //    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+    //    {
+    //        string PName = value.ToString();
 
-            if (PName.Length < 3)
-            {
-                return new ValidationResult("商品名稱至少三個字");
-            }
+    //        if (PName.Length < 3)
+    //        {
+    //            return new ValidationResult("商品名稱至少三個字");
+    //        }
 
-            return ValidationResult.Success;
-        }
+    //        return ValidationResult.Success;
+    //    }
 
-    }
+    //}
 
 
 

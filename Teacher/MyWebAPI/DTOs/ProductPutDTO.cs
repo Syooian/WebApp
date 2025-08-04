@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static MyWebAPI.ValidationAttributes.MyValidator; //8.5.4 在用到自訂驗證器的DTO中using static的 MyValidator類別
 
 namespace MyWebAPI.DTOs
 {

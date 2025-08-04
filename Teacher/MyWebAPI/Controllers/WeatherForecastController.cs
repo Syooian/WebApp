@@ -320,11 +320,33 @@ namespace MyWebAPI.Controllers
 //7.1.2 將刪除照片功能另建立FileDelete()方法
 //7.1.3 使用Swagger測試
 //7.1.4 使用Swagger測試刪除Category資料(這裡會發生資料表關聯的完整性限制)
-//7.1.5 建立可刪除多筆資料的Delete Action，介接口設為[HttpDelete("ByCatID")]，方法名稱可自訂，傳入的參為為商品類別ID
+//7.1.5 建立可刪除多筆資料的Delete Action(批次刪除)，介接口設為[HttpDelete("ByCatID")]，方法名稱可自訂，傳入的參為為商品類別ID
 //7.1.6 使用Swagger測試
 //7.1.7 再次使用Swagger測試刪除Category資料
 //※一般要刪除父資料表的資料前，需先刪除與之關聯的子資料表所有資料，以確保資料不會被批次誤刪※
 
+
+/////////////////////////////////////////////////////////////////////////////
+
+//8     程式碼重構-使用依賴注入(Dependency Injection-DI)
+
+//8.0   自訂資料驗證類別程式碼重構(未用到DI)
+//8.0.1 新增一個「ValidationAttributes」資料夾，並在資料夾中建立MyValidator.cs檔案
+//8.0.2 將原本寫在ProductPostDTO及CategoryPostDTO內的自訂驗證類別(ValidationAttributes)貼進MyValidator.cs檔案中
+//8.0.3 將原先的ValidationAttributes註解或刪除
+//8.5.4 在用到自訂驗證器的DTO中using static的 MyValidator類別
+//8.0.5 使用Swagger測試
+
+
+
+//8.1   實作Service及DI
+//8.1.1 創建一個Service資料夾
+//8.1.2 在資料夾中建立SomeService.cs類別並實作內容
+//8.1.3 在Program.cs裡註冊SomeService服務
+//8.1.4 建立API控制器 SomeController
+//8.1.5 在SomeController裡注入SomeService服務(這裡就是DI的寫法，不使用 new 關鍵字)
+//8.1.6 撰寫兩個Get Action
+//8.1.7 使用Swagger測試
 
 
 

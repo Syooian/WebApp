@@ -7,7 +7,7 @@ namespace WebAPITest.DTOs
     {
         [Required]
         [StringLength(40)]
-        [ProudctNameCheck]
+        [ProductNameCheck]
         public string ProductName { get; set; } = null!;
 
         [Required]

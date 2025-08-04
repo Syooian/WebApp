@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using MyWebAPI.Models;
+using static MyWebAPI.ValidationAttributes.MyValidator; //8.5.4 在用到自訂驗證器的DTO中using static的 MyValidator類別
 
 namespace MyWebAPI.DTOs
 {
@@ -20,37 +21,37 @@ namespace MyWebAPI.DTOs
     }
 
     //5.3.8 在CategoryPostDTO.cs加入自訂驗證器(使用ValidationAttribute物件)
-    public class CategoryNameDuplicateCheck : ValidationAttribute
-    {
+    //public class CategoryNameDuplicateCheck : ValidationAttribute
+    //{
 
-        //不可以模仿Controller的寫法注入 Context
-        //private readonly GoodStoreContextG2 _context;
+    //    //不可以模仿Controller的寫法注入 Context
+    //    //private readonly GoodStoreContextG2 _context;
 
-        //public CategoryNameDuplicateCheck(GoodStoreContextG2 context)
-        //{
-        //    _context = context;
-        //}
-
-
-        //假設類別名稱不可以重複
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {
-
-            string cateName = value.ToString();
-
-            GoodStoreContextG2 _context= validationContext.GetService<GoodStoreContextG2>();
+    //    //public CategoryNameDuplicateCheck(GoodStoreContextG2 context)
+    //    //{
+    //    //    _context = context;
+    //    //}
 
 
-            var result = _context.Category.Where(c => c.CateName == cateName);
+    //    //假設類別名稱不可以重複
+    //    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+    //    {
 
-            if (result.Any())
-            {
-                return new ValidationResult("類別名稱不可以重複");
-            }
+    //        string cateName = value.ToString();
+
+    //        GoodStoreContextG2 _context= validationContext.GetService<GoodStoreContextG2>();
 
 
-            return ValidationResult.Success;
-        }
-    }
+    //        var result = _context.Category.Where(c => c.CateName == cateName);
+
+    //        if (result.Any())
+    //        {
+    //            return new ValidationResult("類別名稱不可以重複");
+    //        }
+
+
+    //        return ValidationResult.Success;
+    //    }
+    //}
 
 }
