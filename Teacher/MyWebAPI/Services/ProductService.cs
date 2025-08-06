@@ -51,6 +51,15 @@ namespace MyWebAPI.Services
             return productsList;
         }
 
+        public async Task<ProductDTO> GetProduct(string id)
+        {
+            var product = await _context.Product.Include(c => c.Cate).Where(p => p.ProductID == id)
+              .OrderBy(p => p.Price).Select(p => ItemProduct(p)).FirstOrDefaultAsync();
+
+
+            return product;
+        }
+
         private static ProductDTO ItemProduct(Product p)
         {
             var result = new ProductDTO

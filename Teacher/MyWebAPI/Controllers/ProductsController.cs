@@ -27,12 +27,12 @@ namespace MyWebAPI.Controllers
 
         //4.7.8 修改ProductsController上方所注入的GoodStoreContext為GoodStoreContext2
         private readonly GoodStoreContextG2 _context;
-        private readonly SomeService _service;
+        private readonly ProductService _productService;
 
-        public ProductsController(GoodStoreContextG2 context, SomeService service)
+        public ProductsController(GoodStoreContextG2 context, ProductService productService)
         {
             _context = context;
-            _service = service;
+            _productService = productService;
         }
 
         //8.3.5 改寫ProductsController裡的Get Action寫法，僅留下控制邏輯
@@ -40,36 +40,7 @@ namespace MyWebAPI.Controllers
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct(string? cateID, string? productName, decimal? minPrice, decimal? maxPrice, string? description)
         {
 
-            
-            var products = _context.Product.Include(c => c.Cate).OrderBy(p => p.Price).AsQueryable();
-
-           
-            if (!string.IsNullOrEmpty(cateID))
-            {
-              
-                products = products.Where(p => p.CateID == cateID);
-
-            }
-          
-            if (!string.IsNullOrEmpty(productName))
-            {
-              
-                products = products.Where(p => p.ProductName.Contains(productName));
-            }
-         
-            if (minPrice.HasValue && maxPrice.HasValue)
-            {
-              
-                products = products.Where(p => p.Price >= minPrice && p.Price <= maxPrice);
-            }
-
-
-           
-            if (!string.IsNullOrEmpty(description))
-            {
-              
-                products = products.Where(p => p.Description.Contains(description));
-            }
+            var products = await _productService.GetProduct(cateID, productName, minPrice, maxPrice, description);
 
 
             if (products == null || products.Count() == 0)
@@ -78,7 +49,7 @@ namespace MyWebAPI.Controllers
             }
 
 
-            return await products.Select(p => ItemProduct(p)).ToListAsync();
+            return products;
         }
 
         //4.6.1 新增一個Get Action GetProductFromSQL()並設定介接口為[HttpGet("fromSQL")]
@@ -161,15 +132,11 @@ namespace MyWebAPI.Controllers
         }
 
 
-        //4.3.1 先使用Swagger測試及觀查目前Product的資料取得狀況(理解參數及介接口)
+     
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDTO>> GetProduct(string id)
         {
-            //4.4.1 將資料轉換的程式寫成函數並再次改寫Get Action(※這種寫法架構才會好※)
-            //4.3.2 使用Include()同時取得關聯資料並使用ProductDTO來傳遞資料
-            var product = await _context.Product.Include(c => c.Cate).Where(p => p.ProductID == id)
-              .OrderBy(p => p.Price).Select(p => ItemProduct(p)).FirstOrDefaultAsync();
-
+            var product= await _productService.GetProduct(id);
 
             if (product == null)
             {
