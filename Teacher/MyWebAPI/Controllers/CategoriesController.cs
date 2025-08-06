@@ -26,21 +26,27 @@ namespace MyWebAPI.Controllers
             _categoryService = categoryService;
         }
 
-
+        //8.2.5 改寫CategoriesController裡的兩個Get Action寫法，僅留下控制邏輯
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoryDTO>>> GetCategory()
         {
-            
-            return await _context.Category.Include(c=>c.Product).Select(c=>ItemCategory(c)).ToListAsync();
+            var categories = await _categoryService.GetCategory();
+
+            //控制邏輯：如果沒有找到任何資料，則回傳NotFound
+            if (categories == null || !categories.Any())
+            {
+                return NotFound("沒有找到任何資料");
+            }
+
+            return categories;
         }
 
-     
+        //8.2.5 改寫CategoriesController裡的兩個Get Action寫法，僅留下控制邏輯
         [HttpGet("{id}")]
         public async Task<ActionResult<CategoryDTO>> GetCategory(string id)
         {
            
-            var category = await _context.Category.Include(c => c.Product).Where(c=>c.CateID==id)
-                .Select(c => ItemCategory(c)).FirstOrDefaultAsync();
+            var category = await _categoryService.GetCategory(id);
 
 
             if (category == null)
@@ -50,6 +56,8 @@ namespace MyWebAPI.Controllers
 
             return category;
         }
+
+
 
         //6.1.4 改寫CategoriesController中Put Action內容
         [HttpPut("{id}")]
