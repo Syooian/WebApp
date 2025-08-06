@@ -59,48 +59,24 @@ namespace MyWebAPI.Controllers
 
 
 
-        //6.1.4 改寫CategoriesController中Put Action內容
+        //8.2.7 將Post、Put及Delete重構
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCategory(string id,[FromForm] CategoryPutDTO category)
         {
-            //if (id != category.CateID)
-            //{
-            //    return BadRequest();
-            //}
-
+           
             if (id ==null)
             {
                 return BadRequest();
             }
-            
-            var cate = await _context.Category.FindAsync(id);
 
-            if (cate == null)
+            var cateOld = await _categoryService.getCategory(id);
+
+            if (cateOld == null)
             {
                 return NotFound("查無資料");
             }
 
-            cate.CateName = category.CateName;
-
-            _context.Entry(cate).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CategoryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            //return NoContent();
+           var cate = await _categoryService.UpdateCategory(cateOld, category);
 
             return Ok(cate);
         }
@@ -140,7 +116,8 @@ namespace MyWebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(string id)
         {
-            var category = await _context.Category.FindAsync(id);
+            var category = await _categoryService.getCategory(id);
+
             if (category == null)
             {
                 return NotFound();
@@ -152,24 +129,15 @@ namespace MyWebAPI.Controllers
             return NoContent();
         }
 
+        
+
+
         private bool CategoryExists(string id)
         {
             return _context.Category.Any(e => e.CateID == id);
         }
 
 
-        private static CategoryDTO ItemCategory(Category c)
-        {
-            var result = new CategoryDTO()
-            {
-                CateID = c.CateID,
-                CateName = c.CateName,
-                //ProductCount = c.Product.Count(),
-                Product = c.Product
-            };
-
-            return result;
-
-        }
+      
     }
 }

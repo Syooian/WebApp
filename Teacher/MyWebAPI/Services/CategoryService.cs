@@ -47,5 +47,32 @@ namespace MyWebAPI.Services
 
         }
 
+        public async Task<Category> getCategory(string id)
+        {
+            return await _context.Category.FindAsync(id);
+        }
+
+        public async Task<Category> UpdateCategory(Category cate, [FromForm] CategoryPutDTO category)
+        {
+            
+            cate.CateName = category.CateName;
+
+            _context.Entry(cate).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+
+
+
+            return cate;
+        }
+
+
     }
 }
