@@ -85,31 +85,15 @@ namespace MyWebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<CategoryPostDTO>> PostCategory(CategoryPostDTO category)
         {
-            //5.3.11 修改Post Action 內的寫法
-            Category cate = new Category()
-            {
-                CateID = category.CateID,
-                CateName = category.CateName
-            };
 
-            _context.Category.Add(cate);
-            try
+            if (CategoryExists(category.CateID))
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (CategoryExists(category.CateID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest();
             }
 
-            return CreatedAtAction("GetCategory", new { id = category.CateID }, category);
+            var cate =_categoryService.InsertCategory(category);
+
+            return Ok(cate);
         }
 
         // DELETE: api/Categories/5

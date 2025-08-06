@@ -73,6 +73,28 @@ namespace MyWebAPI.Services
             return cate;
         }
 
+        public async Task<Category> InsertCategory(CategoryPostDTO category)
+        {
+          
+            Category cate = new Category()
+            {
+                CateID = category.CateID,
+                CateName = category.CateName
+            };
 
+            _context.Category.Add(cate);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                
+                 throw;
+                
+            }
+
+            return cate;
+        }
     }
 }
