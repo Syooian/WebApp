@@ -142,8 +142,10 @@ JsonIgnore對FromForm無效
 # 控制邏輯與商業邏輯
 * 控制邏輯寫在Controller
 	* 動作要去到哪裡
-* 商業邏輯寫在Model
+* 商業邏輯寫在Model, Services
 	* 演算法
+	* 要做的事情
+	* 篩選條件
 
 # 路由註冊順序
 1. 先註冊特殊路由

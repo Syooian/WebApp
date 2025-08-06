@@ -18,6 +18,7 @@ namespace MyWebAPI.Controllers
 
         //SomeService someService = new SomeService();
 
+        //8.1.5 撰寫兩個Get Action
         [HttpGet]
         public IEnumerable<string> Get()
         {

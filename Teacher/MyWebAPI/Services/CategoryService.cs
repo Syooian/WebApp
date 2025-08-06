@@ -1,0 +1,52 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MyWebAPI.DTOs;
+using MyWebAPI.Models;
+
+namespace MyWebAPI.Services
+{
+    public class CategoryService
+    {
+        private readonly GoodStoreContext _context;
+
+        public CategoryService(GoodStoreContext context)
+        {
+            _context = context;
+        }
+        //8.2.1 在Service資料夾中建立CategoryService，並將CategoriesController裡的兩個Get Action相關的商業邏輯移至此撰寫
+        //      (包括ItemProduct()方法一併移入CategoryService)
+
+        public async Task<List<CategoryDTO>> GetCategory()
+        {
+          
+            return await _context.Category.Include(c => c.Product).Select(c => ItemCategory(c)).ToListAsync();
+        }
+
+
+        public async Task<CategoryDTO> GetCategory(string id)
+        {
+            
+            var category = await _context.Category.Include(c => c.Product).Where(c => c.CateID == id)
+                .Select(c => ItemCategory(c)).FirstOrDefaultAsync();
+
+
+      
+            return category;
+        }
+
+        private static CategoryDTO ItemCategory(Category c)
+        {
+            var result = new CategoryDTO()
+            {
+                CateID = c.CateID,
+                CateName = c.CateName,
+                //ProductCount = c.Product.Count(),
+                Product = c.Product
+            };
+
+            return result;
+
+        }
+
+    }
+}

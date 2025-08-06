@@ -299,3 +299,15 @@ end
 * 8.1.5 撰寫兩個Get Action
 * 8.1.6 在Program.cs裡註冊SomeService服務
 * 8.1.7 使用Swagger測試
+
+<p>8.2   CategoriesController程式碼重構</p>
+
+* 8.2.1 在Service資料夾中建立CategoryService，並將CategoriesController裡的兩個Get Action相關的商業邏輯移至此撰寫 (包括ItemProduct()方法一併移入CategoryService)
+* 8.2.2 複製一個CategoriesController，並把檔名及class名字改掉(這個動作做不做都可以，只是要保留舊的寫法供參考用)
+* 8.2.3 在Program.cs裡註冊CategoryService
+* 8.2.4 在CategoriesController裡注入CategoryService服務
+* 8.2.5 改寫CategoriesController裡的兩個Get Action寫法，僅留下控制邏輯
+* 8.2.6 使用Swagger測試
+* 8.2.7 將Post、Put及Delete重構
+* 8.2.8 CategoriesController再重構
+* 8.2.9 使用Swagger測試
