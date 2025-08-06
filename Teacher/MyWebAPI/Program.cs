@@ -41,6 +41,8 @@ builder.Services.AddDbContext<GoodStoreContextG2>(options =>
 //8.1.6 在Program.cs裡註冊SomeService服務
 builder.Services.AddScoped<SomeService>();
 
+//8.2.3 在Program.cs裡註冊CategoryService
+builder.Services.AddScoped<CategoryService>();
 
 
 var app = builder.Build();
