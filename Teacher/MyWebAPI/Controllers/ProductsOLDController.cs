@@ -15,7 +15,7 @@ namespace MyWebAPI.Controllers
     //3.2.4 修改API介接路由為「api[controller]」
     [Route("api[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductsOLDController : ControllerBase
     {
         //private readonly GoodStoreContext _context;
 
@@ -29,45 +29,86 @@ namespace MyWebAPI.Controllers
         private readonly GoodStoreContextG2 _context;
         private readonly SomeService _service;
 
-        public ProductsController(GoodStoreContextG2 context, SomeService service)
+        public ProductsOLDController(GoodStoreContextG2 context, SomeService service)
         {
             _context = context;
             _service = service;
         }
 
-        //8.3.5 改寫ProductsController裡的Get Action寫法，僅留下控制邏輯
+        // GET: api/Products
         [HttpGet()]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct(string? cateID, string? productName, decimal? minPrice, decimal? maxPrice, string? description)
         {
 
-            
+            //4.1.2 使用Include()同時取得關聯資料
+            //4.1.3 使用Where()改變查詢的條件並測試
+            //4.1.4 使用OrderBy()相關排序方法改變資料排序並測試
+
+            //var products = await _context.Product.Include(c => c.Cate).Where(p=>p.Price>= price)
+            //    .OrderBy(p=>p.Price).ToListAsync();
+
+            //4.1.5 使用Select()抓取特定的欄位並測試(這樣做無法return)
+            //var products = await _context.Product.Include(c => c.Cate).Where(p => p.Price >= price)
+            //    .OrderBy(p => p.Price).Select(p => new { 
+            //        p.ProductID,
+            //        p.ProductName,
+            //        p.Price,
+            //        p.Description,
+            //        p.Picture,
+            //        p.CreatedDate,
+            //        p.CateID,
+            //        p.Cate.CateName 
+            //    }).ToListAsync();
+
+            //4.2.3 改寫ProductsController裡的Get Action
+            //var products = await _context.Product.Include(c => c.Cate).Where(p => p.Price >= price)
+            // .OrderBy(p => p.Price).Select(p => new ProductDTO
+            // {
+            //     ProductID = p.ProductID,
+            //     ProductName = p.ProductName,
+            //     Price = p.Price,
+            //     Description = p.Description,
+            //     Picture = p.Picture,
+            //     CateID = p.CateID,
+            //     CateName = p.Cate.CateName
+            // }).ToListAsync();
+
+
+            //4.4.1 將資料轉換的程式寫成函數並再次改寫Get Action(※這種寫法架構才會好※)
+            //var products = await _context.Product.Include(c => c.Cate).Where(p => p.Price >= price)
+            //    .OrderBy(p => p.Price).Select(p => ItemProduct(p)).ToListAsync();
+
+
+            //var products = await _context.Product.Include(c => c.Cate).OrderBy(p => p.Price).Select(p => ItemProduct(p)).ToListAsync();
+
+            //4.4.8 修改先將資料載入內存的寫法
             var products = _context.Product.Include(c => c.Cate).OrderBy(p => p.Price).AsQueryable();
 
-           
+            //4.4.2 加入產品類別搜尋
             if (!string.IsNullOrEmpty(cateID))
             {
-              
+                //products = products.Where(p => p.CateID == cateID).ToList();
                 products = products.Where(p => p.CateID == cateID);
 
             }
-          
+            //4.4.3 加入產品名稱關鍵字搜尋
             if (!string.IsNullOrEmpty(productName))
             {
-              
+                //products = products.Where(p => p.ProductName.Contains(productName)).ToList();
                 products = products.Where(p => p.ProductName.Contains(productName));
             }
-         
+            //4.4.4 加入價格區間搜區
             if (minPrice.HasValue && maxPrice.HasValue)
             {
-              
+                //products = products.Where(p => p.Price >= minPrice && p.Price <= maxPrice).ToList();
                 products = products.Where(p => p.Price >= minPrice && p.Price <= maxPrice);
             }
 
 
-           
+            //4.4.5 加入產品敘述關鍵字搜尋
             if (!string.IsNullOrEmpty(description))
             {
-              
+                //products = products.Where(p => p.Description.Contains(description)).ToList();
                 products = products.Where(p => p.Description.Contains(description));
             }
 

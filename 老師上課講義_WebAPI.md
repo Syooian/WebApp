@@ -311,3 +311,20 @@ end
 * 8.2.7 將Post、Put及Delete重構
 * 8.2.8 CategoriesController再重構
 * 8.2.9 使用Swagger測試
+
+<p>8.3   ProductsController程式碼重構</p>
+
+* 8.3.1 在Service資料夾中建立ProductService，並將ProductsController裡的Get Action相關的商業邏輯移至此撰寫(包括ItemProduct()方法一併移入ProductService)
+* 8.3.2 複製一個ProductsController，並把檔名及class名字改掉(這個動作做不做都可以，只是要保留舊的寫法供參考用)
+* 8.3.3 在Program.cs裡註冊ProductService
+* 8.3.4 在ProductsController裡注入ProductService服務
+* 8.3.5 改寫ProductsController裡的Get Action寫法，僅留下控制邏輯
+* 8.3.6 使用Swagger測試
+* 8.3.7 建立商品查詢的傳入參數類別ProductParam.cs(此例放置於QueryParameters資料夾)
+* 8.3.8 改寫參數傳入的方式為傳入ProductParam類別(全部相關的地方都要改寫)  
+※※※※※這裡要注意在Get Action中傳參數時要標註為[FromQuery]，否則會判斷為[FromBody]※※※※※
+* 8.3.9 將上傳照片及刪除照片的方法移至ProductService，修飾詞改為Public
+* 8.3.10 使用Swagger測試  
+※程式碼重構的目的，在於保持程式的彈性，使耦合力降低，並非硬拆解程式※  
+※需不需要重構雖然沒有一定的標準，但原則上有重複出現的程式或寫死太多的程式，就應考慮重構※  
+※基本的重構原則是Controller只保留控制邏輯，商業邏輯均需移至Service，再將其注入使用※
