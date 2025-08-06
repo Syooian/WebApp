@@ -96,5 +96,26 @@ namespace MyWebAPI.Services
 
             return cate;
         }
+
+        public async Task<bool> DeleteCategory(Category cate)
+        {
+         
+
+            _context.Category.Remove(cate);
+ 
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+
+                return false;
+
+            }
+
+            return true;
+        }
     }
 }

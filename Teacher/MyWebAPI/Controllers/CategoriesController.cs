@@ -81,7 +81,7 @@ namespace MyWebAPI.Controllers
             return Ok(cate);
         }
 
-        //5.3.10 修改CategoriesController的Post方法，使其傳遞CategoryPostDTO
+
         [HttpPost]
         public async Task<ActionResult<CategoryPostDTO>> PostCategory(CategoryPostDTO category)
         {
@@ -107,8 +107,13 @@ namespace MyWebAPI.Controllers
                 return NotFound();
             }
 
-            _context.Category.Remove(category);
-            await _context.SaveChangesAsync();
+            var result = await _categoryService.DeleteCategory(category);
+
+            if (!result)
+            {
+                return BadRequest();
+            }
+
 
             return NoContent();
         }
