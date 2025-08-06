@@ -29,7 +29,6 @@ namespace MyWebAPI.Services
             var category = await _context.Category.Include(c => c.Product).Where(c => c.CateID == id)
                 .Select(c => ItemCategory(c)).FirstOrDefaultAsync();
 
-
       
             return category;
         }

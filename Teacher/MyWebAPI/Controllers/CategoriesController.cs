@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyWebAPI.DTOs;
 using MyWebAPI.Models;
+using MyWebAPI.Services;
 
 namespace MyWebAPI.Controllers
 {
@@ -16,25 +17,28 @@ namespace MyWebAPI.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly GoodStoreContext _context;
+        //8.2.4 在CategoriesController裡注入CategoryService服務
+        private readonly CategoryService _categoryService;
 
-        public CategoriesController(GoodStoreContext context)
+        public CategoriesController(GoodStoreContext context, CategoryService categoryService)
         {
             _context = context;
+            _categoryService = categoryService;
         }
 
-        //4.5.3 改寫CategoriesController裡的第一個Get Action
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoryDTO>>> GetCategory()
         {
-            //4.5.4 使用Include()同時取得關聯資料並以CategoryDTO傳遞
+            
             return await _context.Category.Include(c=>c.Product).Select(c=>ItemCategory(c)).ToListAsync();
         }
 
-        //4.5.6 改寫CategoriesController裡的第二個Get Action
+     
         [HttpGet("{id}")]
         public async Task<ActionResult<CategoryDTO>> GetCategory(string id)
         {
-            //4.5.7 使用Include()同時取得關聯資料並以CategoryDTO傳遞
+           
             var category = await _context.Category.Include(c => c.Product).Where(c=>c.CateID==id)
                 .Select(c => ItemCategory(c)).FirstOrDefaultAsync();
 
