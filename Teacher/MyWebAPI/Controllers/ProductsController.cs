@@ -8,6 +8,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using MyWebAPI.DTOs;
 using MyWebAPI.Models;
+using MyWebAPI.QueryParameters;
 using MyWebAPI.Services;
 
 namespace MyWebAPI.Controllers
@@ -37,10 +38,10 @@ namespace MyWebAPI.Controllers
 
         //8.3.5 改寫ProductsController裡的Get Action寫法，僅留下控制邏輯
         [HttpGet()]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct(string? cateID, string? productName, decimal? minPrice, decimal? maxPrice, string? description)
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct(ProductParam productParam)
         {
 
-            var products = await _productService.GetProduct(cateID, productName, minPrice, maxPrice, description);
+            var products = await _productService.GetProduct(productParam);
 
 
             if (products == null || products.Count() == 0)

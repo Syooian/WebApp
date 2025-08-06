@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyWebAPI.DTOs;
 using MyWebAPI.Models;
+using MyWebAPI.QueryParameters;
 
 namespace MyWebAPI.Services
 {
@@ -14,36 +15,36 @@ namespace MyWebAPI.Services
             _context = context;
         }
 
-        public async Task<List<ProductDTO>> GetProduct(string? cateID, string? productName, decimal? minPrice, decimal? maxPrice, string? description)
+        public async Task<List<ProductDTO>> GetProduct(ProductParam productParam)
         {
 
             var products = _context.Product.Include(c => c.Cate).OrderBy(p => p.Price).AsQueryable();
 
 
-            if (!string.IsNullOrEmpty(cateID))
+            if (!string.IsNullOrEmpty(productParam.catID))
             {
 
-                products = products.Where(p => p.CateID == cateID);
+                products = products.Where(p => p.CateID == productParam.catID);
 
             }
 
-            if (!string.IsNullOrEmpty(productName))
+            if (!string.IsNullOrEmpty(productParam.productName))
             {
 
-                products = products.Where(p => p.ProductName.Contains(productName));
+                products = products.Where(p => p.ProductName.Contains(productParam.productName));
             }
 
-            if (minPrice.HasValue && maxPrice.HasValue)
+            if (productParam.minPrice.HasValue && productParam.maxPrice.HasValue)
             {
 
-                products = products.Where(p => p.Price >= minPrice && p.Price <= maxPrice);
+                products = products.Where(p => p.Price >= productParam.minPrice && p.Price <= productParam.maxPrice);
             }
 
 
-            if (!string.IsNullOrEmpty(description))
+            if (!string.IsNullOrEmpty(productParam.description))
             {
 
-                products = products.Where(p => p.Description.Contains(description));
+                products = products.Where(p => p.Description.Contains(productParam.description));
             }
 
             var productsList =  await products.Select(p => ItemProduct(p)).ToListAsync();

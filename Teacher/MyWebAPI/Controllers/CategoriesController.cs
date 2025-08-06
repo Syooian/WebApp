@@ -91,7 +91,7 @@ namespace MyWebAPI.Controllers
                 return BadRequest();
             }
 
-            var cate =_categoryService.InsertCategory(category);
+            var cate =await _categoryService.InsertCategory(category);
 
             return Ok(cate);
         }
