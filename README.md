@@ -5,3 +5,4 @@
 # 老師的上課講義檔案說明：
 - Model DBFirst：[老師上課講義_ModelDBFirst.md](/老師上課講義_ModelDBFirst.md)
 - Model CodeFirst：[老師上課講義_ModelCodeFirst.md](/老師上課講義_ModelCodeFirst.md)
+- Model WebAPI：[老師上課講義_WebAPI.md](/老師上課講義_WebAPI.md)
