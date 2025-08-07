@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\User\Controllers\" />
+    <Folder Include="Filters\" />
   </ItemGroup>
 
 </Project>
