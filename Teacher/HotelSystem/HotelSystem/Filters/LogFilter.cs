@@ -13,6 +13,7 @@ namespace HotelSystem.Filters
         {
             var controller = context.RouteData.Values["controller"];
             var action = context.RouteData.Values["action"];
+            var id=context.RouteData.Values["id"];
 
             var agent = context.HttpContext.Request.Headers["User-Agent"].ToString();
             var ip = context.HttpContext.Connection.RemoteIpAddress?.ToString();
@@ -21,7 +22,7 @@ namespace HotelSystem.Filters
             var time = DateTime.Now;
 
 
-            string logMessage = $"{time} - {user} - {ip} - {agent} - {controller}/{action}";
+            string logMessage = $"{time} - {user} - {ip} - {agent} - {controller}/{action}/{id}";
 
 
             // 寫入日誌系統
