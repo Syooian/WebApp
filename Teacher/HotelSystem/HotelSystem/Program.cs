@@ -42,7 +42,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "EmployeeRole",
     pattern: "Manager/{action=Index}/{id?}",
-    defaults: new { controller = "EmployeeRoles", action = "Index" });
+    defaults: new {area="Admin", controller = "EmployeeRoles" });
 
 
 
