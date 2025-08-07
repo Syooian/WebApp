@@ -1,10 +1,13 @@
 using HotelSystem.Access.Data;
+using HotelSystem.Filters;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options => {
+    options.Filters.Add<LogFilter>();
+});
 
 
 builder.Services.AddDbContext<HotelSysDBContext>(options =>
