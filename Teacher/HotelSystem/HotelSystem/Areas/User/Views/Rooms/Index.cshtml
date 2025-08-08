@@ -1,0 +1,54 @@
+﻿@model IEnumerable<HotelSystem.Models.Room>
+
+@{
+    ViewData["Title"] = "選擇您要的房型";
+}
+
+<h1>@ViewData["Title"] </h1>
+
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-xl-4 col-md-6">
+            <div class="card">
+                @*  <img src="~/RoomPhotos/@item.RoomID/1.jpg" class="card-img-top" alt="..."> *@
+                <div id="carouselRoomPhoto-@item.RoomID" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @{
+                            bool isFirst = true;
+                            foreach (var photo in ViewBag.RoomPhotos)
+                            {
+                             
+                                if (photo.RoomID == item.RoomID)
+                                {
+                                    <div class="carousel-item @(isFirst ? "active" : "")" data-bs-interval="5000">
+                                        <img src="~/RoomPhotos/@photo.PhotoPath" class="d-block w-100" alt="...">
+                                    </div>
+                                    isFirst = false;
+                                }
+                            }
+                        }
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselRoomPhoto-@item.RoomID" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselRoomPhoto-@item.RoomID" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+                <div class="card-body">
+                    <h2 class="card-title fw-bold">@Html.DisplayFor(modelItem => item.RoomName)</h2>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Introduction)</p>
+                    <div class="text-end text-decoration-line-through text-secondary">原價:@String.Format("{0:C0}",item.Price * (decimal)1.5)</div>
+                    <h2 class="fw-bold text-end text-danger">@Html.DisplayFor(modelItem => item.Price)</h2>
+                    <a href="#" class="btn btn-primary">訂房</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
