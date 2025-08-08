@@ -24,6 +24,8 @@ namespace HotelSystem.Areas.User.Controllers
         public async Task<IActionResult> Index()
         {
             var rooms = _context.Room.Where(r => r.StatusCode == "1");
+            ViewData["RoomPhotos"] = await _context.RoomPhoto.ToListAsync();
+
             return View(await rooms.ToListAsync());
         }
 

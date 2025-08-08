@@ -24,6 +24,9 @@ namespace HotelSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var hotelSysDBContext2 = _context.Room.Include(r => r.StatusCodeNavigation);
+
+          
+
             return View(await hotelSysDBContext2.ToListAsync());
         }
 
