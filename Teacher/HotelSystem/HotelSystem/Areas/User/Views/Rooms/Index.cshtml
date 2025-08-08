@@ -14,9 +14,11 @@
             <div class="card">
                 <img src="~/RoomPhotos/@item.RoomID/1.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.RoomName)</h5>
+                    <h2 class="card-title fw-bold">@Html.DisplayFor(modelItem => item.RoomName)</h2>
                     <p class="card-text">@Html.DisplayFor(modelItem => item.Introduction)</p>
+                    <h4>@Html.DisplayFor(modelItem => item.Price)</h4>
                     <a href="#" class="btn btn-primary">訂房</a>
+                  
                 </div>
             </div>
         </div>
