@@ -23,8 +23,8 @@ namespace HotelSystem.Areas.User.Controllers
         // GET: User/Rooms
         public async Task<IActionResult> Index()
         {
-            var hotelSysDBContext2 = _context.Room.Include(r => r.StatusCodeNavigation);
-            return View(await hotelSysDBContext2.ToListAsync());
+            var rooms = _context.Room.Where(r => r.StatusCode == "1");
+            return View(await rooms.ToListAsync());
         }
 
         // GET: User/Rooms/Details/5
