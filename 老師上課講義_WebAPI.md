@@ -328,3 +328,29 @@ end
 ※程式碼重構的目的，在於保持程式的彈性，使耦合力降低，並非硬拆解程式※  
 ※需不需要重構雖然沒有一定的標準，但原則上有重複出現的程式或寫死太多的程式，就應考慮重構※  
 ※基本的重構原則是Controller只保留控制邏輯，商業邏輯均需移至Service，再將其注入使用※
+
+## 9. 串接第三方的API作為自己的API
+<p>串接第三方API(本例以農業部資料開放平臺「動物認領養」資料為例)</p>
+
+<p>9.1   串接第三方API(本例以農業部資料開放平臺「動物認領養」資料為例)</p>
+
+※資料說明網址：https://data.moa.gov.tw/open_detail.aspx?id=QcbUEzN6E6DL  
+※資料介接位址：https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL
+
+* 把第三方的API做為自己的API的時機
+    1. 這個API無法直接介接到前端(通常是跨域存取政策(policy)所致)
+    2. 要做自己API的查詢功能
+    3. 有需要的時候
+
+* 9.1.1 OpenData觀念說明
+* 9.1.2 
+* 9.1.3 在APIModels資料夾新增PetAdoptionData.cs類別檔
+* 9.1.4 利用資料介接位址所回傳的JSON格式建立PetAdoptionData類別屬性(複製一筆資料→編輯→選擇性貼上→貼上JSON做為類別)
+* 9.1.5 建立一個空白的API Contoller-PetAdoptionController並設定介接位址
+* 9.1.6 撰寫Get()方法，使用HttpClient物件取得第三方API的資料
+* 9.1.7 使用Swagger測試
+* 9.1.8 在Get()方法中加入分頁用參數
+* 9.1.9 使用Swagger測試
+* 9.1.10 利用第三方API所給的使用說明文件，另外撰寫至少兩個不同的查詢功能以利測試
+* 9.1.11 使用Swagger測試  
+※我們可以靈活運用第三方API去組合及製作出不同的查詢功能(我們自己想要的)※

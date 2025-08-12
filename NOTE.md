@@ -154,3 +154,6 @@ JsonIgnore對FromForm無效
 	* 帶有多個參數的路由
 2. 再註冊區域路由
 3. 最後註冊預設路由
+
+# AJAX
+透過JavaScript的XMLHttpRequest物件或Fetch API，向伺服器發送請求並接收回應，而不需要重新載入整個頁面。
