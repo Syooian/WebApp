@@ -26,6 +26,8 @@ namespace HotelSystem.Areas.User.Controllers
             var rooms = _context.Room.Where(r => r.StatusCode == "1");
             ViewData["RoomPhotos"] = await _context.RoomPhoto.ToListAsync();
 
+            ViewData["PeopleNum"] = await _context.Room.Where(r => r.StatusCode == "1").Select(r => r.PeopleNum).Distinct().ToListAsync();
+
             return View(await rooms.ToListAsync());
         }
 
