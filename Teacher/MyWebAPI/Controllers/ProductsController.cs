@@ -37,6 +37,7 @@ namespace MyWebAPI.Controllers
         }
 
         //8.3.5 改寫ProductsController裡的Get Action寫法，僅留下控制邏輯
+        //8.3.8 改寫參數傳入的方式為傳入ProductParam類別(全部相關的地方都要改寫)
         [HttpGet()]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct([FromQuery]ProductParam productParam)
         {
@@ -53,14 +54,15 @@ namespace MyWebAPI.Controllers
             return products;
         }
 
-
+        //8.3.5 改寫ProductsController裡的Get Action寫法，僅留下控制邏輯
+        //8.3.8 改寫參數傳入的方式為傳入ProductParam類別(全部相關的地方都要改寫)
         [HttpGet("fromSQL")]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductFromSQL([FromQuery] ProductParam productParam)
         {
 
             var products = await  _productService.GetProductFromSQL(productParam);
 
-            if (products == null )
+            if (products == null || products.Count()==0)
             {
                 return NotFound("找不到產品資料");
             }
@@ -69,29 +71,24 @@ namespace MyWebAPI.Controllers
             return products;
         }
 
-        //4.8.2 在ProductsController中建立一個新的Get Action
-        //4.8.3 設置介接口為[HttpGet("fromProc/{id}")]，Action名稱可自訂，並使用ProductDTO來傳遞資料
+
+        //8.3.5 改寫ProductsController裡的Get Action寫法，僅留下控制邏輯
         [HttpGet("fromProc/{id}")]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductFromProc(string id)
         {
-            //4.8.4 使用預存程序進行查詢(參數的傳遞請使用SqlParameter)
-            string sql = $"exec getProductWithCateName @cateID";
 
-            var cateID = new SqlParameter("@cateID", id);
+            var result = await _productService.getProductWithCateName(id);
 
-            var products = await _context.ProductDTO.FromSqlRaw(sql, cateID).ToListAsync();
-
-            if (products == null || products.Count() == 0)
+            if (result == null || result.Count() <= 0)
             {
-                return NotFound("找不到產品資料");
+                return NotFound("找不到資料");
             }
 
-
-            return products;
+            return result;
         }
 
 
-
+        //8.3.5 改寫ProductsController裡的Get Action寫法，僅留下控制邏輯
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDTO>> GetProduct(string id)
         {

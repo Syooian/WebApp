@@ -16,6 +16,7 @@ namespace MyWebAPI.Services
             _context = context;
         }
 
+        //8.3.8 改寫參數傳入的方式為傳入ProductParam類別(全部相關的地方都要改寫)
         public async Task<List<ProductDTO>> GetProduct(ProductParam productParam)
         {
 
@@ -53,7 +54,8 @@ namespace MyWebAPI.Services
             return productsList;
         }
 
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductFromSQL(ProductParam productParam)
+        //8.3.8 改寫參數傳入的方式為傳入ProductParam類別(全部相關的地方都要改寫)
+        public async Task<List<ProductDTO>> GetProductFromSQL(ProductParam productParam)
         {
 
 
@@ -99,6 +101,20 @@ namespace MyWebAPI.Services
 
             return products;
         }
+
+        public async Task<List<ProductDTO>> getProductWithCateName(string id)
+        {
+
+            var CateID = new SqlParameter("@catID", id);
+            string sql = "exec getProductWithCateName @catID";
+
+            //執行SQL查詢
+            var result = await _context.ProductDTO.FromSqlRaw(sql, CateID).ToListAsync();
+
+
+            return result;
+        }
+
 
         public async Task<ProductDTO> GetProduct(string id)
         {
