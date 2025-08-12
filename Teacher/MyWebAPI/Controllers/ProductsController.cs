@@ -38,7 +38,7 @@ namespace MyWebAPI.Controllers
 
         //8.3.5 改寫ProductsController裡的Get Action寫法，僅留下控制邏輯
         [HttpGet()]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct(ProductParam productParam)
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct([FromQuery]ProductParam productParam)
         {
 
             var products = await _productService.GetProduct(productParam);
@@ -55,7 +55,7 @@ namespace MyWebAPI.Controllers
 
 
         [HttpGet("fromSQL")]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductFromSQL(ProductParam productParam)
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductFromSQL([FromQuery] ProductParam productParam)
         {
 
             var products = await  _productService.GetProductFromSQL(productParam);
