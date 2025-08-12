@@ -6,17 +6,19 @@
 
 }
 
-<h1>@ViewData["Title"] </h1>
+<h1>
+	@ViewData["Title"] <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">搜尋房型</button>
+</h1>
 
 
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Enable body scrolling</button>
 
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
 	<div class="offcanvas-header">
-		<h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
+		<h5 class="offcanvas-title" id="offcanvasScrollingLabel">搜尋房型條件</h5>
 		<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 	</div>
 	<div class="offcanvas-body">
+		<h3>入住人數</h3>
 		@foreach (var num in ViewBag.PeopleNum)
 		{
 			<input type="checkbox" class="btn-check peopleNum" id="btn-check-@num" autocomplete="off" value="@num">
@@ -81,19 +83,7 @@
 
 	<script>
 
-		const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-		const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
-		const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-		const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-
-
-		function showDetail(id){
-
-			$('#productDetailModal .modal-body').html(` <div class="text-center"><div class="spinner-border"></div> Loading...</div>`);
-			$('#productDetailModal .modal-body').load(`/ProductList/Details/${id}`);
-		}
-
-
+		
 
 		let peopleNumArr=[];
 
