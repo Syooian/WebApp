@@ -381,6 +381,33 @@ namespace MyWebAPI.Controllers
 
 
 
+////////////////////////////////////////////////////////////////////////////
+//9     串接第三方的API做為自己的API
+
+
+//9.1   串接第三方API(本例以農業部資料開放平臺「動物認領養」資料為例)
+//※資料說明網址：https://data.moa.gov.tw/open_detail.aspx?id=QcbUEzN6E6DL
+//※資料介接位址：https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL
+
+//把第三方的API做為自己的API的時機
+//※1. 這個API無法直接介接到前端(通常是跨域存取政策(policy)所致)
+//※2. 要做自己API的查詢功能
+//※3. 有需要的時候
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//9.1.1 OpenData觀念說明
+//9.1.2 在Models資料夾新增PetAdoptionData.cs類別檔
+//9.1.3 利用資料介接位址所回傳的JSON格式建立PetAdoptionData類別屬性(複製一筆資料→編輯→選擇性貼上→貼上JSON做為類別)
+//9.1.4 建立一個空白的API Contoller-PetAdoptionController並設定介接位址
+//9.1.5 撰寫Get()方法，使用HttpClient物件取得第三方API的資料
+//9.1.6 使用Swagger測試
+//9.1.7 在Get()方法中加入分頁用參數
+//9.1.8 使用Swagger測試
+//9.1.9 利用第三方API所給的使用說明文件，另外撰寫至少兩個不同的查詢功能以利測試
+//9.1.10 使用Swagger測試
+//※我們可以靈活運用第三方API去組合及製作出不同的查詢功能(我們自己想要的)※
+
+
 
 
 
