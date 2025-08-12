@@ -53,56 +53,14 @@ namespace MyWebAPI.Controllers
             return products;
         }
 
-        //4.6.1 新增一個Get Action GetProductFromSQL()並設定介接口為[HttpGet("fromSQL")]
+
         [HttpGet("fromSQL")]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductFromSQL(string? cateID, string? productName, decimal? minPrice, decimal? maxPrice, string? description)
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductFromSQL(ProductParam productParam)
         {
-            //4.6.2 用SQL語法撰寫與先前一樣的功能並使用DTO傳遞結果
-            //var products = _context.Product.Include(c => c.Cate).OrderBy(p => p.Price).AsQueryable();
 
+            var products = await  _productService.GetProductFromSQL(productParam);
 
-            string sql = "select p.ProductID, p.ProductName, p.Price, p.Description, p.Picture, p.CateID, c.CateName " +
-                " from Product as p inner join Category as c on p.CateID=c.CateID where 1=1 ";
-
-            List<SqlParameter> parameters = new List<SqlParameter>();
-
-            if (!string.IsNullOrEmpty(cateID))
-            {
-                //sql += $" and p.CateID = '{cateID}' ";
-                sql += " and p.CateID = @cate ";
-                parameters.Add(new SqlParameter("@cate", cateID));
-            }
-
-            if (!string.IsNullOrEmpty(productName))
-            {
-                //sql += $" and p.ProductName like '%{productName}%' ";
-                sql += " and p.ProductName like @productName ";
-                parameters.Add(new SqlParameter("@productName", $"%{productName}%"));
-            }
-
-            if (minPrice.HasValue && maxPrice.HasValue)
-            {
-                //sql += $" and between {minPrice} and {maxPrice} ";
-                sql += " and p.Price between @minPrice and @maxPrice ";
-                parameters.Add(new SqlParameter("@minPrice", minPrice));
-                parameters.Add(new SqlParameter("@maxPrice", maxPrice));
-            }
-
-
-            if (!string.IsNullOrEmpty(description))
-            {
-                //sql += $" and p.Description like '%{description}%' ";
-                sql += $" and p.Description like @description ";
-                parameters.Add(new SqlParameter("@description", $"%{description}%"));
-            }
-
-            //4.6.4 使用Swagger測試(這裡會發生錯誤，因為使用了合併查詢)
-            //var products = await _context.Product.FromSqlRaw(sql).ToListAsync();
-
-            //4.6.6 將_context.Product.FromSqlRaw(sql).ToListAsync();改為_context.ProductDTO.FromSqlRaw(sql).ToListAsync();
-            var products = await _context.ProductDTO.FromSqlRaw(sql, parameters.ToArray()).ToListAsync();
-
-            if (products == null || products.Count() == 0)
+            if (products == null )
             {
                 return NotFound("找不到產品資料");
             }
@@ -133,11 +91,11 @@ namespace MyWebAPI.Controllers
         }
 
 
-     
+
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDTO>> GetProduct(string id)
         {
-            var product= await _productService.GetProduct(id);
+            var product = await _productService.GetProduct(id);
 
             if (product == null)
             {
@@ -288,7 +246,7 @@ namespace MyWebAPI.Controllers
             }
 
             //刪除商品照片
-            if(! await FileDelete(product.Picture))
+            if (!await FileDelete(product.Picture))
             {
                 return BadRequest("刪除商品照片失敗，請檢查檔案是否存在或權限問題。");
             }
@@ -313,7 +271,7 @@ namespace MyWebAPI.Controllers
             }
 
 
-            foreach(var p in products)
+            foreach (var p in products)
             {
                 //刪除商品照片
                 if (!await FileDelete(p.Picture))
@@ -409,7 +367,7 @@ namespace MyWebAPI.Controllers
 
             var filePath = Path.Combine(path, fileName);
 
-            if(System.IO.File.Exists(filePath))
+            if (System.IO.File.Exists(filePath))
             {
                 try
                 {
@@ -419,14 +377,14 @@ namespace MyWebAPI.Controllers
                 }
                 catch (Exception ex)
                 {
-                  
-                  
+
+
                     return false;
                 }
             }
 
 
-          
+
 
             return false;
         }

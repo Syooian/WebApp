@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using MyWebAPI.DTOs;
 using MyWebAPI.Models;
@@ -50,6 +51,53 @@ namespace MyWebAPI.Services
             var productsList =  await products.Select(p => ItemProduct(p)).ToListAsync();
 
             return productsList;
+        }
+
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductFromSQL(ProductParam productParam)
+        {
+
+
+            string sql = "select p.ProductID, p.ProductName, p.Price, p.Description, p.Picture, p.CateID, c.CateName " +
+                " from Product as p inner join Category as c on p.CateID=c.CateID where 1=1 ";
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            if (!string.IsNullOrEmpty(productParam.catID))
+            {
+             
+                sql += " and p.CateID = @cate ";
+                parameters.Add(new SqlParameter("@cate", productParam.catID));
+            }
+
+            if (!string.IsNullOrEmpty(productParam.productName))
+            {
+             
+                sql += " and p.ProductName like @productName ";
+                parameters.Add(new SqlParameter("@productName", $"%{productParam.productName}%"));
+            }
+
+            if (productParam.minPrice.HasValue && productParam.maxPrice.HasValue)
+            {
+             
+                sql += " and p.Price between @minPrice and @maxPrice ";
+                parameters.Add(new SqlParameter("@minPrice", productParam.minPrice));
+                parameters.Add(new SqlParameter("@maxPrice", productParam.maxPrice));
+            }
+
+
+            if (!string.IsNullOrEmpty(productParam.description))
+            {
+               
+                sql += $" and p.Description like @description ";
+                parameters.Add(new SqlParameter("@description", $"%{productParam.description}%"));
+            }
+
+         
+            var products = await _context.ProductDTO.FromSqlRaw(sql, parameters.ToArray()).ToListAsync();
+
+       
+
+            return products;
         }
 
         public async Task<ProductDTO> GetProduct(string id)
