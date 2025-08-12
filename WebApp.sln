@@ -61,6 +61,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "Teacher\Hotel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelSystemAPI", "Teacher\HotelSystem\HotelSystemAPI\HotelSystemAPI.csproj", "{6971098C-3B23-B3A0-9E0B-6B5467C94F6E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBFirst_Test", "My\DBFirst_Test\DBFirst_Test.csproj", "{DF9FD683-2551-EBEC-C279-592093254C83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -171,6 +173,10 @@ Global
 		{6971098C-3B23-B3A0-9E0B-6B5467C94F6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6971098C-3B23-B3A0-9E0B-6B5467C94F6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6971098C-3B23-B3A0-9E0B-6B5467C94F6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF9FD683-2551-EBEC-C279-592093254C83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF9FD683-2551-EBEC-C279-592093254C83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF9FD683-2551-EBEC-C279-592093254C83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF9FD683-2551-EBEC-C279-592093254C83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -203,6 +209,7 @@ Global
 		{D9BB8F63-3B35-1AA5-0356-122984048E8F} = {3926BF2E-1B54-46AA-985D-5E98B7516A23}
 		{67254CC2-617E-ACBA-0C55-2833E9BAC6EE} = {3926BF2E-1B54-46AA-985D-5E98B7516A23}
 		{6971098C-3B23-B3A0-9E0B-6B5467C94F6E} = {3926BF2E-1B54-46AA-985D-5E98B7516A23}
+		{DF9FD683-2551-EBEC-C279-592093254C83} = {34767B73-0185-495A-870F-3806D34CE124}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A7AD7DF-1590-4C6B-B95E-FE5859A20146}
