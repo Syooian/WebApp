@@ -6,17 +6,19 @@
 
 }
 
-<h1>@ViewData["Title"] </h1>
+<h1>
+	@ViewData["Title"] <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">搜尋房型</button>
+</h1>
 
 
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Enable body scrolling</button>
 
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
 	<div class="offcanvas-header">
-		<h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
+		<h5 class="offcanvas-title" id="offcanvasScrollingLabel">搜尋房型條件</h5>
 		<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 	</div>
 	<div class="offcanvas-body">
+		<h3>入住人數</h3>
 		@foreach (var num in ViewBag.PeopleNum)
 		{
 			<input type="checkbox" class="btn-check peopleNum" id="btn-check-@num" autocomplete="off" value="@num">
@@ -24,6 +26,9 @@
 
 
 		}
+
+		<input type="checkbox" class="btn-check peopleNum" id="btn-check-all" autocomplete="off" value="all">
+		<label class="btn" for="btn-check-all">全部</label>
 	</div>
 </div>
 
@@ -67,7 +72,7 @@
 					<div class="text-end text-decoration-line-through text-secondary">原價:@String.Format("{0:C0}", item.Price * (decimal)1.5)</div>
 					<h2 class="fw-bold text-end text-danger">@Html.DisplayFor(modelItem => item.Price)</h2>
 					<a href="#" class="btn btn-primary">訂房</a>
-					<span class="peopleNum">@item.PeopleNum</span>
+					<span class="peopleNum d-none">@item.PeopleNum</span>
 				</div>
 			</div>
 		</div>
@@ -81,18 +86,6 @@
 
 	<script>
 
-		const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-		const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
-		const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-		const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-
-
-		function showDetail(id){
-
-			$('#productDetailModal .modal-body').html(` <div class="text-center"><div class="spinner-border"></div> Loading...</div>`);
-			$('#productDetailModal .modal-body').load(`/ProductList/Details/${id}`);
-		}
-
 
 
 		let peopleNumArr=[];
@@ -100,40 +93,29 @@
 			$('.peopleNum').on('change', function () {
 				// 檢查 checkbox 是否有被勾選
 				if ($(this).is(':checked')) {
-					console.log('已勾選', $(this).val());
-
 					peopleNumArr.push($(this).val());
 					console.log(peopleNumArr);
+					showRoomItem();
 
-					// let keyword = $(this).val();
-					$('.card .peopleNum').each(function () {
-						console.log(peopleNumArr.filter(item => item === $(this).text()));
-
-
-						if(peopleNumArr.filter(item => item !== $(this).text())){
-							$(this).closest('.rooms').show();
-						}
-						else {
-							$(this).closest('.rooms').hide();
-						}
-					});
 				}
 				else {
-
-					console.log('未勾選', $(this).val());
 					peopleNumArr = peopleNumArr.filter(item => item !== $(this).val());
 					console.log(peopleNumArr);
-				
+					showRoomItem();
 				}
-
-			
 			});
 
 
-
-
-
-
+			function showRoomItem(){
+				$('.card .peopleNum').each(function () {
+						if(peopleNumArr.find(item=>item==$(this).text())){
+							$(this).closest('.rooms').show(300);
+						}
+						else {
+							$(this).closest('.rooms').hide(300);
+						}
+					});
+			}
 	</script>
 
 
