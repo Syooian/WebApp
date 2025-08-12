@@ -26,6 +26,11 @@ namespace HotelSystem.Areas.User.Controllers
             var rooms = _context.Room.Where(r => r.StatusCode == "1");
             ViewData["RoomPhotos"] = await _context.RoomPhoto.ToListAsync();
 
+            var peopleNum = await _context.Room.Select(r => r.PeopleNum).Distinct().ToListAsync();
+
+
+            ViewData["PeopleNum"] = new SelectList(peopleNum, "PeopleNum", "PeopleNum"); //建立給下拉選單的資料來源
+
             return View(await rooms.ToListAsync());
         }
 
