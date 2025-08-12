@@ -10,7 +10,7 @@ namespace MyWebAPI.Controllers
     [ApiController]
     public class PetAdoptionController : ControllerBase
     {
-        //9.1.6 撰寫Get()方法，使用HttpClient物件取得第三方API的資料
+        //9.1.5 撰寫Get()方法，使用HttpClient物件取得第三方API的資料
         [HttpGet]
         public async Task<IEnumerable<PetAdoptionData>> Get()
         {

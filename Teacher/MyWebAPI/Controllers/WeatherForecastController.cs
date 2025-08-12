@@ -396,16 +396,15 @@ namespace MyWebAPI.Controllers
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //9.1.1 OpenData觀念說明
-
-//9.1.3 在APIModels資料夾新增PetAdoptionData.cs類別檔
-//9.1.4 利用資料介接位址所回傳的JSON格式建立PetAdoptionData類別屬性(複製一筆資料→編輯→選擇性貼上→貼上JSON做為類別)
-//9.1.5 建立一個空白的API Contoller-PetAdoptionController並設定介接位址
-//9.1.6 撰寫Get()方法，使用HttpClient物件取得第三方API的資料
-//9.1.7 使用Swagger測試
-//9.1.8 在Get()方法中加入分頁用參數
-//9.1.9 使用Swagger測試
-//9.1.10 利用第三方API所給的使用說明文件，另外撰寫至少兩個不同的查詢功能以利測試
-//9.1.11 使用Swagger測試
+//9.1.2 在Models資料夾新增PetAdoptionData.cs類別檔
+//9.1.3 利用資料介接位址所回傳的JSON格式建立PetAdoptionData類別屬性(複製一筆資料→編輯→選擇性貼上→貼上JSON做為類別)
+//9.1.4 建立一個空白的API Contoller-PetAdoptionController並設定介接位址
+//9.1.5 撰寫Get()方法，使用HttpClient物件取得第三方API的資料
+//9.1.6 使用Swagger測試
+//9.1.7 在Get()方法中加入分頁用參數
+//9.1.8 使用Swagger測試
+//9.1.9 利用第三方API所給的使用說明文件，另外撰寫至少兩個不同的查詢功能以利測試
+//9.1.10 使用Swagger測試
 //※我們可以靈活運用第三方API去組合及製作出不同的查詢功能(我們自己想要的)※
 
 
