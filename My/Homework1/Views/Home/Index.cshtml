@@ -1,41 +1,8 @@
-﻿@model IEnumerable<Homework1.Models.MainText>
-
-<p>
-    <a asp-action="Create" class="btn btn-primary">新增文章</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @*<a asp-action="Edit" asp-route-id="@item.MainTextID">Edit</a> |*@
-                <a asp-action="Details" asp-route-MainTextID="@item.MainTextID" class="btn btn-outline-primary">詳細檢視</a>
-                @*<a asp-action="Delete" asp-route-id="@item.MainTextID">Delete</a>*@
-            </td>
-        </tr>
+﻿@{
+    ViewData["Title"] = "Home Page";
 }
-    </tbody>
-</table>
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<h1>作業1</h1>
