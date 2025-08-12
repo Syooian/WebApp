@@ -69,7 +69,7 @@
 					<div class="text-end text-decoration-line-through text-secondary">原價:@String.Format("{0:C0}", item.Price * (decimal)1.5)</div>
 					<h2 class="fw-bold text-end text-danger">@Html.DisplayFor(modelItem => item.Price)</h2>
 					<a href="#" class="btn btn-primary">訂房</a>
-					<span class="peopleNum">@item.PeopleNum</span>
+					<span class="peopleNum d-none">@item.PeopleNum</span>
 				</div>
 			</div>
 		</div>
@@ -83,23 +83,28 @@
 
 	<script>
 
-		
+
 
 		let peopleNumArr=[];
 
 			$('.peopleNum').on('change', function () {
 				// 檢查 checkbox 是否有被勾選
 				if ($(this).is(':checked')) {
-					console.log('已勾選', $(this).val());
-
 					peopleNumArr.push($(this).val());
 					console.log(peopleNumArr);
+					showRoomItem();
 
-					// let keyword = $(this).val();
-					$('.card .peopleNum').each(function () {
-						console.log(peopleNumArr.find(item=>item==$(this).text()));
+				}
+				else {
+					peopleNumArr = peopleNumArr.filter(item => item !== $(this).val());
+					console.log(peopleNumArr);
+					showRoomItem();
+				}
+			});
 
 
+			function showRoomItem(){
+				$('.card .peopleNum').each(function () {
 						if(peopleNumArr.find(item=>item==$(this).text())){
 							$(this).closest('.rooms').show(300);
 						}
@@ -107,33 +112,7 @@
 							$(this).closest('.rooms').hide(300);
 						}
 					});
-				}
-				else {
-
-					console.log('未勾選', $(this).val());
-					peopleNumArr = peopleNumArr.filter(item => item !== $(this).val());
-					console.log(peopleNumArr);
-
-						$('.card .peopleNum').each(function () {
-
-					if(peopleNumArr.find(item=>item==$(this).text())){
-							$(this).closest('.rooms').show(300);
-						}
-						else {
-							$(this).closest('.rooms').hide(300);
-						}
-					});
-
-				}
-
-
-			});
-
-
-
-
-
-
+			}
 	</script>
 
 
