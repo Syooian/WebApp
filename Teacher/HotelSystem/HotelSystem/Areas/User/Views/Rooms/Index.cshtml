@@ -107,14 +107,14 @@
 
 					// let keyword = $(this).val();
 					$('.card .peopleNum').each(function () {
-						console.log(peopleNumArr.filter(item => item === $(this).text()));
+						console.log(peopleNumArr.find(item=>item==$(this).text()));
 
 
-						if(peopleNumArr.filter(item => item !== $(this).text())){
-							$(this).closest('.rooms').show();
+						if(peopleNumArr.find(item=>item==$(this).text())){
+							$(this).closest('.rooms').show(300);
 						}
 						else {
-							$(this).closest('.rooms').hide();
+							$(this).closest('.rooms').hide(300);
 						}
 					});
 				}
@@ -123,10 +123,20 @@
 					console.log('未勾選', $(this).val());
 					peopleNumArr = peopleNumArr.filter(item => item !== $(this).val());
 					console.log(peopleNumArr);
-				
+
+						$('.card .peopleNum').each(function () {
+
+					if(peopleNumArr.find(item=>item==$(this).text())){
+							$(this).closest('.rooms').show(300);
+						}
+						else {
+							$(this).closest('.rooms').hide(300);
+						}
+					});
+
 				}
 
-			
+
 			});
 
 
