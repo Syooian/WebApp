@@ -45,9 +45,13 @@ namespace MyWebAPI.Controllers
 
         //9.2.1 將PetAdoptionController中的HttpClient物件寫成DI方式
         [HttpGet]
-        public async Task<IEnumerable<PetAdoptionData>> Get(int top=200)
+        public async Task<IEnumerable<PetAdoptionData>> Get(int pageSize = 30, int page=1)
         {
-            string url = $"https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top={top}";
+            //分頁功能-每N筆為一頁,若使用者沒有傳入pageSize參數，則預設為30筆資料一頁
+            int skip = (page - 1) * pageSize; //計算要跳過的資料筆數           
+
+
+            string url = $"https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top={pageSize}&$skip={skip}";
 
             var collection =await _thirdPartyService.Get<PetAdoptionData>(url);
             return collection;
@@ -58,10 +62,13 @@ namespace MyWebAPI.Controllers
         //9.1.9 利用第三方API所給的使用說明文件，另外撰寫至少兩個不同的查詢功能以利測試
 
         //可用參數當條件查詢動物資料的功能
+
         [HttpGet("HasUrlParameter")]
-        public async Task<IEnumerable<PetAdoptionData>> Get(string urlParameterName, string urlParameterValue, int top = 200)
+        public async Task<IEnumerable<PetAdoptionData>> Get(string urlParameterName, string urlParameterValue, int pageSize = 30, int page = 1)
         {
-            string url = $"https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top={top}&{urlParameterName}={urlParameterValue}";
+            int skip = (page - 1) * pageSize;
+
+            string url = $"https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top={pageSize}&$skip={skip}&{urlParameterName}={urlParameterValue}";
             var collection = await _thirdPartyService.Get<PetAdoptionData>(url);
 
             return collection;
@@ -70,9 +77,11 @@ namespace MyWebAPI.Controllers
 
         //可用多個參數當條件查詢動物資料的功能
         [HttpGet("HaveUrlParameters")]
-        public async Task<IEnumerable<PetAdoptionData>> Get(string urlParameters, int top = 200)
+        public async Task<IEnumerable<PetAdoptionData>> Get(string urlParameters, int top = 200, int pageSize = 30, int page = 1)
         {
-            string url = $"https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top={top}{urlParameters}";
+            int skip = (page - 1) * pageSize;
+
+            string url = $"https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top={pageSize}&$skip={skip}{urlParameters}";
             var collection = await _thirdPartyService.Get<PetAdoptionData>(url);
 
             return collection;
