@@ -1,0 +1,199 @@
+﻿@model IEnumerable<MyWebAPI.Models.PetAdoptionData>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_subid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_area_pkid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_shelter_pkid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_place)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_kind)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_Variety)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_sex)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_bodytype)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_colour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_sterilization)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_bacterin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_foundplace)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_remark)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_caption)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_opendate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_closeddate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_update)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.animal_createtime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shelter_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.album_file)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.album_update)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shelter_address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shelter_tel)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_subid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_area_pkid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_shelter_pkid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_place)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_kind)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_Variety)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_sex)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_bodytype)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_colour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_sterilization)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_bacterin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_foundplace)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_remark)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_caption)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_opendate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_closeddate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_update)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animal_createtime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.shelter_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.album_file)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.album_update)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.shelter_address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.shelter_tel)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.animal_id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.animal_id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.animal_id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>
