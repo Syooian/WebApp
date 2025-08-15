@@ -47,6 +47,10 @@ builder.Services.AddScoped<CategoryService>();
 //8.3.3 在Program.cs裡註冊ProductService
 builder.Services.AddScoped<ProductService>();
 
+//9.2.2 在Program.cs內註冊HttpClient物件
+builder.Services.AddScoped<HttpClient>();
+
+
 
 var app = builder.Build();
 

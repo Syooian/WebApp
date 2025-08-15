@@ -409,6 +409,19 @@ namespace MyWebAPI.Controllers
 
 
 
+//9.2   程式碼重構
+//※為了優化程式碼，我們在這裡進行程式碼重構
+//9.2.1 將PetAdoptionController中的HttpClient物件寫成DI方式
+//9.2.2 在Program.cs內註冊HttpClient物件
+//9.2.3 在Service資料夾中建立ThirdPartyService類別做為取得第三方API資料的服務
+//9.2.4 撰寫ThirdPartyService內容，包念HttpClient注入及取得資料的GetDataFromAPI方法
+//9.2.5 在Program.cs內註冊ThirdPartyService物件
+//9.2.6 將ThirdPartyService注入PetAdoptionController，並將原來注入的HttpClient相關程式碼註解
+//9.2.7 改寫每一個資料取得的方法內容
+//9.2.8 使用Swagger測試
+
+
+
 
 
 
