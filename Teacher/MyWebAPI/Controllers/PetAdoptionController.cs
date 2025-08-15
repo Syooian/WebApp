@@ -58,6 +58,8 @@ namespace MyWebAPI.Controllers
         }
 
 
+        //9.1.9 利用第三方API所給的使用說明文件，另外撰寫至少兩個不同的查詢功能以利測試
+
         //可以用縣市代碼查詢動物資料的功能
         [HttpGet("AnimalAreaPkid")]
         public async Task<IEnumerable<PetAdoptionData>> Get(int animalAreaPkid)
