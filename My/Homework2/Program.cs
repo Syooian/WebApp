@@ -10,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<FlightInformationServices>();
+builder.Services.AddScoped<HttpClient>();
 
 var app = builder.Build();
 
