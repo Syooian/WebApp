@@ -12,10 +12,6 @@ namespace Homework2.Services
         /// </summary>
         HttpClient Client;
         /// <summary>
-        /// API金鑰
-        /// </summary>
-        readonly string APIAccessToken;
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="Client"></param>
@@ -23,7 +19,19 @@ namespace Homework2.Services
         public FlightInformationServices(HttpClient Client, IConfiguration Configuration)
         {
             this.Client = Client;
-            APIAccessToken = Configuration["APIAccessToken"];
+
+            #region 加入API金鑰
+            var APIAccessToken = Configuration["APIAccessToken"];
+            if (!string.IsNullOrEmpty(APIAccessToken))
+            {
+                Client.DefaultRequestHeaders.Add("Authorization", $"Bearer {APIAccessToken}");
+                //Client.DefaultRequestHeaders.Add("Authorization", APIAccessToken);
+            }
+            else
+            {
+                Debug.WriteLine("API金鑰為空");
+            }
+            #endregion
         }
 
         /// <summary>
