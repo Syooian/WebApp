@@ -27,7 +27,7 @@ namespace MyWebAPI.Services
 
         //}
 
-
+        //9.2.4 撰寫ThirdPartyService內容，包念HttpClient注入及取得資料的Get的API方法
         public async Task<IEnumerable<T>> Get<T>(string url)
         {
 
