@@ -14,12 +14,12 @@ namespace MyWebAPI.Controllers
     {
         //9.2.6 將ThirdPartyService注入PetAdoptionController，並將原來注入的HttpClient相關程式碼註解
         //private readonly HttpClient _httpClient;
-        private readonly PetAdoptionService _petAdoptionService;
+        private readonly ThirdPartyService _thirdPartyService;
 
-        public PetAdoptionController(PetAdoptionService petAdoptionService)
+        public PetAdoptionController(ThirdPartyService thirdPartyService)
         {
             //_httpClient = new HttpClient();
-            _petAdoptionService = petAdoptionService;
+            _thirdPartyService = thirdPartyService;
         }
 
         //9.1.5 撰寫Get()方法，使用HttpClient物件取得第三方API的資料
@@ -46,9 +46,9 @@ namespace MyWebAPI.Controllers
         [HttpGet]
         public async Task<IEnumerable<PetAdoptionData>> Get(int top=200)
         {
-            
- 
-            var collection =await _petAdoptionService.Get(null, top);
+            string url = $"https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top={top}";
+
+            var collection =await _thirdPartyService.Get<PetAdoptionData>(url);
             return collection;
 
         }
@@ -60,7 +60,8 @@ namespace MyWebAPI.Controllers
         [HttpGet("AnimalAreaPkid")]
         public async Task<IEnumerable<PetAdoptionData>> Get(int animalAreaPkid, int top = 200)
         {
-            var collection = await _petAdoptionService.Get($"&animal_area_pkid={animalAreaPkid}", top);
+            string url = $"https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top={top}&animal_area_pkid={animalAreaPkid}";
+            var collection = await _thirdPartyService.Get<PetAdoptionData>(url);
 
             return collection;
 
@@ -71,8 +72,8 @@ namespace MyWebAPI.Controllers
         [HttpGet("AnimalKind")]
         public async Task<IEnumerable<PetAdoptionData>> Get(string animalKind,int top= 200)
         {
-
-            var collection = await _petAdoptionService.Get($"&animal_kind={animalKind}", top);
+            string url = $"https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top={top}&animal_kind={animalKind}";
+            var collection = await _thirdPartyService.Get<PetAdoptionData>(url);
 
             return collection;
 
