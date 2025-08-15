@@ -1,9 +1,11 @@
-﻿namespace MyWebAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MyWebAPI.Models
 {
     //9.1.3 在APIModels資料夾新增PetAdoptionData.cs類別檔
     public class PetAdoptionData
     {
-    
+        [Key]
         public int animal_id { get; set; }
         public string animal_subid { get; set; }
         public int animal_area_pkid { get; set; }
