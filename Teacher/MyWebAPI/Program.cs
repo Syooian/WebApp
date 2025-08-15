@@ -19,8 +19,8 @@ builder.Services.AddCors(options =>
 
 //4.7.10 在Program裡全域啟用 ReferenceHandler.Preserve
 //builder.Services.AddControllers();
-
-builder.Services.AddControllers()
+//9.3.6 在Program.cs裡將AddControllers()服務改為AddControllersWithViews服務並啟用路由機制Route()
+builder.Services.AddControllersWithViews()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
@@ -47,6 +47,12 @@ builder.Services.AddScoped<CategoryService>();
 //8.3.3 在Program.cs裡註冊ProductService
 builder.Services.AddScoped<ProductService>();
 
+//9.2.2 在Program.cs內註冊HttpClient物件
+builder.Services.AddScoped<HttpClient>();
+
+
+//9.2.5 在Program.cs內註冊ThirdPartyService物件
+builder.Services.AddScoped<ThirdPartyService>();
 
 var app = builder.Build();
 
@@ -62,6 +68,13 @@ app.UseCors("MyCorsPolicy");
 
 //2.1.3 在Program.cs中加入app.UseStaticFiles(); (因為我們開的是 純WebAPI專案)
 app.UseStaticFiles();
+
+app.UseRouting();
+app.MapControllerRoute(
+    name:"default",
+    pattern:"{controller}/{action}/{id?}"
+    );
+
 
 app.UseAuthorization();
 

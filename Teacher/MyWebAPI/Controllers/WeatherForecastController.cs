@@ -409,6 +409,41 @@ namespace MyWebAPI.Controllers
 
 
 
+//9.2   程式碼重構
+//※為了優化程式碼，我們在這裡進行程式碼重構
+//9.2.1 將PetAdoptionController中的HttpClient物件寫成DI方式
+//9.2.2 在Program.cs內註冊HttpClient物件
+//9.2.3 在Service資料夾中建立ThirdPartyService類別做為取得第三方API資料的服務
+//9.2.4 撰寫ThirdPartyService內容，包念HttpClient注入及取得資料的Get的API方法
+//9.2.5 在Program.cs內註冊ThirdPartyService物件
+//9.2.6 將ThirdPartyService注入PetAdoptionController，並將原來注入的HttpClient相關程式碼註解
+//9.2.7 改寫每一個資料取得的方法內容
+//9.2.8 使用Swagger測試
+
+
+//9.3   使用ASP.net MVC的View來顯示資料
+//9.3.1 建立空白的 MVC Controller
+//9.3.2 將ThirdPartyService注入
+//9.3.3 撰寫取得資料的非同步Action方法並回傳給View
+//9.3.4 在MyStoreContext2中加入PetAdoptionData類別的DbSet
+//9.3.5 在PetAdoptionData類別中使用DataAnnotaion方式指定Key屬性
+//9.3.6 在Program.cs裡將AddControllers()服務改為AddControllersWithViews服務並啟用路由機制Route()
+//9.3.6 在Index Action內按右鍵→新增檢視→選擇「Razor檢視」→按下「加入」鈕
+//9.3.7 在對話方塊中設定如下
+//      檢視名稱: Index
+//      範本:List
+//      模型類別: PetAdoptionData(MyWebAPI.Models)
+//      資料內容類別: GoodStoreContext2(MyWebAPI.Models)
+//      不勾選 建立成局部檢視
+//      不勾選 參考指令碼程式庫
+//      不勾選 使用版面配置頁
+//      按下「新增」按鈕
+//9.3.8 執行Index View測試
+//※使用第三方API並非只能做成API Controller，亦可以將它當作資料來源並使用在ASP.net MVC上※
+//※由於我們當初這個專案是API專案，因此必須在Program.cs內啟用View及Route※
+
+
+
 
 
 
