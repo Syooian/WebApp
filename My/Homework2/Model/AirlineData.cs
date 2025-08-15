@@ -6,8 +6,8 @@
     public class Airline
     {
         public string AirlineID { get; set; }
-        public AirlineName AirlineName { get; set; }
-        public AirlineNameAlias AirlineNameAlias { get; set; }
+        public Name AirlineName { get; set; }
+        public Name AirlineNameAlias { get; set; }
         public string AirlineIATA { get; set; }
         public string AirlineICAO { get; set; }
         public string AirlineEmail { get; set; }
@@ -16,24 +16,6 @@
         public string AirlineNationality { get; set; }
         public DateTime UpdateTime { get; set; }
         public int VersionID { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class AirlineName
-    {
-        public string Zh_tw { get; set; }
-        public string En { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class AirlineNameAlias
-    {
-        public string Zh_tw { get; set; }
-        public string En { get; set; }
     }
 }
 
