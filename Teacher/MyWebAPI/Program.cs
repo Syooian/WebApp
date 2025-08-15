@@ -50,6 +50,7 @@ builder.Services.AddScoped<ProductService>();
 //9.2.2 在Program.cs內註冊HttpClient物件
 builder.Services.AddScoped<HttpClient>();
 
+//9.2.5 在Program.cs內註冊ThirdPartyService物件
 builder.Services.AddScoped<PetAdoptionService>();
 
 var app = builder.Build();

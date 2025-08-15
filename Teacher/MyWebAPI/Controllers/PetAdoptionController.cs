@@ -1,7 +1,9 @@
 ﻿using System.Collections;
+using Humanizer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyWebAPI.Models;
+using MyWebAPI.Services;
 using Newtonsoft.Json;
 
 namespace MyWebAPI.Controllers
@@ -10,11 +12,14 @@ namespace MyWebAPI.Controllers
     [ApiController]
     public class PetAdoptionController : ControllerBase
     {
-        private readonly HttpClient _httpClient;
+        //9.2.6 將ThirdPartyService注入PetAdoptionController，並將原來注入的HttpClient相關程式碼註解
+        //private readonly HttpClient _httpClient;
+        private readonly PetAdoptionService _petAdoptionService;
 
-        public PetAdoptionController()
+        public PetAdoptionController(PetAdoptionService petAdoptionService)
         {
-            _httpClient = new HttpClient();
+            //_httpClient = new HttpClient();
+            _petAdoptionService = petAdoptionService;
         }
 
         //9.1.5 撰寫Get()方法，使用HttpClient物件取得第三方API的資料
@@ -39,21 +44,12 @@ namespace MyWebAPI.Controllers
 
         //9.2.1 將PetAdoptionController中的HttpClient物件寫成DI方式
         [HttpGet]
-        public async Task<IEnumerable<PetAdoptionData>> Get()
+        public async Task<IEnumerable<PetAdoptionData>> Get(int top=200)
         {
-            string url = "https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top=200"; //這是資料來源
-
-
-            //HttpClient client = new HttpClient();
-
-            var resp = await _httpClient.GetStringAsync(url);  //取得API的回應的Json字串
-
-            //將Json字串轉換為PetAdoptionData物件IEnumerable
-            var collection = JsonConvert.DeserializeObject<IEnumerable<PetAdoptionData>>(resp);
-
-
+            
+ 
+            var collection =await _petAdoptionService.Get(null, top);
             return collection;
-
 
         }
 
@@ -62,18 +58,9 @@ namespace MyWebAPI.Controllers
 
         //可以用縣市代碼查詢動物資料的功能
         [HttpGet("AnimalAreaPkid")]
-        public async Task<IEnumerable<PetAdoptionData>> Get(int animalAreaPkid)
+        public async Task<IEnumerable<PetAdoptionData>> Get(int animalAreaPkid, int top = 200)
         {
-            string url = $"https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top=200&animal_area_pkid={animalAreaPkid}"; //這是資料來源
-
-
-            //HttpClient client = new HttpClient();
-
-            var resp = await _httpClient.GetStringAsync(url);  //取得API的回應的Json字串
-
-            //將Json字串轉換為PetAdoptionData物件IEnumerable
-            var collection = JsonConvert.DeserializeObject<IEnumerable<PetAdoptionData>>(resp);
-
+            var collection = await _petAdoptionService.Get($"&animal_area_pkid={animalAreaPkid}", top);
 
             return collection;
 
@@ -82,18 +69,10 @@ namespace MyWebAPI.Controllers
 
         //可以用動物種類查詢動物資料的功能
         [HttpGet("AnimalKind")]
-        public async Task<IEnumerable<PetAdoptionData>> Get(string animalKind)
+        public async Task<IEnumerable<PetAdoptionData>> Get(string animalKind,int top= 200)
         {
-            string url = $"https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top=200&animal_kind={animalKind}"; //這是資料來源
 
-
-            //HttpClient client = new HttpClient();
-
-            var resp = await _httpClient.GetStringAsync(url);  //取得API的回應的Json字串
-
-            //將Json字串轉換為PetAdoptionData物件IEnumerable
-            var collection = JsonConvert.DeserializeObject<IEnumerable<PetAdoptionData>>(resp);
-
+            var collection = await _petAdoptionService.Get($"&animal_kind={animalKind}", top);
 
             return collection;
 
