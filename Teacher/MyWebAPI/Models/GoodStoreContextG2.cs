@@ -17,6 +17,9 @@ public class GoodStoreContextG2 : GoodStoreContext
     public virtual DbSet<ProductDTO> ProductDTO { get; set; }
 
 
+    public virtual DbSet<PetAdoptionData> PetAdoptionData { get; set; }
+
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
