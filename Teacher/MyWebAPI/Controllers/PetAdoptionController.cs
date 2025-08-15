@@ -2,6 +2,7 @@
 using Humanizer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using MyWebAPI.Models;
 using MyWebAPI.Services;
 using Newtonsoft.Json;
@@ -57,27 +58,28 @@ namespace MyWebAPI.Controllers
         //9.1.9 利用第三方API所給的使用說明文件，另外撰寫至少兩個不同的查詢功能以利測試
 
         //可以用縣市代碼查詢動物資料的功能
-        [HttpGet("AnimalAreaPkid")]
-        public async Task<IEnumerable<PetAdoptionData>> Get(int animalAreaPkid, int top = 200)
+        [HttpGet("HasUrlParameter")]
+        public async Task<IEnumerable<PetAdoptionData>> Get(string urlParameterName, string urlParameterValue, int top = 200)
         {
-            string url = $"https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top={top}&animal_area_pkid={animalAreaPkid}";
+            string url = $"https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top={top}&{urlParameterName}={urlParameterValue}";
             var collection = await _thirdPartyService.Get<PetAdoptionData>(url);
 
             return collection;
 
+          
 
         }
 
         //可以用動物種類查詢動物資料的功能
-        [HttpGet("AnimalKind")]
-        public async Task<IEnumerable<PetAdoptionData>> Get(string animalKind,int top= 200)
-        {
-            string url = $"https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top={top}&animal_kind={animalKind}";
-            var collection = await _thirdPartyService.Get<PetAdoptionData>(url);
+        //[HttpGet("AnimalKind")]
+        //public async Task<IEnumerable<PetAdoptionData>> Get(string animalKind,int top= 200)
+        //{
+        //    string url = $"https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top={top}&animal_kind={animalKind}";
+        //    var collection = await _thirdPartyService.Get<PetAdoptionData>(url);
 
-            return collection;
+        //    return collection;
 
 
-        }
+        //}
     }
 }

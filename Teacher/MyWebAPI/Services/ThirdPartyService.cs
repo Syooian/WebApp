@@ -30,14 +30,11 @@ namespace MyWebAPI.Services
 
         public async Task<IEnumerable<T>> Get<T>(string url)
         {
-            
-           
+
             var resp = await _httpClient.GetStringAsync(url);
             var collection = JsonConvert.DeserializeObject<IEnumerable<T>>(resp);
 
-
             return collection;
-
 
         }
     }
