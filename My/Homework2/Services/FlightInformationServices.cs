@@ -49,9 +49,7 @@ namespace Homework2.Services
             //https://tdx.transportdata.tw/api/basic/v2/Air/Airport?%24top=30&%24format=JSON
             //https://tdx.transportdata.tw/api/basic/v2/Air/Airport?%24top=30&%24skip=100&%24format=JSON
 
-            var Collection = JsonConvert.DeserializeObject<IEnumerable<Airport>>(Resp);
-
-            return Collection;
+            return GetCollection<Airport>(Resp);
         }
 
         /// <summary>
@@ -70,9 +68,7 @@ namespace Homework2.Services
             //https://tdx.transportdata.tw/api/basic/v2/Air/Airline?%24top=30&%24format=JSON
             //https://tdx.transportdata.tw/api/basic/v2/Air/Airline?%24top=30&%24skip=0&%24format=JSON
 
-            var Collection = JsonConvert.DeserializeObject<IEnumerable<Airline>>(Resp);
-
-            return Collection;
+            return GetCollection<Airline>(Resp);
         }
 
         /// <summary>
@@ -87,9 +83,18 @@ namespace Homework2.Services
 
             var Resp = Get(null, $"https://tdx.transportdata.tw/api/basic/v2/Air/FIDS/Flight?%24top={Top}&%24skip={Skip}&%24format=JSON", AccessToken.access_token).Result;
 
-            var Collection = JsonConvert.DeserializeObject<IEnumerable<Flight>>(Resp);
+            return GetCollection<Flight>(Resp);
+        }
 
-            return Collection;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="Response"></param>
+        /// <returns></returns>
+        IEnumerable<T> GetCollection<T>(string Response)
+        {
+            return JsonConvert.DeserializeObject<IEnumerable<T>>(Response);
         }
 
         /// <summary>
