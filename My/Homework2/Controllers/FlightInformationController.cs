@@ -31,9 +31,7 @@ namespace Homework2.Controllers
         [HttpGet]
         public async Task<IEnumerable<Airport>> GetAirports(int PageSize = 30, int Page = 1)
         {
-            int Skip = (Page - 1) * PageSize;
-
-            var Result = await Services.GetAirports(Skip, PageSize);
+            var Result = await Services.GetAirports(GetSkip(Page, PageSize), PageSize);
             if (Result == null)
                 return new List<Airport>();
 
@@ -50,13 +48,38 @@ namespace Homework2.Controllers
         [HttpGet]
         public async Task<IEnumerable<Airline>> GetAirlines(int PageSize = 30, int Page = 1)
         {
-            int Skip = (Page - 1) * PageSize;
-
-            var Result = await Services.GetAirlines(Skip, PageSize);
+            var Result = await Services.GetAirlines(GetSkip(Page, PageSize), PageSize);
             if (Result == null)
                 return new List<Airline>();
 
             return Result;
+        }
+
+        /// <summary>
+        /// 取得所有航班資料
+        /// </summary>
+        /// <param name="PageSize"></param>
+        /// <param name="Page"></param>
+        /// <returns></returns>
+        [HttpGet("GetFlights")]
+        public async Task<IEnumerable<Flight>> GetFlights(int PageSize = 30, int Page = 1)
+        {
+            var Result = await Services.GetFlights(GetSkip(Page, PageSize), PageSize);
+            if (Result == null)
+                return new List<Flight>();
+
+            return Result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Page"></param>
+        /// <param name="PageSize"></param>
+        /// <returns></returns>
+        int GetSkip(int Page, int PageSize)
+        {
+            return (Page - 1) * PageSize;
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Homework2.Services
         }
 
         /// <summary>
-        /// 
+        /// 查機場
         /// </summary>
         /// <param name="Skip">跳過前幾筆</param>
         /// <param name="Top">取前幾筆</param>
@@ -55,7 +55,7 @@ namespace Homework2.Services
         }
 
         /// <summary>
-        /// 
+        /// 查航空公司
         /// </summary>
         /// <param name="Skip">跳過前幾筆</param>
         /// <param name="Top">取前幾筆</param>
@@ -71,6 +71,23 @@ namespace Homework2.Services
             //https://tdx.transportdata.tw/api/basic/v2/Air/Airline?%24top=30&%24skip=0&%24format=JSON
 
             var Collection = JsonConvert.DeserializeObject<IEnumerable<Airline>>(Resp);
+
+            return Collection;
+        }
+
+        /// <summary>
+        /// 查航班
+        /// </summary>
+        /// <param name="Skip">跳過前幾筆</param>
+        /// <param name="Top">取前幾筆</param>
+        /// <returns></returns>
+        public async Task<IEnumerable<Flight>> GetFlights(int Skip = 0, int Top = 30)
+        {
+            var AccessToken = GetToken(tokenUri).Result;
+
+            var Resp = Get(null, $"https://tdx.transportdata.tw/api/basic/v2/Air/FIDS/Flight?%24top={Top}&%24skip={Skip}&%24format=JSON", AccessToken.access_token).Result;
+
+            var Collection = JsonConvert.DeserializeObject<IEnumerable<Flight>>(Resp);
 
             return Collection;
         }
