@@ -41,10 +41,8 @@ namespace Homework2.Services
         /// <returns></returns>
         public async Task<IEnumerable<Airport>> GetAirports(int Skip = 0, int Top = 30)
         {
-            var AccessToken = GetToken(tokenUri).Result;
-
             //Debug.WriteLine($"https://tdx.transportdata.tw/api/basic/v2/Air/Airport?%24top={Top}&%24skip={Skip}&%24format=JSON");
-            var Resp = Get(null, $"https://tdx.transportdata.tw/api/basic/v2/Air/Airport?%24top={Top}&%24skip={Skip}&%24format=JSON", AccessToken.access_token).Result;
+            var Resp = Get(null, $"https://tdx.transportdata.tw/api/basic/v2/Air/Airport?%24top={Top}&%24skip={Skip}&%24format=JSON", GetAccessToken()).Result;
 
             //https://tdx.transportdata.tw/api/basic/v2/Air/Airport?%24top=30&%24format=JSON
             //https://tdx.transportdata.tw/api/basic/v2/Air/Airport?%24top=30&%24skip=100&%24format=JSON
@@ -60,10 +58,8 @@ namespace Homework2.Services
         /// <returns></returns>
         public async Task<IEnumerable<Airline>> GetAirlines(int Skip = 0, int Top = 30)
         {
-            var AccessToken = GetToken(tokenUri).Result;
-
             //var Resp = await Client.GetStringAsync($"https://tdx.transportdata.tw/api/basic/v2/Air/Airline?%24top={Top}&%24skip={Skip}&%24format=JSON");
-            var Resp = Get(null, $"https://tdx.transportdata.tw/api/basic/v2/Air/Airline?%24top={Top}&%24skip={Skip}&%24format=JSON", AccessToken.access_token).Result;
+            var Resp = Get(null, $"https://tdx.transportdata.tw/api/basic/v2/Air/Airline?%24top={Top}&%24skip={Skip}&%24format=JSON", GetAccessToken()).Result;
 
             //https://tdx.transportdata.tw/api/basic/v2/Air/Airline?%24top=30&%24format=JSON
             //https://tdx.transportdata.tw/api/basic/v2/Air/Airline?%24top=30&%24skip=0&%24format=JSON
@@ -79,11 +75,18 @@ namespace Homework2.Services
         /// <returns></returns>
         public async Task<IEnumerable<Flight>> GetFlights(int Skip = 0, int Top = 30)
         {
-            var AccessToken = GetToken(tokenUri).Result;
-
-            var Resp = Get(null, $"https://tdx.transportdata.tw/api/basic/v2/Air/FIDS/Flight?%24top={Top}&%24skip={Skip}&%24format=JSON", AccessToken.access_token).Result;
+            var Resp = Get(null, $"https://tdx.transportdata.tw/api/basic/v2/Air/FIDS/Flight?%24top={Top}&%24skip={Skip}&%24format=JSON", GetAccessToken()).Result;
 
             return GetCollection<Flight>(Resp);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        string GetAccessToken()
+        {
+            return GetToken(tokenUri).Result.access_token;
         }
 
         /// <summary>
