@@ -30,7 +30,32 @@
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
 
-        @Html.Raw(ViewData["RoomPhotos"])
+        <div id="carouselRoomPhoto-@Model.RoomID" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @{
+                    bool isFirst = true;
+                    foreach (var photo in ViewBag.RoomPhotos)
+                    {
+
+                        if (photo.RoomID == Model.RoomID)
+                        {
+                            <div class="carousel-item @(isFirst ? "active" : "")" data-bs-interval="5000">
+                                <img src="~/RoomPhotos/@photo.PhotoPath" class="d-block w-100" alt="...">
+                            </div>
+                            isFirst = false;
+                        }
+                    }
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselRoomPhoto-@Model.RoomID" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselRoomPhoto-@Model.RoomID" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
 
     </div>
     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">...</div>
