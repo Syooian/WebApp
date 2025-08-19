@@ -108,6 +108,7 @@
 
 			function showRoomItem(){
 				$('.card .peopleNum').each(function () {
+					
 						if(peopleNumArr.find(item=>item==$(this).text())){
 							$(this).closest('.rooms').show(300);
 						}
