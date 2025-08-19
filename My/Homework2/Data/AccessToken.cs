@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ASP.NET_Sample.Models
+namespace Homework2.Data
 {
     public class AccessToken
     {

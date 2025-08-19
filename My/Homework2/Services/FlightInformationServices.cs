@@ -1,4 +1,4 @@
-﻿using ASP.NET_Sample.Models;
+﻿using Homework2.Data;
 using Homework2.Model;
 using Newtonsoft;
 using Newtonsoft.Json;
