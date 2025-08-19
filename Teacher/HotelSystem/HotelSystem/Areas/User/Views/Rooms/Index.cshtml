@@ -75,9 +75,11 @@
 					<span class="peopleNum d-none">@item.PeopleNum</span>
 				</div>
 				<div class="card-footer">
-					<div class="btn-group">
-					<a href="#" class="btn btn-success btn-lg"><i class="bi bi-cart4"></i></a>
-					<a href="#" class="btn btn-danger btn-lg"><i class="bi bi-heart-fill"></i></a>
+					<div class="d-grid gap-2">
+						<div class="btn-group">
+							<a href="#" class="btn btn-success btn-lg"><i class="bi bi-cart4"></i></a>
+							<a href="#" class="btn btn-danger btn-lg"><i class="bi bi-heart-fill"></i></a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -114,7 +116,7 @@
 
 			function showRoomItem(){
 				$('.card .peopleNum').each(function () {
-					
+
 						if(peopleNumArr.find(item=>item==$(this).text())){
 							$(this).closest('.rooms').show(300);
 						}
