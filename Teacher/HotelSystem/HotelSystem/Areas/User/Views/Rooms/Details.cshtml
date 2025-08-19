@@ -51,10 +51,12 @@
 				<h3 class="card-text">@Html.DisplayFor(modelItem => Model.Introduction)</h3>
 				<div class="text-decoration-line-through text-secondary">原價:@String.Format("{0:C0}", Model.Price * (decimal)1.5)</div>
 				<h1 class="fw-bold text-danger">@Html.DisplayFor(modelItem => Model.Price)</h1>
-				<div>
-					<a href="#" class="btn btn-success">加入購物車</a>
-					<a href="#" class="btn btn-primary">我要訂房</a>
-					<a href="#" class="btn btn-danger">加入最愛</a>
+				<div class="text-center">
+					<div class="btn-group">
+						<a href="#" class="btn btn-success btn-lg">加入購物車</a>
+						<a href="#" class="btn btn-primary btn-lg">我要訂房</a>
+						<a href="#" class="btn btn-danger btn-lg">加入最愛</a>
+					</div>
 				</div>
 			</div>
 		</div>
