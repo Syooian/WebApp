@@ -3,7 +3,7 @@
     /// <summary>
     /// 航班
     /// </summary>
-    public class Flight
+    public class FlightData
     {
         public DateTime FlightDate { get; set; }
         public string FlightNumber { get; set; }

@@ -62,11 +62,11 @@ namespace Homework2.Controllers
         /// <param name="Page"></param>
         /// <returns></returns>
         [HttpGet("GetFlights")]
-        public async Task<IEnumerable<Flight>> GetFlights(int PageSize = 30, int Page = 1)
+        public async Task<IEnumerable<FlightData>> GetFlights(int PageSize = 30, int Page = 1)
         {
             var Result = await Services.GetFlights(GetSkip(Page, PageSize), PageSize);
             if (Result == null)
-                return new List<Flight>();
+                return new List<FlightData>();
 
             return Result;
         }

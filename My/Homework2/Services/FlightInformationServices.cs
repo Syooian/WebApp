@@ -73,11 +73,11 @@ namespace Homework2.Services
         /// <param name="Skip">跳過前幾筆</param>
         /// <param name="Top">取前幾筆</param>
         /// <returns></returns>
-        public async Task<IEnumerable<Flight>> GetFlights(int Skip = 0, int Top = 30)
+        public async Task<IEnumerable<FlightData>> GetFlights(int Skip = 0, int Top = 30)
         {
             var Resp = Get(null, $"https://tdx.transportdata.tw/api/basic/v2/Air/FIDS/Flight?%24top={Top}&%24skip={Skip}&%24format=JSON", GetAccessToken()).Result;
 
-            return GetCollection<Flight>(Resp);
+            return GetCollection<FlightData>(Resp);
         }
 
         /// <summary>
