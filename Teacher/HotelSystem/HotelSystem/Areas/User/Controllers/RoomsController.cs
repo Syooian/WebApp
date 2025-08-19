@@ -47,8 +47,36 @@ namespace HotelSystem.Areas.User.Controllers
                 return NotFound();
             }
 
+
+            string[] files = Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "RoomPhotos", id)); //  /wwwroot/RoomPhotos/A2001
+
+            foreach (string item in files)
+            {
+                string fileName = Path.GetFileName(item);
+
+                ViewData["RoomPhotos"] += $"<img src='/RoomPhotos/{id}/{fileName}' height='600'>";
+            }
+
             return View(room);
         }
+
+
+        //public IActionResult showPhotos(string roomID)
+        //{
+
+        //    string[] files = Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "RoomPhotos", roomID)); //  /wwwroot/RoomPhotos/A2001
+
+        //    foreach (string item in files)
+        //    {
+        //        string fileName = Path.GetFileName(item);
+                
+        //        ViewData["RoomPhotos"] += $"<img src='~/RoomPhotos/{fileName}'>";
+        //    }
+
+
+        //    return View();
+        //}
+
 
         // GET: User/Rooms/Create
         public IActionResult Create()
