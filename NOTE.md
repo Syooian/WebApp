@@ -152,3 +152,6 @@ JsonIgnore對FromForm無效
 	* 帶有多個參數的路由
 2. 再註冊區域路由
 3. 最後註冊預設路由
+
+# Layout拆分
+每個Area一定要有自己的_ViewStart和_ViewImport，MVC會先在自己的Area內尋找_ViewStart內所記載的Layout名稱，沒有再去跟目錄的View找
