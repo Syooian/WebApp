@@ -8,12 +8,13 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/HotelSystem.styles.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/user/userstyle.css" rel="stylesheet" asp-append-version="true" />
 </head>
 <body>
 	<header>
 		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
 			<div class="container-fluid">
-				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Root HotelSystem</a>
+				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">User HotelSystem</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
 						aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -21,16 +22,26 @@
 				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
 					<ul class="navbar-nav flex-grow-1">
 						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+							<a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-house-door"></i> 回首頁</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+							<a class="nav-link" asp-area="User" asp-controller="Rooms" asp-action="Index"><i class="bi bi-card-list"></i> 房型列表</a>
 						</li>
 					</ul>
+					<button class="btn btn-outline-dark"><i class="bi bi-person-fill"></i> 會員登入</button>
 				</div>
 			</div>
 		</nav>
 	</header>
+	<div class="container mb-4">
+
+		<div class="bg-secondary-subtle p-5 mt-3 rounded shadow jumbotron">
+			<h1 class="fw-bold text-white textShadow">快點找找適合您的房間出發囉~~</h1>
+			<p class="text-white textShadow fs-3"><strong>錢包那麼小 是能看三小</strong></p>
+			<hr>
+			<button class="btn btn-success btn-lg">了解更多</button>
+		</div>
+	</div>
 	<div class="container">
 		<main role="main" class="pb-3">
 			@RenderBody()
@@ -45,6 +56,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
+
 	@await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

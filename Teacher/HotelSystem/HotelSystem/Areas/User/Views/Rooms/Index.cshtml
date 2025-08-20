@@ -10,8 +10,6 @@
 	@ViewData["Title"] <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">搜尋房型</button>
 </h1>
 
-
-
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
 	<div class="offcanvas-header">
 		<h5 class="offcanvas-title" id="offcanvasScrollingLabel">搜尋房型條件</h5>
@@ -29,6 +27,7 @@
 
 		<input type="checkbox" class="btn-check peopleNum" id="btn-check-all" autocomplete="off" value="all">
 		<label class="btn" for="btn-check-all">全部</label>
+
 	</div>
 </div>
 
@@ -37,52 +36,52 @@
 	@foreach (var item in Model)
 	{
 		<div class="col-xl-4 col-md-6 mb-3 rooms">
-			<div class="card h-100">
-				@*  <img src="~/RoomPhotos/@item.RoomID/1.jpg" class="card-img-top" alt="..."> *@
-				<div id="carouselRoomPhoto-@item.RoomID" class="carousel slide" data-bs-ride="carousel">
-					<div class="carousel-inner">
-						@{
-							bool isFirst = true;
-							foreach (var photo in ViewBag.RoomPhotos)
-							{
-
-								if (photo.RoomID == item.RoomID)
+			<a asp-action="Details" asp-route-id="@item.RoomID" class="text-decoration-none text-dark">
+				<div class="card h-100">
+					<div id="carouselRoomPhoto-@item.RoomID" class="carousel slide" data-bs-ride="carousel">
+						<div class="carousel-inner">
+							@{
+								bool isFirst = true;
+								foreach (var photo in ViewBag.RoomPhotos)
 								{
-									<div class="carousel-item @(isFirst ? "active" : "")" data-bs-interval="5000">
-										<img src="~/RoomPhotos/@photo.PhotoPath" class="d-block w-100" alt="...">
-									</div>
-									isFirst = false;
+									if (photo.RoomID == item.RoomID)
+									{
+										<div class="carousel-item @(isFirst ? "active" : "")" data-bs-interval="5000">
+											<img src="~/RoomPhotos/@photo.PhotoPath" class="d-block w-100" alt="...">
+										</div>
+										isFirst = false;
+									}
 								}
 							}
-						}
+						</div>
+						<button class="carousel-control-prev" type="button" data-bs-target="#carouselRoomPhoto-@item.RoomID" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#carouselRoomPhoto-@item.RoomID" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
 					</div>
-					<button class="carousel-control-prev" type="button" data-bs-target="#carouselRoomPhoto-@item.RoomID" data-bs-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Previous</span>
-					</button>
-					<button class="carousel-control-next" type="button" data-bs-target="#carouselRoomPhoto-@item.RoomID" data-bs-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Next</span>
-					</button>
-				</div>
 
-				<div class="card-body">
-					<h2 class="card-title fw-bold">@Html.DisplayFor(modelItem => item.RoomName)</h2>
-					<p class="card-text">@Html.DisplayFor(modelItem => item.Introduction)</p>
-					<div class="text-end text-decoration-line-through text-secondary">原價:@String.Format("{0:C0}", item.Price * (decimal)1.5)</div>
-					<h2 class="fw-bold text-end text-danger">@Html.DisplayFor(modelItem => item.Price)</h2>
-					<a href="#" class="btn btn-primary">訂房</a>
-					<span class="peopleNum d-none">@item.PeopleNum</span>
-				</div>
-				<div class="card-footer">
-					<div class="d-grid gap-2">
-						<div class="btn-group">
-							<a href="#" class="btn btn-success btn-lg"><i class="bi bi-cart4"></i></a>
-							<a href="#" class="btn btn-danger btn-lg"><i class="bi bi-heart-fill"></i></a>
+					<div class="card-body">
+						<h2 class="card-title fw-bold">@Html.DisplayFor(modelItem => item.RoomName)</h2>
+						<p class="card-text">@Html.DisplayFor(modelItem => item.Introduction)</p>
+						<div class="text-end text-decoration-line-through text-secondary">原價:@String.Format("{0:C0}", item.Price * (decimal)1.5)</div>
+						<h2 class="fw-bold text-end text-danger">@Html.DisplayFor(modelItem => item.Price)</h2>
+						<a href="#" class="btn btn-primary">訂房</a>
+						<span class="peopleNum d-none">@item.PeopleNum</span>
+					</div>
+					<div class="card-footer">
+						<div class="d-grid gap-2">
+							<div class="btn-group">
+								<a href="#" class="btn btn-success btn-lg"><i class="bi bi-cart4"></i></a>
+								<a href="#" class="btn btn-danger btn-lg"><i class="bi bi-heart-fill"></i></a>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</a>
 		</div>
 	}
 </div>
@@ -93,38 +92,47 @@
 @section Scripts {
 
 	<script>
+		let peopleNumArr = [];
 
+		$('.peopleNum').on('change', function () {
+			if ($(this).val() === 'all') {
+				if ($(this).is(':checked')) {
+					// 取消其他選項勾選
+					$('.peopleNum').not(this).prop('checked', false);
+					peopleNumArr = [];
+					showAllRooms();
+				} else {
+					// 若取消勾選「全部」，則不顯示任何房型
+					$('.rooms').hide(300);
+				}
+			} else {
+				// 取消「全部」的勾選
+				$('#btn-check-all').prop('checked', false);
 
-
-		let peopleNumArr=[];
-
-			$('.peopleNum').on('change', function () {
-				// 檢查 checkbox 是否有被勾選
 				if ($(this).is(':checked')) {
 					peopleNumArr.push($(this).val());
-					console.log(peopleNumArr);
-					showRoomItem();
-
-				}
-				else {
+				} else {
 					peopleNumArr = peopleNumArr.filter(item => item !== $(this).val());
-					console.log(peopleNumArr);
-					showRoomItem();
+				}
+				showRoomItem();
+			}
+		});
+
+		function showRoomItem() {
+			$('.card .peopleNum').each(function () {
+				if (peopleNumArr.find(item => item == $(this).text())) {
+					$(this).closest('.rooms').show(300);
+				} else {
+					$(this).closest('.rooms').hide(300);
 				}
 			});
+		}
+
+		function showAllRooms() {
+			$('.rooms').show(300);
+		}
 
 
-			function showRoomItem(){
-				$('.card .peopleNum').each(function () {
-
-						if(peopleNumArr.find(item=>item==$(this).text())){
-							$(this).closest('.rooms').show(300);
-						}
-						else {
-							$(this).closest('.rooms').hide(300);
-						}
-					});
-			}
 	</script>
 
 

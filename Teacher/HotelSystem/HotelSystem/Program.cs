@@ -64,16 +64,16 @@ app.MapControllerRoute(
     defaults: new { controller = "Order", action = "Detail" });
 
 
-app.MapControllerRoute(
-        name: "admin",
-        pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}");
+
 
 //2. 再註冊區域路由
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
-
+app.MapControllerRoute(
+        name: "admin",
+        pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}");
 
 // 3. 最後註冊預設路由
 

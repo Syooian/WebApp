@@ -157,3 +157,6 @@ JsonIgnore對FromForm無效
 
 # AJAX
 透過JavaScript的XMLHttpRequest物件或Fetch API，向伺服器發送請求並接收回應，而不需要重新載入整個頁面。
+
+# Layout拆分
+每個Area一定要有自己的_ViewStart和_ViewImport，MVC會先在自己的Area內尋找_ViewStart內所記載的Layout名稱，沒有再去跟目錄的View找

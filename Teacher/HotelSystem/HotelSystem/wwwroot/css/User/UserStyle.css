@@ -1,0 +1,8 @@
+﻿.jumbotron {
+    background-image: url('/roomphotos/a2003/1.jpg');
+    background-repeat: round;
+}
+
+.textShadow {
+    text-shadow: 2px 2px 4px #000000;
+}
