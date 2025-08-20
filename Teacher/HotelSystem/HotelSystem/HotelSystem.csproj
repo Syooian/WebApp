@@ -21,6 +21,11 @@
 
   <ItemGroup>
     <Folder Include="LogFiles\" />
+    <Folder Include="wwwroot\css\Admin\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\User\UserStyle.css" />
   </ItemGroup>
 
 </Project>
