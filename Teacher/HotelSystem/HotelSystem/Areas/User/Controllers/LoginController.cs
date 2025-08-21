@@ -2,6 +2,7 @@
 using HotelSystem.Access.Data;
 using HotelSystem.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
@@ -17,8 +18,8 @@ namespace HotelSystem.Areas.User.Controllers
 
             _context = context;
         }
-        
 
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
