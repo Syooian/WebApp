@@ -11,37 +11,46 @@
 	<link rel="stylesheet" href="~/css/user/userstyle.css" rel="stylesheet" asp-append-version="true" />
 </head>
 <body>
-	<header>
-		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+	<header class="bg-secondary-subtle px-0 pb-5 rounded shadow jumbotron mb-5">
+		<nav class="navbar navbar-expand-sm mt-0 mb-3 navbar-toggleable-sm navbar-light bg-white bg-opacity-50 border-bottom box-shadow py-3 px-5">
 			<div class="container-fluid">
-				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">User HotelSystem</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+					<img src="~/images/brand.png" height="70" class="border border-3 border-white rounded" />
+				</a>
+				<button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
 						aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
+					<span class="navbar-toggler-icon "></span>
 				</button>
 				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-					<ul class="navbar-nav flex-grow-1">
+					<ul class="navbar-nav flex-grow-1 fs-3 fw-bold textShadow">
+						@* <li class="nav-item">
+							<a class="nav-link btn btn-light fw-bold" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-house-door"></i> 回首頁</a>
+						</li> *@
 						<li class="nav-item">
-							<a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-house-door"></i> 回首頁</a>
+							<a class="nav-link  btn btn-light text-white" asp-area="User" asp-controller="Rooms" asp-action="Index"><i class="bi bi-card-list"></i> 房型列表</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" asp-area="User" asp-controller="Rooms" asp-action="Index"><i class="bi bi-card-list"></i> 房型列表</a>
+							<a class="nav-link  btn btn-light text-white" asp-area="User" asp-controller="" asp-action="Index"><i class="bi bi-card-checklist"></i> 我的訂單</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link  btn btn-light text-white" asp-area="User" asp-controller="" asp-action="Index"><i class="bi bi-person-vcard"></i> 會員中心</a>
 						</li>
 					</ul>
-					<button class="btn btn-outline-dark"><i class="bi bi-person-fill"></i> 會員登入</button>
+					<button class="btn btn-outline-light fs-5 fw-bold"><i class="bi bi-person-fill"></i> 登入</button>
 				</div>
 			</div>
 		</nav>
-	</header>
-	<div class="container mb-4">
 
-		<div class="bg-secondary-subtle p-5 mt-3 rounded shadow jumbotron">
-			<h1 class="fw-bold text-white textShadow">快點找找適合您的房間出發囉~~</h1>
-			<p class="text-white textShadow fs-3"><strong>錢包那麼小 是能看三小</strong></p>
-			<hr>
-			<button class="btn btn-success btn-lg">了解更多</button>
+
+		<div class="m-5">
+
+			<h1 class="fw-bold text-white textShadow mb-3">快點找找適合您的房間出發囉~~</h1>
+			<p class="text-white textShadow fs-3 mb-3"><strong>錢包那麼小 是能看三小</strong></p>
+			<hr class="mb-3">
+			<button class="btn btn-success btn-lg"><i class="bi bi-cursor-fill"></i> 了解更多</button>
 		</div>
-	</div>
+	</header>
+
 	<div class="container">
 		<main role="main" class="pb-3">
 			@RenderBody()
