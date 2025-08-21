@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pag
 
 namespace HotelSystem.Areas.User.Controllers
 {
+    [Area("User")]
     public class LoginController : Controller
     {
         private readonly HotelSysDBContext2 _context;
@@ -20,26 +21,30 @@ namespace HotelSystem.Areas.User.Controllers
 
             _context = context;
         }
-
-        [AllowAnonymous]
+        public IActionResult Index()
+        {
+            return View();
+        }
+ 
         public IActionResult Login()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Login(MemberAccount memberAccount)
         {
-            //密碼必須先經過雜湊處理，再與資料庫中的密碼進行比對
+           
             if (memberAccount == null || string.IsNullOrEmpty(memberAccount.Account) || string.IsNullOrEmpty(memberAccount.Password))
             {
                 ViewData["Error"] = "請輸入帳號和密碼";
                 return View();
             }
 
-            var user = await _context.MemberAccount
+            var user = await _context.MemberAccount                                            //密碼必須先經過雜湊處理，再與資料庫中的密碼進行比對
                 .FirstOrDefaultAsync(u => u.Account == memberAccount.Account && u.Password == ComputeSha256Hash(memberAccount.Password)); //12345678
-            
-            
+
+
             if (user != null)
             {
                 var claims = new List<Claim>
@@ -60,13 +65,13 @@ namespace HotelSystem.Areas.User.Controllers
             }
 
             ViewData["Error"] = "帳號或密碼錯誤，請重新輸入";
-           
-            
+
+
             return View(memberAccount);
 
 
 
-         
+
         }
 
         // 新增一個靜態方法來進行 SHA256 雜湊
