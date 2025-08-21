@@ -6,28 +6,29 @@
 
 }
 
-<h1>
-	@ViewData["Title"] <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">搜尋房型</button>
-</h1>
+<h2>
+	@ViewData["Title"] <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="bi bi-search"></i> 搜尋房型</button>
+</h2>
 
-<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+<div class="offcanvas offcanvas-start shadow-lg" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling">
 	<div class="offcanvas-header">
-		<h5 class="offcanvas-title" id="offcanvasScrollingLabel">搜尋房型條件</h5>
-		<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		<h5 class="offcanvas-title" id="offcanvasScrollingLabel">房型條件</h5>
+		<button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
 	</div>
-	<div class="offcanvas-body">
-		<h3>入住人數</h3>
-		@foreach (var num in ViewBag.PeopleNum)
-		{
-			<input type="checkbox" class="btn-check peopleNum" id="btn-check-@num" autocomplete="off" value="@num">
-			<label class="btn" for="btn-check-@num">@(num)人房</label>
+	<div class="offcanvas-body ">
+		<div class="border border-1 border-secondary rounded p-3">
+			<h4 class="fw-bold">入住人數</h4>
+			@foreach (var num in ViewBag.PeopleNum)
+			{
+				<input type="checkbox" class="btn-check peopleNum" id="btn-check-@num" autocomplete="off" value="@num">
+				<label class="btn" for="btn-check-@num">@(num)人房</label>
 
 
-		}
+			}
 
-		<input type="checkbox" class="btn-check peopleNum" id="btn-check-all" autocomplete="off" value="all">
-		<label class="btn" for="btn-check-all">全部</label>
-
+			<input type="checkbox" class="btn-check peopleNum" checked id="btn-check-all" autocomplete="off" value="all">
+			<label class="btn" for="btn-check-all">全部</label>
+		</div>
 	</div>
 </div>
 
@@ -37,7 +38,7 @@
 	{
 		<div class="col-xl-4 col-md-6 mb-3 rooms">
 			<a asp-action="Details" asp-route-id="@item.RoomID" class="text-decoration-none text-dark">
-				<div class="card h-100">
+				<div class="card h-100 border-4">
 					<div id="carouselRoomPhoto-@item.RoomID" class="carousel slide" data-bs-ride="carousel">
 						<div class="carousel-inner">
 							@{
@@ -69,14 +70,13 @@
 						<p class="card-text">@Html.DisplayFor(modelItem => item.Introduction)</p>
 						<div class="text-end text-decoration-line-through text-secondary">原價:@String.Format("{0:C0}", item.Price * (decimal)1.5)</div>
 						<h2 class="fw-bold text-end text-danger">@Html.DisplayFor(modelItem => item.Price)</h2>
-						<a href="#" class="btn btn-primary">訂房</a>
 						<span class="peopleNum d-none">@item.PeopleNum</span>
 					</div>
-					<div class="card-footer">
+					<div class="card-footer p-0">
 						<div class="d-grid gap-2">
 							<div class="btn-group">
-								<a href="#" class="btn btn-success btn-lg"><i class="bi bi-cart4"></i></a>
-								<a href="#" class="btn btn-danger btn-lg"><i class="bi bi-heart-fill"></i></a>
+								<button class="btn btn-outline-success btn-lg fw-bold"><i class="bi bi-cart4"></i> 加入訂單</button>
+								<button class="btn btn-outline-danger btn-lg fw-bold"><i class="bi bi-heart-fill"></i> 放入口袋</button>
 							</div>
 						</div>
 					</div>

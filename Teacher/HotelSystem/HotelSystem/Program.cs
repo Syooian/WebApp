@@ -18,7 +18,12 @@ builder.Services.AddDbContext<HotelSysDBContext2>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("HotelSysDBConnection")));
 
 
-
+builder.Services.AddAuthentication("MemberLogin").AddCookie("MemberLogin", options =>
+{
+    options.LoginPath = "/User/Login/Login"; // 設定登入頁面路徑(若需登入而未登入則強制導到此路徑)
+    options.LogoutPath = "/User/Login/Logout"; // 設定登出頁面路徑
+    options.AccessDeniedPath = "/Home/Index"; // 設定存取拒絕頁面路徑(若已登入但角色權限不符,則強制導到此路徑)
+});
 
 
 
