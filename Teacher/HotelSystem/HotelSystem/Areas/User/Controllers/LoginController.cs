@@ -32,6 +32,7 @@ namespace HotelSystem.Areas.User.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(MemberAccount memberAccount)
         {
            
@@ -72,7 +73,14 @@ namespace HotelSystem.Areas.User.Controllers
 
             return View(memberAccount);
 
+        }
 
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+
+            await HttpContext.SignOutAsync("MemberLogin");// 清除登入狀態(清除Cookie的MemberLogin紀錄)
+            return RedirectToAction("Index", "Rooms"); // 登出後導向到 Login 頁面
 
 
         }
