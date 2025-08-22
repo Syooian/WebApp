@@ -38,6 +38,9 @@
 					</ul>
 					@if (User.IsInRole("Member"))
 					{
+						var MemberName = User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value;
+
+						<span class="">歡迎 @MemberName </span>
 						<a class="btn btn-light fs-5 fw-bold" asp-area="User" asp-controller="Login" asp-action="Login"><i class="bi bi-person"></i> 登出</a>
 
 					}
