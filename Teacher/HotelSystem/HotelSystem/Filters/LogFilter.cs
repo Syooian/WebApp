@@ -18,7 +18,11 @@ namespace HotelSystem.Filters
             var agent = context.HttpContext.Request.Headers["User-Agent"].ToString();
             var ip = context.HttpContext.Connection.RemoteIpAddress?.ToString();
 
-            string user = "Guest";
+            var user = context.HttpContext.User.FindFirst(System.Security.Claims.ClaimTypes.Sid)?.Value;
+            if (user == null) {
+                user = "Guest";
+            }
+          
             var time = DateTime.Now;
 
 
