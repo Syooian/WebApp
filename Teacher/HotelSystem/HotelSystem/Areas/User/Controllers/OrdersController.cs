@@ -25,7 +25,12 @@ namespace HotelSystem.Areas.User.Controllers
         // GET: User/Orders
         public async Task<IActionResult> Index()
         {
-            var hotelSysDBContext2 = _context.Order.Include(o => o.Employee).Include(o => o.Member).Include(o => o.PayCodeNavigation).Include(o => o.StatusCodeNavigation);
+            // 取得 MemberID（存在 ClaimTypes.Sid）
+            var MemberID = User.FindFirst(System.Security.Claims.ClaimTypes.Sid)?.Value;
+
+
+            var hotelSysDBContext2 = _context.Order.Include(o => o.Employee).Include(o => o.Member).Include(o => o.PayCodeNavigation)
+                .Include(o => o.StatusCodeNavigation).Where(o => o.MemberID == MemberID);
             return View(await hotelSysDBContext2.ToListAsync());
         }
 

@@ -41,7 +41,7 @@ namespace HotelSystem.Areas.User.Controllers
                 return View();
             }
 
-            var user = await _context.MemberAccount                                            //密碼必須先經過雜湊處理，再與資料庫中的密碼進行比對
+            var user = await _context.MemberAccount                                        //密碼必須先經過雜湊處理，再與資料庫中的密碼進行比對
                 .FirstOrDefaultAsync(u => u.Account == memberAccount.Account && u.Password == ComputeSha256Hash(memberAccount.Password)); //12345678
 
 
@@ -51,7 +51,8 @@ namespace HotelSystem.Areas.User.Controllers
                     {
                         new Claim(ClaimTypes.Actor, user.Account),
                         new Claim(ClaimTypes.Role, "Member"),
-                         new Claim(ClaimTypes.Sid, user.MemberID),
+                         new Claim(ClaimTypes.Sid, user.MemberID)
+                       
                     };
 
                 var claimsIdentity = new ClaimsIdentity(claims, "MemberLogin");
