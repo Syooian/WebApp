@@ -50,7 +50,8 @@ namespace HotelSystem.Areas.User.Controllers
                 var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Actor, user.Account),
-                        new Claim(ClaimTypes.Role, "Member")
+                        new Claim(ClaimTypes.Role, "Member"),
+                         new Claim(ClaimTypes.Sid, user.MemberID),
                     };
 
                 var claimsIdentity = new ClaimsIdentity(claims, "MemberLogin");
