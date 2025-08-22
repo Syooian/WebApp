@@ -36,6 +36,17 @@
 							<a class="nav-link  btn btn-light text-white" asp-area="User" asp-controller="Members" asp-action="Index"><i class="bi bi-person-vcard"></i> 會員中心</a>
 						</li>
 					</ul>
+
+					
+
+					<a  class="position-relative">
+						<i class="bi bi-cart4"></i>
+						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+							0
+							<span class="visually-hidden">unread messages</span>
+						</span>
+					</a>
+					
 					@if (User.IsInRole("Member"))
 					{
 						var MemberName = User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value;
