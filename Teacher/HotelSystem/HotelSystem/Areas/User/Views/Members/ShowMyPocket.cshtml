@@ -2,7 +2,7 @@
 	ViewData["Title"] = "我的旅行口袋";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 class=" text-center">@ViewData["Title"]</h1>
 <div class="table-responsive">
 	<table class="table table-striped table-hover" id="myPocket">
 		<thead class="">
@@ -27,32 +27,42 @@
 			if(localStorage.getItem("myPocket"))
 				arrMyPocket = JSON.parse(localStorage.getItem("myPocket"));
 
-			let items="";
-			let s=1;
-			for(let item of arrMyPocket)
+			if(arrMyPocket==null || arrMyPocket.length==0)
 			{
-
-			items+=`<tr onclick="goRoomDetail('${item.RID}')">
-						<td><h3>${s}</h3></td>
-						<td><img src="/RoomPhotos/${item.RID}/1.jpg" class="img-fluid" style="max-height:100px;"/></td>
-						<td><h3>${item.RName}</h3></td>
-						<td><h3>${item.Area}</h3></td>
-						<td><h3>${item.Floor}</h3></td>
-						<td><button class="btn btn-danger" onclick="removeItem(${s-1},event)"><i class="bi bi-trash3"></i> 移除</button></td>
-					</TR>
-					`;
-				 s++;
+				$('#myPocket').html(`<h2 class="text-success text-center">目前口袋空空如也</h2>`);
+			}
+			else
+			{
+				getMyPocketList()
 			}
 
-		$('#myPocket tbody').html(items);
+			function getMyPocketList(){
+				let items="";
+				let s=1;
+				for(let item of arrMyPocket)
+				{
 
+				items+=`<tr onclick="goRoomDetail('${item.RID}')">
+							<td><h3>${s}</h3></td>
+							<td><img src="/RoomPhotos/${item.RID}/1.jpg" class="img-fluid" style="max-height:100px;"/></td>
+							<td><h3>${item.RName}</h3></td>
+							<td><h3>${item.Area}</h3></td>
+							<td><h3>${item.Floor}</h3></td>
+							<td><button class="btn btn-danger" onclick="removeItem(${s-1},event)"><i class="bi bi-trash3"></i> 移除</button></td>
+						</TR>
+						`;
+					 s++;
+				}
+
+			$('#myPocket tbody').html(items);
+		}
 		function removeItem(index,evt){
 			evt.stopPropagation();  //停止父節點的預設行為
 			if(confirm("確定要移除嗎?")){
 				arrMyPocket.splice(index,1);
 				localStorage.setItem("myPocket",JSON.stringify(arrMyPocket));
 			}
-
+			 getMyPocketList();
 		}
 
 
