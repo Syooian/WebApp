@@ -32,7 +32,7 @@
 			for(let item of arrMyPocket)
 			{
 
-			items+=`<tr>
+			items+=`<tr onclick="goRoomDetail('${item.RID}')">
 						<td><h3>${s}</h3></td>
 						<td><img src="/RoomPhotos/${item.RID}/1.jpg" class="img-fluid" style="max-height:100px;"/></td>
 						<td><h3>${item.RName}</h3></td>
@@ -45,6 +45,11 @@
 			}
 
 		$('#myPocket tbody').html(items);
+
+		function goRoomDetail(roomID){
+			location.href=`/User/Rooms/Details/${roomID}`;
+
+		}
 
 	</script>
 }
