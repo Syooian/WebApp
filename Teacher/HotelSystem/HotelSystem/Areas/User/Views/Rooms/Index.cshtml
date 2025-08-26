@@ -38,7 +38,7 @@
 	{
 		<div class="col-xl-4 col-md-6 mb-3 rooms">
 			<a asp-action="Details" asp-route-id="@item.RoomID" class="text-decoration-none text-dark">
-				<div class="card h-100 border-4">
+				<div class="card h-100 border-1 shadow">
 					<div id="carouselRoomPhoto-@item.RoomID" class="carousel slide" data-bs-ride="carousel">
 						<div class="carousel-inner">
 							@{
@@ -75,8 +75,8 @@
 					<div class="card-footer p-0">
 						<div class="d-grid gap-2">
 							<div class="btn-group">
-								<button class="btn btn-outline-success btn-lg fw-bold"><i class="bi bi-cart4"></i> 加入訂單</button>
-								<button class="btn btn-outline-danger btn-lg fw-bold"><i class="bi bi-heart-fill"></i> 放入口袋</button>
+								<button class="btn btn-outline-success btn-lg fw-bold"><i class="bi bi-cart4"></i> 我要訂房</button>
+								<button class="btn btn-outline-danger btn-lg fw-bold" onclick="addMyPocket()"><i class="bi bi-heart-fill"></i> 放入口袋</button>
 							</div>
 						</div>
 					</div>
@@ -92,6 +92,17 @@
 @section Scripts {
 
 	<script>
+
+		//////加入我的旅行口袋////////////////
+
+		function addMyPocket(){
+			evt.stopPropagation();
+
+			alert('已加入口袋');
+		}
+
+
+		//////////////////////////////////////////////////////////
 		let peopleNumArr = [];
 
 		$('.peopleNum').on('change', function () {
