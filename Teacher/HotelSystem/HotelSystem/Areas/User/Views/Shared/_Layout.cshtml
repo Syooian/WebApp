@@ -11,8 +11,9 @@
 	<link rel="stylesheet" href="~/css/user/userstyle.css" rel="stylesheet" asp-append-version="true" />
 </head>
 <body>
+
 	<header class="bg-secondary-subtle px-0 pb-5 rounded shadow jumbotron mb-5">
-		<nav class="navbar navbar-expand-sm mt-0 mb-3 navbar-toggleable-sm navbar-light bg-white bg-opacity-50 border-bottom box-shadow py-3 px-5">
+		<nav class="navbar navbar-expand-xl mt-0 mb-3 navbar-light bg-white bg-opacity-50 border-bottom box-shadow py-3 px-5">
 			<div class="container-fluid">
 				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
 					<img src="~/images/brand.png" height="70" class="border border-3 border-white rounded" />
@@ -21,7 +22,7 @@
 						aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon "></span>
 				</button>
-				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav flex-grow-1 fs-3 fw-bold textShadow">
 						@* <li class="nav-item">
 							<a class="nav-link btn btn-light fw-bold" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-house-door"></i> 回首頁</a>
@@ -37,27 +38,33 @@
 						</li>
 					</ul>
 
+					<div class="text-center">
 
+						<a class="position-relative me-3 text-danger">
+							<i class="bi bi-heart-fill fs-3"></i>
+						</a>
 
-					<a class="position-relative me-5">
-						<i class="bi bi-cart4 fs-1"></i>
-						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
-							0
-						</span>
-					</a>
+						<a class="position-relative me-5 text-dark">
+							<i class="bi bi-cart4 fs-2"></i>
+							<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
+								0
+							</span>
+						</a>
+					</div>
+					<div class="text-center">
+						@if (User.IsInRole("Member"))
+						{
+							var MemberName = User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value;
 
-					@if (User.IsInRole("Member"))
-					{
-						var MemberName = User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value;
+							<span class="text-white fw-bold me-4 rounded textShadow">歡迎 @MemberName  </span>
+							<a class="btn btn-light fs-5 fw-bold" asp-area="User" asp-controller="Login" asp-action="Logout"><i class="bi bi-person"></i> 登出</a>
 
-						<span class="text-white fw-bold me-4 rounded textShadow">歡迎 @MemberName  </span>
-						<a class="btn btn-light fs-5 fw-bold" asp-area="User" asp-controller="Login" asp-action="Logout"><i class="bi bi-person"></i> 登出</a>
-
-					}
-					else
-					{
-						<a class="btn btn-outline-light fs-5 fw-bold" asp-area="User" asp-controller="Login" asp-action="Login"><i class="bi bi-person-fill"></i> 登入</a>
-					}
+						}
+						else
+						{
+							<a class="btn btn-outline-light fs-5 fw-bold textShadow" asp-area="User" asp-controller="Login" asp-action="Login"><i class="bi bi-person-fill"></i> 登入</a>
+						}
+					</div>
 				</div>
 			</div>
 		</nav>
@@ -65,10 +72,11 @@
 
 		<div class="m-5">
 
-			<h1 class="fw-bold text-white textShadow mb-3">快點找找適合您的房間出發囉~~</h1>
-			<p class="text-white textShadow fs-3 mb-3"><strong>錢包那麼小 是能看三小</strong></p>
+			<h1 class="fw-bold text-white textShadow mb-3">快點找找適合您的房間出發囉~~ </h1>
+			<p class="text-white textShadow fs-4 mb-3"><strong>在這裡你一定能找到一間適合你的房型</strong></p>
 			<hr class="mb-3">
-			<button class="btn btn-success btn-lg"><i class="bi bi-cursor-fill"></i> 了解更多</button>
+			<a asp-controller="Rooms" asp-action="Index" asp-area="User" class="btn btn-success btn-lg"><i class="bi bi-cursor-fill"></i> 馬上看看房間</a>
+
 		</div>
 	</header>
 
@@ -84,14 +92,12 @@
 		</div>
 	</footer>
 
-
 	<a class="position-fixed bottom-0 end-0 m-xl-5 pe-lx-5 m-md-3 pe-md-3 m-1 pe-1 rounded">
 		<i class="bi bi-cart4 fs-1"></i>
-		<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6">
+		<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6 m-0">
 			0
 		</span>
-	</a>
-
+	</a>	
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>

@@ -22,6 +22,25 @@ namespace HotelSystem.Models
         public string RoleName { get; set; } = null!;
     }
 
+    public  class MemberAccountData
+    {
+
+        [Display(Name = "帳號")]
+        [Required(ErrorMessage ="必填")]
+        public string Account { get; set; } = null!;
+
+        [Display(Name = "密碼")]
+        [Required(ErrorMessage = "必填")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; } = null!;
+    }
+
+
+    [ModelMetadataType(typeof(MemberAccountData))]
+    public partial class MemberAccount
+    { }
+
+
     [ModelMetadataType(typeof(EmployeeRoleData))]
     public partial class EmployeeRole
     { }

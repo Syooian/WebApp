@@ -6,7 +6,7 @@
 
 
 <nav>
-	<div class="nav nav-tabs" id="nav-tab" role="tablist">
+	<div class="nav nav-tabs  nav-fill" id="nav-tab" role="tablist">
 		<button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">商品詳情</button>
 		<button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">規格描述</button>
 		<button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">商品評價</button>
@@ -51,13 +51,7 @@
 				<h3 class="card-text">@Html.DisplayFor(modelItem => Model.Introduction)</h3>
 				<div class="text-decoration-line-through text-secondary">原價:@String.Format("{0:C0}", Model.Price * (decimal)1.5)</div>
 				<h1 class="fw-bold text-danger">@Html.DisplayFor(modelItem => Model.Price)</h1>
-				<div class="text-center">
-					<div class="btn-group">
-						<a href="#" class="btn btn-success btn-lg"><i class="bi bi-cart4"></i> 加入購物車</a>
-						<a href="#" class="btn btn-primary btn-lg"><i class="bi bi-bookmark-check-fill"></i> 我要訂房</a>
-						<a href="#" class="btn btn-danger btn-lg"><i class="bi bi-heart-fill"></i> 加入最愛</a>
-					</div>
-				</div>
+				
 			</div>
 		</div>
 
@@ -72,8 +66,15 @@
 	<div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
 		ccc
 	</div>
+	<div class="text-center mt-5">
+		<div class="btn-group">
+			<a href="#" class="btn btn-outline-dark btn-lg"><i class="bi bi-cart4"></i> 加入購物車</a>
+			<a href="#" class="btn btn-outline-dark btn-lg"><i class="bi bi-bookmark-check-fill"></i> 我要訂房</a>
+			<a href="#" class="btn btn-outline-dark btn-lg"><i class="bi bi-heart-fill"></i> 加入最愛</a>
+		</div>
+	</div>
 </div>
-
+<hr />
 <div>
-	<a asp-action="Index" asp-controller="Rooms">Back to List</a>
+	<a asp-action="Index" asp-controller="Rooms">回房型列表</a>
 </div>
