@@ -43,7 +43,6 @@
 						<a class="position-relative me-3 text-danger">
 							<i class="bi bi-heart-fill fs-3"></i>
 						</a>
-
 						<a class="position-relative me-5 text-dark">
 							<i class="bi bi-cart4 fs-2"></i>
 							<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
@@ -57,12 +56,12 @@
 							var MemberName = User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value;
 
 							<span class="text-white fw-bold me-4 rounded textShadow">歡迎 @MemberName  </span>
-							<a class="btn btn-light fs-5 fw-bold" asp-area="User" asp-controller="Login" asp-action="Logout"><i class="bi bi-person"></i> 登出</a>
+							<a class="btn btn-light fs-5 fw-bold border-4 textShadow" asp-area="User" asp-controller="Login" asp-action="Logout"><i class="bi bi-person"></i> 登出</a>
 
 						}
 						else
 						{
-							<a class="btn btn-outline-light fs-5 fw-bold textShadow" asp-area="User" asp-controller="Login" asp-action="Login"><i class="bi bi-person-fill"></i> 登入</a>
+							<a class="btn btn-outline-light fs-5 fw-bold  border-4 textShadow" asp-area="User" asp-controller="Login" asp-action="Login"><i class="bi bi-person-fill"></i> 登入</a>
 						}
 					</div>
 				</div>
@@ -75,7 +74,7 @@
 			<h1 class="fw-bold text-white textShadow mb-3">快點找找適合您的房間出發囉~~ </h1>
 			<p class="text-white textShadow fs-4 mb-3"><strong>在這裡你一定能找到一間適合你的房型</strong></p>
 			<hr class="mb-3">
-			<a asp-controller="Rooms" asp-action="Index" asp-area="User" class="btn btn-success btn-lg"><i class="bi bi-cursor-fill"></i> 馬上看看房間</a>
+			<a asp-controller="Rooms" asp-action="Index" asp-area="User" class="fw-bold fs-4 btn btn-success btn-lg border-5 border-white textShadow"><i class="bi bi-cursor-fill"></i> 馬上看看房間</a>
 
 		</div>
 	</header>
