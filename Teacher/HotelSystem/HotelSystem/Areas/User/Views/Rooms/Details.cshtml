@@ -15,7 +15,7 @@
 </nav>
 <div class="tab-content" id="nav-tabContent">
 	<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-		<h1 class="fw-bold py-3">@Html.DisplayFor(model => model.RoomName)</h1>
+		<h1 class="fw-bold py-3">@Html.DisplayFor(model => model.RoomName) <button class="btn btn-outline-danger btn-lg" onclick="addMyPocket('@Model.RoomID','@Model.RoomName','@Model.Area',@Model.Floor)"><i class="bi bi-heart-fill"></i> 加入我的口袋</button></h1>
 
 		<div class="card h-100">
 			@*  <img src="~/RoomPhotos/@item.RoomID/1.jpg" class="card-img-top" alt="..."> *@
@@ -70,11 +70,67 @@
 		<div class="btn-group">
 			<a href="#" class="btn btn-outline-dark btn-lg"><i class="bi bi-cart4"></i> 加入購物車</a>
 			<a href="#" class="btn btn-outline-dark btn-lg"><i class="bi bi-bookmark-check-fill"></i> 我要訂房</a>
-			<a href="#" class="btn btn-outline-dark btn-lg"><i class="bi bi-heart-fill"></i> 加入最愛</a>
+			
 		</div>
 	</div>
 </div>
+<div class="toast-container position-fixed top-0 end-0 p-3">
+	<div class="toast align-items-center text-bg-danger border-0" id="addItemToast" data-bs-delay="2000">
+		<div class="d-flex">
+			<div class="toast-body fs-6">
+				已加入口袋
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <hr />
 <div>
 	<a asp-action="Index" asp-controller="Rooms">回房型列表</a>
 </div>
+
+	@section Scripts{
+		<script>
+			//////加入我的旅行口袋////////////////
+		const addItemToast=document.getElementById('addItemToast');
+		const toastBootstrap=bootstrap.Toast.getOrCreateInstance(addItemToast);
+
+
+		//localStorage存放的是JSON格式, 但JS所用的是Array
+
+		let arrMyPocket=[];
+
+		if(localStorage.getItem("myPocket"))
+			arrMyPocket = JSON.parse(localStorage.getItem("myPocket"));
+
+		function addMyPocket(roomID,roomName,area,floor){
+
+			let result = arrMyPocket.find(item=>item.RID==roomID);  //如果沒找到,會回傳undefined
+
+			if(result==undefined)
+			{
+				$('#addItemToast .toast-body').html(`【${roomName}】已加入我的旅行口袋 <i class="bi bi-heart-fill"></i>`);
+
+
+				//將房間加入localStorage
+
+				let newItem={
+					RID:roomID,
+					RName:roomName,
+					Area:area,
+					Floor:floor
+				}
+				arrMyPocket.push(newItem);
+
+				localStorage.setItem("myPocket", JSON.stringify(arrMyPocket));
+			}
+			else{
+				$('#addItemToast .toast-body').html(`【${roomName}】已在旅行口袋中 <i class="bi bi-heart-fill"></i>`);
+
+			}
+			toastBootstrap.show();
+		}
+		</script>
+
+	}
