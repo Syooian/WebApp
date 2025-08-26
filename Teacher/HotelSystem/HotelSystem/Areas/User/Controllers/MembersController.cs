@@ -22,6 +22,13 @@ namespace HotelSystem.Areas.User.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
+        public IActionResult ShowMyPocket()
+        {
+            return View();
+        }
+
+
         // GET: User/Members
         public async Task<IActionResult> Index()
         {

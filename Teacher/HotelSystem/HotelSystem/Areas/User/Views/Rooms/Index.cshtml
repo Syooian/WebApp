@@ -113,9 +113,6 @@
 		if(localStorage.getItem("myPocket"))
 			arrMyPocket = JSON.parse(localStorage.getItem("myPocket"));
 
-
-		//localStorage.setItem("myPocket");
-
 		function addMyPocket(roomID,roomName,area,floor){
 
 			let result = arrMyPocket.find(item=>item.RID==roomID);  //如果沒找到,會回傳undefined

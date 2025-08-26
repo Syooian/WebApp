@@ -1,0 +1,51 @@
+﻿@{
+	ViewData["Title"] = "我的旅行口袋";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="table-responsive">
+	<table class="table" id="myPocket">
+		<thead class="table-secondary">
+			<tr>
+				<th>序號</th>
+				<th>房間照片</th>
+				<th>房型名稱</th>
+				<th>區域</th>
+				<th>樓層</th>
+				<th>移除</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</div>
+
+@section Scripts {
+	<script>
+			let arrMyPocket=[];
+
+			if(localStorage.getItem("myPocket"))
+				arrMyPocket = JSON.parse(localStorage.getItem("myPocket"));
+
+			let items="";
+			let s=1;
+			for(let item of arrMyPocket)
+			{
+
+			items+=`<tr>
+						<td>${s}</td>
+						<td><img src="/RoomPhotos/${item.RID}/1.jpg" class="img-fluid" style="max-height:150px;"/></td>
+						<td><h3>${item.RName}</h3></td>
+						<td><h3>${item.Area}</h3></td>
+						<td><h3>${item.Floor}</h3></td>
+						<td><button class="btn btn-danger" onclick="removeItem(${item.RoomID})"><i class="bi bi-trash3"></i> 移除</button></td>
+					</TR>
+					`;
+				 s++;
+			}
+
+		$('#myPocket tbody').html(items);
+
+	</script>
+}
+
