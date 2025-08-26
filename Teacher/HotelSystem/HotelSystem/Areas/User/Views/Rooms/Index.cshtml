@@ -88,7 +88,13 @@
 	}
 </div>
 
-
+<div class="toast align-items-center" id="addItemToast">
+	<div class="d-flex">
+		<div class="toast-body">
+			已加入口袋
+		</div>
+	</div>
+</div>
 
 
 @section Scripts {
@@ -96,11 +102,14 @@
 	<script>
 
 		//////加入我的旅行口袋////////////////
+		const addItemToast=document.getElementById('addItemToast');
+		const toastBootstrap=bootstrap.Toast.getOrCreateInstance(addItemToast);
+
 
 		function addMyPocket(){
+			toastBootstrap.show();
 
-
-			alert('已加入口袋');
+			// alert('已加入口袋');
 		}
 
 
