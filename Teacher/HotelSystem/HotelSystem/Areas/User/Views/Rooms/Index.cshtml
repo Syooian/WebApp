@@ -78,7 +78,7 @@
 					<div class="d-grid gap-2">
 						<div class="btn-group">
 							<button class="btn btn-outline-success btn-lg fw-bold"><i class="bi bi-cart4"></i> 我要訂房</button>
-							<button class="btn btn-outline-danger btn-lg fw-bold" onclick="addMyPocket('@item.RoomName')"><i class="bi bi-heart-fill"></i> 放入口袋</button>
+							<button class="btn btn-outline-danger btn-lg fw-bold" onclick="addMyPocket('@item.RoomID','@item.RoomName','@item.Area',@item.Floor)"><i class="bi bi-heart-fill"></i> 放入口袋</button>
 						</div>
 					</div>
 				</div>
@@ -106,9 +106,31 @@
 		const toastBootstrap=bootstrap.Toast.getOrCreateInstance(addItemToast);
 
 
-		function addMyPocket(roomName){
+		//localStorage存放的是JSON格式, 但JS所用的是Array
+
+		let arrMyPocket=[];
+
+		if(localStorage.getItem("myPocket"))
+			arrMyPocket = JSON.parse(localStorage.getItem("myPocket"));
+
+
+		//localStorage.setItem("myPocket");
+
+		function addMyPocket(roomID,roomName,area,floor){
 			$('#addItemToast .toast-body').html(`【${roomName}】已加入我的口袋 <i class="bi bi-heart-fill"></i>`);
 			toastBootstrap.show();
+
+			//將房間加入localStorage
+
+			let newItem={
+				RID:roomID,
+				RName:roomName,
+				Area:area,
+				Floor:floor
+			}
+			arrMyPocket.push(newItem);
+
+			localStorage.setItem("myPocket", JSON.stringify(arrMyPocket));
 
 			// alert('已加入口袋');
 		}
