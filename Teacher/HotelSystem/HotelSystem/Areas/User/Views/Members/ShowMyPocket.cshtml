@@ -38,13 +38,23 @@
 						<td><h3>${item.RName}</h3></td>
 						<td><h3>${item.Area}</h3></td>
 						<td><h3>${item.Floor}</h3></td>
-						<td><button class="btn btn-danger" onclick="removeItem(${item.RoomID})"><i class="bi bi-trash3"></i> 移除</button></td>
+						<td><button class="btn btn-danger" onclick="removeItem(${s-1},event)"><i class="bi bi-trash3"></i> 移除</button></td>
 					</TR>
 					`;
 				 s++;
 			}
 
 		$('#myPocket tbody').html(items);
+
+		function removeItem(index,evt){
+			evt.stopPropagation();  //停止父節點的預設行為
+			if(confirm("確定要移除嗎?")){
+				arrMyPocket.splice(index,1);
+				localStorage.setItem("myPocket",JSON.stringify(arrMyPocket));
+			}
+
+		}
+
 
 		function goRoomDetail(roomID){
 			location.href=`/User/Rooms/Details/${roomID}`;
