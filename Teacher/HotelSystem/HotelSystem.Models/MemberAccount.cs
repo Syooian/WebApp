@@ -13,7 +13,6 @@ public partial class MemberAccount
     public string Account { get; set; } = null!;
 
     [StringLength(200)]
-    [DataType(DataType.Password)]
     public string Password { get; set; } = null!;
 
     [StringLength(5)]
