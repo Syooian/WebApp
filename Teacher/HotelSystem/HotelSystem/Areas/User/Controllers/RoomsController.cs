@@ -50,7 +50,7 @@ namespace HotelSystem.Areas.User.Controllers
         }
 
         // GET: User/Rooms/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(string id, DateTime? checkIn, DateTime? checkOut)
         {
             if (id == null)
             {
@@ -65,6 +65,9 @@ namespace HotelSystem.Areas.User.Controllers
                 return NotFound();
             }
             ViewData["RoomPhotos"] = await _context.RoomPhoto.Where(r=>r.RoomID==id).ToListAsync();
+
+            ViewData["CheckIn"] = checkIn?.ToString("yyyy-MM-dd") ?? string.Empty;
+            ViewData["CheckOut"] = checkOut?.ToString("yyyy-MM-dd") ?? string.Empty;
 
             //string[] files = Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "RoomPhotos", id)); //  /wwwroot/RoomPhotos/A2001
 

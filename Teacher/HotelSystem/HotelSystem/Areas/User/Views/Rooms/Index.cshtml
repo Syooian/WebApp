@@ -15,17 +15,7 @@
 	</div>
 	<div class="offcanvas-body ">
 		<form asp-action="Index" class="border border-1 border-secondary rounded p-3 mb-3">
-			<h4 class="fw-bold">住宿日期</h4>
-			<div class="input-group">
-				<span class="input-group-text">入住</span>
-				<input type="text" name="checkIn" value="@ViewData["CheckIn"]" class="form-control datepicker" id="checkinDate" style="cursor:pointer" readonly>
-				<i class="bi bi-calendar-month input-group-text datepicker"  style="cursor:pointer"></i>
-			</div>
-			<div class="input-group">
-				<span class="input-group-text">退房</span>
-				<input type="text" name="checkOut" value="@ViewData["CheckOut"]" class="form-control datepicker" id="checkoutDate" style="cursor:pointer" readonly>
-				<i class="bi bi-calendar-month input-group-text datepicker"  style="cursor:pointer"></i>
-			</div>
+			@await Html.PartialAsync("_DatePickerPartial")
 			<button type="submit" class="btn btn-outline-dark mt-3" id="searchBtn"><i class="bi bi-search"></i> 查詢</button>
 		</form>
 
@@ -52,7 +42,7 @@
 		<div class="col-xl-4 col-md-6 mb-3 rooms">
 
 			<div class="card h-100 border-1 shadow">
-				<a asp-action="Details" asp-route-id="@item.RoomID" class="text-decoration-none text-dark">
+				<a asp-action="Details" asp-route-id="@item.RoomID" asp-route-checkIn="@ViewData["CheckIn"]" asp-route-checkOut="@ViewData["CheckOut"]" class="text-decoration-none text-dark">
 					<div id="carouselRoomPhoto-@item.RoomID" class="carousel slide" data-bs-ride="carousel">
 						<div class="carousel-inner">
 							@{
@@ -90,7 +80,7 @@
 				<div class="card-footer p-0">
 					<div class="d-grid gap-2">
 						<div class="btn-group">
-							<button class="btn btn-outline-success btn-lg fw-bold"><i class="bi bi-cart4"></i> 我要訂房</button>
+							<a asp-action="Details" asp-route-id="@item.RoomID" asp-route-checkIn="@ViewData["CheckIn"]" asp-route-checkOut="@ViewData["CheckOut"]" class="btn btn-outline-success btn-lg fw-bold"><i class="bi bi-cart4"></i> 我要訂房</a>
 							<button class="btn btn-outline-danger btn-lg fw-bold" onclick="addMyPocket('@item.RoomID','@item.RoomName','@item.Area',@item.Floor)"><i class="bi bi-heart-fill"></i> 放入口袋</button>
 						</div>
 					</div>
@@ -113,23 +103,9 @@
 	
 	<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
 	<script src="~/js/mypocket.js"></script>
+	<script src="~/js/mydatepicker.js"></script>
 	<script>
-		///這裡是萬年曆的介面
-		$( ".datepicker" ).datepicker({
-			dateFormat:"yy-mm-dd",
-			//minDate:1,
-			dayNamesMin:["日", "一", "二", "三", "四", "五", "六"],
-			monthNames: ["一月", "二月", "三月", "四月", "五月", "六月",
-			"七月", "八月", "九月", "十月", "十一月", "十二月"],
 		
-		});  //先初始化datepicker
-
-
-
-		$(".datepicker").on('click',function(){
-				
-			$(this).datepicker('show');
-		});
 		
 		//////////////////////////////////////////////////////////
 		let peopleNumArr = [];
