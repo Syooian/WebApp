@@ -5,12 +5,12 @@
 }
 
 <h2>
-	@ViewData["Title"] <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="bi bi-search"></i> 搜尋房型</button>
+	@ViewData["Title"] <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="bi bi-search"></i> 房間搜尋</button>
 </h2>
 
 <div class="offcanvas offcanvas-start shadow-lg" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling">
 	<div class="offcanvas-header">
-		<h5 class="offcanvas-title" id="offcanvasScrollingLabel">房型條件</h5>
+		<h5 class="offcanvas-title" id="offcanvasScrollingLabel">篩選條件</h5>
 		<button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
 	</div>
 	<div class="offcanvas-body ">
@@ -19,12 +19,12 @@
 			<div class="input-group">
 				<span class="input-group-text">入住</span>
 				<input type="text" name="checkIn" value="@ViewData["CheckIn"]" class="form-control datepicker" id="checkinDate" style="cursor:pointer" readonly>
-				<i class="bi bi-calendar-month input-group-text datepicker" data-target="#checkinDate" style="cursor:pointer"></i>
+				<i class="bi bi-calendar-month input-group-text datepicker"  style="cursor:pointer"></i>
 			</div>
 			<div class="input-group">
 				<span class="input-group-text">退房</span>
 				<input type="text" name="checkOut" value="@ViewData["CheckOut"]" class="form-control datepicker" id="checkoutDate" style="cursor:pointer" readonly>
-				<i class="bi bi-calendar-month input-group-text datepicker" data-target="#checkoutDate" style="cursor:pointer"></i>
+				<i class="bi bi-calendar-month input-group-text datepicker"  style="cursor:pointer"></i>
 			</div>
 			<button type="submit" class="btn btn-outline-dark mt-3" id="searchBtn"><i class="bi bi-search"></i> 查詢</button>
 		</form>
@@ -36,7 +36,6 @@
 			{
 				<input type="checkbox" class="btn-check peopleNum" id="btn-check-@num" autocomplete="off" value="@num">
 				<label class="btn" for="btn-check-@num">@(num)人房</label>
-
 
 			}
 
