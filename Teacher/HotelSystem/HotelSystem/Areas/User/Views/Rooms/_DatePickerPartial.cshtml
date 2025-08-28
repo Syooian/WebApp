@@ -1,0 +1,11 @@
+﻿<h4 class="fw-bold">住宿日期</h4>
+<div class="input-group">
+	<span class="input-group-text">入住</span>
+	<input type="text" name="checkIn" value="@ViewData["CheckIn"]" class="form-control datepicker" id="checkinDate" style="cursor:pointer" readonly>
+	<i class="bi bi-calendar-month input-group-text datepicker" data-target="#checkinDate" style="cursor:pointer"></i>
+</div>
+<div class="input-group">
+	<span class="input-group-text">退房</span>
+	<input type="text" name="checkOut" value="@ViewData["CheckOut"]" class="form-control datepicker" id="checkoutDate" style="cursor:pointer" readonly>
+	<i class="bi bi-calendar-month input-group-text datepicker" data-target="#checkoutDate" style="cursor:pointer"></i>
+</div>

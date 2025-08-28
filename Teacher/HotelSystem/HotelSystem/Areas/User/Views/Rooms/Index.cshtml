@@ -15,17 +15,7 @@
 	</div>
 	<div class="offcanvas-body ">
 		<form asp-action="Index" class="border border-1 border-secondary rounded p-3 mb-3">
-			<h4 class="fw-bold">住宿日期</h4>
-			<div class="input-group">
-				<span class="input-group-text">入住</span>
-				<input type="text" name="checkIn" value="@ViewData["CheckIn"]" class="form-control datepicker" id="checkinDate" style="cursor:pointer" readonly>
-				<i class="bi bi-calendar-month input-group-text datepicker" data-target="#checkinDate" style="cursor:pointer"></i>
-			</div>
-			<div class="input-group">
-				<span class="input-group-text">退房</span>
-				<input type="text" name="checkOut" value="@ViewData["CheckOut"]" class="form-control datepicker" id="checkoutDate" style="cursor:pointer" readonly>
-				<i class="bi bi-calendar-month input-group-text datepicker" data-target="#checkoutDate" style="cursor:pointer"></i>
-			</div>
+			@await Html.PartialAsync("_DatePickerPartial")
 			<button type="submit" class="btn btn-outline-dark mt-3" id="searchBtn"><i class="bi bi-search"></i> 查詢</button>
 		</form>
 
