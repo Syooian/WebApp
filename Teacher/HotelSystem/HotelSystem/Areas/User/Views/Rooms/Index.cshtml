@@ -89,7 +89,13 @@
 
 @await Html.PartialAsync("_MyPocketToastPartial")
 
+@section css{
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+}
+
+
 @section Scripts {
+	<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
 	<script src="~/js/mypocket.js"></script>
 	<script>
 
