@@ -4,8 +4,8 @@
 
 <h1 class=" text-center">@ViewData["Title"]</h1>
 <div class="table-responsive">
-	<table class="table table-striped table-hover" id="myPocket">
-		<thead class="">
+	<table class="table table-hover" id="myPocket">
+		<thead>
 			<tr>
 				<th>序號</th>
 				<th>房間照片</th>
@@ -27,14 +27,17 @@
 			if(localStorage.getItem("myPocket"))
 				arrMyPocket = JSON.parse(localStorage.getItem("myPocket"));
 
-			if(arrMyPocket==null || arrMyPocket.length==0)
-			{
-				$('#myPocket').html(`<h2 class="text-success text-center">目前口袋空空如也</h2>`);
+			function IsPocketEmpty(){
+				if(arrMyPocket==null || arrMyPocket.length==0)
+				{
+					$('#myPocket').html(`<h2 class="text-success text-center">目前口袋空空如也</h2>`);
+				}
+				else
+				{
+					getMyPocketList()
+				}
 			}
-			else
-			{
-				getMyPocketList()
-			}
+			IsPocketEmpty();
 
 			function getMyPocketList(){
 				let items="";
@@ -56,13 +59,14 @@
 
 			$('#myPocket tbody').html(items);
 		}
+
 		function removeItem(index,evt){
 			evt.stopPropagation();  //停止父節點的預設行為
 			if(confirm("確定要移除嗎?")){
 				arrMyPocket.splice(index,1);
 				localStorage.setItem("myPocket",JSON.stringify(arrMyPocket));
 			}
-			 getMyPocketList();
+			IsPocketEmpty();
 		}
 
 

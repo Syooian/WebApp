@@ -2,27 +2,40 @@
 
 @{
 	ViewData["Title"] = "選擇您要的房型";
-
-
 }
 
 <h2>
-	@ViewData["Title"] <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="bi bi-search"></i> 搜尋房型</button>
+	@ViewData["Title"] <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="bi bi-search"></i> 房間搜尋</button>
 </h2>
 
 <div class="offcanvas offcanvas-start shadow-lg" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling">
 	<div class="offcanvas-header">
-		<h5 class="offcanvas-title" id="offcanvasScrollingLabel">房型條件</h5>
+		<h5 class="offcanvas-title" id="offcanvasScrollingLabel">篩選條件</h5>
 		<button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
 	</div>
 	<div class="offcanvas-body ">
+		<form asp-action="Index" class="border border-1 border-secondary rounded p-3 mb-3">
+			<h4 class="fw-bold">住宿日期</h4>
+			<div class="input-group">
+				<span class="input-group-text">入住</span>
+				<input type="text" name="checkIn" value="@ViewData["CheckIn"]" class="form-control datepicker" id="checkinDate" style="cursor:pointer" readonly>
+				<i class="bi bi-calendar-month input-group-text datepicker"  style="cursor:pointer"></i>
+			</div>
+			<div class="input-group">
+				<span class="input-group-text">退房</span>
+				<input type="text" name="checkOut" value="@ViewData["CheckOut"]" class="form-control datepicker" id="checkoutDate" style="cursor:pointer" readonly>
+				<i class="bi bi-calendar-month input-group-text datepicker"  style="cursor:pointer"></i>
+			</div>
+			<button type="submit" class="btn btn-outline-dark mt-3" id="searchBtn"><i class="bi bi-search"></i> 查詢</button>
+		</form>
+
+
 		<div class="border border-1 border-secondary rounded p-3">
 			<h4 class="fw-bold">入住人數</h4>
 			@foreach (var num in ViewBag.PeopleNum)
 			{
 				<input type="checkbox" class="btn-check peopleNum" id="btn-check-@num" autocomplete="off" value="@num">
 				<label class="btn" for="btn-check-@num">@(num)人房</label>
-
 
 			}
 
@@ -89,13 +102,35 @@
 </div>
 
 
-@await Html.PartialAsync("_MyPocketToastPartial");
+@await Html.PartialAsync("_MyPocketToastPartial")
+
+@section css {
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+}
+
 
 @section Scripts {
+	
+	<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
 	<script src="~/js/mypocket.js"></script>
 	<script>
+		///這裡是萬年曆的介面
+		$( ".datepicker" ).datepicker({
+			dateFormat:"yy-mm-dd",
+			//minDate:1,
+			dayNamesMin:["日", "一", "二", "三", "四", "五", "六"],
+			monthNames: ["一月", "二月", "三月", "四月", "五月", "六月",
+			"七月", "八月", "九月", "十月", "十一月", "十二月"],
+		
+		});  //先初始化datepicker
 
-	
+
+
+		$(".datepicker").on('click',function(){
+				
+			$(this).datepicker('show');
+		});
+		
 		//////////////////////////////////////////////////////////
 		let peopleNumArr = [];
 
