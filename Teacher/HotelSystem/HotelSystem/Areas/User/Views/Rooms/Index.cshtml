@@ -15,6 +15,21 @@
 	</div>
 	<div class="offcanvas-body ">
 		<div class="border border-1 border-secondary rounded p-3">
+			<h4 class="fw-bold">住宿日期</h4>
+			<div class="input-group">
+				<span class="input-group-text">入住</span>
+				<input type="text" class="form-control">
+				<i class="bi bi-calendar-month input-group-text"></i>
+			</div>
+			<div class="input-group">
+				<span class="input-group-text">退房</span>
+				<input type="text" class="form-control" id="datepicker">
+				<i class="bi bi-calendar-month input-group-text"></i>
+			</div>
+		</div>
+
+
+		<div class="border border-1 border-secondary rounded p-3">
 			<h4 class="fw-bold">入住人數</h4>
 			@foreach (var num in ViewBag.PeopleNum)
 			{
@@ -89,7 +104,7 @@
 
 @await Html.PartialAsync("_MyPocketToastPartial")
 
-@section css{
+@section css {
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
 }
 
@@ -98,7 +113,9 @@
 	<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
 	<script src="~/js/mypocket.js"></script>
 	<script>
-
+		///這裡是萬年曆的介面
+	
+		$("#datepicker").datepicker();
 	
 		//////////////////////////////////////////////////////////
 		let peopleNumArr = [];
