@@ -21,9 +21,24 @@ namespace HotelSystem.Areas.User.Controllers
         }
 
         // GET: User/Rooms
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(DateTime? checkIn, DateTime? checkOut)
         {
             var rooms = _context.Room.Where(r => r.StatusCode == "1");
+
+            if(checkIn!=null && checkOut != null)
+            {
+                //比對日期區間有哪些房是可以下訂的
+                rooms = rooms.Where(r => !r.OrderDetail.Any(od => od.Order.ExpectedCheckInDate >= checkIn && od.Order.ExpectedCheckOutDate <= checkOut));
+
+                rooms = rooms.Where(r => !r.OrderDetail.Any(od => od.Order.ExpectedCheckInDate <= checkIn && od.Order.ExpectedCheckOutDate >= checkOut));
+
+                rooms = rooms.Where(r => !r.OrderDetail.Any(od => od.Order.ExpectedCheckOutDate >= checkIn && od.Order.ExpectedCheckOutDate <= checkOut));
+
+                rooms = rooms.Where(r => !r.OrderDetail.Any(od => od.Order.ExpectedCheckInDate >= checkIn && od.Order.ExpectedCheckInDate <= checkOut));
+
+            }
+
+
             ViewData["RoomPhotos"] = await _context.RoomPhoto.ToListAsync();
 
             ViewData["PeopleNum"] = await _context.Room.Where(r => r.StatusCode == "1").Select(r => r.PeopleNum).Distinct().ToListAsync();

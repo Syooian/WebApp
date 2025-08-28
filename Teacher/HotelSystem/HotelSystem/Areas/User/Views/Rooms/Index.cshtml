@@ -14,20 +14,20 @@
 		<button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
 	</div>
 	<div class="offcanvas-body ">
-		<div class="border border-1 border-secondary rounded p-3">
+		<form asp-action="Index" class="border border-1 border-secondary rounded p-3">
 			<h4 class="fw-bold">住宿日期</h4>
 			<div class="input-group">
 				<span class="input-group-text">入住</span>
-				<input type="text" class="form-control datepicker" id="checkinDate" style="cursor:pointer" readonly>
+				<input type="text" name="checkIn" class="form-control datepicker" id="checkinDate" style="cursor:pointer" readonly>
 				<i class="bi bi-calendar-month input-group-text datepicker" data-target="#checkinDate" style="cursor:pointer"></i>
 			</div>
 			<div class="input-group">
 				<span class="input-group-text">退房</span>
-				<input type="text" class="form-control datepicker" id="checkoutDate" style="cursor:pointer" readonly>
+				<input type="text" name="checkOut" class="form-control datepicker" id="checkoutDate" style="cursor:pointer" readonly>
 				<i class="bi bi-calendar-month input-group-text datepicker" data-target="#checkoutDate" style="cursor:pointer"></i>
 			</div>
-			<button class="btn btn-outline-dark mt-3" id="searchBtn"><i class="bi bi-search"></i> 查詢</button>
-		</div>
+			<button type="submit" class="btn btn-outline-dark mt-3" id="searchBtn"><i class="bi bi-search"></i> 查詢</button>
+		</form>
 
 
 		<div class="border border-1 border-secondary rounded p-3">
@@ -118,7 +118,7 @@
 		///這裡是萬年曆的介面
 		$( ".datepicker" ).datepicker({
 			dateFormat:"yy-mm-dd",
-			minDate:1,
+			//minDate:1,
 			dayNamesMin:["日", "一", "二", "三", "四", "五", "六"],
 			monthNames: ["一月", "二月", "三月", "四月", "五月", "六月",
 			"七月", "八月", "九月", "十月", "十一月", "十二月"],
