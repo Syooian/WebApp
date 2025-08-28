@@ -43,6 +43,9 @@ namespace HotelSystem.Areas.User.Controllers
 
             ViewData["PeopleNum"] = await _context.Room.Where(r => r.StatusCode == "1").Select(r => r.PeopleNum).Distinct().ToListAsync();
 
+            ViewData["CheckIn"]= checkIn?.ToString("yyyy-MM-dd")??string.Empty;
+            ViewData["CheckOut"] = checkOut?.ToString("yyyy-MM-dd") ?? string.Empty;
+
             return View(await rooms.ToListAsync());
         }
 
