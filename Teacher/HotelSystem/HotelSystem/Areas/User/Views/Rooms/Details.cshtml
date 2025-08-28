@@ -91,7 +91,7 @@
 
 <hr />
 <div>
-	<a asp-action="Index" asp-controller="Rooms">回房型列表</a>
+	<a asp-action="Index" asp-controller="Rooms" asp-route-checkIn="@ViewData["CheckIn"]" asp-route-checkOut="@ViewData["CheckOut"]">回房型列表</a>
 </div>
 
 	@section Scripts{
