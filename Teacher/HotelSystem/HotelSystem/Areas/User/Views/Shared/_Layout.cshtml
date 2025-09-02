@@ -45,7 +45,7 @@
 						<a asp-area="User" asp-controller="Members" asp-action="ShowMyPocket" class="position-relative me-3 text-danger">
 							<i class="bi bi-heart-fill fs-3"></i>
 						</a>
-						<a class="position-relative me-5 text-dark">
+						<a class="position-relative me-5 text-dark CartStatus" asp-area="User" asp-action="ShowMyCart" asp-controller="Members">
 							<i class="bi bi-cart4 fs-2"></i>
 							<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
 								0
@@ -93,7 +93,7 @@
 		</div>
 	</footer>
 
-	<a class="position-fixed bottom-0 end-0 m-xl-5 pe-lx-5 m-md-3 pe-md-3 m-1 pe-1 rounded">
+	<a class="position-fixed bottom-0 end-0 m-xl-5 pe-lx-5 m-md-3 pe-md-3 m-1 pe-1 rounded CartStatus" asp-area="User" asp-action="ShowMyCart" asp-controller="Members">
 		<i class="bi bi-cart4 fs-1"></i>
 		<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6 m-0">
 			0
@@ -105,6 +105,13 @@
 	<script src="~/js/site.js" asp-append-version="true"></script>
 	
 	@await RenderSectionAsync("Scripts", required: false)
+	<script>
+		//let arrMyCart = [];
 
+		// if (localStorage.getItem("myCart"))
+		// 	arrMyCart = JSON.parse(localStorage.getItem("myCart"));
+
+		$('.CartStatus .badge').text(arrMyCart.length);
+	</script>
 </body>
 </html>
