@@ -57,7 +57,7 @@
 					@await Html.PartialAsync("_DatePickerPartial")
 			
 					<div class="text-center mt-5">
-							<a href="#" class="btn btn-outline-dark btn-lg"><i class="bi bi-cart4"></i> 加入購物車</a>
+							<button href="#" class="btn btn-outline-dark btn-lg" onclick="addCart()"><i class="bi bi-cart4"></i> 加入購物車</button>
 					</div>
 				</div>
 			</div>
@@ -87,5 +87,26 @@
 	@section Scripts{
 	<script src="~/js/mypocket.js"></script>
 	<script src="~/js/mydatepicker.js"></script>
+
+	<script>
+		function addCart(){
+			//先判斷有沒有選住宿日期區間,有才加入購物車
+			if($('#checkinDate').val()=="" ||  $('#checkOutDate').val()==""){
+				//alert("請選擇入住及退房日期!!")
+				$('#addItemToast .toast-body').html(`請選擇【入住日期】及【退房日期】!! `);
+				toastBootstrap.show();
+				return;
+			}
+			else{
+				//加入購物車
+				//但在加入購物車前前,得先判斷該日期區間有沒有人訂此房型
+				//必須由後端去取得資料庫的資料做比對
+
+
+			}
+		}
+	</script>
+
+
 		
 	}
