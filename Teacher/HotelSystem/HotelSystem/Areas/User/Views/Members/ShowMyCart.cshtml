@@ -90,8 +90,10 @@
 			if(confirm("確定要移除嗎?")){
 				arrMyCart.splice(index,1);
 				localStorage.setItem("myCart",JSON.stringify(arrMyCart));
+				CartStatusCheck();
+				IsCartEmpty();
 			}
-			IsCartEmpty();
+			
 		}
 
 
