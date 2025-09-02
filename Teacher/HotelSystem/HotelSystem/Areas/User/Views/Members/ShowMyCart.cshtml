@@ -51,10 +51,11 @@
 			function getMyCartList(){
 				let items="";
 				let s=1;
+				let sum=0;
 				for(let item of arrMyCart)
 				{
 
-				items+=`<tr">
+					items+=`<tr">
 							<td><h3>${s}</h3></td>
 							<td><img src="/RoomPhotos/${item.RID}/1.jpg" class="img-fluid" style="max-height:100px;"/></td>
 							<td><h3>${item.RName}</h3></td>
@@ -64,11 +65,16 @@
 							<td><h3>${item.Qty}</h3></td>
 							<td><h3 class="text-danger fw-bold">${toNTD.format(item.Price*item.Qty)}</h3></td>
 							<td><button class="btn btn-danger" onclick="removeItem(${s-1},event)"><i class="bi bi-trash3"></i> 移除</button></td>
-						</TR>
+						</tr>
 						`;
 					 s++;
-				}
 
+					 sum+=item.Price*item.Qty;
+				}
+				items+=`<tfoot><tr">
+				<td colspan="9"><h3 class="text-danger fw-bold text-end">總額：NT ${toNTD.format(sum)}</h3></td>
+				</tr></tfoot>
+						`;
 			$('#myCart tbody').html(items);
 		}
 
