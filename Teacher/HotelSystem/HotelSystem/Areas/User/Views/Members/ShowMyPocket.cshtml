@@ -21,11 +21,9 @@
 </div>
 
 @section Scripts {
+	<script src="~/js/MemberJS.js"></script>
 	<script>
-			let arrMyPocket=[];
-
-			if(localStorage.getItem("myPocket"))
-				arrMyPocket = JSON.parse(localStorage.getItem("myPocket"));
+		
 
 			function IsPocketEmpty(){
 				if(arrMyPocket==null || arrMyPocket.length==0)

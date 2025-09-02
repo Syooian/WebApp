@@ -90,7 +90,7 @@
 
 @section Scripts {
 	<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
-	<script src="~/js/mypocket.js"></script>
+	<script src="~/js/MemberJS.js"></script>
 	<script src="~/js/mydatepicker.js"></script>
 
 	<script>
@@ -132,46 +132,7 @@
 		}
 
 
-		let arrMyCart = [];
-
-		if (localStorage.getItem("myCart"))
-			arrMyCart = JSON.parse(localStorage.getItem("myCart"));
-
-		function addMyCart(roomID, roomName, area, floor, price, checkinDate, checkoutDate) {
-
-			let result = arrMyCart.find(item => item.RID == roomID);  //如果沒找到,會回傳undefined
-
-			if (result == undefined) {
-				$('#addItemToast .toast-body').html(`【${roomName}】已加入購物車 <i class="bi bi-cart4"></i>`);
-
-				//將房間加入localStorage
-
-				let newItem = {
-					RID: roomID,
-					RName: roomName,
-					Area: area,
-					Floor: floor,
-					Price:price,
-					CheckinDate:checkinDate,
-					CheckoutDate:checkoutDate,
-					Qty:1
-
-				}
-				arrMyCart.push(newItem);
-				CartStatusCheck();
-				localStorage.setItem("myCart", JSON.stringify(arrMyCart));
-			}
-			else {
-				$('#addItemToast .toast-body').html(`【${roomName}】已在購物車中 <i class="bi bi-cart4"></i>`);
-
-			}
-			toastBootstrap.show();
-		}
-
-		function CartStatusCheck(){
-			$('.CartStatus .badge').text(arrMyCart.length);
-		}
-		 CartStatusCheck();
+		
 	</script>
 
 

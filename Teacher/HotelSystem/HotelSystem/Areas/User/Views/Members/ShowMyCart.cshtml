@@ -29,6 +29,8 @@
 </div>
 
 @section Scripts {
+	<script src="~/js/MemberJS.js"></script>
+
 	<script>
 		 let toNTD = new Intl.NumberFormat('zh-TW'  , {
 			style:'currency',
@@ -36,10 +38,7 @@
 			minimumFractionDigits:0
 		} );
 
-			let arrMyCart=[];
-
-			if(localStorage.getItem("myCart"))
-				arrMyCart = JSON.parse(localStorage.getItem("myCart"));
+		
 
 			function IsCartEmpty(){
 				if(arrMyCart==null || arrMyCart.length==0)
