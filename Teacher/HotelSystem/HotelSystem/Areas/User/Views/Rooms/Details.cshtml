@@ -83,8 +83,11 @@
 <div>
 	<a asp-action="Index" asp-controller="Rooms" asp-route-checkIn="@ViewData["CheckIn"]" asp-route-checkOut="@ViewData["CheckOut"]">回房型列表</a>
 </div>
-
+@section css {
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+}
 	@section Scripts{
+	<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
 	<script src="~/js/mypocket.js"></script>
 	<script src="~/js/mydatepicker.js"></script>
 
