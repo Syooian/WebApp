@@ -40,6 +40,25 @@ function addMyPocket(roomID, roomName, area, floor) {
 
 
 ////-------加入購物車////////////////
+function shadow1() {
+	$('.CartStatus').css({
+		'text-shadow': '0 0 10px orange'
+
+	});
+
+	setTimeout(shadow2, 200);
+
+}
+
+
+function shadow2() {
+	$('.CartStatus').css({
+		'text-shadow': '0 0 10px white'
+
+	});
+	setTimeout(shadow1, 200);
+}
+
 let arrMyCart = [];
 
 if (localStorage.getItem("myCart"))
@@ -78,5 +97,10 @@ function addMyCart(roomID, roomName, area, floor, price, checkinDate, checkoutDa
 
 function CartStatusCheck() {
 	$('.CartStatus .badge').text(arrMyCart.length);
+
+	if (arrMyCart.length > 0) {
+		
+		shadow1();
+	}
 }
 CartStatusCheck();
