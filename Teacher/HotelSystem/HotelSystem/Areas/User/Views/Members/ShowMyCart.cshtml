@@ -25,6 +25,12 @@
 
 @section Scripts {
 	<script>
+		 let toNTD = new Intl.NumberFormat('zh-TW'  , {
+			style:'currency',
+			currency:'TWD',
+			minimumFractionDigits:0
+		} );
+
 			let arrMyCart=[];
 
 			if(localStorage.getItem("myCart"))
@@ -54,9 +60,9 @@
 							<td><h3>${item.RName}</h3></td>
 							<td><h3>${item.Area}</h3></td>
 							<td><h3>${item.Floor}</h3></td>
-							<td><h3>${item.Price}</h3></td>
+							<td><h3>${toNTD.format(item.Price)}</h3></td>
 							<td><h3>${item.Qty}</h3></td>
-							<td><h3>${item.Price*item.Qty}</h3></td>
+							<td><h3>${toNTD.format(item.Price*item.Qty)}</h3></td>
 							<td><button class="btn btn-danger" onclick="removeItem(${s-1},event)"><i class="bi bi-trash3"></i> 移除</button></td>
 						</TR>
 						`;
