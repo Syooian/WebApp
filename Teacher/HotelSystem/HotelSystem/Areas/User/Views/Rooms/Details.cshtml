@@ -53,13 +53,14 @@
 					<h1 class="fw-bold text-danger">@Html.DisplayFor(modelItem => Model.Price)</h1>
 				</div>
 
-				<div class="col-xl-4 col-md-6">
+				<form id="myForm" class="col-xl-4 col-md-6">
 					@await Html.PartialAsync("_DatePickerPartial")
-			
+					<input type="hidden" name="id" value="@Model.RoomID" />
 					<div class="text-center mt-5">
-							<a href="#" class="btn btn-outline-dark btn-lg"><i class="bi bi-cart4"></i> 加入購物車</a>
+						<button type="button" class="btn btn-outline-dark btn-lg" onclick="addCart('@Model.RoomID','@Model.RoomName','@Model.Area',@Model.Floor,@Model.Price)"><i class="bi bi-cart4"></i> 加入購物車</button>
 					</div>
-				</div>
+				</form>
+
 			</div>
 		</div>
 
@@ -74,7 +75,7 @@
 	<div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
 		ccc
 	</div>
-	
+
 </div>
 
 @await Html.PartialAsync("_MyPocketToastPartial")
@@ -83,9 +84,57 @@
 <div>
 	<a asp-action="Index" asp-controller="Rooms" asp-route-checkIn="@ViewData["CheckIn"]" asp-route-checkOut="@ViewData["CheckOut"]">回房型列表</a>
 </div>
+@section css {
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+}
 
-	@section Scripts{
-	<script src="~/js/mypocket.js"></script>
+@section Scripts {
+	<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
+	<script src="~/js/MemberJS.js"></script>
 	<script src="~/js/mydatepicker.js"></script>
+
+	<script>
+		function addCart(roomID, roomName, area, floor, price){
+			//event.preventDefault();
+
+			//先判斷有沒有選住宿日期區間,有才加入購物車
+			if($('#checkinDate').val()=="" ||  $('#checkOutDate').val()==""){
+				//alert("請選擇入住及退房日期!!")
+				$('#addItemToast .toast-body').html(`請選擇【入住日期】及【退房日期】!! `);
+				toastBootstrap.show();
+				return;
+			}
+			else{
+				//加入購物車
+				//但在加入購物車前前,得先判斷該日期區間有沒有人訂此房型
+				//必須由後端去取得資料庫的資料做比對
+				//用Ajax對一般的action 提出Request,目的為不讓網頁重新整理
+
+				$.ajax({
+					url:`@Url.Action("IsRoomAvailable")`,
+					data:$('#myForm').serialize(),
+					success:function(resp){
+						if(resp){
+							//執行把房型加入購物車
+							//alert("已加入購物車!!");
+							addMyCart(roomID, roomName, area, floor, price, $('#checkinDate').val(), $('#checkoutDate').val());
+						}
+						else{
+							//alert("該日期區間已無此房型,請重新選擇!!")
+							$('#addItemToast .toast-body').html(`該日期區間已無此房型,請重新選擇!! `);
+							toastBootstrap.show();
+							return;
+						}
+					}
+				});
+
+			}
+		}
+
+
 		
+	</script>
+
+
+
 	}

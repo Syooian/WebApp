@@ -49,6 +49,33 @@ namespace HotelSystem.Areas.User.Controllers
             return View(await rooms.ToListAsync());
         }
 
+        public async Task<bool> IsRoomAvailable(DateTime checkIn, DateTime checkOut, string id)
+        {
+            if(checkIn==null || checkOut == null || id==null)
+            {
+                return false;
+            }
+
+            //取得指定房間在特訂日期區間內能否下訂
+            var room = await _context.Room.Include(r => r.OrderDetail).ThenInclude(od => od.Order).FirstOrDefaultAsync(r => r.RoomID == id);
+
+            if (room == null)
+            {
+                return false;
+            }
+
+            bool isAvailable = !room.OrderDetail.Any(od => od.Order.ExpectedCheckInDate >= checkIn && od.Order.ExpectedCheckOutDate <= checkOut);
+
+            isAvailable = !room.OrderDetail.Any(od => od.Order.ExpectedCheckInDate <= checkIn && od.Order.ExpectedCheckOutDate >= checkOut);
+
+            isAvailable = !room.OrderDetail.Any(od => od.Order.ExpectedCheckOutDate >= checkIn && od.Order.ExpectedCheckOutDate <= checkOut);
+
+            isAvailable = !room.OrderDetail.Any(od => od.Order.ExpectedCheckInDate >= checkIn && od.Order.ExpectedCheckInDate <= checkOut);
+
+            return isAvailable;
+        }
+
+
         // GET: User/Rooms/Details/5
         public async Task<IActionResult> Details(string id, DateTime? checkIn, DateTime? checkOut)
         {

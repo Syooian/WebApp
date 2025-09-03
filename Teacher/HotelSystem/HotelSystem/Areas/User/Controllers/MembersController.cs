@@ -28,7 +28,11 @@ namespace HotelSystem.Areas.User.Controllers
             return View();
         }
 
-
+        [AllowAnonymous]
+        public IActionResult ShowMyCart()
+        {
+            return View();
+        }
         // GET: User/Members
         public async Task<IActionResult> Index()
         {

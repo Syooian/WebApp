@@ -1,0 +1,102 @@
+﻿@{
+	ViewData["Title"] = "我的旅行清單";
+}
+
+<h1 class=" text-center">@ViewData["Title"]</h1>
+
+<div id="title" class="card border-info p-4 mb-4 bg-info bg-opacity-10">
+	<h4 class="fw-bold text-center text-danger"></h4>
+</div>
+
+<div class="table-responsive">
+	<table class="table table-hover" id="myCart">
+		<thead>
+			<tr>
+				<th>序號</th>
+				<th>房間照片</th>
+				<th>房型名稱</th>
+				<th>區域</th>
+				<th>樓層</th>
+				<th>單價</th>
+				<th>數量</th>
+				<th>小計</th>
+				<th>移除</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</div>
+
+@section Scripts {
+	<script src="~/js/MemberJS.js"></script>
+
+	<script>
+		 let toNTD = new Intl.NumberFormat('zh-TW'  , {
+			style:'currency',
+			currency:'TWD',
+			minimumFractionDigits:0
+		} );
+
+		
+
+			function IsCartEmpty(){
+				if(arrMyCart==null || arrMyCart.length==0)
+				{
+					$('#myCart').html(`<h2 class="text-success text-center">目前沒有任何房間被加入行程中</h2>`);
+				}
+				else
+				{
+					getMyCartList()
+				}
+			}
+			IsCartEmpty();
+
+			function getMyCartList(){
+				let items="";
+				let s=1;
+				let sum=0;
+
+				 $('#title h4').html(`入住日期：${arrMyCart[0].CheckinDate}　退房日期：${arrMyCart[0].CheckoutDate}`);
+
+				for(let item of arrMyCart)
+				{
+
+					items+=`<tr">
+							<td><h3>${s}</h3></td>
+							<td><img src="/RoomPhotos/${item.RID}/1.jpg" class="img-fluid" style="max-height:100px;"/></td>
+							<td><h3>${item.RName}</h3></td>
+							<td><h3>${item.Area}</h3></td>
+							<td><h3>${item.Floor}</h3></td>
+							<td><h3>${toNTD.format(item.Price)}</h3></td>
+							<td><h3>${item.Qty}</h3></td>
+							<td><h3 class="text-danger fw-bold">${toNTD.format(item.Price*item.Qty)}</h3></td>
+							<td><button class="btn btn-danger" onclick="removeItem(${s-1},event)"><i class="bi bi-trash3"></i> 移除</button></td>
+						</tr>
+						`;
+					 s++;
+
+					 sum+=item.Price*item.Qty;
+				}
+				items+=`<tfoot><tr">
+				<td colspan="9"><h3 class="text-danger fw-bold text-end">總額：NT ${toNTD.format(sum)}</h3></td>
+				</tr></tfoot>
+						`;
+			$('#myCart tbody').html(items);
+		}
+
+		function removeItem(index,evt){
+			evt.stopPropagation();  //停止父節點的預設行為
+			if(confirm("確定要移除嗎?")){
+				arrMyCart.splice(index,1);
+				localStorage.setItem("myCart",JSON.stringify(arrMyCart));
+				CartStatusCheck();
+				IsCartEmpty();
+			}
+			
+		}
+
+
+	</script>
+}
+
