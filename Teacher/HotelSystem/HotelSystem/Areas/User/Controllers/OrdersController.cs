@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace HotelSystem.Areas.User.Controllers
 {
     [Area("User")]
-    [Authorize(Roles = "Member")]
+    //[Authorize(Roles = "Member")]
     public class OrdersController : Controller
     {
         private readonly HotelSysDBContext2 _context;
@@ -57,12 +57,14 @@ namespace HotelSystem.Areas.User.Controllers
         }
 
         // GET: User/Orders/Create
-        public IActionResult Create()
+        public IActionResult Create(DateTime ExpectedCheckInDate, DateTime ExpectedCheckOutDate)
         {
-            ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeID", "EmployeeID");
-            ViewData["MemberID"] = new SelectList(_context.Member, "MemberID", "MemberID");
-            ViewData["PayCode"] = new SelectList(_context.PayType, "PayCode", "PayCode");
-            ViewData["StatusCode"] = new SelectList(_context.OrderStatus, "StatusCode", "StatusCode");
+            ViewData["ExpectedCheckInDate"] = ExpectedCheckInDate;
+
+            ViewData["ExpectedCheckOutDate"] = ExpectedCheckOutDate;
+
+            ViewData["PayCode"] = new SelectList(_context.PayType, "PayCode", "PayType1");
+         
             return View();
         }
 

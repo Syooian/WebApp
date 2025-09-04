@@ -4,12 +4,13 @@
 
 <h1 class=" text-center">@ViewData["Title"]</h1>
 
-<div id="title" class="card border-info p-4 mb-4 bg-info bg-opacity-10">
-	<h4 class="fw-bold text-center text-danger"></h4>
-</div>
 
-<div class="table-responsive">
-	<table class="table table-hover" id="myCart">
+<div class="table-responsive" id="myCart">
+
+	<div id="title" class="card border-info p-4 mb-4 bg-info bg-opacity-10">
+		<h4 class="fw-bold text-center text-danger"></h4>
+	</div>
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>序號</th>
@@ -27,6 +28,7 @@
 		</tbody>
 	</table>
 </div>
+
 
 @section Scripts {
 	<script src="~/js/MemberJS.js"></script>
@@ -80,7 +82,12 @@
 				}
 				items+=`<tfoot><tr">
 				<td colspan="9"><h3 class="text-danger fw-bold text-end">總額：NT ${toNTD.format(sum)}</h3></td>
-				</tr></tfoot>
+				</tr>
+				<tr">
+						<td colspan="9"><a href="/User/Orders/Create?ExpectedCheckInDate=${arrMyCart[0].CheckinDate}&ExpectedCheckOutDate=${arrMyCart[0].CheckoutDate}" class="btn btn-primary">確定下單</a></td>
+				</tr>
+				
+				</tfoot>
 						`;
 			$('#myCart tbody').html(items);
 		}
