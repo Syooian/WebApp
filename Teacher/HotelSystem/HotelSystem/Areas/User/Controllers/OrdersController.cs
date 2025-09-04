@@ -15,7 +15,7 @@ using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 namespace HotelSystem.Areas.User.Controllers
 {
     [Area("User")]
-    //[Authorize(Roles = "Member")]
+    [Authorize(Roles = "Member")]
     public class OrdersController : Controller
     {
         private readonly HotelSysDBContext2 _context;
@@ -95,16 +95,31 @@ namespace HotelSystem.Areas.User.Controllers
 
             if (ModelState.IsValid)
             {
-                _context.Add(order);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    var result = await _context.ExecSPAddNewOrderAsync(order.ExpectedCheckInDate, order.ExpectedCheckOutDate, order.Note, order.MemberID, order.PayCode, order.StatusCode, Cart);
+                    if (result > 0)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "新增失敗");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, "新增失敗: " + ex.Message);
+                    ViewData["PayCode"] = new SelectList(_context.PayType, "PayCode", "PayType1", order.PayCode);
+                    return View(order);
+                }
             }
 
             ViewData["ExpectedCheckInDate"] = order.ExpectedCheckInDate;
 
             ViewData["ExpectedCheckOutDate"] = order.ExpectedCheckOutDate;
 
-            ViewData["PayCode"] = new SelectList(_context.PayType, "PayCode", "PayType1");
+            ViewData["PayCode"] = new SelectList(_context.PayType, "PayCode", "PayType1", order.PayCode);
             return View(order);
         }
 

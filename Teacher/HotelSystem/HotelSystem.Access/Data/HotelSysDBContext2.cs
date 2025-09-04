@@ -25,4 +25,11 @@ public partial class HotelSysDBContext2 : HotelSysDBContext
             .FromSqlRaw("EXEC getMemberWithTel", "A0001")
             .ToListAsync();
     }
+
+    public async Task<int> ExecSPAddNewOrderAsync(DateTime ExpectedCheckInDate, DateTime ExpectedCheckOutDate, string Note, string MemberID, string PayCode, string StatusCode, string Cart)
+    {
+        var result = this.Database.ExecuteSqlRawAsync("EXEC AddNewOrder {0},{1},{2},{3},{4},{5},{6}", ExpectedCheckInDate, ExpectedCheckOutDate, Note, MemberID, PayCode, StatusCode, Cart);
+        return await result;
+    }
+
 }
