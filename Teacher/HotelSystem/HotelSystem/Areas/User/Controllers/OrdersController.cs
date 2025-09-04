@@ -83,6 +83,14 @@ namespace HotelSystem.Areas.User.Controllers
             order.StatusCode = "0";
 
 
+            ModelState.Remove("OrderID");
+            ModelState.Remove("StatusCode");
+            ModelState.Remove("MemberID");
+            ModelState.Remove("Member");
+            ModelState.Remove("PayCodeNavigation");
+            ModelState.Remove("StatusCodeNavigation");
+
+
             if (ModelState.IsValid)
             {
                 _context.Add(order);
