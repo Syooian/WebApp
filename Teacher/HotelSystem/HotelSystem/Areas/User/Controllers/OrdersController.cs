@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Humanizer;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
+using Newtonsoft.Json.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Diagnostics.Metrics;
 
 namespace HotelSystem.Areas.User.Controllers
 {
@@ -100,6 +103,7 @@ namespace HotelSystem.Areas.User.Controllers
                     var result = await _context.ExecSPAddNewOrderAsync(order.ExpectedCheckInDate, order.ExpectedCheckOutDate, order.Note, order.MemberID, order.PayCode, order.StatusCode, Cart);
                     if (result > 0)
                     {
+                        TempData["SuccessMessage"] = "OK";
                         return RedirectToAction(nameof(Index));
                     }
                     else
@@ -255,3 +259,47 @@ namespace HotelSystem.Areas.User.Controllers
 
 //RETURN @newOrderID;
 //END
+
+
+
+
+//CREATE proc[dbo].[AddNewOrder]
+//@ExpectedCheckInDate datetime,
+//    @ExpectedCheckOutDate datetime,
+//    @Note nvarchar(200),
+//    @MemberID  nchar(5),
+//    @PayCode nchar(2),
+//    @StatusCode nchar(1),
+//    @Cart nvarchar(max)
+//as
+//begin
+
+//	begin tran  --交易處理開始
+
+//	declare @orderID nchar(12) = dbo.GenerateOrderID()
+
+
+//	insert into  [Order]
+//values(@orderID, getDate(), @ExpectedCheckInDate, @ExpectedCheckOutDate, @Note,
+//    @MemberID, null, @PayCode, @StatusCode)  --資料來自表單
+
+
+//    if @@error = 0
+
+//    begin
+
+//        insert into[OrderDetail](OrderID, RoomID, Price)
+
+//        select @orderID, RID, Price from openjson(@Cart) with(RID nchar(5), Price money)
+
+//		if @@ERROR=0
+//			commit
+//		else
+//			rollback
+	
+//	end
+//	else
+//		rollback
+
+
+// end

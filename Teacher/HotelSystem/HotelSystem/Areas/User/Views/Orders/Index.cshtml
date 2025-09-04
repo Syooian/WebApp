@@ -75,3 +75,24 @@
 }
     </tbody>
 </table>
+
+
+
+@await Html.PartialAsync("_MyPocketToastPartial")
+@if (TempData["SuccessMessage"] != null)
+{
+    @section Scripts {
+
+
+
+        <script>
+            $('#addItemToast .toast-body').html("新增訂單成功!!");
+            toastBootstrap.show()
+            localStorage.removeItem("myCart"); //把購物車清空
+            CartStatusCheck();
+        </script>
+
+    }
+
+}
+
