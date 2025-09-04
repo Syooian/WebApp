@@ -9,6 +9,8 @@ using HotelSystem.Access.Data;
 using HotelSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Humanizer;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 
 namespace HotelSystem.Areas.User.Controllers
 {
@@ -74,7 +76,7 @@ namespace HotelSystem.Areas.User.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Order order)
+        public async Task<IActionResult> Create(Order order,string Cart)
         {
             //OrderID要系統自動產生
             //OrderDate等寫入資料庫時再抓
@@ -208,3 +210,33 @@ namespace HotelSystem.Areas.User.Controllers
         }
     }
 }
+
+
+
+//CREATE FUNCTION[dbo].[GenerateOrderID] ()
+//RETURNS NCHAR(12)
+//AS
+//BEGIN
+//    DECLARE @prefix CHAR(1) = 'R';
+//DECLARE @datePart CHAR(8) = CONVERT(CHAR(8), GETDATE(), 112); --yyyyMMdd
+//    DECLARE @lastNumber INT = 0;
+//DECLARE @newNumber VARCHAR(3);
+//DECLARE @newOrderID VARCHAR(20);
+
+//--取得當天最後一個OrderID流水號
+//    SELECT @lastNumber =
+//        ISNULL(MAX(CAST(RIGHT(OrderID, 3) AS INT)), 0)
+//    FROM [Order]
+//WHERE OrderID LIKE @prefix + @datePart + '%';
+
+//--流水號 + 1
+//    SET @lastNumber = @lastNumber + 1;
+
+//--格式化為三位數，不足補0
+//SET @newNumber = RIGHT('000' + CAST(@lastNumber AS VARCHAR(3)), 3);
+
+//--組成新的OrderID
+//    SET @newOrderID = @prefix + @datePart + @newNumber;
+
+//RETURN @newOrderID;
+//END

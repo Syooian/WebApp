@@ -38,6 +38,7 @@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+            <input type="hidden" name="Cart" id="Cart" />
         </form>
     </div>
 </div>
@@ -46,3 +47,13 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+	<script src="~/js/memberjs.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $('#Cart').val(localStorage.getItem("myCart"));
+    </script>
+}
